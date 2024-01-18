@@ -1,0 +1,8 @@
+
+node_modules/
+src/.vuepress/.cache/
+src/.vuepress/.temp/
+src/.vuepress/dist/
+
+# ignore every __pycache__
+**/__pycache__/
