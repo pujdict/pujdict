@@ -591,12 +591,21 @@ function resetUrlQueryParameter(key) {
   window.history.replaceState({}, "", url);
 }
 
+function extractProto(protoId) {
+  let protoOriginal = $(protoId);
+  protoOriginal.removeAttr("id");
+  let protoCloned = protoOriginal.clone();
+  protoOriginal.remove();
+  return protoCloned;
+}
+
 export {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
   unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
 }
@@ -623,8 +632,8 @@ export {
 
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 
-@import 'bootstrap';
+@import 'bootstrap/scss/bootstrap-utilities';
 
 </style>

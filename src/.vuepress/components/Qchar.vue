@@ -1,20 +1,36 @@
 <template>
-<form class="row g-3">
-  <div class="query-input-area">
-    <!-- 长度充满整个div -->
-    <input class="form-control" id="query-input" type="text" placeholder="输入汉字..." maxlength="256" style="background: transparent" />
-  </div>
+  <div v-bind:data-bs-theme="$isDarkmode ? 'dark' : 'light'">
+    <form class="row g-3">
+      <div class="query-input-area">
+        <!-- 长度充满整个div -->
+        <input class="form-control" id="query-input" type="text" placeholder="输入汉字..." maxlength="256"/>
+      </div>
 
-  <div class="btn-toolbar">
-    <div class="btn-group">
-      <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" />
-      <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" />
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <input id="query-button" class="btn btn-outline-primary" type="button" value="查询"/>
+          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
+        </div>
+        <img id="loading" src="/loading.svg" height="30" width="30" alt="加载中"/>
+      </div>
+    </form>
+    <hr/>
+    <div id="query-result">
+      <div class="card border-dark mb-2" id="query-result-proto">
+        <div class="card-header"></div><!--字-->
+        <div class="card-body">
+          <h5 class="card-title"></h5><!--音-->
+          <h6 class="card-subtitle mb-auto text-body-secondary"></h6><!--备用-->
+          <p class="card-text"></p><!--义-->
+        </div>
+      </div>
     </div>
-    <img id="loading" src="/loading.svg" height="30" width="30" alt="加载中" />
   </div>
-</form>
-  <div id="query-result"></div>
 </template>
+
+<script setup>
+// import isDarkMode:
+</script>
 
 <script>
 import {
@@ -23,6 +39,7 @@ import {
   unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations
 } from './Qcommon.vue';
@@ -36,6 +53,7 @@ import 'khroma';
 
 export default {
   mounted() {
+    const queryResultProto = extractProto("#query-result-proto");
 
     initFromDatabase().then(() => {
       setLoading(false);
@@ -116,21 +134,9 @@ export default {
       // |                     |
       // | 释义和词例正文        |
       // +---------------------+
-      let entryDiv = $("<div></div>");
-      entryDiv.css({
-        "border-style": "solid",
-        "border-width": "2px",
-        "border-radius": "3px",
-        "border-color": "var(--md-accent-fg-color)",
-        "margin": "5px 0 5px 0",
-        "padding": "3px",
-        "display": "flex",
-        "font-size": "1.5em",
-      });
-      let charTextDiv = $("<div></div>");
-      charTextDiv.css({
-        "text-align": "left",
-      });
+      let entryDiv = queryResultProto.clone();
+      let charTextDiv = entryDiv.find(".card-header");
+      charTextDiv.text('');
       let mainCharSpan = $("<span></span>");
       mainCharSpan.text(entry.char_sim);
       switch (entry.cat) {
@@ -149,31 +155,23 @@ export default {
       charTextDiv.append(mainCharSpan);
       if (entry.char !== entry.char_sim) {
         let varCharSpan = $("<span></span>");
-        varCharSpan.text(`（${entry.char}）`);
+        varCharSpan.text(` (${entry.char})`);
         charTextDiv.append(varCharSpan);
       }
-      let pronunciationDiv = $("<div></div>");
+      let pronunciationDiv = entryDiv.find(".card-title");
       let pronunciationText = unifyWordDisplay(entry.initial + addPUJToneMarkForSingle(entry.final, entry.tone));
       pronunciationDiv.text(pronunciationText);
       // add <a> tag to pronunciation text
       // let pronunciationLink = $("<a></a>");
       // pronunciationLink.attr("href", `/query/query_word.html?chars=${pronunciationText}`);
-      charTextDiv.append(pronunciationDiv);
-      entryDiv.append(charTextDiv);
-      entryDiv.append(pronunciationDiv);
-      let charMeaningDiv = $("<div></div>");
-      charMeaningDiv.css({
-        "font-size": "1.2em",
-        "text-align": "center",
-      });
-      charMeaningDiv.text(entry.meaning);
-      entryDiv.append(charMeaningDiv);
+      let charMeaningDiv = entryDiv.find(".card-text");
+      charMeaningDiv.text(entry.details);
       return entryDiv;
     }
   }
 }
 </script>
 
-<style scoped>
-@import "bootstrap";
+<style scoped lang="scss">
+@import 'bootstrap/scss/bootstrap';
 </style>

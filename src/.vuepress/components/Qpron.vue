@@ -1,50 +1,53 @@
 <template>
-  <form id="query-conditions" class="row g-3">
-    <div class="mb-auto">
-      <div class="form-label"><b>口音偏好</b></div>
-      <div id="fuzzy-query" class="query-filter-list">
-        <div class="form-check form-check-inline offset-sm-0" id="fuzzy-query-proto">
-          <input class="form-check-input" type="radio"/>
-          <label class="form-check-label" style="width: 2em"></label>
+  <div v-bind:data-bs-theme="$isDarkmode ? 'dark' : 'light'">
+    <form id="query-conditions" class="row g-3">
+      <div class="mb-auto">
+        <div class="form-label"><b>口音偏好</b></div>
+        <div id="fuzzy-query" class="query-filter-list">
+          <div class="form-check form-check-inline offset-sm-0" id="fuzzy-query-proto">
+            <input class="form-check-input" type="radio"/>
+            <label class="form-check-label" style="width: 2em"></label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mb-auto">
-      <div class="form-label"><b>声母</b></div>
-      <div id="initials-list" class="query-filter-list">
-        <div class="form-check form-check-inline" id="initials-list-proto">
-          <input class="form-check-input" type="checkbox"/>
-          <label class="form-check-label" style="width: 2em"></label>
+      <div class="mb-auto">
+        <div class="form-label"><b>声母</b></div>
+        <div id="initials-list" class="query-filter-list">
+          <div class="form-check form-check-inline" id="initials-list-proto">
+            <input class="form-check-input" type="checkbox"/>
+            <label class="form-check-label" style="width: 2em"></label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mb-auto">
-      <div class="form-label"><b>韵母</b></div>
-      <div id="finals-list" class="query-filter-list">
-        <div class="form-check form-check-inline" id="finals-list-proto">
-          <input class="form-check-input" type="checkbox"/>
-          <label class="form-check-label" style="width: 2em"></label>
+      <div class="mb-auto">
+        <div class="form-label"><b>韵母</b></div>
+        <div id="finals-list" class="query-filter-list">
+          <div class="form-check form-check-inline" id="finals-list-proto">
+            <input class="form-check-input" type="checkbox"/>
+            <label class="form-check-label" style="width: 2em"></label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mb-auto">
-      <div class="form-label"><b>声调</b></div>
-      <div id="tones-list" class="query-filter-list">
-        <div class="form-check form-check-inline" id="tones-list-proto">
-          <input class="form-check-input" type="checkbox"/>
-          <label class="form-check-label" style="width: 2em"></label>
+      <div class="mb-auto">
+        <div class="form-label"><b>声调</b></div>
+        <div id="tones-list" class="query-filter-list">
+          <div class="form-check form-check-inline" id="tones-list-proto">
+            <input class="form-check-input" type="checkbox"/>
+            <label class="form-check-label" style="width: 2em"></label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="btn-toolbar">
-      <div class="btn-group">
-        <input id="query-button" class="btn btn-outline-primary" type="button" value="查询"/>
-        <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <input id="query-button" class="btn btn-outline-primary" type="button" value="查询"/>
+          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
+        </div>
+        <img id="loading" src="/loading.svg" height="30" width="30" alt="加载中"/>
       </div>
-      <img id="loading" src="/loading.svg" height="30" width="30" alt="加载中"/>
-    </div>
-  </form>
-  <div id="query-result"></div>
+    </form>
+    <hr/>
+    <div id="query-result"></div>
+  </div>
 </template>
 
 <script setup>
@@ -58,6 +61,7 @@ import {
   unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations
 } from './Qcommon.vue';
@@ -80,13 +84,6 @@ export default {
     // 定义一组模糊音映射，模糊拼音 str -> 原始拼音列表 Pronunciation，在点击索引按钮检索时使用，将搜索出所有符合条件的原始拼音
     var fuzzyRulesMapReverse = {}
 
-    function extractProto(protoId) {
-      let protoOriginal = $(protoId);
-      let protoCloned = protoOriginal.clone();
-      protoOriginal.remove();
-      return protoCloned;
-    }
-
     // proto of fuzzy div tag, clone it every time when needed
     const fuzzyProto = extractProto("#fuzzy-query-proto");
     const initialsListProto = extractProto("#initials-list-proto");
@@ -105,6 +102,7 @@ export default {
         input.attr("id", "fuzzy-query-" + key);
         input.change(onFuzzyRuleSelected);
         let label = cur.find("label");
+        label.attr("for", "fuzzy-query-" + key);
         label.text(rule.name);
         $("#fuzzy-query").append(cur);
       }
@@ -168,6 +166,7 @@ export default {
         input.attr("value", initial);
         input.attr("id", "initial-" + initial);
         let label = cur.find("label");
+        label.attr("for", "initial-" + initial);
         label.text(initial);
         $("#initials-list").append(cur);
       }
@@ -180,6 +179,7 @@ export default {
         input.attr("value", final);
         input.attr("id", "final-" + final);
         let label = cur.find("label");
+        label.attr("for", "final-" + final);
         label.text(unifyWordDisplay(final));
         $("#finals-list").append(cur);
       }
@@ -192,6 +192,7 @@ export default {
         input.attr("value", tone);
         input.attr("id", "tone-" + tone);
         let label = cur.find("label");
+        label.attr("for", "tone-" + tone);
         label.text(tone);
         $("#tones-list").append(cur);
       }
@@ -475,42 +476,40 @@ export default {
 <style scoped lang="scss">
 
 
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
+//@import 'bootstrap/scss/functions';
+//@import 'bootstrap/scss/variables';
 //@import 'bootstrap/scss/variables-dark';
-@import 'bootstrap/scss/maps';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/utilities';
-@import 'bootstrap/scss/root';
-@import 'bootstrap/scss/reboot';
-@import 'bootstrap/scss/type';
-//@import 'bootstrap/scss/bootstrap-reboot';
+//@import 'bootstrap/scss/maps';
+//@import 'bootstrap/scss/mixins';
+//@import 'bootstrap/scss/utilities';
+//@import 'bootstrap/scss/root';
+//@import 'bootstrap/scss/reboot';
+//@import 'bootstrap/scss/type';
+////@import 'bootstrap/scss/bootstrap-reboot';
 //@import 'bootstrap/scss/bootstrap-utilities';
-@import 'bootstrap/scss/buttons';
-@import 'bootstrap/scss/button-group';
-//@import 'bootstrap/scss/input-group';
-@import 'bootstrap/scss/forms';
-//@import 'bootstrap/scss/custom-forms';
 //@import 'bootstrap/scss/buttons';
-@import 'bootstrap/scss/helpers';
-//@import 'bootstrap/scss/bootstrap';
+//@import 'bootstrap/scss/button-group';
+////@import 'bootstrap/scss/input-group';
+//@import 'bootstrap/scss/forms';
+////@import 'bootstrap/scss/custom-forms';
+////@import 'bootstrap/scss/buttons';
+//@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/bootstrap';
 
 </style>
 
-<style>
-
-
-#query-input {
-  background-color: transparent;
-}
-
-.query-filter-list label {
-  /* add fixed width blank between every label */
-  display: inline-block;
-  width: 80px;
-  height: 120%;
-}
-
+<style lang="scss">
+//#query-input {
+//  background-color: transparent;
+//}
+//
+//.query-filter-list label {
+//  /* add fixed width blank between every label */
+//  display: inline-block;
+//  width: 80px;
+//  height: 120%;
+//}
+//
 .query-filter-list * {
   /* add hover mouse icon */
   cursor: pointer;
