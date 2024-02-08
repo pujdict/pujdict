@@ -480,12 +480,40 @@ function unifyWordDisplay(word, v = "ṳ", V = "Ṳ", o2 = "o̤", O2 = "O̤") {
   return word;
 }
 
+function addPUJToneMark(sentence) {
+  let result = "";
+  let cur = "";
+  for (let i = 0; i < sentence.length; i++) {
+    if (/[a-zA-Z0-9']/.test(sentence[i])) {
+      cur += sentence[i];
+    } else {
+      result += addPUJToneMarkForSingle(cur);
+      cur = "";
+      result += sentence[i];
+    }
+  }
+  if (cur !== "") {
+    result += addPUJToneMarkForSingle(cur);
+  }
+  return result;
+}
+
 /**
  * 为单个字添加音调符号
  */
 function addPUJToneMarkForSingle(word, tone) {
   if (tone === 0 || tone === 1 || tone === 4) {
     return word;
+  }
+  if (tone === undefined) {
+    tone = 0;
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] >= '0' && word[i] <= '9') {
+        tone = parseInt(word[i]);
+        word = word.substring(0, i) + word.substring(i + 1);
+        break;
+      }
+    }
   }
 
   const VowelOrder = "aeoiuvAEOIUV";
@@ -602,7 +630,7 @@ function extractProto(protoId) {
 export {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMarkForSingle,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,

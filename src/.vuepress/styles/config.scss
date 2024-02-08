@@ -7,11 +7,16 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-family: IPAToneLetter;
   src: url('/assets/fonts/GentiumBookPlus-Regular.woff2') format('woff2');
   unicode-range: U+02E5-02E9, U+A712-A716, U+A708-A70C, U+A70D-A711;
+  size-adjust: 105%;
 }
 
 @font-face {
   font-family: SansSerifCJKExt;
-  src: url('/assets/fonts/PlangothicP1-Regular.fallback.woff2') format('woff2');
+  src: url('/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
+  size-adjust: 98%;
+  ascent-override: 100%;
+  descent-override: 0%;
+  line-gap-override: 50%;
 }
 
 body {

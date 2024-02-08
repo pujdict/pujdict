@@ -16,11 +16,11 @@
     </form>
     <hr/>
     <div id="query-result">
-      <div class="card border-dark mb-2" id="query-result-proto">
-        <div class="card-header"></div><!--字-->
+      <div class="card border-dark mb-3" id="query-result-proto">
+<!--        <div class="card-header"></div>&lt;!&ndash;字&ndash;&gt;-->
         <div class="card-body">
-          <h5 class="card-title"></h5><!--音-->
-          <h6 class="card-subtitle mb-auto text-body-secondary"></h6><!--备用-->
+          <h4 class="card-title"></h4><!--音-->
+          <h5 class="card-subtitle mb-auto text-body-secondary"></h5><!--备用-->
           <p class="card-text"></p><!--义-->
         </div>
       </div>
@@ -36,7 +36,7 @@
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMarkForSingle,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
@@ -127,6 +127,42 @@ export default {
       return entries;
     }
 
+    function makeMeaningWord(str) {
+      // 词例@注音@释义
+      let result = $("<span></span>");
+      let word;
+      let pronunciation;
+      let meaning;
+      let splits = str.split('@');
+      if (splits.length >= 1) {
+        word = splits[0];
+      }
+      if (splits.length >= 2) {
+        pronunciation = splits[1];
+      }
+      if (splits.length >= 3) {
+        meaning = splits[2];
+      }
+      // word 标注 pronunciation, 加一个括号包 meaning
+      if (word !== undefined) {
+        let wordSpan = $("<span></span>");
+        wordSpan.text(word);
+        if (pronunciation !== undefined) {
+          let pronunciationText = unifyWordDisplay(addPUJToneMark(pronunciation));
+          let pronunciationSpan2 = $("<span></span>");
+          pronunciationSpan2.text(` [${pronunciationText}]`);
+          wordSpan.append(pronunciationSpan2);
+        }
+        if (meaning !== undefined) {
+          let meaningSpan = $("<span></span>");
+          meaningSpan.text(` (${meaning})`);
+          wordSpan.append(meaningSpan);
+        }
+        result.append(wordSpan);
+      }
+      return result;
+    }
+
     function makeEntryArea(entry) {
       // 每个字的div，外面一个带半透明边框、浅色背景的div，里面一个带字的div，大概这样：
       // +---------------------+
@@ -135,7 +171,7 @@ export default {
       // | 释义和词例正文        |
       // +---------------------+
       let entryDiv = queryResultProto.clone();
-      let charTextDiv = entryDiv.find(".card-header");
+      let charTextDiv = entryDiv.find(".card-title");
       charTextDiv.text('');
       let mainCharSpan = $("<span></span>");
       mainCharSpan.text(entry.char_sim);
@@ -158,14 +194,39 @@ export default {
         varCharSpan.text(` (${entry.char})`);
         charTextDiv.append(varCharSpan);
       }
-      let pronunciationDiv = entryDiv.find(".card-title");
+      if (entry.char_ref) {
+        let refCharSpan = $("<span></span>");
+        refCharSpan.text(` [${entry.char_ref}]`);
+        charTextDiv.append(refCharSpan);
+      }
+      let pronunciationDiv = entryDiv.find(".card-subtitle");
       let pronunciationText = unifyWordDisplay(entry.initial + addPUJToneMarkForSingle(entry.final, entry.tone));
       pronunciationDiv.text(pronunciationText);
       // add <a> tag to pronunciation text
       // let pronunciationLink = $("<a></a>");
       // pronunciationLink.attr("href", `/query/query_word.html?chars=${pronunciationText}`);
       let charMeaningDiv = entryDiv.find(".card-text");
-      charMeaningDiv.text(entry.details);
+      charMeaningDiv.text('');
+      // 详细内容利用 # 进行条目分割；每个条目内，% 之前为中文释义，之后为词例（如果有），词例集合以 / 分割，每个词例用 @ 分隔开三部分（如果有）：词例正文、词例注音、词例释义
+      let meanings = entry.details.split("#");
+      meanings.forEach(meaning => {
+        let meaningSplit = meaning.split("%");
+        let words;
+        if (meaningSplit.length === 1) {
+          words = meaningSplit[0].split("/");
+        } else if (meaningSplit.length === 2) {
+          charMeaningDiv.append(meaningSplit[0]);
+          charMeaningDiv.append('：');
+          words = meaningSplit[1].split("/");
+        }
+        for (let i = 0; i < words.length; i++) {
+          if (i !== 0) {
+            charMeaningDiv.append("；");
+          }
+          charMeaningDiv.append(makeMeaningWord(words[i]));
+        }
+      });
+
       return entryDiv;
     }
   }
