@@ -1,5 +1,5 @@
-import { defineUserConfig } from "vuepress";
-import { getDirname, path } from "@vuepress/utils";
+import {defineUserConfig} from "vuepress";
+import {getDirname, path} from "@vuepress/utils";
 import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
@@ -50,8 +50,29 @@ export default defineUserConfig({
     darkmode: "switch",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
+    nextLink: false,
+    prevLink: false,
     // navbar: ["/doc/"],
     // sidebar: [],
+    sidebar: {
+      '/doc/': [
+        "puj.md",
+        "bib.md",
+      ],
+      // '/query/': [
+      //   {
+      //     text: "汉字查询",
+      //     link: "/query/qchar.md",
+      //   },
+      //   {
+      //     text: "音韵查询",
+      //     link: "/query/qpron.md",
+      //   }
+      // ],
+      '/appendix/': [
+        "human_body.md",
+      ]
+    },
     navbar: [
       {
         text: "文档",
@@ -82,12 +103,23 @@ export default defineUserConfig({
             link: "qpron.md",
           },
         ]
+      },
+      {
+        text: "附录",
+        prefix: "/appendix/",
+        icon: "receipt",
+        children: [
+          {
+            text: "人体",
+            link: "human_body.md",
+          }
+        ]
       }
     ],
     plugins: {
       readingTime: false,
       mdEnhance: {
-        include:  {
+        include: {
           resolvePath: (file) => {
             if (file.startsWith("@src"))
               return file.replace("@src", path.resolve(__dirname, ".."));
@@ -101,8 +133,7 @@ export default defineUserConfig({
         sup: true,
         tabs: true,
       },
-      comment: {
-      },
+      comment: {},
     }
   }),
   plugins: [
@@ -111,7 +142,8 @@ export default defineUserConfig({
       components: {
         Qpron: path.resolve(__dirname, "./components/Qpron.vue"),
         Qchar: path.resolve(__dirname, "./components/Qchar.vue"),
-        QCommon: path.resolve(__dirname, "./components/Qcommon.vue"),
+        Qcommon: path.resolve(__dirname, "./components/Qcommon.vue"),
+        Qappendix: path.resolve(__dirname, "./components/Qappendix.vue"),
         // Mermaid: path.resolve(__dirname, "./components/Mermaid.vue"),
       },
     }),

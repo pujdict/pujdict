@@ -1,7 +1,7 @@
 ---
 title: 汉字检索
 index: false
-icon: book-open
+icon: search
 order: 10
 sidebar: false
 breadcrumb: false
