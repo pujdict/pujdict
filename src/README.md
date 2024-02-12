@@ -7,16 +7,21 @@ title: 主页
 #bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: 潮州方言白话字辞典
-tagline: 本站旨在收录和整理潮汕方言汉字读音，提供针对汉字和读音的快速查询。
+heroText: 潮汕方言白话字辞典
+tagline: |
+  整理潮汕方言汉字读音，提供针对汉字和读音的快速查询，兼容潮汕各地语音。
 actions:
-  - text: 检索
+  - text: 汉字检索
     icon: search
-    link: ./query/
+    link: ./query/qchar
+    type: primary
+  - text: 音韵检索
+    icon: search
+    link: ./query/qpron
     type: primary
 
-  - text: 文档
-    link: ./doc/
+#  - text: 文档
+#    link: ./doc/
 
 #highlights:
 #  - header: 易于安装
@@ -270,7 +275,7 @@ actions:
 #        link: https://theme-hope.vuejs.press/zh/guide/advanced/pwa.html
 
 copyright: false
-footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-present Mr.Hope
+#footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-present Mr.Hope
 ---
 
 [//]: # (这是项目主页的案例。你可以在这里放置你的主体内容。)
@@ -281,4 +286,49 @@ footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VueP
 [//]: # ()
 [//]: # (配置项的相关说明详见 [项目主页配置]&#40;https://theme-hope.vuejs.press/zh/guide/layout/home/&#41;。)
 
-**正在开发中，网址、内容、查询接口随时可能发生变化。**
+**开发中，网址、内容、查询接口随时可能发生变化。**
+
+## TODO List
+
+- [ ] 数据表
+  - [ ] 字表
+    - [x] 框架
+    - [ ] 字表重构
+    - [ ] 字表校对
+  - [ ] 词表
+- [ ] 文档
+  - [x] 白话字拼音方案文档
+  - [x] 白话字转读规则表与转写程序
+  - [ ] 凡例整理
+  - [ ] 参考文献整理
+- [ ] 检索页
+  - [x] 通用程序
+    - [x] 通用操作函数
+    - [x] 数据库与 CSV 接入
+  - [ ] 汉字检索
+    - [x] 基础程序和基础界面
+    - [ ] 反切注音
+    - [ ] 白话字音频合成
+    - [ ] 程序重构
+  - [ ] 音韵检索
+    - [x] 基础程序和基础界面
+    - [x] 根据各地口音偏好转写白话字
+    - [ ] 检索用户指定拼音或正则表达式
+    - [ ] 同音字表格式优化
+    - [ ] 程序重构
+  - [ ] 词汇检索
+- [ ] 附录
+  - [x] 基础框架和程序
+  - [ ] 词汇数据库建立与整理
+  - [ ] 附录表
+    - [ ] 基础词汇
+    - [ ] 姓氏
+    - [x] 人体
+    - [ ] 动物
+    - [ ] 植物
+      - [ ] 水果
+      - [ ] 蔬菜
+      - [ ] 花草树木
+    - [ ] 海鲜
+    - [ ] 詈语
+- [ ] 界面优化

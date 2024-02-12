@@ -1,7 +1,7 @@
 ---
 title: 白话字拼音方案
 icon: p
-order: 1
+order: 10
 ---
 
 # 拼音方案
@@ -236,37 +236,6 @@ flowchart
 
 [//]: # (白话字的拼音方案与国际音标中标记的发音比较一致，各地的不同发音也可以使用现有元音字母组合得到。)
 <!-- 不过，在字典中需要采取一个较为统一的记法。例如潮州、澄海等地的 -ie 以及其他地方的 -io，这些对应的读音主要采用哪一个进行记录，将在后文记录标准和规则一节给出。 -->
-
-<!--
-| 白话字 | 潮拼 | 国际音标 | 例字 |
-| ------ | ---- | -------- | ---- |
-| am/ap  | am   | am       | 庵   |
-| an     | ang  | an       | 安   |
-| om     |      | om       | 森   |
-| ang    | ang  | aŋ       | 红   |
-| ong    | ong  | oŋ       | 翁   |
-| eng    | êng  | eŋ       | 英   |
-| im     | im   | im       | 音   |
-| in     | ing  | in       | 因   |
-| iam    | iam  | iam      | 奄   |
-| ian    | iang | ian      | 嫣   |
-| iang   | iang | iaŋ      | 央   |
-| iong   | iong | ioŋ      | 雍   |
-| uan    | uang | uan      | 冤   |
-| uang   | uang | uaŋ      | 汪   |
-| ueng   | uang | ueŋ      | 荣   |
-| un     | ung  | un       | 温   |
-| ng     | en   | ŋ/ɯŋ/ɯ̃   | 秧   |
-| ṳn     | eng  | ɯn       | 恩   |
-| ainn   | ain  | ãĩ       | 嗳   |
-| oinn   | oin  | õĩ       | 闲   |
-| enn    | ên   | ẽ        | 楹   |
-| inn    | in   | ĩ        | 丸   |
-| iann   | ian  | ĩã       | 影   |
-| ionn   | ion  | ĩõ       | 羊   |
-| iunn   | iun  | ĩũ       | 幼   |
-| uann   | uan  | ũã       | 鞍   |
--->
 
 ### 声化韵
 

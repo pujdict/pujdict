@@ -55,10 +55,6 @@ export default defineUserConfig({
     // navbar: ["/doc/"],
     // sidebar: [],
     sidebar: {
-      '/doc/': [
-        "puj.md",
-        "bib.md",
-      ],
       // '/query/': [
       //   {
       //     text: "汉字查询",
@@ -69,11 +65,31 @@ export default defineUserConfig({
       //     link: "/query/qpron.md",
       //   }
       // ],
+      '/doc/': [
+        "puj.md",
+        "guide.md",
+        "bib.md",
+      ],
       '/appendix/': [
         "human_body.md",
       ]
     },
     navbar: [
+      {
+        text: "检索",
+        prefix: "/query/",
+        icon: "search",
+        children: [
+          {
+            text: "汉字检索",
+            link: "qchar.md",
+          },
+          {
+            text: "音韵检索",
+            link: "qpron.md",
+          },
+        ]
+      },
       {
         text: "文档",
         prefix: "/doc/",
@@ -84,23 +100,12 @@ export default defineUserConfig({
             link: "puj.md",
           },
           {
+            text: "凡例",
+            link: "guide.md",
+          },
+          {
             text: "参考文献",
             link: "bib.md",
-          },
-        ]
-      },
-      {
-        text: "检索",
-        prefix: "/query/",
-        icon: "search",
-        children: [
-          {
-            text: "汉字查询",
-            link: "qchar.md",
-          },
-          {
-            text: "音韵查询",
-            link: "qpron.md",
           },
         ]
       },
@@ -132,6 +137,7 @@ export default defineUserConfig({
         sub: true,
         sup: true,
         tabs: true,
+        tasklist: true,
       },
       comment: {},
     }
