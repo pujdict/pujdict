@@ -79,7 +79,7 @@ export default {
       if (chars.length !== 0) {
         setLoading(true);
         let entries = queryChars(chars);
-        $("#query-result").empty();
+        $("#query-result").children().not("#query-result-proto").remove();
         entries.forEach(entry => {
           $("#query-result").append(makeEntryArea(entry));
         });

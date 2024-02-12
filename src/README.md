@@ -10,13 +10,13 @@ bgImageStyle:
 heroText: 潮州方言白话字辞典
 tagline: 本站旨在收录和整理潮汕方言汉字读音，提供针对汉字和读音的快速查询。
 actions:
-  - text: 使用指南
-    icon: lightbulb
-    link: ./demo/
+  - text: 检索
+    icon: search
+    link: ./query/
     type: primary
 
   - text: 文档
-    link: ./guide/
+    link: ./doc/
 
 #highlights:
 #  - header: 易于安装

@@ -80,9 +80,9 @@ export default {
 
     var fuzzyName = "dummy";
     // 定义一组模糊音映射，原始拼音 str -> 模糊拼音 Pronunciation，在索引页显示所有映射后的拼音，拼音格式为列表 [initial, final, tone]
-    var fuzzyRulesMap = {}
+    var fuzzyRulesMap = {};
     // 定义一组模糊音映射，模糊拼音 str -> 原始拼音列表 Pronunciation，在点击索引按钮检索时使用，将搜索出所有符合条件的原始拼音
-    var fuzzyRulesMapReverse = {}
+    var fuzzyRulesMapReverse = {};
 
     // proto of fuzzy div tag, clone it every time when needed
     const fuzzyProto = extractProto("#fuzzy-query-proto");
@@ -92,7 +92,7 @@ export default {
 
     function initQuerySelectionArea() {
       // 设置模糊音匹配规则口音
-      $("#fuzzy-query").empty();
+      $("#fuzzy-query").children().not("#fuzzy-query-proto").remove();
       for (let key in fuzzyRules) {
         let rule = fuzzyRules[key];
         let cur = fuzzyProto.clone();
@@ -158,7 +158,7 @@ export default {
 
     function makeQueryConditions(initials, finals, tones) {
       // 设置声母列表
-      $("#initials-list").empty();
+      $("#initials-list").children().not("#initials-list-proto").remove();
       for (let i = 0; i < initials.length; i++) {
         let initial = initials[i];
         let cur = initialsListProto.clone();
@@ -171,7 +171,7 @@ export default {
         $("#initials-list").append(cur);
       }
       // 设置韵母列表
-      $("#finals-list").empty();
+      $("#finals-list").children().not("#finals-list-proto").remove();
       for (let i = 0; i < finals.length; i++) {
         let final = finals[i];
         let cur = finalsListProto.clone();
@@ -184,7 +184,7 @@ export default {
         $("#finals-list").append(cur);
       }
       // 设置声调列表
-      $("#tones-list").empty();
+      $("#tones-list").children().not("#tones-list-proto").remove();
       for (let i = 0; i < tones.length; i++) {
         let tone = tones[i];
         let cur = tonesListProto.clone();

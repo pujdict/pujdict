@@ -621,9 +621,11 @@ function resetUrlQueryParameter(key) {
 
 function extractProto(protoId) {
   let protoOriginal = $(protoId);
-  protoOriginal.removeAttr("id");
+  // hide the original proto
+  protoOriginal.attr("hidden", "hidden");
   let protoCloned = protoOriginal.clone();
-  protoOriginal.remove();
+  protoCloned.removeAttr("id");
+  protoCloned.removeAttr("hidden");
   return protoCloned;
 }
 
