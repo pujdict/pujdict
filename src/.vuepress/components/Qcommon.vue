@@ -518,7 +518,7 @@ function addPUJToneMarkForSingle(word, tone) {
   if (tone === undefined) {
     tone = 0;
     for (let i = 0; i < word.length; i++) {
-      if (word[i] >= '0' && word[i] <= '9') {
+      if (word[i] >= '1' && word[i] <= '8') {
         tone = parseInt(word[i]);
         word = word.substring(0, i) + word.substring(i + 1);
         break;
