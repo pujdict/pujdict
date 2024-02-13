@@ -54,6 +54,7 @@ export default defineUserConfig({
     darkmode: "switch",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
+    contributors: false,
     nextLink: false,
     prevLink: false,
     // navbar: ["/doc/"],
