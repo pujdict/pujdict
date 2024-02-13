@@ -35,6 +35,15 @@ const PUJToneMarks = [
   /*8:*/ "\u030d", // 竖线符 ̍
 ];
 
+const PUJSpecialVowels = {
+  "v": "ṳ",
+  "V": "Ṳ",
+  "o'": "o̤",
+  "O'": "O̤",
+};
+
+const VowelOrder = ['a', 'e', 'o', 'i', 'u', 'v', PUJSpecialVowels['v'], PUJSpecialVowels["o'"], 'A', 'E', 'O', 'I', 'U', 'V', PUJSpecialVowels['V'], PUJSpecialVowels["O'"]];
+
 class Entry {
   constructor(entry_index, char, char_sim, initial, final, tone, cat, char_ref, details) {
     this.entry_index = entry_index;
@@ -362,8 +371,8 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
-      // 声调：3 6 混为 3
-      if (result.tone === '6') result.tone = '3';
+      // 声调：3 6 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
+      // if (result.tone === '6') result.tone = '3';
 
       // 去除所有撇号 '
       result.initial = result.initial.replace(/'/g, '');
@@ -408,8 +417,8 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
-      // 声调 3 7 混为 3
-      if (result.tone === '7') result.tone = '3';
+      // 声调 3 7 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
+      // if (result.tone === '7') result.tone = '3';
 
       // 去除所有撇号 '
       result.initial = result.initial.replace(/'/g, '');
@@ -471,12 +480,12 @@ function makeEntryFromSqlResult(sqlResult) {
   return entry;
 }
 
-function unifyWordDisplay(word, v = "ṳ", V = "Ṳ", o2 = "o̤", O2 = "O̤") {
+function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], o2 = PUJSpecialVowels["o'"], O2 = PUJSpecialVowels["O'"]) {
   word = word.replace('0', '');
   word = word.replace('v', v);
   word = word.replace('V', V);
-  word = word.replace('o\'', o2);
-  word = word.replace('O\'', O2);
+  word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
+  word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return word;
 }
 
@@ -553,6 +562,10 @@ function addPUJToneMarkForSingle(word, tone) {
     }
   }
   return result;
+}
+
+function addPUJToneMarkAndUnify(sentence) {
+  return unifyWordDisplay(addPUJToneMark(sentence));
 }
 
 // 改用 sql.js 读取数据库
@@ -632,7 +645,7 @@ function extractProto(protoId) {
 export {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,

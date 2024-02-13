@@ -36,7 +36,7 @@
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
@@ -148,7 +148,7 @@ export default {
         let wordSpan = $("<span></span>");
         wordSpan.text(word);
         if (pronunciation !== undefined) {
-          let pronunciationText = unifyWordDisplay(addPUJToneMark(pronunciation));
+          let pronunciationText = addPUJToneMarkAndUnify(pronunciation);
           let pronunciationSpan2 = $("<span></span>");
           pronunciationSpan2.text(` [${pronunciationText}]`);
           wordSpan.append(pronunciationSpan2);
@@ -200,7 +200,7 @@ export default {
         charTextDiv.append(refCharSpan);
       }
       let pronunciationDiv = entryDiv.find(".card-subtitle");
-      let pronunciationText = unifyWordDisplay(entry.initial + addPUJToneMarkForSingle(entry.final, entry.tone));
+      let pronunciationText = addPUJToneMarkAndUnify(entry.initial + entry.final + entry.tone);
       pronunciationDiv.text(pronunciationText);
       // add <a> tag to pronunciation text
       // let pronunciationLink = $("<a></a>");

@@ -25,7 +25,7 @@
 <script>
 import {
   Entry, Pronunciation,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
 } from './Qcommon.vue';
 // import papaparse
@@ -66,7 +66,7 @@ export default {
           complete: (results) => {
             this.items = results.data.map((item) => {
               const teochew = item.teochew;
-              const puj = unifyWordDisplay(addPUJToneMark(item.puj));
+              const puj = addPUJToneMarkAndUnify(item.puj);
               const mandarin = item.mandarin !== '' ? item.mandarin : item.teochew;
               return new TableEntry(teochew, puj, mandarin);
             });
