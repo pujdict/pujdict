@@ -54,6 +54,10 @@ export default defineUserConfig({
     darkmode: "switch",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
+    repo: "pujdict/pujdict.github.io",
+    docsBranch: "main",
+    editLink: true,
+    docsDir: "src",
     contributors: false,
     nextLink: false,
     prevLink: false,
@@ -161,5 +165,5 @@ export default defineUserConfig({
   ],
 
   // Enable it with pwa
-  // shouldPrefetch: false,
+  shouldPrefetch: false,
 });
