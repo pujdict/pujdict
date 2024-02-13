@@ -35,24 +35,19 @@ jobs:
       - name: Prepare files
         run: |-
           bash prepare_files.sh
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          # 选择要使用的 pnpm 版本
-          version: 8
-          # 使用 pnpm 安装依赖
-          run_install: true
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           # 选择要使用的 node 版本
           node-version: 20
-          # 缓存 pnpm 依赖
-          cache: pnpm
+          cache: npm
       # 运行构建脚本
+      - name: Install dependencies
+        run: |-
+          npm ci
       - name: Build VuePress site
         run: |-
-          pnpm docs:build
+          npm run docs:build
           > src/.vuepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
