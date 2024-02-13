@@ -1,6 +1,6 @@
 <template>
   <div v-bind:data-bs-theme="$isDarkmode ? 'dark' : 'light'">
-    <form class="row g-3">
+    <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area">
         <!-- 长度充满整个div -->
         <input class="form-control" id="query-input" type="text" placeholder="输入汉字..." maxlength="256"/>
@@ -8,7 +8,7 @@
 
       <div class="btn-toolbar">
         <div class="btn-group">
-          <input id="query-button" class="btn btn-outline-primary" type="button" value="查询"/>
+          <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询"/>
           <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
