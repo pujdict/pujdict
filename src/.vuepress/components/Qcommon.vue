@@ -5,6 +5,7 @@ import {h, ref} from 'vue';
 <script>
 
 import {h, ref} from 'vue';
+import {withBase} from "@vuepress/client";
 
 // import sql js
 import initSqlJs from "sql.js";
@@ -106,8 +107,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -136,8 +137,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -172,8 +173,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -204,8 +205,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -237,8 +238,8 @@ const fuzzyRules = {
         result.initial = 'm';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -281,8 +282,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -320,8 +321,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -350,8 +351,8 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -375,8 +376,8 @@ const fuzzyRules = {
       // if (result.tone === '6') result.tone = '3';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -396,8 +397,8 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -421,8 +422,8 @@ const fuzzyRules = {
       // if (result.tone === '7') result.tone = '3';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -446,8 +447,8 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace(/'/g, '');
-      result.final = result.final.replace(/'/g, '');
+      result.initial = result.initial.replace("'", '');
+      result.final = result.final.replace("'", '');
 
       return result;
     },
@@ -583,7 +584,7 @@ async function initFromDatabase() {
       // locateFile: () => '/data/sql-wasm.wasm',
     };
     const sqlPromise = initSqlJs(config);
-    const dataPromise = fetch('/data/entries.db').then(response => response.arrayBuffer());
+    const dataPromise = fetch(withBase('/data/entries.db')).then(response => response.arrayBuffer());
     const [sql, buf] = await Promise.all([sqlPromise, dataPromise]);
     db = new sql.Database(new Uint8Array(buf));
     // read basic desc data from dbdesc table

@@ -30,6 +30,7 @@ import {
 } from './Qcommon.vue';
 // import papaparse
 import Papaparse from 'papaparse';
+import {withBase} from "@vuepress/client";
 
 class TableEntry {
   constructor(teochew, puj, mandarin) {
@@ -57,7 +58,7 @@ export default {
   methods: {
     async loadData() {
       try {
-        const response = await fetch(`/data/appendix/${this.filename}.csv`);
+        const response = await fetch(withBase(`/data/appendix/${this.filename}.csv`));
         const text = await response.text();
         // noinspection JSUnresolvedReference
         Papaparse.parse(text, {
