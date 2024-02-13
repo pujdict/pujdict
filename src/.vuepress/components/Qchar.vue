@@ -11,7 +11,7 @@
           <input id="query-button" class="btn btn-outline-primary" type="button" value="查询"/>
           <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
         </div>
-        <img id="loading" src="/loading.svg" height="30" width="30" alt="加载中"/>
+        <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
     </form>
     <hr/>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-// import isDarkMode:
+import {withBase} from "@vuepress/client";
 </script>
 
 <script>

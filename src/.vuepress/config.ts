@@ -3,12 +3,16 @@ import {getDirname, path} from "@vuepress/utils";
 import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
+import * as dotenv from 'dotenv'
 
 // @ts-ignore
 const __dirname = getDirname(import.meta.url);
 
+dotenv.config();
+
 export default defineUserConfig({
-  base: "/",
+  // @ts-ignore
+  base: process.env.VUE_APP_BASEURL || "/",
   lang: "zh-CN",
   title: "潮汕方言白话字辞典【DEMO】",
   alias: {
