@@ -10,7 +10,7 @@ const __dirname = getDirname(import.meta.url);
 export default defineUserConfig({
   base: "/",
   lang: "zh-CN",
-  title: "潮汕方言白话字辞典",
+  title: "潮汕方言白话字辞典【DEMO】",
   alias: {
     '@src': path.resolve(__dirname, ".."),
     '@public': path.resolve(__dirname, "public"),
