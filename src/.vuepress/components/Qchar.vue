@@ -207,17 +207,17 @@ export default {
       // pronunciationLink.attr("href", `/query/query_word.html?chars=${pronunciationText}`);
       let charMeaningDiv = entryDiv.find(".card-text");
       charMeaningDiv.text('');
-      // 详细内容利用 # 进行条目分割；每个条目内，% 之前为中文释义，之后为词例（如果有），词例集合以 / 分割，每个词例用 @ 分隔开三部分（如果有）：词例正文、词例注音、词例释义
-      let meanings = entry.details.split("#");
+      // 详细内容利用 // 进行条目分割；每个条目内，:: 之前为中文释义，之后为词例（如果有），词例集合以 ;; 分割，每个词例用 @ 分隔开三部分（如果有）：词例正文、词例注音、词例释义
+      let meanings = entry.details.split("//");
       meanings.forEach(meaning => {
-        let meaningSplit = meaning.split("%");
+        let meaningSplit = meaning.split("::");
         let words;
         if (meaningSplit.length === 1) {
-          words = meaningSplit[0].split("/");
+          words = meaningSplit[0].split(";;");
         } else if (meaningSplit.length === 2) {
           charMeaningDiv.append(meaningSplit[0]);
           charMeaningDiv.append('：');
-          words = meaningSplit[1].split("/");
+          words = meaningSplit[1].split(";;");
         }
         for (let i = 0; i < words.length; i++) {
           if (i !== 0) {

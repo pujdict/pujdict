@@ -258,7 +258,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 貝,贝,p,ue,3,2,,宝贝
 貝,贝,p,ue,6,1,,贝壳
 背,背,p,ue,3,2,,背后
-背,背,p,ue,6,2,,背叛/背约
+背,背,p,ue,6,2,,背叛;;背约
 背,背,p,i,3,1,,背书包
 倍,倍,p,ue,6,0,,
 狽,狈,p,ue,6,0,,
@@ -279,7 +279,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 唄,呗,p,ai,1,0,,
 唄,呗,p,e,1,0,,
 奔,奔,p,un,1,2,,
-奔,奔,p,eng,1,3,,外来语%奔驰@peng1-si6
+奔,奔,p,eng,1,3,,外来语::奔驰@peng1-si6
 栟,栟,p,eng,6,0,,
 逩,逩,ph,un,3,0,,
 賁,贲,p,i,3,0,,
@@ -591,7 +591,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 槽,槽,ts,o,5,1,,
 槽,槽,tsh,au,5,2,,
 螬,螬,tsh,au,5,0,,
-草,草,tsh,o,2,1,,草书/潦草
+草,草,tsh,o,2,1,,草书;;潦草
 草,草,tsh,au,2,2,,花草
 冊,册,tsh,eh,4,1,,
 冊,册,tsh,ek,4,2,,
@@ -624,7 +624,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 臿,臿,tsh,ah,4,1,,
 臿,臿,tsh,ap,4,2,,
 插,插,tsh,ah,4,1,,插入
-插,插,tsh,ap,4,2,扱,搭理%勿插你@mai3-tshap4-lv2@不想理你/插潲@tshap4-siau5@理会
+插,插,tsh,ap,4,2,扱,搭理::勿插你@mai3-tshap4-lv2@不想理你;;插潲@tshap4-siau5@理会
 鍤,锸,tsh,ah,4,1,,
 鍤,锸,tsh,ap,4,2,,
 餷,馇,ts,a,1,0,,
@@ -808,8 +808,8 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 檉,柽,tsh,eng,1,0,,
 蟶,蛏,th,ang,1,0,,
 成,成,s,eng,5,2,,成功
-成,成,ts,iann,5,1,,姓#大约%成十/成百
-成,成,s,iann,5,1,,十分之一%八成
+成,成,ts,iann,5,1,,姓//大约::成十;;成百
+成,成,s,iann,5,1,,十分之一::八成
 丞,丞,s,eng,5,0,,
 呈,呈,th,iann,5,1,,
 呈,呈,th,eng,5,2,,
@@ -939,7 +939,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 臭,臭,h,iu,3,0,,
 出,出,tsh,ut,4,0,,
 初,初,tsh,o,1,2,,
-初,初,tsh,eu,1,1,,农历日期%初一
+初,初,tsh,eu,1,1,,农历日期::初一
 樗,樗,s,u,1,0,,
 樗,樗,s,u,1,0,,
 齣,齣,tsh,ut,4,0,,
@@ -985,7 +985,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 川,川,tsh,ng,1,3,,尻川@ka1-tshng1@屁股
 穿,穿,tsh,uan,1,1,,
 穿,穿,tsh,eng,7,3,𧚔,
-𧚔,𧚔,tsh,eng,7,0,,穿%𧚔衫@tsheng7-sann1@穿衣服
+𧚔,𧚔,tsh,eng,7,0,,穿::𧚔衫@tsheng7-sann1@穿衣服
 穿,穿,tsh,ng,1,1,,
 舩,舩,ts,un,5,1,,
 舩,舩,tsh,uan,5,2,,
@@ -1180,7 +1180,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 打,打,t,a,2,0,,
 大,大,t,ai,6,2,,
 大,大,t,ua,7,1,,
-大,大,t,a,1,3,,岳父岳母%大官@ta1-kuann1@岳父/大家@ta1-ke1@岳母
+大,大,t,a,1,3,,岳父岳母::大官@ta1-kuann1@岳父;;大家@ta1-ke1@岳母
 瘩,瘩,t,ap,4,0,,
 呆,呆,t,ai,1,2,,
 呆,呆,ng,ai,5,2,,
@@ -1504,7 +1504,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 凍,冻,t,ong,3,2,,
 動,动,t,ong,6,2,,
 動,动,t,ang,6,1,,振动@tin2-tang6@动身
-動,动,th,ang,6,1,,触碰%勿动@mai3-thang6@不要动
+動,动,th,ang,6,1,,触碰::勿动@mai3-thang6@不要动
 棟,栋,t,ang,3,0,,
 棟,栋,t,ong,3,0,,
 湩,湩,t,ong,3,0,,
@@ -1587,7 +1587,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 緞,缎,t,ng,7,1,,
 緞,缎,t,uan,6,2,,
 鍛,锻,t,uan,3,0,,
-斷,断,t,uan,3,2,,判断/决断
+斷,断,t,uan,3,2,,判断;;决断
 斷,断,t,uan,6,2,,断绝
 斷,断,t,ng,6,1,,
 籪,簖,t,uan,6,0,,
@@ -3693,7 +3693,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 婪,婪,l,am,5,0,,
 嵐,岚,l,am,5,0,,
 藍,蓝,l,am,5,0,,
-藍,蓝,n,ann,5,0,,姓#芥蓝@khah4-nann5
+藍,蓝,n,ann,5,0,,姓//芥蓝@khah4-nann5
 闌,阑,l,an,5,0,,
 襤,褴,l,am,5,0,,
 攔,拦,l,an,5,0,,
@@ -6100,7 +6100,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 飼,饲,tsh,i,7,0,,
 駟,驷,s,v,3,0,,
 儩,儩,s,v,3,0,,
-松,松,s,eng,5,1,,松树@seng5-tshiu7/松香@seng5-hionn1
+松,松,s,eng,5,1,,松树@seng5-tshiu7;;松香@seng5-hionn1
 松,松,s,iong,5,2,,
 凇,凇,s,iong,5,0,,
 菘,菘,s,iong,5,0,,
@@ -6779,8 +6779,8 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 蕪,芜,b,u,5,0,,
 鼯,鼯,0,u,5,0,,
 五,五,ng,ou,6,1,,数字
-五,五,ng,ou,2,1,,五香@ngou2-hiang1/五花肉@ngou2-hue1-nek8
-五,五,0,u,2,2,,二一添做五@ji7-it4 thiam1-tso3-u2/九五之尊@kiu2-u2 tsv1-tsun1
+五,五,ng,ou,2,1,,五香@ngou2-hiang1;;五花肉@ngou2-hue1-nek8
+五,五,0,u,2,2,,二一添做五@ji7-it4 thiam1-tso3-u2;;九五之尊@kiu2-u2 tsv1-tsun1
 午,午,ng,ou,2,1,,
 午,午,0,u,2,2,,
 伍,伍,ng,ou,2,1,,
@@ -8454,7 +8454,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 指,指,ts,i,2,2,,
 指,指,k,i,2,1,,动词
 指,指,ts,ainn',2,1,,名词
-指,指,ts,ng,2,1,,固定搭配%指头公@tsng2-thau5-kong@大拇指/指尾仔@tsng2-bue2-kiann2@小指/指甲@tsng2-kah4
+指,指,ts,ng,2,1,,固定搭配::指头公@tsng2-thau5-kong@大拇指;;指尾仔@tsng2-bue2-kiann2@小指;;指甲@tsng2-kah4
 枳,枳,ts,i,2,0,,
 咫,咫,ts,i,2,0,,
 紙,纸,ts,ua,2,1,,
