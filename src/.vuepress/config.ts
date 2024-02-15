@@ -61,6 +61,7 @@ export default defineUserConfig({
     contributors: false,
     nextLink: false,
     prevLink: false,
+    lastUpdated: false,
     // navbar: ["/doc/"],
     // sidebar: [],
     sidebar: {
