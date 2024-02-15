@@ -84,6 +84,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iem';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -100,6 +103,9 @@ const fuzzyRules = {
       // 双唇音接 ng 圆唇化
       if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
         result.final = 'ung';
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
 
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
@@ -109,7 +115,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -120,6 +126,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -131,6 +140,10 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
         result.final = 'ong';
@@ -139,7 +152,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -150,6 +163,8 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 潮安饶平特色 oi -> ue
@@ -166,6 +181,9 @@ const fuzzyRules = {
       // 双唇音接 ng 圆唇化
       if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
         result.final = 'ung';
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
 
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
@@ -175,7 +193,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -186,6 +204,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iem';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -199,6 +220,10 @@ const fuzzyRules = {
       if (result.final === 'eng') result.final = 'en';
       if (result.final === 'ek') result.final = 'et';
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
         result.final = 'ong';
@@ -207,7 +232,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -218,6 +243,8 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 潮安饶平特色 oi -> ue
@@ -228,6 +255,10 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
         result.final = 'ong';
@@ -235,12 +266,12 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // bu- 阳声韵变为 mu-
-      if (result.initial === 'b' && result.final.match(/^u\w*[m|n|ng]$/))
+      if (result.initial === 'b' && result.final.match(/^u\w*(m|n|ng)$/))
         result.initial = 'm';
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -251,6 +282,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -269,12 +303,15 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
       // 丢失 mp 韵尾
-      result.final = result.final.replace(/^([aoveiu])m$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu])p$/, '$1k');
+      result.final = result.final.replace(/^([aoveiu]+)m$/, '$1ng');
+      result.final = result.final.replace(/^([aoveiu]+)p$/, '$1k');
 
       // 双唇音接 ng 圆唇化
       if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
         result.final = 'ung';
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
 
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
@@ -284,7 +321,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -295,6 +332,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -314,6 +354,9 @@ const fuzzyRules = {
       // 双唇音接 ng 圆唇化
       if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
         result.final = 'ung';
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
 
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
@@ -323,7 +366,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -334,6 +377,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -343,7 +389,11 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
       // 揭阳特色 ing ik -> eng ek
-      result.final = result.final.replace(/^i([ng|k])$/, 'e$1');
+      result.final = result.final.replace(/^i(ng|k)$/, 'e$1');
+
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
 
       // 齿龈音接 iong iok 丢失介音
       if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
@@ -353,7 +403,7 @@ const fuzzyRules = {
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -365,6 +415,9 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -373,12 +426,16 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 声调：3 6 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
       // if (result.tone === '6') result.tone = '3';
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -389,6 +446,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -397,9 +457,13 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -411,6 +475,9 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
+      if (result.final === "o'") result.final = 'o';
+      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -419,12 +486,16 @@ const fuzzyRules = {
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 声调 3 7 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
       // if (result.tone === '7') result.tone = '3';
 
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },
@@ -436,20 +507,27 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
+      if (result.final === "o'") result.final = 'e';
+      if (result.final === "o'm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
+      if (result.final === 'ou') result.final = 'au';
 
       // 陆丰特色 ue -> uei
-      result.final = result.final.replace(/^ue([nn|h|nnh])$/, 'uei$1');
+      result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1');
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
 
+      // ng 增生 v 元音
+      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
+        result.final = 'vng';
+
       // 去除所有撇号 '
       result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("'", '');
+      result.final = result.final.replace("nn'", '');
 
       return result;
     },

@@ -49,7 +49,7 @@ import 'jquery.cookie';
 const $ = jquery;
 
 // import 'bootstrap';
-import 'khroma';
+// import 'khroma';
 
 export default {
   mounted() {

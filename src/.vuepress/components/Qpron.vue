@@ -94,7 +94,7 @@ import 'jquery.cookie';
 const $ = jquery;
 
 // import 'bootstrap';
-import 'khroma';
+// import 'khroma';
 
 export default {
   data() {
@@ -249,7 +249,7 @@ export default {
         db.exec(createTmpTableSql);
 
         let insertTmpTableSql = "INSERT INTO tmp_combinations VALUES ";
-        let insertTmpTableSqlValues = [];
+        let insertTmpTableSqlValues = new Set();
         let sqlResult = null;
         let fuzzyRulesMapReverse = this.fuzzyRulesMapReverse;
         for (let i = 0; i < queryInitials.length; i++) {
@@ -265,18 +265,18 @@ export default {
               let curFuzzyList = fuzzyRulesMapReverse[curCombination];
               for (let l = 0; l < curFuzzyList.length; l++) {
                 let curFuzzy = curFuzzyList[l];
-                insertTmpTableSqlValues.push("(\"" + curFuzzy.combination + "\")");
+                insertTmpTableSqlValues.add("(\"" + curFuzzy.combination + "\")");
               }
               // avoid too many values in one sql
-              if (insertTmpTableSqlValues.length > 1000) {
-                db.exec(insertTmpTableSql + insertTmpTableSqlValues.join(","));
-                insertTmpTableSqlValues = [];
+              if (insertTmpTableSqlValues.size > 1000) {
+                db.exec(insertTmpTableSql + [...insertTmpTableSqlValues].join(","));
+                insertTmpTableSqlValues = new Set();
               }
             }
           }
         }
-        if (insertTmpTableSqlValues.length > 0) {
-          db.exec(insertTmpTableSql + insertTmpTableSqlValues.join(","));
+        if (insertTmpTableSqlValues.size > 0) {
+          db.exec(insertTmpTableSql + [...insertTmpTableSqlValues].join(","));
         }
 
         // now, select all hit entries that match the pronunciation
