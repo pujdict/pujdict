@@ -4,6 +4,7 @@ import { defineClientConfig } from "@vuepress/client";
 import { defineMermaidConfig, injectMermaidConfig, useMermaidOptions } from "vuepress-plugin-md-enhance/client";
 import {defineAsyncComponent, onBeforeMount} from "vue";
 import mermaidThemes from './styles/mermaid';
+import VueCookies from "vue-cookies";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.js';
 
@@ -38,6 +39,7 @@ export default defineClientConfig({
     enhance({app, router, siteData}) {
         // app.component("Qcommon", defineAsyncComponent(() => import("./components/Qcommon.vue")));
         // app.component("Qpron", defineAsyncComponent(() => import("./components/Qpron.vue")));
+        VueCookies.install(app);
     },
     layouts: {},
     setup() {

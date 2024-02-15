@@ -6,12 +6,13 @@ import {h, ref} from 'vue';
 
 import {h, ref} from 'vue';
 import {withBase} from "@vuepress/client";
+import VueCookies from 'vue-cookies';
 
 // import sql js
 import initSqlJs from "sql.js";
 import jquery from "jquery";
 const $ = jquery;
-import 'jquery.cookie';
+// import 'jquery.cookie';
 
 // var jsdom = require('jsdom');
 // var $ = require('jquery')(jsdom().defaultView);
@@ -614,11 +615,22 @@ function setLoading(loading) {
 }
 
 function setOptionInCookie(optionName, optionValue) {
-  $.cookie(optionName, optionValue, {expires: 365, path: "/;SameSite=Lax", secure: true});
+  try {
+    VueCookies.set(optionName, optionValue, '365d', '/', '', true);
+    // $.cookie(optionName, optionValue, {expires: 365, path: "/;SameSite=Lax", secure: true});
+  } catch (e) {
+    console.error(e);
+  }
 }
 
-function getOptionInCookie(optionName) {
-  return $.cookie(optionName);
+function getOptionInCookie(optionName, $default = null) {
+  try {
+    return VueCookies.get(optionName) ?? $default;
+    // return $.cookie(optionName);
+  } catch (e) {
+    console.error(e);
+    return $default;
+  }
 }
 
 function setUrlQueryParameter(key, value) {
