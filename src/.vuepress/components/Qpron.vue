@@ -61,7 +61,7 @@
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span v-for="entry in toneItem">
-                <a target="_blank" class="text-decoration-none" :href="withBase('query/qchar?chars=' + entry.char)">{{
+                <a target="_blank" class="text-decoration-none" :href="withBase('query/qchar.html?chars=' + entry.char)">{{
                     entry.char_sim
                   }}{{ entry.char_sim !== entry.char ? '(' + entry.char + ')' : '' }}</a>
               </span>
