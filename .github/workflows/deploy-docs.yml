@@ -66,11 +66,11 @@ jobs:
           name: dist
           path: dist
       - name: Rsync to SourceForge Web Site
-        uses: contention/rsync-deployments@v2.0.0
+        uses: burnett01/rsync-deployments@6.0.0
         with:
-          FLAGS: -avzr --delete
-          USER: ${{ vars.PUJDICT_SF_WEB_SITE_USER }}
-          HOST: web.sourceforge.net
-          LOCALPATH: dist/
-          REMOTEPATH: /home/project-web/pujdict/htdocs/
-          DEPLOY_KEY: ${{ secrets.PUJDICT_RSYNC_FROM_GH_ACTION_TO_SF_WEB_SITE }}
+          switches: -avzr --delete
+          remote_user: ${{ vars.PUJDICT_SF_WEB_SITE_USER }}
+          remote_host: web.sourceforge.net
+          path: dist/
+          remote_path: /home/project-web/pujdict/htdocs/
+          remote_key: ${{ secrets.PUJDICT_RSYNC_FROM_GH_ACTION_TO_SF_WEB_SITE }}
