@@ -51,10 +51,10 @@ export default defineUserConfig({
   // },
 
   theme: hopeTheme({
-    darkmode: "switch",
+    darkmode: "toggle",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
-    repo: "pujdict/pujdict.github.io",
+    repo: "pujdict/pujdict",
     docsBranch: "main",
     editLink: true,
     docsDir: "src",
