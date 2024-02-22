@@ -73,7 +73,8 @@ export default {
     });
 
     $("#query-button").click(function () {
-      let chars = [...$("#query-input").val()];
+      let charsInput = $("#query-input").val();
+      let chars = [...charsInput];
       // remove all non-Chinese characters
       // query = query.replace(/[^\u4e00-\u9fa5]/g, "");
       if (chars.length !== 0) {
@@ -84,7 +85,7 @@ export default {
           $("#query-result").append(makeEntryArea(entry));
         });
         setLoading(false);
-        setUrlQueryParameter("chars", chars);
+        setUrlQueryParameter("chars", charsInput);
       }
       this.blur();
     });
