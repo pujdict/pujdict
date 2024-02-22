@@ -41,11 +41,11 @@ const PUJToneMarks = [
 const PUJSpecialVowels = {
   "v": "ṳ",
   "V": "Ṳ",
-  "o'": "o̤",
-  "O'": "O̤",
+  "r": "o̤",
+  "R": "O̤",
 };
 
-const VowelOrder = ['a', 'e', 'o', 'i', 'u', 'v', PUJSpecialVowels['v'], PUJSpecialVowels["o'"], 'A', 'E', 'O', 'I', 'U', 'V', PUJSpecialVowels['V'], PUJSpecialVowels["O'"]];
+const VowelOrder = ['a', 'e', 'o', 'i', 'u', 'v', PUJSpecialVowels['v'], PUJSpecialVowels["r"], 'A', 'E', 'O', 'I', 'U', 'V', PUJSpecialVowels['V'], PUJSpecialVowels["R"]];
 
 class Entry {
   constructor(entry_index, char, char_sim, initial, final, tone, cat, char_ref, details) {
@@ -85,9 +85,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iem';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iem';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -127,9 +127,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -164,8 +164,8 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 潮安饶平特色 oi -> ue
@@ -205,9 +205,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iem';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iem';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -244,8 +244,8 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 潮安饶平特色 oi -> ue
@@ -283,9 +283,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -333,9 +333,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'uoinn') result.final = 'uinn';
 
@@ -378,9 +378,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -416,9 +416,9 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -447,9 +447,9 @@ const fuzzyRules = {
       let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -476,9 +476,9 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
-      if (result.final === "o'") result.final = 'o';
-      if (result.final === "o'h") result.final = 'oh';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'o';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -508,8 +508,9 @@ const fuzzyRules = {
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
-      if (result.final === "o'") result.final = 'e';
-      if (result.final === "o'm") result.final = 'iam';
+      if (result.final === "r") result.final = 'e';
+      if (result.final === "rh") result.final = 'oh';
+      if (result.final === "rm") result.final = 'iam';
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
@@ -561,12 +562,14 @@ function makeEntryFromSqlResult(sqlResult) {
   return entry;
 }
 
-function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], o2 = PUJSpecialVowels["o'"], O2 = PUJSpecialVowels["O'"]) {
+function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   word = word.replace('0', '');
   word = word.replace('v', v);
   word = word.replace('V', V);
-  word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
-  word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
+  word = word.replace('r', r);
+  word = word.replace('R', R);
+  // word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
+  // word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return word;
 }
 
