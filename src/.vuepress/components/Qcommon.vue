@@ -46,7 +46,7 @@ const PUJSpecialVowels = {
   "R": "O̤",
 };
 
-const VowelOrder = ['a', 'e', 'o', 'i', 'u', 'v', PUJSpecialVowels['v'], PUJSpecialVowels["r"], 'A', 'E', 'O', 'I', 'U', 'V', PUJSpecialVowels['V'], PUJSpecialVowels["R"]];
+const VowelOrder = ['A', 'a', 'E', 'e', 'O', 'o', 'I', 'i', 'Y', 'y', 'U', 'u', 'V', 'v', 'R', 'r', PUJSpecialVowels['V'], PUJSpecialVowels['v'], PUJSpecialVowels['R'], PUJSpecialVowels['r']];
 
 class Entry {
   constructor(entry_index, char, char_sim, initial, final, tone, cat, char_ref, details) {
@@ -612,7 +612,6 @@ function addPUJToneMarkForSingle(word, tone) {
     }
   }
 
-  const VowelOrder = "aeoiuvAEOIUV";
   // 添加音调符号：找到开口度最大的元音字母，开口度从大到小顺序为 aeoiuv
   let vowelsIndices = [];
   for (let i = 0; i < word.length; i++) {
@@ -620,7 +619,7 @@ function addPUJToneMarkForSingle(word, tone) {
       vowelsIndices.push(i);
     }
   }
-  if (vowelsIndices.length > 1 && "iuIU".includes(word[vowelsIndices[0]])) {
+  if (vowelsIndices.length > 1 && "iyuIYU".includes(word[vowelsIndices[0]])) {
     // 多于一个且第一个是 iu 的话，iu 就是介音，直接去掉。
     vowelsIndices.shift();
   }
