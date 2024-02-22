@@ -165,6 +165,7 @@ export default defineUserConfig({
         Qchar: path.resolve(__dirname, "./components/Qchar.vue"),
         Qcommon: path.resolve(__dirname, "./components/Qcommon.vue"),
         Qappendix: path.resolve(__dirname, "./components/Qappendix.vue"),
+        Qpuj: path.resolve(__dirname, "./components/Qpuj.vue"),
         // Mermaid: path.resolve(__dirname, "./components/Mermaid.vue"),
       },
     }),
