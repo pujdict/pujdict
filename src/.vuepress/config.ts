@@ -81,6 +81,7 @@ export default defineUserConfig({
         "bib.md",
       ],
       '/appendix/': [
+        "relationships.md",
         "human_body.md",
       ]
     },
@@ -125,9 +126,13 @@ export default defineUserConfig({
         icon: "receipt",
         children: [
           {
+            text: "人称",
+            link: "relationships.md",
+          },
+          {
             text: "人体",
             link: "human_body.md",
-          }
+          },
         ]
       }
     ],
