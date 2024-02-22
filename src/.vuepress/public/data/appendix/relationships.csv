@@ -35,6 +35,7 @@ teochew,puj,mandarin
 丈夫囝/兜囝,ta1-pou1-kiann2/tau1-kiann2,儿子
 查某囝/走囝,tsa1-bou2-kiann2/tsau2-kiann2,女儿
 孙,sun1,孙子/侄子
+外甥,gua7-seng1,外甥
 丈夫孙/兜孙,ta1-pou1-sun1/tau1-sun1,孙子
 查某孙/走孙,tsa1-bou2-sun1/tsau2-sun1,孙女
 曾孙,tseng1-sun1,曾孙
@@ -53,10 +54,14 @@ teochew,puj,mandarin
 [英] aunt,an5--thi7,姨妈
 阿姑娘/阿姑/阿娘,a1-kou1-nionn5/a1-ku5-niang6,姑姑
 阿姑丈/阿丈,a1-kou1-tionn6,姑丈/姨丈
-阿嫂,a1-sau2/a1-so2,嫂子
+阿嫂,a1-so2,嫂子
+阿嫂,a1-sau2,兄嫂
 妻舅,tsi1-ku6,舅子
 妻姨,tsi1-i5,姨子
+小姆,sio2-m2,弟妇
 大小姆,tua7-sio2-m2,妯娌
+姐夫,tse2-hu1,姐夫
+妹婿,mue6-sai3,妹夫
 阿兄/阿哥,a1-hiann1/a1-ko5,哥哥（亲/堂/表）
 阿弟,a1-ti7,弟弟（亲/堂/表）
 阿姐,a1-tse2,姐姐（亲/堂/表）
@@ -65,3 +70,5 @@ teochew,puj,mandarin
 表,pio2,表亲前缀
 老,lau6,更高一辈称呼前缀
 双生,sang1-senn1,双胞胎
+大/二/三/…/小,tua7/ji7/sann1/.../soi3,（排行）
+阿大/阿二/阿三/…/阿小,a1-tua7/a1-ji7/a1-sann1/.../a1-soi3,老大/老二/老三/…/老小
