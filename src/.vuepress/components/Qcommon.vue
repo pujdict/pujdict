@@ -564,11 +564,11 @@ function makeEntryFromSqlResult(sqlResult) {
 }
 
 function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
-  word = word.replace('0', '');
-  word = word.replace('v', v);
-  word = word.replace('V', V);
-  word = word.replace('r', r);
-  word = word.replace('R', R);
+  word = word.replace(/0/g, '');
+  word = word.replace(/v/g, v);
+  word = word.replace(/V/g, V);
+  word = word.replace(/r/g, r);
+  word = word.replace(/R/g, R);
   // word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
   // word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return word;
@@ -589,6 +589,8 @@ function addPUJToneMark(sentence) {
   if (cur !== "") {
     result += addPUJToneMarkForSingle(cur);
   }
+  // 为了美观轻声调用点表示
+  result = result.replace(/--/g, '·');
   return result;
 }
 
