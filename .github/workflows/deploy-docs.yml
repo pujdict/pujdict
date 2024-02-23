@@ -41,14 +41,14 @@ jobs:
         with:
           # 选择要使用的 node 版本
           node-version: 20
-          cache: npm
+          cache: pnpm
       # 运行构建脚本
       - name: Install dependencies
         run: |-
-          npm ci
+          pnpm install --frozen-lockfile
       - name: Build VuePress site
         run: |-
-          npm run docs:build
+          pnpm run docs:build
           > src/.vuepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-artifact@v4

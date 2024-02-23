@@ -1,5 +1,6 @@
 import {defineUserConfig} from "vuepress";
-import {getDirname, path} from "@vuepress/utils";
+// @ts-ignore
+import {getDirname, path} from "vuepress/utils";
 import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
