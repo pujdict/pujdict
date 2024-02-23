@@ -8,7 +8,7 @@ import { viteBundler } from '@vuepress/bundler-vite';
 import * as dotenv from 'dotenv'
 
 // @ts-ignore
-const __dirname = getDirname(import.meta.url);
+const __dirname = getDirname(import.meta.url); // .vuepress
 
 dotenv.config();
 
@@ -179,4 +179,6 @@ export default defineUserConfig({
     viteOptions: {},
     vuePluginOptions: {},
   }),
+  templateDev: path.join(__dirname, "./templates/dev.html"),
+  templateBuild: path.join(__dirname, "./templates/build.html"),
 });
