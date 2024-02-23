@@ -38,6 +38,9 @@ devDependencies:
   khroma:
     specifier: ^2.1.0
     version: 2.1.0
+  markdown-it-cjk-breaks:
+    specifier: ^2.0.0
+    version: 2.0.0
   mermaid:
     specifier: ^10.8.0
     version: 10.8.0
@@ -2922,6 +2925,12 @@ packages:
     dependencies:
       '@types/markdown-it': 13.0.7
       markdown-it: 14.0.0
+    dev: true
+
+  /markdown-it-cjk-breaks@2.0.0:
+    resolution: {integrity: sha512-hzgyuNzXuHoNJuPW+b4IXEtqaLeD4xNloqFVWG/wzT3O0npoDiwaEFY6JiglFjUh5//xvE0N21GU07NMxw4TiA==, tarball: https://registry.npmjs.org/markdown-it-cjk-breaks/-/markdown-it-cjk-breaks-2.0.0.tgz}
+    dependencies:
+      get-east-asian-width: 1.2.0
     dev: true
 
   /markdown-it-emoji@3.0.0:

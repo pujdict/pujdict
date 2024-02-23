@@ -5,7 +5,8 @@ import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
 import { viteBundler } from '@vuepress/bundler-vite';
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
+import cjk_breaks from 'markdown-it-cjk-breaks';
 
 // @ts-ignore
 const __dirname = getDirname(import.meta.url); // .vuepress
@@ -159,6 +160,9 @@ export default defineUserConfig({
       comment: {},
     }
   }),
+  extendsMarkdown: (md) => {
+    md.use(cjk_breaks);
+  },
   plugins: [
     registerComponentsPlugin({
       // componentsDir: path.resolve(__dirname, "./components"),
