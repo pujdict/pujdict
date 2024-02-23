@@ -8,7 +8,7 @@
 
       <div class="btn-toolbar">
         <div class="btn-group">
-          <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询"/>
+          <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询" @click="queryEntries()"/>
           <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
@@ -16,12 +16,37 @@
     </form>
     <hr/>
     <div id="query-result">
-      <div class="card border-dark mb-3" id="query-result-proto">
-<!--        <div class="card-header"></div>&lt;!&ndash;字&ndash;&gt;-->
-        <div class="card-body">
-          <h4 class="card-title"></h4><!--音-->
-          <h5 class="card-subtitle mb-auto text-body-secondary"></h5><!--备用-->
-          <p class="card-text"></p><!--义-->
+      <div v-if="queryResultEmpty">没有找到符合条件的结果。</div>
+      <div v-else>
+        <div class="card border-dark mb-3" v-for="result in queryResult">
+          <!--        <div class="card-header"></div>&lt;!&ndash;字&ndash;&gt;-->
+          <div class="card-body">
+            <h4 class="card-title">{{
+                result.entry.char_sim
+              }}{{ result.entry.char_sim !== result.entry.char ? ` (${result.entry.char})` : '' }}</h4>
+            <h5 class="card-subtitle mb-auto text-body-secondary">
+              <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
+                <template v-if="key === 'dummy'">
+                  {{ pronunciation.display }} </template>
+              </span>
+            </h5>
+            <p class="card-text">
+              <template v-for="(meaningItem, i) in result.meaningItem">
+                <br v-if="i > 0"/>
+                <template>{{ meaningItem.explanation }}</template>
+                <template v-for="(word, j) in meaningItem.words">
+                  <template v-if="j > 0">；</template>
+                  <span v-if="word.teochew">{{ word.teochew }}</span>
+                  <span v-if="word.puj">
+                    <span> [{{ word.puj }}] </span>
+                  </span>
+                  <span v-if="word.mandarin">
+                    <span> ({{ word.mandarin }})</span>
+                  </span>
+                </template>
+              </template>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -52,47 +77,30 @@ const $ = jquery;
 // import 'bootstrap';
 // import 'khroma';
 
+class MeaningWord {
+  constructor(teochew, puj, mandarin) {
+    this.teochew = teochew;
+    this.puj = puj;
+    this.mandarin = mandarin;
+  }
+}
+
+class MeaningItem {
+  constructor(explanation, words) {
+    this.explanation = explanation;
+    this.words = words;
+  }
+}
+
 export default {
-  mounted() {
-    initDarkModeString();
-    const queryResultProto = extractProto("#query-result-proto");
-
-    initFromDatabase().then(() => {
-      setLoading(false);
-      // get the GET parameter in url
-      let searchParams = new URLSearchParams(window.location.search);
-      let query = searchParams.get("chars");
-      if (query !== null) {
-        $("#query-input").val(query);
-        $("#query-button").click();
-      }
-    });
-
-    $("#reset-button").click(function () {
-      $("#query-input").val("");
-      resetUrlQueryParameter("chars");
-      this.blur();
-    });
-
-    $("#query-button").click(function () {
-      let charsInput = $("#query-input").val();
-      let chars = [...charsInput];
-      // remove all non-Chinese characters
-      // query = query.replace(/[^\u4e00-\u9fa5]/g, "");
-      if (chars.length !== 0) {
-        setLoading(true);
-        let entries = queryChars(chars);
-        $("#query-result").children().not("#query-result-proto").remove();
-        entries.forEach(entry => {
-          $("#query-result").append(makeEntryArea(entry));
-        });
-        setLoading(false);
-        setUrlQueryParameter("chars", charsInput);
-      }
-      this.blur();
-    });
-
-    function queryChars(chars) {
+  data() {
+    return {
+      queryResult: {},
+      queryResultEmpty: false,
+    };
+  },
+  methods: {
+    queryChars(chars) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
         return [];
@@ -126,9 +134,113 @@ export default {
       if (queryResult.length === 0) {
         return [];
       }
-      let entries = queryResult[0].values.map(row => new Entry(...row));
-      return entries;
+      let result = queryResult[0].values.map(row => {
+        let entry = new Entry(...row);
+        let pronunciations = {};
+        Object.entries(fuzzyRules).forEach(([key, rule]) => {
+          let fuzzyPronunciation = rule.fuzzy(new Pronunciation(entry.initial, entry.final, entry.tone));
+          let combination = fuzzyPronunciation.getCombination();
+          let display = addPUJToneMarkAndUnify(combination);
+          pronunciations[key] = {
+            key: key,
+            name: rule.name,
+            raw: fuzzyPronunciation,
+            plain: combination,
+            display: display,
+          };
+        });
+        return {
+          entry: entry,
+          pronunciations: pronunciations,
+          meaningItem: this.makeMeaningItems(entry),
+        };
+      });
+      return result;
+    },
+    queryEntries() {
+      let charsInput = $("#query-input").val();
+      let chars = [...charsInput];
+      // remove all non-Chinese characters
+      // query = query.replace(/[^\u4e00-\u9fa5]/g, "");
+      if (chars.length !== 0) {
+        setLoading(true);
+        let result = this.queryChars(chars);
+        this.queryResult = result;
+        this.queryResultEmpty = result.length === 0;
+        //$("#query-result").children().not("#query-result-proto").remove();
+        //result.forEach(entry => {
+        //  $("#query-result").append(makeEntryArea(entry));
+        //});
+        setLoading(false);
+        setUrlQueryParameter("chars", charsInput);
+      }
+    },
+    makeMeaningItems(entry) {
+      // 每个字的div，外面一个带半透明边框、浅色背景的div，里面一个带字的div，大概这样：
+      // +---------------------+
+      // | 简（繁）  注音        |
+      // |                     |
+      // | 释义和词例正文        |
+      // +---------------------+
+      let rawMeaningItems = entry.details.split("//");
+      let meaningItems = [];
+      rawMeaningItems.forEach(item => {
+        let meaningSplit = item.split("::");
+        let explanation = '';
+        let rawWords = [];
+        if (meaningSplit.length === 1) {
+          rawWords = meaningSplit[0].split(";;");
+        } else if (meaningSplit.length === 2) {
+          rawWords = meaningSplit[1].split(";;");
+        }
+        let words = [];
+        rawWords.forEach(rawWord => {
+          let teochew = '';
+          let puj = '';
+          let mandarin = '';
+          let splits = rawWord.split('@');
+          if (splits.length >= 1) {
+            teochew = splits[0];
+          }
+          if (splits.length >= 2) {
+            puj = splits[1];
+            puj = addPUJToneMarkAndUnify(puj);
+          }
+          if (splits.length >= 3) {
+            mandarin = splits[2];
+          }
+          words.push(new MeaningWord(teochew, puj, mandarin));
+        });
+        meaningItems.push(new MeaningItem(explanation, words));
+      });
+
+      return meaningItems;
     }
+  },
+  mounted() {
+    initDarkModeString();
+    const queryResultProto = extractProto("#query-result-proto");
+
+    initFromDatabase().then(() => {
+      setLoading(false);
+      // get the GET parameter in url
+      let searchParams = new URLSearchParams(window.location.search);
+      let query = searchParams.get("chars");
+      if (query !== null) {
+        $("#query-input").val(query);
+        $("#query-button").click();
+      }
+    });
+
+    $("#reset-button").click(function () {
+      $("#query-input").val("");
+      resetUrlQueryParameter("chars");
+      this.blur();
+    });
+
+    $("#query-button").click(function () {
+      this.blur();
+    });
 
     function makeMeaningWord(str) {
       // 词例@注音@释义

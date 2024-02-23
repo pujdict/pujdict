@@ -81,6 +81,14 @@ class Entry {
     this.char_ref = char_ref;
     this.details = details;
   }
+
+  getCombination() {
+    return this.combination;
+  }
+
+  getCombinationDisplay() {
+    return addPUJToneMarkAndUnify(this.combination);
+  }
 }
 
 class Pronunciation {
@@ -89,6 +97,10 @@ class Pronunciation {
     this.final = final;
     this.tone = tone;
     this.combination = initial + final + tone;
+  }
+
+  getCombination() {
+    return this.initial + this.final + this.tone;
   }
 }
 
@@ -191,18 +203,11 @@ const fuzzyRules = {
 
       // 潮安饶平特色 oi -> ue
       if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi([nn|h|nnh])*$/, 'ue$1');
+        result.final = result.final.replace(/^oi(nn|h|nnh)*$/, 'ue$1');
 
       // 府城特色高化元音
       result.final = result.final.replace(/^ia([nt])$/, 'ie$1');
 
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // 双唇音接 ng 圆唇化
-      if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
-        result.final = 'ung';
       // ng 增生 v 元音
       if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
         result.final = 'vng';
@@ -271,7 +276,7 @@ const fuzzyRules = {
 
       // 潮安饶平特色 oi -> ue
       if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi([nn|h|nnh])*$/, 'ue$1');
+        result.final = result.final.replace(/^oi(nn|h|nnh)*$/, 'ue$1');
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -671,7 +676,7 @@ function addPUJToneMarkForSingle(word, tone) {
 }
 
 function addPUJToneMarkAndUnify(sentence) {
-  return unifyWordDisplay(addPUJToneMark(sentence));
+  return unifyWordDisplay(addPUJToneMark(sentence)).normalize();
 }
 
 // 改用 sql.js 读取数据库

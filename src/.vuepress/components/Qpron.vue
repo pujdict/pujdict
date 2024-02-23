@@ -266,7 +266,7 @@ export default {
               let curFuzzyList = fuzzyRulesMapReverse[curCombination];
               for (let l = 0; l < curFuzzyList.length; l++) {
                 let curFuzzy = curFuzzyList[l];
-                insertTmpTableSqlValues.add("(\"" + curFuzzy.combination + "\")");
+                insertTmpTableSqlValues.add(`("${curFuzzy.getCombination()}")`);
               }
               // avoid too many values in one sql
               if (insertTmpTableSqlValues.size > 1000) {
@@ -306,7 +306,7 @@ export default {
     showQueryResultList(resultEntries) {
       this.queryResultEmpty = resultEntries.length === 0;
       // initial+final -> {tone -> [entryIds]}
-      resultEntries.sort((a, b) => a.combination.localeCompare(b.combination));
+      resultEntries.sort((a, b) => a.getCombination().localeCompare(b.getCombination()));
       let queryResult = {};
       let fuzzyRulesMap = this.fuzzyRulesMap;
       for (let i = 0; i < resultEntries.length; i++) {
