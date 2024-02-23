@@ -53,7 +53,7 @@ export default defineUserConfig({
   // },
 
   theme: hopeTheme({
-    darkmode: "toggle",
+    darkmode: "switch",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
     repo: "pujdict/pujdict",

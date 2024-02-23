@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:data-bs-theme="$isDarkmode ? 'dark' : 'light'">
+  <div v-bind:data-bs-theme="darkModeString">
     <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area">
         <!-- 长度充满整个div -->
@@ -41,7 +41,8 @@ import {
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
   // $,
-  fuzzyRules, db, entriesCount, initials, finals, combinations
+  fuzzyRules, db, entriesCount, initials, finals, combinations,
+  darkModeString, initDarkModeString,
 } from './Qcommon.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -53,6 +54,7 @@ const $ = jquery;
 
 export default {
   mounted() {
+    initDarkModeString();
     const queryResultProto = extractProto("#query-result-proto");
 
     initFromDatabase().then(() => {

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:data-bs-theme="$isDarkmode ? 'dark' : 'light'">
+  <div v-bind:data-bs-theme="darkModeString">
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
         <div class="form-label"><b>口音偏好</b></div>
@@ -86,7 +86,8 @@ import {
   setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
   // $,
-  fuzzyRules, db, entriesCount, initials, finals, combinations
+  fuzzyRules, db, combinations,
+  darkModeString, initDarkModeString,
 } from './Qcommon.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -428,6 +429,8 @@ export default {
     },
   },
   mounted() {
+    initDarkModeString();
+    // this.checkUserPreference();
     // import('bootstrap');
     // import('khroma');
     function resetUrlQueryParameterPron() {
