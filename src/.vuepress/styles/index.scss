@@ -18,4 +18,12 @@ table.table {
   display: table;
 }
 
-// Add more CSS here
+/* blockquote color fix */
+blockquote {
+  color: color-mix(in srgb, var(--text-color) 90%, transparent);
+}
+
+/* hint container background fix */
+.hint-container.note {
+  background: color-mix(in srgb, var(--note-bg-color) 10%, transparent);
+}
