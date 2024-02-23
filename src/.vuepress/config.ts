@@ -58,7 +58,7 @@ export default defineUserConfig({
     iconAssets: "fontawesome-with-brands",
     repo: "pujdict/pujdict",
     docsBranch: "main",
-    editLink: true,
+    editLink: false,
     docsDir: "src",
     contributors: false,
     nextLink: false,
