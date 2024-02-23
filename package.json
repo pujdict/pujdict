@@ -12,8 +12,8 @@
   },
   "devDependencies": {
     "@vue/compat": "^3.4.19",
-    "@vuepress/bundler-vite": "^2.0.0-rc.8",
-    "@vuepress/plugin-register-components": "^2.0.0-rc.15",
+    "@vuepress/bundler-vite": "2.0.0-rc.8",
+    "@vuepress/plugin-register-components": "2.0.0-rc.15",
     "bootstrap": "^5.3.3",
     "copy-webpack-plugin": "^12.0.2",
     "csv-parse": "^5.5.3",
@@ -27,8 +27,8 @@
     "sql.js": "^1.10.2",
     "vue": "^3.4.19",
     "vue-cookies": "^1.8.3",
-    "vuepress": "^2.0.0-rc.8",
-    "vuepress-plugin-md-enhance": "^2.0.0-rc.26",
-    "vuepress-theme-hope": "^2.0.0-rc.26"
+    "vuepress": "2.0.0-rc.8",
+    "vuepress-plugin-md-enhance": "2.0.0-rc.26",
+    "vuepress-theme-hope": "2.0.0-rc.26"
   }
 }
