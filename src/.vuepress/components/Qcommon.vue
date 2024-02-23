@@ -5,7 +5,7 @@ import {h, ref} from 'vue';
 <script>
 
 import {h, ref} from 'vue';
-import {withBase} from "@vuepress/client";
+import {withBase} from "vuepress/client";
 import VueCookies from 'vue-cookies';
 
 // import sql js

@@ -3,6 +3,7 @@ import {getDirname, path} from "@vuepress/utils";
 import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
+import { viteBundler } from '@vuepress/bundler-vite';
 import * as dotenv from 'dotenv'
 
 // @ts-ignore
@@ -173,4 +174,8 @@ export default defineUserConfig({
 
   // Enable it with pwa
   // shouldPrefetch: false,
+  bundler: viteBundler({
+    viteOptions: {},
+    vuePluginOptions: {},
+  }),
 });

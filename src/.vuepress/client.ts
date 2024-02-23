@@ -1,5 +1,6 @@
 // .vuepress/client.ts
-import { defineClientConfig } from "@vuepress/client";
+// @ts-ignore
+import {defineClientConfig} from "vuepress/client";
 // @ts-ignore
 import { defineMermaidConfig, injectMermaidConfig, useMermaidOptions } from "vuepress-plugin-md-enhance/client";
 import {defineAsyncComponent, onBeforeMount} from "vue";

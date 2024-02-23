@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import {withBase} from "@vuepress/client";
+import {withBase} from "vuepress/client";
 </script>
 
 <script>
@@ -44,7 +44,7 @@ import {
   fuzzyRules, db, entriesCount, initials, finals, combinations
 } from './Qcommon.vue';
 import jquery from 'jquery';
-import 'jquery.cookie';
+// import 'jquery.cookie';
 
 const $ = jquery;
 

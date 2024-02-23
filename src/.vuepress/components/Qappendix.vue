@@ -30,7 +30,7 @@ import {
 } from './Qcommon.vue';
 // import papaparse
 import Papaparse from 'papaparse';
-import {withBase} from "@vuepress/client";
+import {withBase} from "vuepress/client";
 
 class TableEntry {
   constructor(teochew, puj, mandarin) {
