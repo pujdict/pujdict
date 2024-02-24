@@ -10,6 +10,7 @@ import VueCookies from 'vue-cookies';
 
 // import sql js
 import initSqlJs from "sql.js";
+import sqlWasm from "sql.js/dist/sql-wasm.wasm?url";
 import jquery from "jquery";
 const $ = jquery;
 // import 'jquery.cookie';
@@ -690,7 +691,8 @@ async function initFromDatabase() {
   async function load() {
     // Load sql.js WebAssembly file
     let config = {
-      locateFile: () => "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.9.0/sql-wasm.wasm",
+      locateFile: () => sqlWasm,
+      // locateFile: () => "https://lib.baomitu.com/sql.js/1.9.0/sql-wasm.wasm",
       // locateFile: () => '/data/sql-wasm.wasm',
     };
     const sqlPromise = initSqlJs(config);

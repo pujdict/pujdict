@@ -5,32 +5,55 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
 /* 五度标记法声调的组合符号 */
 @font-face {
   font-family: IPAToneLetter;
-  src: url('/assets/fonts/GentiumBookPlus-Regular.woff2') format('woff2');
+  src: local('Gentium Book Plus'), local('GentiumBook Plus-Normal'),
+    url('//lib.baomitu.com/fonts/gentium-book-plus/gentium-book-plus-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//lib.baomitu.com/fonts/gentium-book-plus/gentium-book-plus-regular.woff') format('woff'), /* Modern Browsers */
+    url('//lib.baomitu.com/fonts/gentium-book-plus/gentium-book-plus-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('//lib.baomitu.com/fonts/gentium-book-plus/gentium-book-plus-regular.svg#GentiumBook Plus') format('svg'); /* Legacy iOS */
+    // url('/assets/fonts/GentiumBookPlus-Regular.woff2') format('woff2');
   unicode-range: U+02E5-02E9, U+A712-A716, U+A708-A70C, U+A70D-A711;
   size-adjust: 105%;
 }
 
 @font-face {
   font-family: SansSerifCJKExt1;
-  src: url('/assets/fonts/PlangothicP1-Regular.fallback.woff2') format('woff2');
+  src: local("Plangothic P1"), local("Plangothic"),
+    url('/assets/fonts/PlangothicP1-Regular.fallback.woff2') format('woff2');
   size-adjust: 100%;
   ascent-override: 100%;
   descent-override: 0%;
   line-gap-override: 50%;
+  // CJK Ext B-F
+  unicode-range: U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF;
 }
 
 @font-face {
   font-family: SansSerifCJKExt2;
-  src: url('/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
+  src: local("Plangothic P2"), local("Plangothic"), url('/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
   size-adjust: 100%;
   ascent-override: 100%;
   descent-override: 0%;
   line-gap-override: 50%;
+  // CJK Ext G & H
+  unicode-range: U+30000-3134F, U+31350-323AF;
 }
 
 @font-face {
   font-family: SourceSans;
-  src: url('/assets/fonts/SourceSans3-Regular.woff2') format('woff2');
+  src: local('Source Sans 3'),
+    url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.woff') format('woff'), /* Modern Browsers */
+    url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.ttf') format('truetype'); /* Safari, Android, iOS */
+    // url('/assets/fonts/SourceSans3-Regular.woff2') format('woff2');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SourceHanSans;
+  src: local('Source Han Sans'), local('Noto Sans CJK SC'), local('Noto Sans SC'),
+    url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff') format('woff'), /* Modern Browsers */
+    url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.ttf') format('truetype'); /* Safari, Android, iOS */
   font-style: normal;
 }
 
