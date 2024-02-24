@@ -45,7 +45,7 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
 
 @font-face {
   font-family: SourceSans;
-  src: local('Source Sans 3'),
+  src: local('Source Sans 3'), local('Source Sans 3 Regular'),
     url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.woff2') format('woff2'), /* Super Modern Browsers */
     url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.woff') format('woff'), /* Modern Browsers */
     url('//lib.baomitu.com/fonts/source-sans-3/source-sans-3-regular.ttf') format('truetype'); /* Safari, Android, iOS */
