@@ -33,6 +33,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.x
+          cache: pip
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Prepare files
         run: |-
           bash prepare_files.sh
@@ -47,7 +52,7 @@ jobs:
           node-version: 20
           cache: pnpm
       # 运行构建脚本
-      - name: Install dependencies
+      - name: Install Node.js dependencies
         run: |-
           pnpm install --frozen-lockfile
       - name: Build VuePress site
