@@ -5014,6 +5014,7 @@ char,char_sim,initial,final,tone,cat,char_ref,details
 牝,牝,ph,in,2,0,,
 聘,聘,ph,eng,3,2,,
 聘,聘,ph,iann,3,1,,
+𩩍,𩩍,ph,iann,1,0,,
 乒,乒,p,in,1,0,,
 娉,娉,ph,eng,3,0,,
 平,平,ph,eng,5,2,,

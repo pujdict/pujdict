@@ -38,6 +38,10 @@ export default defineUserConfig({
     // ["script", {src: "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js",},],
     // // sqljs
     // ["script", {src: "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js",},],
+    // fonts:
+    //   noto sans sc
+    //   source sans 3
+    ["link", {rel: "stylesheet", href: "https://fonts.geekzu.org/css2?family=Noto+Sans+SC:wght@100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap",},],
   ],
 
   // locales: {
