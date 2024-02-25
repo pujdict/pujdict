@@ -5,7 +5,7 @@
 import {
   Entry, Pronunciation,
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
-  setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
 } from './Qcommon.vue';
 
 export default {

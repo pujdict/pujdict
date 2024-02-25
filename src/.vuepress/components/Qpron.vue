@@ -83,7 +83,7 @@ import {
   makeEntryFromJson, makeEntryFromSqlResult,
   unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
-  setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
   // $,
   fuzzyRules, db, combinations,
@@ -105,7 +105,7 @@ export default {
         name: rule.name,
         fuzzy: rule.fuzzy,
       })),
-      selectedFuzzyQueryKey: getOptionInCookie("fuzzy-query") ?? 'dummy',
+      selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
       initialsList: {},
       finalsList: {},
       tonesList: {},
@@ -176,7 +176,7 @@ export default {
         return {key: item, display: item};
       });
       // 重新设置选项 cookie
-      setOptionInCookie("fuzzy-query", ruleKey);
+      setLocalOption("fuzzy-query", ruleKey);
     },
     async initialSelectFromGetParameters() {
       // components using url components string

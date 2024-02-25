@@ -63,7 +63,7 @@ import {
   makeEntryFromJson, makeEntryFromSqlResult,
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
-  setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,

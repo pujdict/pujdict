@@ -725,18 +725,22 @@ function setLoading(loading) {
   }
 }
 
-function setOptionInCookie(optionName, optionValue) {
+function setLocalOption(optionName, optionValue) {
+  if (typeof document === 'undefined') return;
   try {
-    VueCookies.set(optionName, optionValue, '365d', '/', '', true);
+    localStorage.setItem(`pujdict-${optionName}`, optionValue);
+    // VueCookies.set(optionName, optionValue, '365d', '/', '', true);
     // $.cookie(optionName, optionValue, {expires: 365, path: "/;SameSite=Lax", secure: true});
   } catch (e) {
     console.error(e);
   }
 }
 
-function getOptionInCookie(optionName, $default = null) {
+function getLocalOption(optionName, $default = null) {
+  if (typeof document === 'undefined') return $default;
   try {
-    return VueCookies.get(optionName) ?? $default;
+    return localStorage.getItem(`pujdict-${optionName}`) ?? $default;
+    // return VueCookies.get(optionName) ?? $default;
     // return $.cookie(optionName);
   } catch (e) {
     console.error(e);
@@ -804,7 +808,7 @@ export {
   makeEntryFromJson, makeEntryFromSqlResult,
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
-  setLoading, setOptionInCookie, getOptionInCookie, setUrlQueryParameter, resetUrlQueryParameter,
+  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
