@@ -46,7 +46,7 @@
       <div class="btn-toolbar">
         <div class="btn-group" v-if="tonesList">
           <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" @click="querySqlite"/>
-          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
+          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" @click="resetQuery"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
@@ -297,6 +297,18 @@ export default {
       this.showQueryResultList(resultEntries);
       setLoading(false);
     },
+    resetQuery() {
+      this.selectedInitials = [];
+      this.selectedFinals = [];
+      this.selectedTones = [];
+      this.resetUrlQueryParameterPron();
+    },
+    resetUrlQueryParameterPron() {
+      resetUrlQueryParameter("fuzzy");
+      resetUrlQueryParameter("initials");
+      resetUrlQueryParameter("finals");
+      resetUrlQueryParameter("tones");
+    },
     setUrlQueryParameterPron(queryFuzzy, queryInitials, queryFinals, queryTones) {
       setUrlQueryParameter("fuzzy", queryFuzzy);
       setUrlQueryParameter("initials", queryInitials.join(","));
@@ -398,26 +410,9 @@ export default {
   },
   mounted() {
     initDarkModeString();
-    // this.checkUserPreference();
-    // import('bootstrap');
-    // import('khroma');
-    function resetUrlQueryParameterPron() {
-      resetUrlQueryParameter("fuzzy");
-      resetUrlQueryParameter("initials");
-      resetUrlQueryParameter("finals");
-      resetUrlQueryParameter("tones");
-    }
-
     $("#reset-button").click(function () {
-      // clear all checked
-      $("#initials-list input").prop("checked", false);
-      $("#finals-list input").prop("checked", false);
-      $("#tones-list input").prop("checked", false);
-      resetUrlQueryParameterPron();
       this.blur();
     });
-
-    // async click components button
     $("#query-button").click(function () {
       this.blur();
     });

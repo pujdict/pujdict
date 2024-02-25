@@ -8,8 +8,8 @@
 
       <div class="btn-toolbar">
         <div class="btn-group">
-          <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询" @click="queryEntries()"/>
-          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
+          <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询" @click="queryEntries"/>
+          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" @click="resetQuery"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
@@ -215,7 +215,11 @@ export default {
       });
 
       return meaningItems;
-    }
+    },
+    resetQuery() {
+      $("#query-input").val("");
+      resetUrlQueryParameter("chars");
+    },
   },
   mounted() {
     initDarkModeString();
@@ -233,8 +237,6 @@ export default {
     });
 
     $("#reset-button").click(function () {
-      $("#query-input").val("");
-      resetUrlQueryParameter("chars");
       this.blur();
     });
 
