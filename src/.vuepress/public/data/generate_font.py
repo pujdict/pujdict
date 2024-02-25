@@ -52,17 +52,14 @@ def subset(chars):
     font = merger.merge([f'{SUBSET_FONT_NAME_TTF0}', f'{SUBSET_FONT_NAME_TTF1}'])
     font.save(SUBSET_FONT_NAME_TTF)
 
-
-def generate_woff2():
-    if not os.path.exists(SUBSET_FONT_NAME_TTF):
-        raise FileNotFoundError(f'{SUBSET_FONT_NAME_TTF} not found')
     if os.path.exists(SUBSET_FONT_NAME_WOFF2):
         os.remove(SUBSET_FONT_NAME_WOFF2)
     woff2_compress(SUBSET_FONT_NAME_TTF, SUBSET_FONT_NAME_WOFF2)
 
+    shutil.copy(SUBSET_FONT_NAME_WOFF2, FONTS_DIR)
+
 
 def post_process():
-    shutil.copy(SUBSET_FONT_NAME_WOFF2, FONTS_DIR)
     # delete tmp dir
     shutil.rmtree(TEMP_DIR)
 
@@ -88,5 +85,4 @@ if __name__ == '__main__':
     chars = get_chars()
     ensure_plangothic()
     subset(chars)
-    generate_woff2()
     post_process()
