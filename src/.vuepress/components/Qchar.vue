@@ -3,7 +3,7 @@
     <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area">
         <!-- 长度充满整个div -->
-        <input class="form-control" id="query-input" type="text" placeholder="输入汉字..." maxlength="256"/>
+        <input class="form-control" id="query-input" type="text" placeholder="输入汉字..." maxlength="256" v-model="queryInput"/>
       </div>
 
       <div class="btn-toolbar">
@@ -68,6 +68,7 @@ import {
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
   darkModeString, initDarkModeString,
+  isChineseChar,
 } from './Qcommon.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -95,9 +96,18 @@ class MeaningItem {
 export default {
   data() {
     return {
+      queryInput: '',
       queryResult: {},
       queryResultEmpty: false,
     };
+  },
+  watch: {
+    // remove all non-Chinese characters
+    queryInput(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.queryInput = newVal.split('').filter(isChineseChar).join('');
+      }
+    }
   },
   methods: {
     queryChars(chars) {
@@ -158,7 +168,7 @@ export default {
       return result;
     },
     queryEntries() {
-      let charsInput = $("#query-input").val();
+      let charsInput = this.queryInput;
       let chars = [...charsInput];
       // remove all non-Chinese characters
       // query = query.replace(/[^\u4e00-\u9fa5]/g, "");
@@ -217,24 +227,25 @@ export default {
       return meaningItems;
     },
     resetQuery() {
-      $("#query-input").val("");
+      this.queryInput = '';
       resetUrlQueryParameter("chars");
+    },
+    onInitFromDatabaseFinished() {
+      setLoading(false);
+      // get the GET parameter in url
+      let searchParams = new URLSearchParams(window.location.search);
+      let query = searchParams.get("chars");
+      if (query !== null) {
+        this.queryInput = query;
+        this.queryEntries();
+      }
     },
   },
   mounted() {
     initDarkModeString();
     const queryResultProto = extractProto("#query-result-proto");
 
-    initFromDatabase().then(() => {
-      setLoading(false);
-      // get the GET parameter in url
-      let searchParams = new URLSearchParams(window.location.search);
-      let query = searchParams.get("chars");
-      if (query !== null) {
-        $("#query-input").val(query);
-        $("#query-button").click();
-      }
-    });
+    initFromDatabase().then(this.onInitFromDatabaseFinished);
 
     $("#reset-button").click(function () {
       this.blur();
