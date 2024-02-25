@@ -9,7 +9,7 @@
                    :id="fuzzyQuery.key" :value="fuzzyQuery.key"
                    v-model="selectedFuzzyQueryKey"
                    @change="updateFuzzyRulesMap(fuzzyQuery.key)"/>
-            <label class="form-check-label" style="width: 2.8em" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
+            <label class="form-check-label" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
           <div class="form-check form-check-inline" v-for="initial in initialsList">
             <input class="form-check-input" type="checkbox"
                    :id="initial.key" :value="initial.key" v-model="selectedInitials"/>
-            <label class="form-check-label" style="width: 2.8em" :for="initial.key">{{ initial.display }}</label>
+            <label class="form-check-label" :for="initial.key">{{ initial.display }}</label>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
           <div class="form-check form-check-inline" v-for="final in finalsList">
             <input class="form-check-input" type="checkbox"
                    :id="final.key" :value="final.key" v-model="selectedFinals"/>
-            <label class="form-check-label" style="width: 2.8em" :for="final.key">{{ final.display }}</label>
+            <label class="form-check-label" :for="final.key">{{ final.display }}</label>
           </div>
         </div>
       </div>
@@ -39,12 +39,12 @@
           <div class="form-check form-check-inline" id="tones-list-proto" v-for="tone in tonesList">
             <input class="form-check-input" type="checkbox"
                    :id="tone.key" :value="tone.key" v-model="selectedTones"/>
-            <label class="form-check-label" style="width: 2.8em" :for="tone.key">{{ tone.display }}</label>
+            <label class="form-check-label" :for="tone.key">{{ tone.display }}</label>
           </div>
         </div>
       </div>
       <div class="btn-toolbar">
-        <div class="btn-group">
+        <div class="btn-group" v-if="tonesList">
           <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" @click="querySqlite"/>
           <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置"/>
         </div>
@@ -60,7 +60,7 @@
             <span>{{ unifyWordDisplay(key) }}:</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
-              <span v-for="entry in toneItem">
+              <span class="query-result-entry" v-for="entry in toneItem">
                 <a target="_blank" class="text-decoration-none" :href="withBase('query/qchar.html?chars=' + entry.char)">{{
                     entry.char_sim
                   }}{{ entry.char_sim !== entry.char ? '(' + entry.char + ')' : '' }}</a>
@@ -320,47 +320,15 @@ export default {
         }
         queryResult[fuzzy.initial + fuzzy.final][fuzzy.tone].push(entry);
       }
-      this.queryResult = queryResult;
-      return;
-
-      $("#query-result").empty();
-      if (queryResult && Object.keys(queryResult).length > 0) {
-        // 列出结果列表，格式为
-        // 1. initial+final: (tone1) entry1.char, entry2.char, ...; (tone2) entry3.char, entry4.char, ...
-        // 2. initial+final: (tone1) entry1.char, entry2.char, ...; (tone2) entry3.char, entry4.char, ...
-        let list = $("<ul></ul>");
-        for (let key in queryResult) {
-          let queryResultItem = queryResult[key];
-          for (let tone in queryResultItem) {
-            if (queryResultItem[tone].length === 0) {
-              delete queryResultItem[tone];
-            }
-          }
-          if (Object.keys(queryResultItem).length === 0) {
-            continue;
-          }
-          let listItem = $("<li></li>");
-          let displayKey = unifyWordDisplay(key);
-          listItem.text(displayKey + ":");
-          for (let tone in queryResultItem) {
-            let entryIdsInTone = queryResultItem[tone];
-            let toneItem = this.makeResultTone(tone);
-            listItem.append(toneItem);
-            for (let j = 0; j < entryIdsInTone.length; j++) {
-              let entry = entryIdsInTone[j];
-              let entryItem = this.makeResultChar(entry);
-              listItem.append(entryItem);
-            }
-          }
-          list.append(listItem);
-        }
-        $("#query-result").append(list);
-        // fade in the result
-        $("#query-result").css({display: "none"});
-        $("#query-result").fadeIn(300);
-      } else {
-        $("#query-result").append("没有找到符合条件的结果。");
+      // sort the map by key initial+final
+      let keys = Object.keys(queryResult);
+      keys.sort();
+      let sortedQueryResult = {};
+      for (let i = 0; i < keys.length; i++) {
+        sortedQueryResult[keys[i]] = queryResult[keys[i]];
       }
+
+      this.queryResult = sortedQueryResult;
     },
     getQueryConditionList(selectAllForEmpty) {
       let emptyCount = 0;
@@ -385,12 +353,12 @@ export default {
       return [selectedInitials, selectedFinals, selectedTones, false];
     },
     makeResultTone(tone) {
-      const map = "①②③④⑤⑥⑦⑧";
+      const map = "⓪①②③④⑤⑥⑦⑧";
       tone = parseInt(tone);
-      if (tone < 1 || tone > 8) {
+      if (tone < 0 || tone > 8) {
         return "";
       }
-      return map[tone - 1];
+      return map[tone];
     },
     makeResultChar(entry) {
       let entryItem = $("<span></span>");
@@ -502,8 +470,26 @@ export default {
   cursor: pointer;
 }
 
+#query-conditions {
+  font-size: 110%;
+}
+
+#query-conditions .form-check-label {
+  /* add margin between every two entries */
+  width: 2.4em;
+}
+
+#query-result {
+  font-size: 130%;
+}
+
 /* add left margin 4px and right margin 2px */
 #query-result .tone-number {
   margin: 0 2px 0 4px;
+}
+
+/* add margin between every two entries */
+#query-result .query-result-entry {
+  margin: 0 3px 0 3px;
 }
 </style>
