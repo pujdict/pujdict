@@ -84,7 +84,6 @@ import {
   unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  extractProto,
   // $,
   fuzzyRules, db, combinations,
   darkModeString, initDarkModeString,

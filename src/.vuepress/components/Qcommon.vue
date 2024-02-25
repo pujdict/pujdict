@@ -760,16 +760,6 @@ function resetUrlQueryParameter(key) {
   window.history.replaceState({}, "", url);
 }
 
-function extractProto(protoId) {
-  let protoOriginal = $(protoId);
-  // hide the original proto
-  protoOriginal.attr("hidden", "hidden");
-  let protoCloned = protoOriginal.clone();
-  protoCloned.removeAttr("id");
-  protoCloned.removeAttr("hidden");
-  return protoCloned;
-}
-
 function isChineseChar(c) {
   /*
   CJK Unified Ideographs                  4E00-9FFF   Common
@@ -809,7 +799,6 @@ export {
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
   darkModeString, initDarkModeString,

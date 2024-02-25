@@ -64,7 +64,6 @@ import {
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  extractProto,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
   darkModeString, initDarkModeString,
@@ -243,7 +242,6 @@ export default {
   },
   mounted() {
     initDarkModeString();
-    const queryResultProto = extractProto("#query-result-proto");
 
     initFromDatabase().then(this.onInitFromDatabaseFinished);
 
