@@ -1,5 +1,5 @@
 <template>
-  <slot>{{ result }}</slot>
+  {{ result }}
 </template>
 <script>
 import {
@@ -20,7 +20,7 @@ export default {
       result: '',
     };
   },
-  mounted() {
+  created() {
     this.parsePUJ();
   },
   methods: {
