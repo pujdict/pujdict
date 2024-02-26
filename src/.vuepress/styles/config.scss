@@ -33,8 +33,13 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
 }
 
 @font-face {
-  font-family: SansSerifCJKExtSubset;
-  src: url("/assets/fonts/CJKExtSubset.generated.woff2") format("woff2");
+  font-family: CJKExtSubset1;
+  src: url("/assets/fonts/CJKExtSubset1.generated.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: CJKExtSubset2;
+  src: url("/assets/fonts/CJKExtSubset2.generated.woff2") format("woff2");
 }
 
 @font-face {

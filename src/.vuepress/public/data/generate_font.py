@@ -24,11 +24,12 @@ BASIC_SUBSET_FONT_NAME_OTF = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generate
 BASIC_SUBSET_FONT_NAME_WOFF2 = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generated.woff2')
 
 PLANGOTHIC_PATH = os.path.join(FONTS_DIR, 'Plangothic.ttc')
-SUBSET_FONT_NAME = 'CJKExtSubset'
-SUBSET_FONT_NAME_TTF0 = os.path.join(TEMP_DIR, '0-CJKExtSubset.generated.ttf')
-SUBSET_FONT_NAME_TTF1 = os.path.join(TEMP_DIR, '1-CJKExtSubset.generated.ttf')
-SUBSET_FONT_NAME_TTF = os.path.join(TEMP_DIR, 'CJKExtSubset.generated.ttf')
-SUBSET_FONT_NAME_WOFF2 = os.path.join(TEMP_DIR, 'CJKExtSubset.generated.woff2')
+SUBSET_FONT_NAME1 = 'CJKExtSubset1'
+SUBSET_FONT_NAME2 = 'CJKExtSubset2'
+SUBSET_FONT_NAME_TTF1 = os.path.join(TEMP_DIR, 'CJKExtSubset1.generated.ttf')
+SUBSET_FONT_NAME_TTF2 = os.path.join(TEMP_DIR, 'CJKExtSubset2.generated.ttf')
+SUBSET_FONT_NAME_WOFF2_1 = os.path.join(TEMP_DIR, 'CJKExtSubset1.generated.woff2')
+SUBSET_FONT_NAME_WOFF2_2 = os.path.join(TEMP_DIR, 'CJKExtSubset2.generated.woff2')
 
 
 def ensure_noto_sans_sc():
@@ -58,32 +59,31 @@ def basic_subset():
 
 
 def subset(chars):
-    # delete old subset font
-    if os.path.exists(SUBSET_FONT_NAME_TTF):
-        os.remove(SUBSET_FONT_NAME_TTF)
+    print(f'Subset: {chars}')
+    # write chars to a tmp file
+    name = tempfile.mktemp(dir=TEMP_DIR)
+    with open(name, 'w', encoding='utf-8') as f:
+        f.write(''.join(chars))
     pyftsubset([
         PLANGOTHIC_PATH,
-        f'--text={"".join(chars)}',
-        f'--output-file={SUBSET_FONT_NAME_TTF0}',
+        f'--text-file={name}',
+        f'--output-file={SUBSET_FONT_NAME_TTF1}',
         f'--font-number=0',
     ])
     pyftsubset([
         PLANGOTHIC_PATH,
-        f'--text={"".join(chars)}',
-        f'--output-file={SUBSET_FONT_NAME_TTF1}',
+        f'--text-file={name}',
+        f'--output-file={SUBSET_FONT_NAME_TTF2}',
         f'--font-number=1',
     ])
-    # merge two subset fonts
-    merger = fontTools.merge.Merger()
-    font = merger.merge([f'{SUBSET_FONT_NAME_TTF0}', f'{SUBSET_FONT_NAME_TTF1}'])
-    font.save(SUBSET_FONT_NAME_TTF)
-    fontname([SUBSET_FONT_NAME, SUBSET_FONT_NAME_TTF])
+    fontname([SUBSET_FONT_NAME1, SUBSET_FONT_NAME_TTF1])
+    fontname([SUBSET_FONT_NAME2, SUBSET_FONT_NAME_TTF2])
 
-    if os.path.exists(SUBSET_FONT_NAME_WOFF2):
-        os.remove(SUBSET_FONT_NAME_WOFF2)
-    woff2_compress(SUBSET_FONT_NAME_TTF, SUBSET_FONT_NAME_WOFF2)
+    woff2_compress(SUBSET_FONT_NAME_TTF1, SUBSET_FONT_NAME_WOFF2_1)
+    woff2_compress(SUBSET_FONT_NAME_TTF2, SUBSET_FONT_NAME_WOFF2_2)
 
-    shutil.copy(SUBSET_FONT_NAME_WOFF2, FONTS_DIR)
+    shutil.copy(SUBSET_FONT_NAME_WOFF2_1, FONTS_DIR)
+    shutil.copy(SUBSET_FONT_NAME_WOFF2_2, FONTS_DIR)
 
 
 def post_process():
