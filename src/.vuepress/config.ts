@@ -70,7 +70,6 @@ export default defineUserConfig({
     contributors: false,
     nextLink: false,
     prevLink: false,
-    lastUpdated: false,
     // navbar: ["/doc/"],
     // sidebar: [],
     sidebar: {
@@ -146,6 +145,11 @@ export default defineUserConfig({
       }
     ],
     plugins: {
+      git: {
+        createdTime: true,
+        updatedTime: true,
+        contributors: false,
+      },
       readingTime: false,
       mdEnhance: {
         include: {

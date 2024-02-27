@@ -5,6 +5,8 @@ icon: search
 order: 10
 sidebar: false
 breadcrumb: false
+gitInclude:
+  - ../.vuepress/components/Qpron.vue
 ---
 
 <Qpron />
