@@ -2,7 +2,12 @@
 title: 人称
 ---
 
-<Qappendix filename="relationships" />
+<script setup>
+import file from '@public/data/appendix/relationships.csv?raw';
+</script>
+
+<Qappendix :file="file" />
+
 
 ::: note
 

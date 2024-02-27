@@ -30,7 +30,6 @@ import {
 } from './Qcommon.vue';
 // import papaparse
 import Papaparse from 'papaparse';
-import {withBase} from "vuepress/client";
 
 class TableEntry {
   constructor(teochew, puj, mandarin) {
@@ -42,10 +41,10 @@ class TableEntry {
 
 export default {
   props: {
-    filename: {
+    file: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -58,23 +57,18 @@ export default {
   methods: {
     loadData() {
       try {
-        // const response = await fetch(withBase(`/data/appendix/${this.filename}.csv`));
-        // const text = await response.text();
-        import(`@public/data/appendix/${this.filename}.csv?raw`).then((module) => {
-          const text = module.default;
-          // noinspection JSUnresolvedReference
-          Papaparse.parse(text, {
-            header: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-              this.items = results.data.map((item) => {
-                const teochew = item.teochew;
-                const puj = addPUJToneMarkAndUnify(item.puj);
-                const mandarin = item.mandarin !== '' ? item.mandarin : item.teochew;
-                return new TableEntry(teochew, puj, mandarin);
-              });
-            }
-          });
+        const text = this.file;
+        Papaparse.parse(text, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            this.items = results.data.map((item) => {
+              const teochew = item.teochew;
+              const puj = addPUJToneMarkAndUnify(item.puj);
+              const mandarin = item.mandarin !== '' ? item.mandarin : item.teochew;
+              return new TableEntry(teochew, puj, mandarin);
+            });
+          }
         });
       } catch (error) {
         console.error('Error loading data:', error);
