@@ -25,9 +25,6 @@ flowchart
         huan0["huan 烦"];
         huang0["huang 防"];
     end
-%%    SThuang["huang (汕头)"];
-%%    CZhueng["hueng (潮州)"];
-%%    CZhuang["huang (潮州)"];
     huang1[huang]
     hueng1[hueng]
     hueng0 -->|汕头| huang1; hueng0 -->|潮州| hueng1;
@@ -43,27 +40,9 @@ flowchart
         kin0["kin 紧"];
         keng0["keng 景"];
     end
-%%    subgraph "潮州/汕头"
-%%        STkng[kng];
-%%        STking[king];
-%%        STkeng[keng];
-%%    end
-%%    subgraph 揭阳
-%%        JYkeng[keng];
-%%        JYkng[kng];
-%%    end
-%%    subgraph 潮阳
-%%        CYking[king];
-%%        CYkeng[keng];
-%%        CYkng[kng];
-%%    end
     kng1[kng]
     king1[king]
     keng1[keng]
-%%    kvn0 --- STkng;  kvn0 --- JYkeng; kvn0 --- CYking;
-%%    kin0 --- STking; kin0 --- JYkeng; kin0 --- CYking;
-%%    kng0 --- STkng;  kng0 --- JYkng;  kng0 --- CYkng;
-%%    keng0--- STkeng; keng0--- JYkeng; keng0--- CYkeng;
     kng0 --->|*| kng1;
     keng0 --->|*| keng1;
     kvn0 -->|潮州汕头| kng1;
@@ -84,7 +63,7 @@ flowchart
 改进后的通用白话字适用于标注潮州话任意地区的读音，各地可按各自的语言习惯转读，转读规则均为一对一映射（具体参见后文转读规则）。
 
 白话字不是一种新的拉丁化方案，早在 19 世纪末就被许多来华传教士用于记录包括潮州话在内的各地闽南语发音。
-本辞典所用白话字拼音，主要参考了林雄成《汕头方言手册》中的拼音，以及台湾地区“教育部门”发布的《台湾闽南语罗马字拼音方案》（简称“台罗”）。
+本辞典所用白话字拼音，主要参考了林雄成《汕头方言手册》中的拼音，以及台湾省教育部门发布的《台湾闽南语罗马字拼音方案》（简称“台罗”）。
 
 ## 声母
 
@@ -824,38 +803,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    -io/-ionn/-ioh、-iau/-iauh、-ainn、-eng。此外，-ian/-iat、-uan/-uat 为标准发音，但偶尔也会唱为潮州府城音
    -ieng/-iek、-ueng/-uek，后者听感上充满书生气息。-n/-t 韵尾与 -ng/-k 韵尾一般不要求区分，是否保留 -n/-t
    取决于演员个人的发音习惯（例如方展荣老师的唱词就保留了 -n/-t），但 -m/-p 韵尾一定会保留。
-   :::
 
-<!-- 
-| 例字 | 白话字 | 潮拼 | 备注   |
-| ---- | ------ | ---- | ------ |
-| 鱼   | ṳ      | e    | am     |
-| 庵   | am/ap  | am   | am     |
-| 安   | an     | ang  | an     |
-| 红   | ang    | ang  | aŋ     |
-| 翁   | ong    | ong  | oŋ     |
-| 英   | eng    | êng  | eŋ     |
-| 音   | im     | im   | im     |
-| 因   | in     | ing  | in     |
-| 奄   | iam    | iam  | iam    |
-| 嫣   | ian    | iang | ian    |
-| 央   | iang   | iang | iaŋ    |
-| 雍   | iong   | iong | ioŋ    |
-| 冤   | uan    | uang | uan    |
-| 汪   | uang   | uang | uaŋ    |
-| 荣   | ueng   | uang | ueŋ    |
-| 温   | un     | ung  | un     |
-| 秧   | ng     | en   | ŋ/ɯŋ/ɯ̃ |
-| 恩   | ṳn     | eng  | ɯn     |
-| 嗳   | ainn   | ain  | ãĩ     |
-| 闲   | oinn   | oin  | õĩ     |
-| 楹   | enn    | ên   | ẽ      |
-| 丸   | inn    | in   | ĩ      |
-| 影   | iann   | ian  | ĩã     |
-| 羊   | ionn   | ion  | ĩõ     |
-| 幼   | iunn   | iun  | ĩũ     |
-| 鞍   | uann   | uan  | ũã     |
--->
+:::
 
 ### 各地声调调值分表
 
