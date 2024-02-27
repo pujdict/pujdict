@@ -6,7 +6,7 @@ order: 10
 sidebar: false
 breadcrumb: false
 gitInclude:
-  - ../.vuepress/components/Qpron.vue
+  - ../.vuepress/components/QPron.vue
 ---
 
-<Qpron />
+<QPron />

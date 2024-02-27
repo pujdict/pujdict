@@ -6,5 +6,5 @@ title: 人体
 import file from '@public/data/appendix/human_body.csv?raw';
 </script>
 
-<Qappendix :file="file" />
+<QAppendix :file="file" />
 

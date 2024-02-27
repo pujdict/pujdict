@@ -177,11 +177,11 @@ export default defineUserConfig({
     registerComponentsPlugin({
       // componentsDir: path.resolve(__dirname, "./components"),
       components: {
-        Qpron: path.resolve(__dirname, "./components/Qpron.vue"),
-        Qchar: path.resolve(__dirname, "./components/Qchar.vue"),
-        Qcommon: path.resolve(__dirname, "./components/Qcommon.vue"),
-        Qappendix: path.resolve(__dirname, "./components/Qappendix.vue"),
-        Qpuj: path.resolve(__dirname, "./components/Qpuj.vue"),
+        QPron: path.resolve(__dirname, "./components/QPron.vue"),
+        QChar: path.resolve(__dirname, "./components/QChar.vue"),
+        QCommon: path.resolve(__dirname, "./components/QCommon.vue"),
+        QAppendix: path.resolve(__dirname, "./components/QAppendix.vue"),
+        QPuj: path.resolve(__dirname, "./components/QPuj.vue"),
         // Mermaid: path.resolve(__dirname, "./components/Mermaid.vue"),
       },
     }),

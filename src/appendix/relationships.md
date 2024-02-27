@@ -6,7 +6,7 @@ title: 人称
 import file from '@public/data/appendix/relationships.csv?raw';
 </script>
 
-<Qappendix :file="file" />
+<QAppendix :file="file" />
 
 
 ::: note

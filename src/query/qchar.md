@@ -6,9 +6,9 @@ order: 10
 sidebar: false
 breadcrumb: false
 gitInclude:
-  - ../.vuepress/components/Qchar.vue
+  - ../.vuepress/components/QChar.vue
 ---
 
-[//]: # (<-- include: @public/query/Qpron.vue -->)
+[//]: # (<-- include: @public/query/QPron.vue -->)
 
-<Qchar />
+<QChar />

@@ -87,7 +87,7 @@ import {
   // $,
   fuzzyRules, db, combinations,
   darkModeString, initDarkModeString,
-} from './Qcommon.vue';
+} from './QCommon.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
 

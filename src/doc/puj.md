@@ -295,16 +295,16 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 对于汉字的书写，鉴于中文的书写和阅读习惯，就不在书写的时候特意隔开每个单词了。
 例如：
 
-- 我是潮汕人。<Qpuj puj="Ua2 si6-tio5-suann1-nang5."/>
+- 我是潮汕人。<QPuj puj="Ua2 si6-tio5-suann1-nang5."/>
 
 潮汕方言也具有轻声调，通常用于表达强调的含义。
 如果出现轻声，轻声字前用两个连字符 \-\- 或一个点 · 连起来。
 但在书写汉字时，轻声调可能是比较难以直接通过文字判断的。
 在排版方便的时候，建议在可能出现歧义的轻声调中，在轻声调的单词使用着重号 ◌̣ 或者粗体、斜体等不同字体来做区分。
 
-- 你烦恼？<Qpuj puj="Lv2-huan5-lo2?"/>（你操心什么？）——你*烦恼*？<Qpuj puj="Lv2--huan5-lo2?"/>（要你来操心？）
-- 后日。<Qpuj puj="Au6-jit8."/>（以后，之后的某一天）——后*日*。<Qpuj puj="Au6--jit8."/>（后天，专指明天的明天）
-- 记者。<Qpuj puj="Ki3-tsia2."/>（新闻记者）——记*者*。<Qpuj puj="Ki3--tsia2."/>（做记录的人）
+- 你烦恼？<QPuj puj="Lv2-huan5-lo2?"/>（你操心什么？）——你*烦恼*？<QPuj puj="Lv2--huan5-lo2?"/>（要你来操心？）
+- 后日。<QPuj puj="Au6-jit8."/>（以后，之后的某一天）——后*日*。<QPuj puj="Au6--jit8."/>（后天，专指明天的明天）
+- 记者。<QPuj puj="Ki3-tsia2."/>（新闻记者）——记*者*。<QPuj puj="Ki3--tsia2."/>（做记录的人）
 
 字母 i 出现在句首需要使用大写 I 的时候，为避免与字母 L 的小写 l 相混，可转写为 Y。
 
@@ -312,18 +312,18 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 ## 书写范例
 
-<b>苦恋 <Qpuj puj="Khou2-luan3"/> </b>  
+<b>苦恋 <QPuj puj="Khou2-luan3"/> </b>  
 （作词：陈小奇 作曲：宋书华 主唱：宋亦乐）
 
-一片痴情是苦恋 <Qpuj puj="Tsek8-phian3-tshi1-tsheng5 si6-khou2-luan3"/>  
-十字路边把你呼喊 <Qpuj puj="Tsap8-ji7-lou7-pinn1 pa2-lv2 hu1-ham3"/>  
-当初咱山盟海誓 <Qpuj puj="Tng1-tsho1 nan2 suann1-meng5 hai2-si7"/>  
-为何如今对影只一人 <Qpuj puj="Ui5-ho5-ju5-kim1 tui3-iann2 tsi2-tsek8-nang5"/>  
-心头千般相思意 <Qpuj puj="Sim1-thau5 tshoinn1-puann1 siang1-sv1-i3"/>  
-夜夜梦中泪不干 <Qpuj puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
-情痴痴 我痴痴等 <Qpuj puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
-多少风雨多少无奈 <Qpuj puj="To1-tsio2-huang1-hou6 to1-tsio2-bo5-nai6"/>  
-你可明白这地老天荒 <Qpuj puj="Lv2 kho2-meng5-peh8-tse2-ti7-lau2 thian1-huang1"/>
+一片痴情是苦恋 <QPuj puj="Tsek8-phian3-tshi1-tsheng5 si6-khou2-luan3"/>  
+十字路边把你呼喊 <QPuj puj="Tsap8-ji7-lou7-pinn1 pa2-lv2 hu1-ham3"/>  
+当初咱山盟海誓 <QPuj puj="Tng1-tsho1 nan2 suann1-meng5 hai2-si7"/>  
+为何如今对影只一人 <QPuj puj="Ui5-ho5-ju5-kim1 tui3-iann2 tsi2-tsek8-nang5"/>  
+心头千般相思意 <QPuj puj="Sim1-thau5 tshoinn1-puann1 siang1-sv1-i3"/>  
+夜夜梦中泪不干 <QPuj puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
+情痴痴 我痴痴等 <QPuj puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
+多少风雨多少无奈 <QPuj puj="To1-tsio2-huang1-hou6 to1-tsio2-bo5-nai6"/>  
+你可明白这地老天荒 <QPuj puj="Lv2 kho2-meng5-peh8-tse2-ti7-lau2 thian1-huang1"/>
 
 ## 记录标准与转读规则
 

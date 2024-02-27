@@ -68,7 +68,7 @@ import {
   fuzzyRules, db, entriesCount, initials, finals, combinations,
   darkModeString, initDarkModeString,
   isChineseChar,
-} from './Qcommon.vue';
+} from './QCommon.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
 

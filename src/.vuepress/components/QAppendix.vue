@@ -27,7 +27,7 @@ import {
   Entry, Pronunciation,
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-} from './Qcommon.vue';
+} from './QCommon.vue';
 // import papaparse
 import Papaparse from 'papaparse';
 
