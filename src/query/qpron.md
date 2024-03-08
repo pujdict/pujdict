@@ -9,4 +9,8 @@ gitInclude:
   - ../.vuepress/components/QPron.vue
 ---
 
+<script setup>
+import QPron from '@components/QPron.vue';
+</script>
+
 <QPron />

@@ -3,6 +3,7 @@ title: 人称
 ---
 
 <script setup>
+import QAppendix from '@components/QAppendix.vue';
 import file from '@public/data/appendix/relationships.csv?raw';
 </script>
 

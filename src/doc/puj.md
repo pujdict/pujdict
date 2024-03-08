@@ -4,6 +4,10 @@ icon: p
 order: 10
 ---
 
+<script setup>
+import QPuj from '@components/QPuj.vue';
+</script>
+
 # 拼音方案
 
 ## 为什么使用白话字
@@ -145,7 +149,7 @@ flowchart
    > ... Also ù in such words as 代, 塊 tù kù is often pronounced ò; as tò, kò; and it may be remarked that when the ù sound
    is given in this class of words it is a more open sound than when it occurs in the class just before mentioned; the
    difference is easily perceptible, but does not seem capable of being represented by Roman letters.
-   >> （前文描述有些人将 ù 读为 u）……另外，ù 在“代”“塊”等字中常被读为 ò，即 tò, kò，也许可以给它换一种记法，因为当 ù 出现在这类字中的时候，与前文刚提到的那一类相比，它是一个开口度更大的音，区别是很容易察觉的，但似乎难以用罗马字母来表示。
+   >> ……（前文描述有些人将 ù 读为 u，即西部部分地区的口音）另外，ù 在“代”“塊” tù kù 等字中常被读为 ò，即 tò, kò，也许可以给它换一种记法，因为当 ù 出现在这类字中的时候，与前文刚提到的那一类相比，它是一个开口度更大的音，区别是很容易察觉的，但似乎难以用罗马字母来表示。
 
    高德字典的拼音系统中，用 ù、ò 表示汉字“余”“窝”的韵母。由此可见，该类字中出现的韵母是一个音质类似于 [ɯ] 但开口度更大的韵母，那么就应该是一个接近 [ə] 的发音，与今天泉州话中的格局是一致的，但彼时也已开始出现与韵母 o 的混同。可以确定的是，该韵母在晚清时期潮州话中依然存在，最早也是在晚清以后才完全消失。
 4. i 和 u 可以作为齐齿呼和合口呼的介音出现。
@@ -230,8 +234,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | m            | m    | m̍       | 姆 ḿ    |
 | ng^1^        | ng   | ŋ̍/ɯ̃    | 黄 n̂g  |
 | hng          | hng  | ŋ̊ŋ̍/hɯ̃ | 园 hn̂g |
-| (唇音声母)-ng^2^ | -ung | ŋ̍/ɯŋ/uŋ | 饭 pn̄g |
-| (其他声母)-ng^3^ | -eng | ŋ̍/ɯŋ    | 酸 sng  |
+| (唇音声母)-ng/-ṳng^2^ | -ung | ŋ̍/ɯŋ/uŋ | 饭 pn̄g |
+| (其他声母)-ng/-ṳng^3^ | -eng | ŋ̍/ɯŋ    | 酸 sng  |
 
 ::: note
 
@@ -242,6 +246,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    púng [puŋ]。巧合的是，“本”字的文读音为 pún，在韵尾 -n 并入 -ng 后，“本”字的文读音和白读音合流了。
 3. ng 也可以接在其他辅音声母后，发音同样为 [ŋ̍] 或 [ɯŋ]，例如：
    酸 sng，卷 kńg，卵 nñg。
+   实际上，潮汕多数地区该韵母中都有一个比较明显的 [ɯ] 音。为与泉漳片一致，也为了缩减长度，辞典中仍然记为 ng。
    需要注意 -ng 区分于 -ṳn，例如：根 kṳn——缸 kng，这两者在许多地区由于 -n 并入 -ng 已经相混，但本辞典在记录时将二者区分，因为
    -ṳn 所辖字发音有地域差异：在揭阳等地读同 -eng，在潮阳、普宁等地读同 -ing，在其他丢失 -n 韵尾的地方读同 -ṳng 或 -ng。
 
@@ -357,7 +362,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 县悬^3^   | -uoinn           | -uinn                             |
 | 乌       | -ou              |                                   |
 | 腰阳药     | -io, -ionn, -ioh | -ie, -ienn, -ieh                  |
-| 妖跃^4^   | -iau, -iauh      | -ieu/-iṳu/-iou, -ieuh/-iṳuh/-iouh |
+| 妖跃^4^   | -iau, -iauh      | -ieu/-io̤u/-iou, -ieuh/-io̤uh/-iouh |
 | 话关划     | -ue, -uenn, -ueh |                                   |
 | 英易^5^   | -eng, -ek        |                                   |
 | 音邑      | -im, -ip         |                                   |
@@ -366,7 +371,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 温熨      | -un, -ut         | -ung, -uk                         |
 | 庵盒      | -am, -ap         |                                   |
 | 安抑      | -an, -at         | -ang, -ak                         |
-| 奄压      | -iam, -iap       | -iem/-iṳm/-iom, -iep/-iṳp/-iop    |
+| 奄压      | -iam, -iap       | -iem/-io̤m/-iom, -iep/-io̤p/-iop    |
 | 嫣设      | -ian, -iat       | -ieng, -iek                       |
 | 凡法      | -uam, -uap       |                                   |
 | 弯阅      | -uan, -uat       | -ueng, -uek                       |
@@ -793,8 +798,11 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    -uoinn。
 4. -iau/-iauh/-iam/-iap/-ian/-iat 等韵母中，元音 a 受韵尾的影响，各地发生不同程度的变化。例如 -iam/-iau 中的 a
    在潮州等地的高化为 [ɜ]/[ɤ]，在 -ian/-uan 中又进一步前化为 [e]；-iau 中的 a 在澄海等地则进一步圆唇化为 [o]。
-5. -eng/-ek 这一对韵母在潮汕各地基本都读为 -eng/-ek，泉漳片闽南语各地也基本收 -ing/-ik 韵尾，而丰顺（留隍）地区读为 -en/-et
+5. -eng/-ek 这一对韵母来自曾、梗摄文读音，在潮汕各地基本都读为 -eng/-ek，泉漳片闽南语各地基本读为 -ing/-ik，丰顺（留隍）地区读为 -en/-et
    有可能是受客语音系的影响，有待进一步考究。
+   潮州话中该韵母的开口度更大，因而大部分地区在 -n/-t 韵尾混入 -ng/-k 后，会形成 -ing/-ik 和 -eng/-ek 的对立。因此，本辞典中不选择与泉漳片一样将 -eng/-ek 韵母记为 -ing/-ik。
+   不过，在唱戏、讲古等创作中，-eng/-ek 韵母的韵腹也可以读为 [ɪ] 从而与 -in/-it 韵母押韵。
+   揭阳地区的 -in/-it 转为 -eng/-ek 实际上音质也接近于 [ɪ] 音。
 6. 通摄三等字文读音韵母为 -iong, -iok，当接在齿龈音 t/th/n/l/ts/tsh/s/j 后时，包括三市市中心在内的东部多数地区都读为 -ong,
    -ok，西部潮阳、普宁、惠来、陆丰等地保留介音 i。例如：中 tiong，宠 thióng，龙 liông，终 tsiong，从 tshiông，松 siong，茸
    jiông，筑 tiok，六 liók，属 siók，辱 jiók。但有且仅有一组例外：thiok 的辖字（“畜”“蓄”“慉”“搐”）在东部地区依然保留介音 i。

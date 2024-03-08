@@ -11,4 +11,8 @@ gitInclude:
 
 [//]: # (<-- include: @public/query/QPron.vue -->)
 
+<script setup>
+import QChar from '@components/QChar.vue';
+</script>
+
 <QChar />

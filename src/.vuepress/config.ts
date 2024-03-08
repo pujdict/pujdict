@@ -20,6 +20,7 @@ export default defineUserConfig({
   title: "潮汕方言白话字辞典 (DEMO)",
   alias: {
     '@src': path.resolve(__dirname, ".."),
+    '@components': path.resolve(__dirname, "components"),
     '@public': path.resolve(__dirname, "public"),
     '@modules': path.resolve(__dirname, "../node_modules"),
   },
@@ -177,11 +178,7 @@ export default defineUserConfig({
     registerComponentsPlugin({
       // componentsDir: path.resolve(__dirname, "./components"),
       components: {
-        QPron: path.resolve(__dirname, "./components/QPron.vue"),
-        QChar: path.resolve(__dirname, "./components/QChar.vue"),
-        QCommon: path.resolve(__dirname, "./components/QCommon.vue"),
-        QAppendix: path.resolve(__dirname, "./components/QAppendix.vue"),
-        QPuj: path.resolve(__dirname, "./components/QPuj.vue"),
+        // QPron: path.resolve(__dirname, "./components/QPron.vue"),
         // Mermaid: path.resolve(__dirname, "./components/Mermaid.vue"),
       },
     }),
