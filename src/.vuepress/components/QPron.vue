@@ -1,5 +1,6 @@
 <template>
-  <div v-bind:data-bs-theme="darkModeString">
+  <QDarkTheme/>
+  <div v-bind:data-bs-theme="darkThemeString">
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
         <div class="form-label"><b>口音偏好</b></div>
@@ -75,6 +76,7 @@
 
 <script setup>
 import {withBase} from "vuepress/client";
+import QDarkTheme from "./QDarkTheme.vue";
 </script>
 
 <script>
@@ -86,8 +88,8 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
   fuzzyRules, db, combinations,
-  darkModeString, initDarkModeString,
 } from './QCommon.vue';
+import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';
 
@@ -408,7 +410,6 @@ export default {
     },
   },
   mounted() {
-    initDarkModeString();
     $("#reset-button").click(function () {
       this.blur();
     });

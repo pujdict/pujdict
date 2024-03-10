@@ -26,26 +26,6 @@ const $ = jquery;
 // const jsdom = new JSDOM();
 // const $ = jquery(jsdom.window);
 
-const darkModeString = ref('light');
-function updateDarkModeString() {
-  darkModeString.value = $("html")?.attr("data-theme") || "light";
-}
-function initDarkModeString() {
-  updateDarkModeString();
-  let button = $("#appearance-switch");
-  button?.click(updateDarkModeString);
-  // for each children check if it has class darkModeString
-  // button?.children('svg').each(function() {
-  //   let item = $(this);
-  //   let isCur = item.hasClass(`${darkModeString.value}-icon`);
-  //   if (isCur) {
-  //     item.attr('style', 'display:block');
-  //   } else {
-  //     item.attr('style', 'display:none');
-  //   }
-  // });
-}
-
 const PUJToneMarks = [
   /*0:*/ "",
   /*1:*/ "",
@@ -801,7 +781,6 @@ export {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
-  darkModeString, initDarkModeString,
   isChineseChar,
 }
 

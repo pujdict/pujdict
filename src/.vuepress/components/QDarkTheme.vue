@@ -1,0 +1,27 @@
+<script>
+import {ref} from "vue";
+
+export const darkThemeString = ref('light');
+
+export default {
+  methods: {
+    darkThemeObserver(mutationsList) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          darkThemeString.value = mutation.target.getAttribute('data-theme');
+        }
+      }
+    }
+  },
+  mounted() {
+    // Access the <html> element
+    const htmlElement = document.querySelector('html');
+
+    // Create a MutationObserver to observe changes in attributes
+    const observer = new MutationObserver(this.darkThemeObserver);
+
+    // Start observing the <html> element
+    observer.observe(htmlElement, {attributes: true});
+  }
+}
+</script>

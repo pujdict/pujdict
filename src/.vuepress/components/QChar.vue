@@ -1,5 +1,6 @@
 <template>
-  <div v-bind:data-bs-theme="darkModeString">
+  <QDarkTheme/>
+  <div v-bind:data-bs-theme="darkThemeString">
     <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area">
         <!-- 长度充满整个div -->
@@ -55,6 +56,7 @@
 
 <script setup>
 import {withBase} from "vuepress/client";
+import QDarkTheme from "./QDarkTheme.vue";
 </script>
 
 <script>
@@ -66,9 +68,9 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
   fuzzyRules, db, entriesCount, initials, finals, combinations,
-  darkModeString, initDarkModeString,
   isChineseChar,
 } from './QCommon.vue';
+import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';
 
@@ -241,8 +243,6 @@ export default {
     },
   },
   mounted() {
-    initDarkModeString();
-
     initFromDatabase().then(this.onInitFromDatabaseFinished);
 
     $("#reset-button").click(function () {
