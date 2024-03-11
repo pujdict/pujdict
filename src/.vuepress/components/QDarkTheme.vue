@@ -16,6 +16,7 @@ export default {
   mounted() {
     // Access the <html> element
     const htmlElement = document.querySelector('html');
+    darkThemeString.value = htmlElement.getAttribute('data-theme');
 
     // Create a MutationObserver to observe changes in attributes
     const observer = new MutationObserver(this.darkThemeObserver);
