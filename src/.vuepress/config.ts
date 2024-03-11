@@ -4,9 +4,10 @@ import {getDirname, path} from "vuepress/utils";
 import theme from "./theme.js";
 import {extendsBundlerOptions, hopeTheme} from "vuepress-theme-hope";
 import {registerComponentsPlugin} from "@vuepress/plugin-register-components";
-import { viteBundler } from '@vuepress/bundler-vite';
+import {viteBundler} from '@vuepress/bundler-vite';
 import * as dotenv from 'dotenv';
 import cjk_breaks from 'markdown-it-cjk-breaks';
+import {webpackBundler} from "@vuepress/bundler-webpack";
 
 // @ts-ignore
 const __dirname = getDirname(import.meta.url); // .vuepress
@@ -33,12 +34,6 @@ export default defineUserConfig({
   //   },
   // }),
   head: [
-    // // jquery
-    // ["script", {src: "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js",},],
-    // // jquery cookie
-    // ["script", {src: "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js",},],
-    // // sqljs
-    // ["script", {src: "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js",},],
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
@@ -186,10 +181,27 @@ export default defineUserConfig({
 
   // Enable it with pwa
   // shouldPrefetch: false,
-  bundler: viteBundler({
-    viteOptions: {},
-    vuePluginOptions: {},
+  bundler: webpackBundler({
+    postcss: {},
+    vue: {},
+    chainWebpack: (config) => {
+    },
+    configureWebpack: (config) => {
+      // const require = createRequire(import.meta.url);
+      config.resolve = config.resolve || {};
+      config.resolve.fallback = {
+        "browser": false,
+        "crypto": false,
+        "fs": false,
+        "os": false,
+        "path": false,
+      };
+    },
   }),
+  // bundler: viteBundler({
+  //   viteOptions: {},
+  //   vuePluginOptions: {},
+  // }),
   templateDev: path.join(__dirname, "./templates/dev.html"),
   templateBuild: path.join(__dirname, "./templates/build.html"),
 });

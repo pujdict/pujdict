@@ -1,2 +1,5 @@
+# 字体处理程序需要
 brotli
 fonttools
+# 安装 node-sass & sass-loader: python3.12 删除了 distutils
+setuptools

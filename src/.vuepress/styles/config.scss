@@ -19,7 +19,7 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-display: swap;
   font-family: SansSerifCJKExt1;
   src: local("Plangothic P1"), local("Plangothic"),
-    url('/assets/fonts/PlangothicP1-Regular.fallback.woff2') format('woff2');
+    url('@public/assets/fonts/PlangothicP1-Regular.fallback.woff2') format('woff2');
   // CJK Ext B-F
   unicode-range: U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF;
 }
@@ -27,19 +27,19 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
 @font-face {
   font-display: swap;
   font-family: SansSerifCJKExt2;
-  src: local("Plangothic P2"), local("Plangothic"), url('/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
+  src: local("Plangothic P2"), local("Plangothic"), url('@public/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
   // CJK Ext G & H
   unicode-range: U+30000-3134F, U+31350-323AF;
 }
 
 @font-face {
   font-family: CJKExtSubset1;
-  src: url("/assets/fonts/CJKExtSubset1.generated.woff2") format("woff2");
+  src: url("@public/assets/fonts/CJKExtSubset1.generated.woff2") format("woff2");
 }
 
 @font-face {
   font-family: CJKExtSubset2;
-  src: url("/assets/fonts/CJKExtSubset2.generated.woff2") format("woff2");
+  src: url("@public/assets/fonts/CJKExtSubset2.generated.woff2") format("woff2");
 }
 
 @font-face {
@@ -57,7 +57,7 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-display: swap;
   font-family: SourceHanSans;
   src: local('Source Han Sans'), local('Noto Sans SC'), local('NotoSansSC-Regular'), local('Noto Sans CJK SC'),
-    url("/assets/fonts/NotoSansSC-Regular.woff2");
+    url("@public/assets/fonts/NotoSansSC-Regular.woff2");
     //这玩意镜像下下来是一个 light 的字体。。。
     //url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff2') format('woff2'), /* Super Modern Browsers */
     //url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff') format('woff'), /* Modern Browsers */

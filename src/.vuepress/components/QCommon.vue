@@ -10,7 +10,7 @@ import VueCookies from 'vue-cookies';
 
 // import sql js
 import initSqlJs from "sql.js";
-import sqlWasm from "sql.js/dist/sql-wasm.wasm?url";
+import sqlWasm from "!!url-loader!sql.js/dist/sql-wasm.wasm";
 import jquery from "jquery";
 const $ = jquery;
 // import 'jquery.cookie';
@@ -657,7 +657,7 @@ function addPUJToneMarkForSingle(word, tone) {
 }
 
 function addPUJToneMarkAndUnify(sentence) {
-  return unifyWordDisplay(addPUJToneMark(sentence)).normalize();
+  return unifyWordDisplay(addPUJToneMark(sentence));
 }
 
 // 改用 sql.js 读取数据库
