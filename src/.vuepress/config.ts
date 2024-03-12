@@ -66,19 +66,14 @@ export default defineUserConfig({
     contributors: false,
     nextLink: false,
     prevLink: false,
+    breadcrumb: false,
     // navbar: ["/doc/"],
     // sidebar: [],
     sidebar: {
-      // '/query/': [
-      //   {
-      //     text: "汉字查询",
-      //     link: "/query/qchar.md",
-      //   },
-      //   {
-      //     text: "音韵查询",
-      //     link: "/query/qpron.md",
-      //   }
-      // ],
+      '/query/': [
+        "qchar.md",
+        "qpron.md",
+      ],
       '/doc/': [
         "puj.md",
         "guide.md",
