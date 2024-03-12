@@ -33,7 +33,7 @@ order: 10000
 
 ### 《台湾闽南语罗马字拼音方案使用手册》
 
-- 台湾教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2007. <https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh.pdf>
+- 台湾教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2007. <https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh.pdf>.
 
 ### 【Norman1973】
 
