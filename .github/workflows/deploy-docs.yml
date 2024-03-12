@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 为了获取时间戳
       - name: Set up Python 3
         uses: actions/setup-python@v5
         with:
