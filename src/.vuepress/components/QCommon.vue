@@ -13,18 +13,6 @@ import initSqlJs from "sql.js";
 import sqlWasm from "!!url-loader!sql.js/dist/sql-wasm.wasm";
 import jquery from "jquery";
 const $ = jquery;
-// import 'jquery.cookie';
-
-// var jsdom = require('jsdom');
-// var $ = require('jquery')(jsdom().defaultView);
-// const $ = require('jquery');
-// import jquery from 'jquery';
-// const $ = jquery;
-// import { JSDOM } from 'jsdom';
-// import jquery from 'jquery';
-//
-// const jsdom = new JSDOM();
-// const $ = jquery(jsdom.window);
 
 const PUJToneMarks = [
   /*0:*/ "",
