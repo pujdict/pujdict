@@ -35,19 +35,19 @@ order: 10000
 
 - 台湾教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2007. <https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh.pdf>.
 
-### 【Norman1973】
+### 【罗杰瑞1973】
 
 - Norman J. Tonal development in Min[J]. Journal of Chinese Linguistics, 1973: 222-238.
 
-### 【Norman1974】
+### 【罗杰瑞1974】
 
 - Norman J. The initials of Proto-Min[J]. Journal of Chinese Linguistics, 1974: 27-36.
 
-### 【Norman1981】
+### 【罗杰瑞1981】
 
 - Norman J. The proto-Min finals[C]//Proceedings of the International Conference on Sinology August 15-17, 1980 (Section on Linguistics and Paleography). 1981: 35-73.
 
-### 【Norman1991】
+### 【罗杰瑞1991】
 
 - Norman J. The Mǐn dialects in historical perspective[J]. Journal of Chinese Linguistics Monograph Series, 1991 (3): 323-358.
 
@@ -79,7 +79,7 @@ order: 10000
 
 - 徐宇航. 19世纪潮州方言的两种正音及其层次意义[J]. 汉语学报, 2017, (03): 35-40+96.
 
-### 【Kwok2018】
+### 【郭必之2018】
 
 - Kwok B C. Southern Min: Comparative phonology and subgrouping[M]. Routledge, 2018.
 
