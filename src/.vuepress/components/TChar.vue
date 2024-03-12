@@ -1,5 +1,5 @@
 <template>
-  <QDarkTheme/>
+  <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
     <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area">
@@ -56,20 +56,23 @@
 
 <script setup>
 import {withBase} from "vuepress/client";
-import QDarkTheme from "./QDarkTheme.vue";
+import TDarkTheme from "./TDarkTheme.vue";
 </script>
 
 <script>
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  fuzzyRules, db, entriesCount, initials, finals, combinations,
+  db, entriesCount, initials, finals, combinations,
   isChineseChar,
 } from './QCommon.vue';
+import {
+  fuzzyRules,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+} from './QPuj.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';

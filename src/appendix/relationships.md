@@ -3,11 +3,11 @@ title: 人称
 ---
 
 <script setup>
-import QAppendix from '@components/QAppendix.vue';
+import TAppendix from '@components/TAppendix.vue';
 import file from '!!raw-loader!@public/data/appendix/relationships.csv';
 </script>
 
-<QAppendix :file="file" />
+<TAppendix :file="file" />
 
 
 ::: note

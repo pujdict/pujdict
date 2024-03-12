@@ -168,7 +168,7 @@ export default defineUserConfig({
     registerComponentsPlugin({
       // componentsDir: path.resolve(__dirname, "./components"),
       components: {
-        QDarkTheme: path.resolve(__dirname, "./components/QDarkTheme.vue"),
+        // QDarkTheme: path.resolve(__dirname, "./components/QDarkTheme.vue"),
         // Mermaid: path.resolve(__dirname, "./components/Mermaid.vue"),
       },
     }),

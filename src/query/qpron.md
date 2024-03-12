@@ -3,11 +3,11 @@ title: 音韵检索
 icon: search
 order: 10
 gitInclude:
-  - ../.vuepress/components/QPron.vue
+  - ../.vuepress/components/TPron.vue
 ---
 
 <script setup>
-import QPron from '@components/QPron.vue';
+import TPron from '@components/TPron.vue';
 </script>
 
-<QPron />
+<TPron />

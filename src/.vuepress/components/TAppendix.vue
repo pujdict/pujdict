@@ -24,10 +24,9 @@
 
 <script>
 import {
-  Entry, Pronunciation,
+  fuzzyRules,
   unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
-  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-} from './QCommon.vue';
+} from './QPuj.vue';
 // import papaparse
 import Papaparse from 'papaparse';
 

@@ -3,13 +3,13 @@ title: 汉字检索
 icon: search
 order: 10
 gitInclude:
-  - ../.vuepress/components/QChar.vue
+  - ../.vuepress/components/TChar.vue
 ---
 
 [//]: # (<-- include: @public/query/QPron.vue -->)
 
 <script setup>
-import QChar from '@components/QChar.vue';
+import TChar from '@components/TChar.vue';
 </script>
 
-<QChar />
+<TChar />

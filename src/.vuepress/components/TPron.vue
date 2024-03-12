@@ -1,5 +1,5 @@
 <template>
-  <QDarkTheme/>
+  <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
@@ -76,20 +76,23 @@
 
 <script setup>
 import {withBase} from "vuepress/client";
-import QDarkTheme from "./QDarkTheme.vue";
+import {darkThemeString} from "./QDarkTheme.vue";
+import TDarkTheme from "./TDarkTheme.vue";
 </script>
 
 <script>
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  unifyWordDisplay, addPUJToneMarkForSingle,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  fuzzyRules, db, combinations,
+  db, combinations,
 } from './QCommon.vue';
-import {darkThemeString} from "./QDarkTheme.vue";
+import {
+  fuzzyRules,
+  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+} from './QPuj.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
 
