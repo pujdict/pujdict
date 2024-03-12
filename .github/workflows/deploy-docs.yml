@@ -57,9 +57,6 @@ jobs:
       - name: Prepare files
         run: |-
           bash prepare_files.sh
-      - name: Hack change mtime
-        run: |
-          git ls-files | while read file; do touch -d $(git log -1 --format="@%ct" "$file") "$file"; done
       - name: Build VuePress site
         run: |
           pnpm run docs:build
