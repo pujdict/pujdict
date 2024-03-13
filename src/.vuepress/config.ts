@@ -79,6 +79,9 @@ export default defineUserConfig({
         "guide.md",
         "bib.md",
       ],
+      '/tool/': [
+        "pujconv.md",
+      ],
       '/appendix/': [
         "relationships.md",
         "human_body.md",
@@ -116,6 +119,17 @@ export default defineUserConfig({
           {
             text: "参考文献",
             link: "bib.md",
+          },
+        ]
+      },
+      {
+        text: "工具",
+        prefix: "/tool/",
+        icon: "wrench",
+        children: [
+          {
+            text: "白话字转换",
+            link: "pujconv.md",
           },
         ]
       },
