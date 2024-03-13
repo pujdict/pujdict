@@ -41,7 +41,7 @@ import jquery from "jquery";
 const $ = jquery;
 
 import {
-  addPUJToneMarkAndUnify,
+  addPUJToneMarkAndConvertToDisplay,
 } from "./QPuj.vue";
 
 export default {
@@ -57,7 +57,7 @@ export default {
       try {
         switch (this.selectConversion) {
           case "pujUnify": {
-            this.convertOutput = addPUJToneMarkAndUnify(this.convertInput);
+            this.convertOutput = addPUJToneMarkAndConvertToDisplay(this.convertInput);
             break;
           }
         }

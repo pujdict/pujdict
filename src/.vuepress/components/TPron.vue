@@ -58,7 +58,7 @@
       <div v-else>
         <ul>
           <li v-for="(item, key) in queryResult" :key="key">
-            <span>{{ unifyWordDisplay(key) }}:</span>
+            <span>{{ convertPUJToDisplay(key) }}:</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
@@ -82,7 +82,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 
 <script>
 import {
-  Entry, Pronunciation,
+  Entry, PUJPronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
@@ -91,7 +91,7 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
 } from './QPuj.vue';
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -174,7 +174,7 @@ export default {
         return {key: item, display: item};
       });
       this.finalsList = fuzzyFinals.map(item => {
-        return {key: item, display: unifyWordDisplay(item)};
+        return {key: item, display: convertPUJToDisplay(item)};
       });
       this.tonesList = fuzzyTones.map(item => {
         return {key: item, display: item};

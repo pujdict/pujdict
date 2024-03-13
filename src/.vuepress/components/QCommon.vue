@@ -32,7 +32,7 @@ class Entry {
   }
 }
 
-class Pronunciation {
+class PUJPronunciation {
   constructor(initial, final, tone) {
     this.initial = initial;
     this.final = final;
@@ -96,7 +96,7 @@ async function initFromDatabase() {
     finals = db.exec("SELECT description FROM dbdesc WHERE id='finals'")[0].values[0][0].split(",");
     // combinations are initial-final-tone connected by '-' and separated by ','
     combinations = db.exec("SELECT description FROM dbdesc WHERE id='combinations'")[0].values[0][0].split(",").map(combination =>
-        new Pronunciation(...combination.split("-")));
+        new PUJPronunciation(...combination.split("-")));
   }
 
   await load();
@@ -185,7 +185,7 @@ function isChineseChar(c) {
 }
 
 export {
-  Entry, Pronunciation,
+  Entry, PUJPronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,

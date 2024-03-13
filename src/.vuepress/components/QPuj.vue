@@ -1,6 +1,6 @@
 <script>
 import {
-  Entry, Pronunciation,
+  Entry, PUJPronunciation,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
 } from './QCommon.vue';
 
@@ -38,7 +38,7 @@ const fuzzyRules = {
   chaozhou: {
     name: '潮州',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -80,7 +80,7 @@ const fuzzyRules = {
   xiqiang: {
     name: '戏腔',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -117,7 +117,7 @@ const fuzzyRules = {
   chaoan: {
     name: '潮安',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -151,7 +151,7 @@ const fuzzyRules = {
   fengshun: {
     name: '丰顺',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -190,7 +190,7 @@ const fuzzyRules = {
   raoping: {
     name: '饶平',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -229,7 +229,7 @@ const fuzzyRules = {
   chenghai: {
     name: '澄海',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -279,7 +279,7 @@ const fuzzyRules = {
   shantou: {
     name: '汕头',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -324,7 +324,7 @@ const fuzzyRules = {
   jieyang: {
     name: '揭阳',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -361,7 +361,7 @@ const fuzzyRules = {
   chaoyang: {
     name: '潮阳',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -393,7 +393,7 @@ const fuzzyRules = {
   puning: {
     name: '普宁',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -421,7 +421,7 @@ const fuzzyRules = {
   huilai: {
     name: '惠来',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -453,7 +453,7 @@ const fuzzyRules = {
   lufeng: {
     name: '陆丰',
     fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
+      let result = new PUJPronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -485,7 +485,7 @@ const fuzzyRules = {
   },
 };
 
-function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+function convertPUJToDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   word = word.replace(/0/g, '');
   word = word.replace(/v/g, v);
   word = word.replace(/V/g, V);
@@ -571,13 +571,13 @@ function addPUJToneMarkForSingle(word, tone) {
   return result;
 }
 
-function addPUJToneMarkAndUnify(sentence) {
-  return unifyWordDisplay(addPUJToneMark(sentence));
+function addPUJToneMarkAndConvertToDisplay(sentence) {
+  return convertPUJToDisplay(addPUJToneMark(sentence));
 }
 
 export {
   fuzzyRules,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
 }
 
 export default {}

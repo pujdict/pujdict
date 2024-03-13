@@ -25,7 +25,7 @@
 <script>
 import {
   fuzzyRules,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
 } from './QPuj.vue';
 // import papaparse
 import Papaparse from 'papaparse';
@@ -63,7 +63,7 @@ export default {
           complete: (results) => {
             this.items = results.data.map((item) => {
               const teochew = item.teochew;
-              const puj = addPUJToneMarkAndUnify(item.puj);
+              const puj = addPUJToneMarkAndConvertToDisplay(item.puj);
               const mandarin = item.mandarin !== '' ? item.mandarin : item.teochew;
               return new TableEntry(teochew, puj, mandarin);
             });

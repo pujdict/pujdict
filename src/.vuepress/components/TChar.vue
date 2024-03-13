@@ -61,7 +61,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 
 <script>
 import {
-  Entry, Pronunciation,
+  Entry, PUJPronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
@@ -71,7 +71,7 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  unifyWordDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndUnify,
+  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
 } from './QPuj.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -152,9 +152,9 @@ export default {
         let entry = new Entry(...row);
         let pronunciations = {};
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
-          let fuzzyPronunciation = rule.fuzzy(new Pronunciation(entry.initial, entry.final, entry.tone));
+          let fuzzyPronunciation = rule.fuzzy(new PUJPronunciation(entry.initial, entry.final, entry.tone));
           let combination = fuzzyPronunciation.getCombination();
-          let display = addPUJToneMarkAndUnify(combination);
+          let display = addPUJToneMarkAndConvertToDisplay(combination);
           pronunciations[key] = {
             key: key,
             name: rule.name,
@@ -218,7 +218,7 @@ export default {
           }
           if (splits.length >= 2) {
             puj = splits[1];
-            puj = addPUJToneMarkAndUnify(puj);
+            puj = addPUJToneMarkAndConvertToDisplay(puj);
           }
           if (splits.length >= 3) {
             mandarin = splits[2];
@@ -277,7 +277,7 @@ export default {
         let wordSpan = $("<span></span>");
         wordSpan.text(word);
         if (pronunciation !== undefined) {
-          let pronunciationText = addPUJToneMarkAndUnify(pronunciation);
+          let pronunciationText = addPUJToneMarkAndConvertToDisplay(pronunciation);
           let pronunciationSpan2 = $("<span></span>");
           pronunciationSpan2.text(` [${pronunciationText}]`);
           wordSpan.append(pronunciationSpan2);
@@ -329,7 +329,7 @@ export default {
         charTextDiv.append(refCharSpan);
       }
       let pronunciationDiv = entryDiv.find(".card-subtitle");
-      let pronunciationText = addPUJToneMarkAndUnify(entry.initial + entry.final + entry.tone);
+      let pronunciationText = addPUJToneMarkAndConvertToDisplay(entry.initial + entry.final + entry.tone);
       pronunciationDiv.text(pronunciationText);
       // add <a> tag to pronunciation text
       // let pronunciationLink = $("<a></a>");
