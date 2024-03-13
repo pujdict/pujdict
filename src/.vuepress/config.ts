@@ -80,7 +80,7 @@ export default defineUserConfig({
         "bib.md",
       ],
       '/tool/': [
-        "pujconv.md",
+        "puj_unify.md",
       ],
       '/appendix/': [
         "relationships.md",
@@ -128,8 +128,8 @@ export default defineUserConfig({
         icon: "wrench",
         children: [
           {
-            text: "白话字转换",
-            link: "pujconv.md",
+            text: "白话字整理与注音",
+            link: "puj_unify.md",
           },
         ]
       },

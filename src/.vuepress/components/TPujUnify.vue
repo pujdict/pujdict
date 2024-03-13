@@ -3,13 +3,6 @@
   <div v-bind:data-bs-theme="darkThemeString">
     <form onsubmit="return false;">
       <div class="row g-2">
-        <div class="form-floating">
-          <select title="选择转换工具" class="form-select" aria-label="选择转换工具" id="selectConversion"
-                  v-model="selectConversion">
-            <option selected value="pujUnify">白话字整理与注音</option>
-          </select>
-          <label for="selectConversion">选择转换工具</label>
-        </div>
         <div class="form-group">
           <label for="convert-input">输入需要转换的文字：</label>
           <textarea class="form-control" id="convert-input" rows="3"
@@ -47,7 +40,6 @@ import {
 export default {
   data() {
     return {
-      selectConversion: 'pujUnify',
       convertInput: '',
       convertOutput: '',
     }
@@ -55,12 +47,7 @@ export default {
   methods: {
     convertAction() {
       try {
-        switch (this.selectConversion) {
-          case "pujUnify": {
-            this.convertOutput = addPUJToneMarkAndConvertToDisplay(this.convertInput);
-            break;
-          }
-        }
+        this.convertOutput = addPUJToneMarkAndConvertToDisplay(this.convertInput);
       } catch (e) {
         alert(`发生错误：${e}`);
       }
