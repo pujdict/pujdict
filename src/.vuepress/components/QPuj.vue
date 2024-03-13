@@ -496,21 +496,33 @@ function convertPUJToDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowe
   return word;
 }
 
-function addPUJToneMark(sentence) {
-  let result = "";
+function forEachWordInSentence(sentence, funcWord, funcNonWord) {
   let cur = "";
+  sentence = sentence.normalize('NFD');
+  const regexp = new RegExp(`[a-zA-Z0-9']|(${Array.from(Object.values(PUJSpecialVowels)).join('|')})`);
   for (let i = 0; i < sentence.length; i++) {
-    if (/[a-zA-Z0-9']/.test(sentence[i])) {
+    if (regexp.test(sentence[i])) {
       cur += sentence[i];
     } else {
-      result += addPUJToneMarkForSingle(cur);
+      funcWord?.(cur);
       cur = "";
-      result += sentence[i];
+      funcNonWord?.(sentence[i]);
     }
   }
   if (cur !== "") {
-    result += addPUJToneMarkForSingle(cur);
+    funcWord?.(cur);
   }
+}
+
+function addPUJToneMark(sentence) {
+  let result = "";
+  forEachWordInSentence(sentence,
+      (cur) => {
+        result += addPUJToneMarkForSingle(cur);
+      },
+      (cur) => {
+        result += cur;
+      });
   // 为了美观轻声调用点表示
   result = result.replace(/--/g, '·');
   return result;
@@ -573,6 +585,58 @@ function addPUJToneMarkForSingle(word, tone) {
 
 function addPUJToneMarkAndConvertToDisplay(sentence) {
   return convertPUJToDisplay(addPUJToneMark(sentence));
+}
+
+function makePUJPronunciations(pujSentence) {
+  let result = [];
+  forEachWordInSentence(pujSentence, (cur) => {
+    if (cur === "") return;
+    // 先找声调：最后一个字符
+    let tone = 0;
+    let maybeToneChar = cur[cur.length - 1];
+    if (maybeToneChar >= '1' && maybeToneChar <= '8') {
+      tone = parseInt(maybeToneChar);
+      cur = cur.substring(0, cur.length - 1);
+    }
+    // 先处理特殊的声化韵 m, ng, ngh
+    let final = "";
+    if (cur.endsWith('m')) {
+      final = 'm';
+      cur = cur.substring(0, cur.length - 1);
+    } else if (cur.endsWith('ng')) {
+      final = 'ng';
+      cur = cur.substring(0, cur.length - 2);
+    } else if (cur.endsWith('ngh')) {
+      final = 'ngh';
+      cur = cur.substring(0, cur.length - 3);
+    }
+    // 处理声母 p ph m b t th n l k kh ng g h ts tsh s j
+    let initial = "0";
+    const regexpInitialsMatch = /^(p|ph|m|b|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j)/i;
+    if (cur.match(regexpInitialsMatch)) {
+      initial = cur.match(regexpInitialsMatch)[0];
+      cur = cur.substring(initial.length);
+    }
+    // 处理其他韵母
+    final = cur + final;
+    result.push(new PUJPronunciation(initial, final, tone));
+  });
+  return result;
+}
+
+function makePUJPronunciationsFromDisplay(pujDisplaySentence) {
+  // 如果有组合的符号，先解离开来
+  pujDisplaySentence = pujDisplaySentence.normalize('NFD');
+  // 特殊韵母替换
+  pujDisplaySentence = pujDisplaySentence.replace(new RegExp(`[${Array.from(Object.values(PUJSpecialVowels)).join('')}]`, 'g'), (match) => {
+    for (let key in PUJSpecialVowels) {
+      if (PUJSpecialVowels[key] === match) {
+        return key;
+      }
+    }
+    return match;
+  });
+  return makePUJPronunciations(pujDisplaySentence);
 }
 
 export {
