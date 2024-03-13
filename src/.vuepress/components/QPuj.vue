@@ -489,8 +489,8 @@ function unifyWordDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels[
   word = word.replace(/0/g, '');
   word = word.replace(/v/g, v);
   word = word.replace(/V/g, V);
-  word = word.replace(/r/g, r);
-  word = word.replace(/R/g, R);
+  word = word.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)r`, 'g'), r);
+  word = word.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)R`, 'g'), R);
   // word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
   // word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return word;
@@ -541,9 +541,12 @@ function addPUJToneMarkForSingle(word, tone) {
       vowelsIndices.push(i);
     }
   }
+  // 多于一个且第一个是 iu 的话，iu 就是介音，直接去掉。
   if (vowelsIndices.length > 1 && "iyuIYU".includes(word[vowelsIndices[0]])) {
-    // 多于一个且第一个是 iu 的话，iu 就是介音，直接去掉。
-    vowelsIndices.shift();
+    // 这里特殊判断下不是 ir/ur
+    if (!("rR".includes(word[vowelsIndices[1]]))) {
+      vowelsIndices.shift();
+    }
   }
   if (vowelsIndices.length === 0) {
     // 处理特殊鼻声韵母 n m ng：找到倒数第一个 n 或 m，如 园 h[n]g，黄 [n]g，门 m[n]g，村 tsh[n]g，姆 [m]
@@ -556,10 +559,6 @@ function addPUJToneMarkForSingle(word, tone) {
   }
   if (vowelsIndices.length === 0) {
     return word;
-  }
-  if (vowelsIndices.length > 1) {
-    // 如果有多个元音，按照开口度排序
-    vowelsIndices.sort((a, b) => VowelOrder.indexOf(word[a]) - VowelOrder.indexOf(word[b]));
   }
 
   let result = "";
