@@ -39,7 +39,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 import jquery from "jquery";
 
 const $ = jquery;
-import('bootstrap');
+
 import {
   addPUJToneMarkAndUnify,
 } from "./QPuj.vue";
