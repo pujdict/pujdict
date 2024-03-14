@@ -14,6 +14,8 @@ const __dirname = getDirname(import.meta.url); // .vuepress
 
 dotenv.config();
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export default defineUserConfig({
   // @ts-ignore
   base: process.env.VUE_APP_BASEURL || "/",
@@ -191,27 +193,28 @@ export default defineUserConfig({
 
   // Enable it with pwa
   // shouldPrefetch: false,
-  bundler: webpackBundler({
-    postcss: {},
-    vue: {},
-    chainWebpack: (config) => {
-    },
-    configureWebpack: (config) => {
-      // const require = createRequire(import.meta.url);
-      config.resolve = config.resolve || {};
-      config.resolve.fallback = {
-        "browser": false,
-        "crypto": false,
-        "fs": false,
-        "os": false,
-        "path": false,
-      };
-    },
-  }),
-  // bundler: viteBundler({
-  //   viteOptions: {},
-  //   vuePluginOptions: {},
-  // }),
+  bundler: isDev
+    ? viteBundler({
+      viteOptions: {},
+      vuePluginOptions: {},
+    })
+    : webpackBundler({
+      postcss: {},
+      vue: {},
+      chainWebpack: (config) => {
+      },
+      configureWebpack: (config) => {
+        // const require = createRequire(import.meta.url);
+        config.resolve = config.resolve || {};
+        config.resolve.fallback = {
+          "browser": false,
+          "crypto": false,
+          "fs": false,
+          "os": false,
+          "path": false,
+        };
+      },
+    }),
   templateDev: path.join(__dirname, "./templates/dev.html"),
   templateBuild: path.join(__dirname, "./templates/build.html"),
 });
