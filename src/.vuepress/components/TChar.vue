@@ -10,7 +10,7 @@
       <div class="btn-toolbar">
         <div class="btn-group">
           <input id="query-button" class="btn btn-outline-primary" type="submit" value="查询" @click="queryEntries"/>
-          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" @click="resetQuery"/>
+          <input id="reset-button" class="btn btn-outline-danger" type="button" value="重置" @click="resetQuery"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
@@ -62,7 +62,6 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   Entry, PUJPronunciation,
-  makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
@@ -290,73 +289,6 @@ export default {
         result.append(wordSpan);
       }
       return result;
-    }
-
-    function makeEntryArea(entry) {
-      // 每个字的div，外面一个带半透明边框、浅色背景的div，里面一个带字的div，大概这样：
-      // +---------------------+
-      // | 简（繁）  注音        |
-      // |                     |
-      // | 释义和词例正文        |
-      // +---------------------+
-      let entryDiv = queryResultProto.clone();
-      let charTextDiv = entryDiv.find(".card-title");
-      charTextDiv.text('');
-      let mainCharSpan = $("<span></span>");
-      mainCharSpan.text(entry.char_sim);
-      switch (entry.cat) {
-        case '0':
-          break;
-        case '1': // 白读音
-          mainCharSpan.addClass("char-colloquial");
-          break;
-        case '2': // 文读音
-          mainCharSpan.addClass("char-literary");
-          break;
-        default: // 俗读音
-          mainCharSpan.addClass("char-conventional");
-          break;
-      }
-      charTextDiv.append(mainCharSpan);
-      if (entry.char !== entry.char_sim) {
-        let varCharSpan = $("<span></span>");
-        varCharSpan.text(` (${entry.char})`);
-        charTextDiv.append(varCharSpan);
-      }
-      if (entry.char_ref) {
-        let refCharSpan = $("<span></span>");
-        refCharSpan.text(` [${entry.char_ref}]`);
-        charTextDiv.append(refCharSpan);
-      }
-      let pronunciationDiv = entryDiv.find(".card-subtitle");
-      let pronunciationText = addPUJToneMarkAndConvertToDisplay(entry.initial + entry.final + entry.tone);
-      pronunciationDiv.text(pronunciationText);
-      // add <a> tag to pronunciation text
-      // let pronunciationLink = $("<a></a>");
-      // pronunciationLink.attr("href", `/query/query_word.html?chars=${pronunciationText}`);
-      let charMeaningDiv = entryDiv.find(".card-text");
-      charMeaningDiv.text('');
-      // 详细内容利用 // 进行条目分割；每个条目内，:: 之前为中文释义，之后为词例（如果有），词例集合以 ;; 分割，每个词例用 @ 分隔开三部分（如果有）：词例正文、词例注音、词例释义
-      let meanings = entry.details.split("//");
-      meanings.forEach(meaning => {
-        let meaningSplit = meaning.split("::");
-        let words;
-        if (meaningSplit.length === 1) {
-          words = meaningSplit[0].split(";;");
-        } else if (meaningSplit.length === 2) {
-          charMeaningDiv.append(meaningSplit[0]);
-          charMeaningDiv.append('：');
-          words = meaningSplit[1].split(";;");
-        }
-        for (let i = 0; i < words.length; i++) {
-          if (i !== 0) {
-            charMeaningDiv.append("；");
-          }
-          charMeaningDiv.append(makeMeaningWord(words[i]));
-        }
-      });
-
-      return entryDiv;
     }
   }
 }

@@ -16,7 +16,7 @@
         <div class="btn-toolbar">
           <div class="btn-group">
             <input id="query-button" class="btn btn-outline-primary" type="submit" value="转换" @click="convertAction"/>
-            <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" @click="resetAction"/>
+            <input id="reset-button" class="btn btn-outline-danger" type="button" value="重置" @click="resetAction"/>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@
       <div class="btn-toolbar">
         <div class="btn-group" v-if="tonesList">
           <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" @click="querySqlite"/>
-          <input id="reset-button" class="btn btn-outline-secondary" type="button" value="重置" @click="resetQuery"/>
+          <input id="reset-button" class="btn btn-outline-danger" type="button" value="重置" @click="resetQuery"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
