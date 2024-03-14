@@ -36,6 +36,7 @@ export default defineUserConfig({
   //   },
   // }),
   head: [
+    ["meta", {name: "keywords", content: "潮州话, 潮汕话, 潮汕方言, 白话字, 辞典"}]
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
