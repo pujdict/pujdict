@@ -9,7 +9,7 @@ import {withBase} from "vuepress/client";
 
 // import sql js
 import initSqlJs from "sql.js";
-import sqlWasm from "!!url-loader!sql.js/dist/sql-wasm.wasm";
+import sqlWasm from "sql.js/dist/sql-wasm.wasm?url";
 import jquery from "jquery";
 const $ = jquery;
 

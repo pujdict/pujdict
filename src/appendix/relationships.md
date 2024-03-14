@@ -4,7 +4,7 @@ title: 人称
 
 <script setup>
 import TAppendix from '@components/TAppendix.vue';
-import file from '!!raw-loader!@public/data/appendix/relationships.csv';
+import file from '@public/data/appendix/relationships.csv?raw';
 </script>
 
 <TAppendix :file="file" />

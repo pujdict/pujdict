@@ -213,6 +213,15 @@ export default defineUserConfig({
           "os": false,
           "path": false,
         };
+        config.module = config.module || {};
+        config.module.rules.push({
+          resourceQuery: /url/,
+          loader: "url-loader",
+        });
+        config.module.rules.push({
+          resourceQuery: /raw/,
+          loader: "raw-loader",
+        });
       },
     }),
   templateDev: path.join(__dirname, "./templates/dev.html"),
