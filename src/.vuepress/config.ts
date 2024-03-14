@@ -80,7 +80,7 @@ export default defineUserConfig({
       ],
       '/doc/': [
         "puj.md",
-        "guide.md",
+        "dp_fq.md",
         "bib.md",
       ],
       '/tool/': [
@@ -117,8 +117,8 @@ export default defineUserConfig({
             link: "puj.md",
           },
           {
-            text: "凡例",
-            link: "guide.md",
+            text: "扩展潮拼与反切",
+            link: "dp_fq.md",
           },
           {
             text: "参考文献",

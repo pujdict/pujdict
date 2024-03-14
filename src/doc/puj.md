@@ -8,7 +8,7 @@ order: 10
 import TPuj from '@components/TPuj.vue';
 </script>
 
-# 拼音方案
+# 白话字拼音方案
 
 ## 为什么使用白话字
 
