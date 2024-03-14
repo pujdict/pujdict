@@ -69,6 +69,7 @@ export default defineUserConfig({
     breadcrumb: false,
     // navbar: ["/doc/"],
     // sidebar: [],
+    sidebarIcon: false,
     sidebar: {
       '/query/': [
         "qchar.md",
