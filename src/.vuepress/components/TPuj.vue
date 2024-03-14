@@ -3,7 +3,7 @@
 </template>
 <script>
 import {
-  addPUJToneMarkAndConvertToDisplay
+  addPUJToneMarkAndConvertToDisplaySentence
 } from "./QPuj.vue";
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     parsePUJ() {
-      this.result = addPUJToneMarkAndConvertToDisplay(this.puj);
+      this.result = addPUJToneMarkAndConvertToDisplaySentence(this.puj);
     },
   }
 };

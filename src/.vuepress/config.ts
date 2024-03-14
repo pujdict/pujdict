@@ -85,6 +85,7 @@ export default defineUserConfig({
       ],
       '/tool/': [
         "puj_unify.md",
+        "puj_dp.md",
       ],
       '/appendix/': [
         "relationships.md",
@@ -134,6 +135,10 @@ export default defineUserConfig({
           {
             text: "白话字整理与注音",
             link: "puj_unify.md",
+          },
+          {
+            text: "白话字—潮拼转换",
+            link: "puj_dp.md",
           },
         ]
       },

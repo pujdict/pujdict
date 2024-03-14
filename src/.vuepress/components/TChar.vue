@@ -61,7 +61,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 
 <script>
 import {
-  Entry, PUJPronunciation,
+  Entry, Pronunciation,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
@@ -70,7 +70,7 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
+  convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
 } from './QPuj.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -151,9 +151,9 @@ export default {
         let entry = new Entry(...row);
         let pronunciations = {};
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
-          let fuzzyPronunciation = rule.fuzzy(new PUJPronunciation(entry.initial, entry.final, entry.tone));
+          let fuzzyPronunciation = rule.fuzzy(new Pronunciation(entry.initial, entry.final, entry.tone));
           let combination = fuzzyPronunciation.getCombination();
-          let display = addPUJToneMarkAndConvertToDisplay(combination);
+          let display = addPUJToneMarkAndConvertToDisplaySentence(combination);
           pronunciations[key] = {
             key: key,
             name: rule.name,
@@ -217,7 +217,7 @@ export default {
           }
           if (splits.length >= 2) {
             puj = splits[1];
-            puj = addPUJToneMarkAndConvertToDisplay(puj);
+            puj = addPUJToneMarkAndConvertToDisplaySentence(puj);
           }
           if (splits.length >= 3) {
             mandarin = splits[2];
@@ -276,7 +276,7 @@ export default {
         let wordSpan = $("<span></span>");
         wordSpan.text(word);
         if (pronunciation !== undefined) {
-          let pronunciationText = addPUJToneMarkAndConvertToDisplay(pronunciation);
+          let pronunciationText = addPUJToneMarkAndConvertToDisplaySentence(pronunciation);
           let pronunciationSpan2 = $("<span></span>");
           pronunciationSpan2.text(` [${pronunciationText}]`);
           wordSpan.append(pronunciationSpan2);

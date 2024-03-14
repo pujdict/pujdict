@@ -1,6 +1,6 @@
 <script>
 import {
-  Entry, PUJPronunciation,
+  Entry, Pronunciation,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
 } from './QCommon.vue';
 
@@ -38,7 +38,7 @@ const fuzzyRules = {
   chaozhou: {
     name: '潮州',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -80,7 +80,7 @@ const fuzzyRules = {
   xiqiang: {
     name: '戏腔',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -117,7 +117,7 @@ const fuzzyRules = {
   chaoan: {
     name: '潮安',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -151,7 +151,7 @@ const fuzzyRules = {
   fengshun: {
     name: '丰顺',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -190,7 +190,7 @@ const fuzzyRules = {
   raoping: {
     name: '饶平',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -229,7 +229,7 @@ const fuzzyRules = {
   chenghai: {
     name: '澄海',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -279,7 +279,7 @@ const fuzzyRules = {
   shantou: {
     name: '汕头',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -324,7 +324,7 @@ const fuzzyRules = {
   jieyang: {
     name: '揭阳',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -361,7 +361,7 @@ const fuzzyRules = {
   chaoyang: {
     name: '潮阳',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -393,7 +393,7 @@ const fuzzyRules = {
   puning: {
     name: '普宁',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === "r") result.final = 'o';
@@ -421,7 +421,7 @@ const fuzzyRules = {
   huilai: {
     name: '惠来',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -453,7 +453,7 @@ const fuzzyRules = {
   lufeng: {
     name: '陆丰',
     fuzzy: function (original) {
-      let result = new PUJPronunciation(original.initial, original.final, original.tone);
+      let result = new Pronunciation(original.initial, original.final, original.tone);
 
       // 特殊韵母直接映射
       if (result.final === 'v') result.final = 'u';
@@ -485,27 +485,37 @@ const fuzzyRules = {
   },
 };
 
-function convertPUJToDisplay(word, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
-  word = word.replace(/0/g, '');
-  word = word.replace(/v/g, v);
-  word = word.replace(/V/g, V);
-  word = word.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)r`, 'g'), r);
-  word = word.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)R`, 'g'), R);
-  // word = word.replace(/(o)(\W*)(')/g, `${o2}$2`);
-  // word = word.replace(/(O)(\W*)(')/g, `${O2}$2`);
-  return word;
+function convertPUJToDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+  sentence = sentence.replace(/0/g, '');
+  sentence = sentence.replace(/v/g, v);
+  sentence = sentence.replace(/V/g, V);
+  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)r`, 'g'), r);
+  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)R`, 'g'), R);
+  // sentence = sentence.replace(/(o)(\W*)(')/g, `${o2}$2`);
+  // sentence = sentence.replace(/(O)(\W*)(')/g, `${O2}$2`);
+  return sentence;
+}
+
+function convertPUJFromDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+  sentence = sentence.replace(new RegExp(v, 'g'), 'v');
+  sentence = sentence.replace(new RegExp(V, 'g'), 'V');
+  sentence = sentence.replace(new RegExp(r, 'g'), 'r');
+  sentence = sentence.replace(new RegExp(R, 'g'), 'R');
+  return sentence;
 }
 
 function forEachWordInSentence(sentence, funcWord, funcNonWord) {
   let cur = "";
   sentence = sentence.normalize('NFD');
-  const regexp = new RegExp(`[a-zA-Z0-9']|(${Array.from(Object.values(PUJSpecialVowels)).join('|')})`);
+  const regexp = new RegExp(`[a-zA-Z0-9']|${Array.from(Object.values(PUJSpecialVowels)).join('|')}|${PUJToneMarks.filter(e => e.length).join('|')}`);
   for (let i = 0; i < sentence.length; i++) {
     if (regexp.test(sentence[i])) {
       cur += sentence[i];
     } else {
-      funcWord?.(cur);
-      cur = "";
+      if (cur !== "") {
+        funcWord?.(cur);
+        cur = "";
+      }
       funcNonWord?.(sentence[i]);
     }
   }
@@ -514,11 +524,11 @@ function forEachWordInSentence(sentence, funcWord, funcNonWord) {
   }
 }
 
-function addPUJToneMark(sentence) {
+function addPUJToneMarkSentence(sentence) {
   let result = "";
   forEachWordInSentence(sentence,
       (cur) => {
-        result += addPUJToneMarkForSingle(cur);
+        result += addPUJToneMarkWord(cur);
       },
       (cur) => {
         result += cur;
@@ -531,7 +541,7 @@ function addPUJToneMark(sentence) {
 /**
  * 为单个字添加音调符号
  */
-function addPUJToneMarkForSingle(word, tone) {
+function addPUJToneMarkWord(word, tone) {
   if (tone === 0 || tone === 1 || tone === 4) {
     return word;
   }
@@ -583,48 +593,75 @@ function addPUJToneMarkForSingle(word, tone) {
   return result;
 }
 
-function addPUJToneMarkAndConvertToDisplay(sentence) {
-  return convertPUJToDisplay(addPUJToneMark(sentence));
+function undoAddPUJToneMarkWord(word) {
+  let initial = '0';
+  let final = '';
+  let tone = 0;
+  if (!word.length) return new Pronunciation(initial, final, tone);
+
+  if (word[word.length - 1].match(/\d/)) {
+    tone = parseInt(word[word.length - 1]);
+    word = word.substring(0, word.length - 1);
+  } else {
+    PUJToneMarks.forEach((toneMark, index) => {
+      if (toneMark === '' || tone) return;
+      if (word.includes(toneMark)) {
+        word = word.replace(toneMark, '');
+        tone = index;
+      }
+    });
+    if (!tone) {
+      // 1 声或 4 声？
+      if ('ptkhPTKH'.includes(word[word.length - 1])) {
+        tone = 4;
+      } else {
+        tone = 1;
+      }
+    }
+    if (tone === 2) {
+      if ('ptkhPTKH'.includes(word[word.length - 1])) {
+        tone = 8;
+      }
+    }
+  }
+  /*
+  lang def:
+    word ::= (initial) final tone
+    initial ::= "p" | "ph" | "m" | "b" | "t" | "th" | "n" | "l" | "k" | "kh" | "ng" | "g" | "h" | "ts" | "tsh" | "s" | "j" | "0"
+    final ::= (medial) nucleus (coda)
+    medial ::= "i" | "u"
+    nucleus ::= "a" | "e" | "o" | "i" | "u" | "v" | "r" | "m" | "ng"
+    coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
+  */
+  const regexp = /^(p|ph|m|b|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j|0)?(i|u)?(a|e|o|i|u|v|r|m|ng)(u|i|m|n|ng|nn|p|t|k|h|nnh|ngh)?$/i;
+  const match = word.match(regexp);
+  if (match) {
+    if (match[1]) {
+      initial = match[1];
+    }
+    if (match[2]) {
+      final += match[2];
+    }
+    final += match[3];
+    if (match[4]) {
+      final += match[4];
+    }
+  }
+
+  return new Pronunciation(initial, final, tone);
 }
 
-function makePUJPronunciations(pujSentence) {
-  let result = [];
-  forEachWordInSentence(pujSentence, (cur) => {
-    if (cur === "") return;
-    // 先找声调：最后一个字符
-    let tone = 0;
-    let maybeToneChar = cur[cur.length - 1];
-    if (maybeToneChar >= '1' && maybeToneChar <= '8') {
-      tone = parseInt(maybeToneChar);
-      cur = cur.substring(0, cur.length - 1);
-    }
-    // 先处理特殊的声化韵 m, ng, ngh
-    let final = "";
-    if (cur.endsWith('m')) {
-      final = 'm';
-      cur = cur.substring(0, cur.length - 1);
-    } else if (cur.endsWith('ng')) {
-      final = 'ng';
-      cur = cur.substring(0, cur.length - 2);
-    } else if (cur.endsWith('ngh')) {
-      final = 'ngh';
-      cur = cur.substring(0, cur.length - 3);
-    }
-    // 处理声母 p ph m b t th n l k kh ng g h ts tsh s j
-    let initial = "0";
-    const regexpInitialsMatch = /^(p|ph|m|b|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j)/i;
-    if (cur.match(regexpInitialsMatch)) {
-      initial = cur.match(regexpInitialsMatch)[0];
-      cur = cur.substring(initial.length);
-    }
-    // 处理其他韵母
-    final = cur + final;
-    result.push(new PUJPronunciation(initial, final, tone));
-  });
-  return result;
+function addPUJToneMarkAndConvertToDisplaySentence(sentence) {
+  return convertPUJToDisplaySentence(addPUJToneMarkSentence(sentence));
 }
 
-function makePUJPronunciationsFromDisplay(pujDisplaySentence) {
+function convertPUJToPronunciationWord(word) {
+  word = convertPUJFromDisplaySentence(word);
+  let pronunciation = undoAddPUJToneMarkWord(word);
+  return pronunciation;
+}
+
+function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord = convertPUJToPronunciationWord, funcNonWord = null) {
   // 如果有组合的符号，先解离开来
   pujDisplaySentence = pujDisplaySentence.normalize('NFD');
   // 特殊韵母替换
@@ -636,12 +673,88 @@ function makePUJPronunciationsFromDisplay(pujDisplaySentence) {
     }
     return match;
   });
-  return makePUJPronunciations(pujDisplaySentence);
+  let result = [];
+  forEachWordInSentence(pujDisplaySentence, funcWord, funcNonWord);
+  return result;
+}
+
+function convertPronunciationToDP(pronunciation) {
+  let result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
+
+  switch (pronunciation.initial) {
+    case 'p':
+      result.initial = 'b';
+      break;
+    case 'ph':
+      result.initial = 'p';
+      break;
+    case 'b':
+      result.initial = 'bh';
+      break;
+    case 't':
+      result.initial = 'd';
+      break;
+    case 'th':
+      result.initial = 't';
+      break;
+    case 'k':
+      result.initial = 'g';
+      break;
+    case 'kh':
+      result.initial = 'k';
+      break;
+    case 'g':
+      result.initial = 'gh';
+      break;
+    case 'ts':
+      result.initial = 'z';
+      break;
+    case 'tsh':
+      result.initial = 'c';
+      break;
+    case 's':
+      result.initial = 's';
+      break;
+    case 'j':
+      result.initial = 'r';
+      break;
+    case '0':
+      result.initial = '';
+      break;
+  }
+
+  result.final = result.final.replace(/e/, 'ê');
+  result.final = result.final.replace(/v/, 'e');
+  result.final = result.final.replace(/r/, 'er');
+  result.final = result.final.replace(/nn/, 'ⁿ');
+  result.final = result.final.replace(/p$/, 'b');
+  result.final = result.final.replace(/t$/, 'd');
+  result.final = result.final.replace(/k$/, 'g');
+
+  return new Pronunciation(result.initial, result.final, result.tone);
+}
+
+function convertPUJToDPSentence(sentence) {
+  let result = '';
+  forEachWordInSentence(sentence, (cur) => {
+    let pronunciation = convertPUJToPronunciationWord(cur);
+    if (pronunciation) {
+      pronunciation = convertPronunciationToDP(pronunciation);
+      result += pronunciation.initial + pronunciation.final + pronunciation.tone;
+    }
+  }, (cur) => {
+    result += cur;
+  })
+  return result;
 }
 
 export {
   fuzzyRules,
-  convertPUJToDisplay, addPUJToneMark, addPUJToneMarkForSingle, addPUJToneMarkAndConvertToDisplay,
+  convertPUJToDisplaySentence,
+  addPUJToneMarkSentence,
+  addPUJToneMarkWord,
+  addPUJToneMarkAndConvertToDisplaySentence,
+  convertPUJToDPSentence
 }
 
 export default {}
