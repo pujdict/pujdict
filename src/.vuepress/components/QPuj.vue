@@ -27,6 +27,17 @@ const PUJSpecialVowels = {
 
 const VowelOrder = ['A', 'a', 'E', 'e', 'O', 'o', 'I', 'i', 'Y', 'y', 'U', 'u', 'V', 'v', 'R', 'r', PUJSpecialVowels['V'], PUJSpecialVowels['v'], PUJSpecialVowels['R'], PUJSpecialVowels['r']];
 
+/*
+lang def:
+  word ::= (initial) final (tone)
+  initial ::= "p" | "ph" | "m" | "b" | "t" | "th" | "n" | "l" | "k" | "kh" | "ng" | "g" | "h" | "ts" | "tsh" | "s" | "j" | "0"
+  final ::= (medial) nucleus (coda)
+  medial ::= "i" | "u"
+  nucleus ::= "a" | "e" | "o" | "i" | "u" | "v" | "r" | "m" | "ng"
+  coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
+*/
+const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+
 // 模糊音规则
 const fuzzyRules = {
   dummy: {
@@ -487,8 +498,9 @@ const fuzzyRules = {
 
 function convertPUJToDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   sentence = sentence.replace(/0/g, '');
-  sentence = sentence.replace(/v/g, v);
-  sentence = sentence.replace(/V/g, V);
+  // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
+  sentence = sentence.replace(/v(?![uU])/g, v);
+  sentence = sentence.replace(/V(?![uU])/g, V);
   sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)r`, 'g'), r);
   sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)R`, 'g'), R);
   // sentence = sentence.replace(/(o)(\W*)(')/g, `${o2}$2`);
@@ -497,6 +509,7 @@ function convertPUJToDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PU
 }
 
 function convertPUJFromDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+  // sentence = sentence.replace(/ⁿ/g, 'nn');
   sentence = sentence.replace(new RegExp(v, 'g'), 'v');
   sentence = sentence.replace(new RegExp(V, 'g'), 'V');
   sentence = sentence.replace(new RegExp(r, 'g'), 'r');
@@ -547,7 +560,7 @@ function addPUJToneMarkWord(word, tone) {
   }
   if (tone === undefined) {
     tone = 0;
-    for (let i = 0; i < word.length; i++) {
+    for (let i = word.length - 1; i >= 0; --i) {
       if (word[i] >= '1' && word[i] <= '8') {
         tone = parseInt(word[i]);
         word = word.substring(0, i) + word.substring(i + 1);
@@ -555,42 +568,22 @@ function addPUJToneMarkWord(word, tone) {
       }
     }
   }
-
-  // 添加音调符号：找到开口度最大的元音字母，开口度从大到小顺序为 aeoiuv
-  let vowelsIndices = [];
-  for (let i = 0; i < word.length; i++) {
-    if (VowelOrder.includes(word[i])) {
-      vowelsIndices.push(i);
+  const match = word.match(regexpWord);
+  if (match) {
+    let initial = match.groups.initial ?? '0';
+    let medial = match.groups.medial ?? '';
+    let nucleus = match.groups.nucleus ?? '';
+    let coda = match.groups.coda ?? '';
+    if (nucleus !== '') {
+      if (nucleus.length === 1) nucleus += PUJToneMarks[tone];
+      else if (nucleus.length === 2) nucleus = nucleus[0] + PUJToneMarks[tone] + nucleus[1];
+      else nucleus = nucleus[0] + PUJToneMarks[tone] + nucleus.substring(1);
     }
+    return initial + medial + nucleus + coda;
+  } else {
+    console.log(`Error addPUJToneMarkWord: ${word} ${tone}`)
+    return '';
   }
-  // 多于一个且第一个是 iu 的话，iu 就是介音，直接去掉。
-  if (vowelsIndices.length > 1 && "iyuIYU".includes(word[vowelsIndices[0]])) {
-    // 这里特殊判断下不是 ir/ur
-    if (!("rR".includes(word[vowelsIndices[1]]))) {
-      vowelsIndices.shift();
-    }
-  }
-  if (vowelsIndices.length === 0) {
-    // 处理特殊鼻声韵母 n m ng：找到倒数第一个 n 或 m，如 园 h[n]g，黄 [n]g，门 m[n]g，村 tsh[n]g，姆 [m]
-    for (let i = word.length - 1; i >= 0; i--) {
-      if ("nmNM".includes(word[i])) {
-        vowelsIndices.push(i);
-        break;
-      }
-    }
-  }
-  if (vowelsIndices.length === 0) {
-    return word;
-  }
-
-  let result = "";
-  for (let i = 0; i < word.length; i++) {
-    result += word[i];
-    if (i === vowelsIndices[0]) {
-      result += PUJToneMarks[tone];
-    }
-  }
-  return result;
 }
 
 function undoAddPUJToneMarkWord(word) {
@@ -624,27 +617,13 @@ function undoAddPUJToneMarkWord(word) {
       }
     }
   }
-  /*
-  lang def:
-    word ::= (initial) final tone
-    initial ::= "p" | "ph" | "m" | "b" | "t" | "th" | "n" | "l" | "k" | "kh" | "ng" | "g" | "h" | "ts" | "tsh" | "s" | "j" | "0"
-    final ::= (medial) nucleus (coda)
-    medial ::= "i" | "u"
-    nucleus ::= "a" | "e" | "o" | "i" | "u" | "v" | "r" | "m" | "ng"
-    coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
-  */
-  const regexp = /^(p|ph|m|b|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j|0)?(i|u)?(a|e|o|i|u|v|r|m|ng)(u|i|m|n|ng|nn|p|t|k|h|nnh|ngh)?$/i;
-  const match = word.match(regexp);
+  const match = word.match(regexpWord);
   if (match) {
-    if (match[1]) {
-      initial = match[1];
+    if (match.groups.initial) {
+      initial = match.groups.initial;
     }
-    if (match[2]) {
-      final += match[2];
-    }
-    final += match[3];
-    if (match[4]) {
-      final += match[4];
+    if (match.groups.final) {
+      final = match.groups.final;
     }
   }
 
