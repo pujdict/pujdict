@@ -41,7 +41,7 @@ const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|
 // 模糊音规则
 const fuzzyRules = {
   dummy: {
-    name: '标准',
+    name: '辞典',
     fuzzy: function (original) {
       return original;
     },
