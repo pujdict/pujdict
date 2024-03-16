@@ -660,55 +660,47 @@ function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord =
 function convertPronunciationToDP(pronunciation) {
   let result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
 
-  switch (pronunciation.initial) {
-    case 'p':
-      result.initial = 'b';
-      break;
-    case 'ph':
-      result.initial = 'p';
-      break;
-    case 'b':
-      result.initial = 'bh';
-      break;
-    case 't':
-      result.initial = 'd';
-      break;
-    case 'th':
-      result.initial = 't';
-      break;
-    case 'k':
-      result.initial = 'g';
-      break;
-    case 'kh':
-      result.initial = 'k';
-      break;
-    case 'g':
-      result.initial = 'gh';
-      break;
-    case 'ts':
-      result.initial = 'z';
-      break;
-    case 'tsh':
-      result.initial = 'c';
-      break;
-    case 's':
-      result.initial = 's';
-      break;
-    case 'j':
-      result.initial = 'r';
-      break;
-    case '0':
-      result.initial = '';
-      break;
-  }
+  const initialMap = {
+    '': '',
+    '0': '0',
+    'p': 'b',
+    'ph': 'p',
+    'm': 'm',
+    'b': 'bh',
+    't': 'd',
+    'th': 't',
+    'n': 'n',
+    'l': 'l',
+    'k': 'g',
+    'kh': 'k',
+    'ng': 'ng',
+    'g': 'gh',
+    'h': 'h',
+    'ts': 'z',
+    'tsh': 'c',
+    's': 's',
+    'j': 'r',
+  };
 
-  result.final = result.final.replace(/e/, 'ê');
-  result.final = result.final.replace(/v/, 'e');
-  result.final = result.final.replace(/r/, 'er');
-  result.final = result.final.replace(/nn/, 'ⁿ');
+  result.initial = initialMap[result.initial] ?? result.initial;
+
+  // 特殊韵母
+  result.final = result.final.replace('e', 'ê');
+  result.final = result.final.replace(/v|ir|ur/, 'e');
+  result.final = result.final.replace('r', 'er');
+  result.final = result.final.replace('iau', 'iou');
+  result.final = result.final.replace('au', 'ao');
+  // 鼻化韵尾
+  result.final = result.final.replace('nn', 'ⁿ');
+  // 入声韵尾
   result.final = result.final.replace(/p$/, 'b');
   result.final = result.final.replace(/t$/, 'd');
   result.final = result.final.replace(/k$/, 'g');
+
+  // (v)ng -> eng
+  if (result.initial !== '' && result.initial !== 'h' && result.final.match(/^ng$/i)) {
+    result.final = 'eng';
+  }
 
   return new Pronunciation(result.initial, result.final, result.tone);
 }
@@ -716,9 +708,11 @@ function convertPronunciationToDP(pronunciation) {
 function convertPUJToDPSentence(sentence) {
   let result = '';
   forEachWordInSentence(sentence, (cur) => {
+    cur = cur.toLowerCase(); // 潮拼的作用只限于标记拼音，一般不用于作为拉丁语形式书写。
     let pronunciation = convertPUJToPronunciationWord(cur);
     if (pronunciation) {
       pronunciation = convertPronunciationToDP(pronunciation);
+      pronunciation.initial = pronunciation.initial === '0' ? '' : pronunciation.initial;
       result += pronunciation.initial + pronunciation.final + pronunciation.tone;
     }
   }, (cur) => {
