@@ -133,7 +133,7 @@ export default defineUserConfig({
         icon: "wrench",
         children: [
           {
-            text: "白话字整理与注音",
+            text: "白话字注音",
             link: "puj_unify.md",
           },
           {

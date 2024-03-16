@@ -1,5 +1,5 @@
 ---
-title: 白话字整理与注音
+title: 白话字注音
 icon: wrench
 order: 10
 gitInclude:
