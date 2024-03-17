@@ -59,10 +59,18 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*$/, 'ieu$1');
+      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'ieu$1');
       result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
       result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
+
+      // 府城特色 m 阳声韵前 n -> l
+      if (result.final.endsWith('m') && result.initial === 'n')
+        result.initial = 'l';
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -82,8 +90,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -101,8 +108,16 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*$/, 'iou$1');
+      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+
+      // 府城特色 m 阳声韵前 n -> l
+      if (result.final.endsWith('m') && result.initial === 'n')
+        result.initial = 'l';
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -119,8 +134,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -137,10 +151,18 @@ const fuzzyRules = {
 
       // 潮安饶平特色 oi -> ue
       if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi(nn|h|nnh)*$/, 'ue$1');
+        result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1');
 
       // 府城特色高化元音
       result.final = result.final.replace(/^ia([nt])$/, 'ie$1');
+
+      // 府城特色 m 阳声韵前 n -> l
+      if (result.final.endsWith('m') && result.initial === 'n')
+        result.initial = 'l';
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // ng 增生 v 元音
       if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
@@ -153,8 +175,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -172,10 +193,18 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*$/, 'ieu$1');
+      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'ieu$1');
       result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
       result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
+
+      // 府城特色 m 阳声韵前 n -> l
+      if (result.final.endsWith('m') && result.initial === 'n')
+        result.initial = 'l';
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 丰顺特色 en et 韵尾
       if (result.final === 'eng') result.final = 'en';
@@ -192,8 +221,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -210,7 +238,15 @@ const fuzzyRules = {
 
       // 潮安饶平特色 oi -> ue
       if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi(nn|h|nnh)*$/, 'ue$1');
+        result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1');
+
+      // 府城特色 m 阳声韵前 n -> l
+      if (result.final.endsWith('m') && result.initial === 'n')
+        result.initial = 'l';
+
+      // bu- 阳声韵变为 mu-
+      if (result.initial === 'b' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'm';
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -226,13 +262,8 @@ const fuzzyRules = {
       if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
         result.final = 'ok';
 
-      // bu- 阳声韵变为 mu-
-      if (result.initial === 'b' && result.final.match(/^u\w*(m|n|ng)$/))
-        result.initial = 'm';
-
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -256,8 +287,16 @@ const fuzzyRules = {
         result.final = 'uak';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*$/, 'iou$1');
+      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+
+      // 澄海特色 m 阳声韵前 l -> n，这一步骤发生在 m 韵尾丢失之前
+      if (result.final.endsWith('m') && result.initial === 'l')
+        result.initial = 'n';
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -281,8 +320,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -306,7 +344,11 @@ const fuzzyRules = {
         result.final = 'uak';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^iau(nn|h|nnh)*$/, 'iou$1');
+      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
@@ -326,8 +368,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -345,12 +386,16 @@ const fuzzyRules = {
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
 
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
+
+      // 揭阳特色 in it vn vt -> eng ek
+      result.final = result.final.replace(/^[iv]([nt])$/, 'e$1');
+
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // 揭阳特色 ing ik -> eng ek
-      result.final = result.final.replace(/^i(ng|k)$/, 'e$1');
 
       // ng 增生 v 元音
       if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
@@ -363,8 +408,7 @@ const fuzzyRules = {
         result.final = 'ok';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -383,6 +427,13 @@ const fuzzyRules = {
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
 
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
+
+      // 西部地区特色 vn vt -> ing ik
+      result.final = result.final.replace(/^v([nt])$/, 'i$1');
+
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
@@ -395,8 +446,7 @@ const fuzzyRules = {
       // if (result.tone === '6') result.tone = '3';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -414,6 +464,9 @@ const fuzzyRules = {
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
 
+      // 西部地区特色 vn vt -> ing ik
+      result.final = result.final.replace(/^v([nt])$/, 'i$1');
+
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
@@ -423,8 +476,7 @@ const fuzzyRules = {
         result.final = 'vng';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -443,6 +495,13 @@ const fuzzyRules = {
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
 
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
+
+      // 西部地区特色 vn vt -> ing ik
+      result.final = result.final.replace(/^v([nt])$/, 'i$1');
+
       // 丢失 nt 韵尾
       result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
       result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
@@ -455,8 +514,7 @@ const fuzzyRules = {
       // if (result.tone === '7') result.tone = '3';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
@@ -474,7 +532,11 @@ const fuzzyRules = {
       if (result.final === 'eu') result.final = 'iu';
       if (result.final === 'oinn') result.final = 'ainn';
       if (result.final === 'uoinn') result.final = 'uainn';
-      if (result.final === 'ou') result.final = 'au';
+      if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au');
+
+      // mu- 阳声韵变为 bu-
+      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+        result.initial = 'b';
 
       // 陆丰特色 ue -> uei
       result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1');
@@ -488,8 +550,7 @@ const fuzzyRules = {
         result.final = 'vng';
 
       // 去除所有撇号 '
-      result.initial = result.initial.replace("'", '');
-      result.final = result.final.replace("nn'", '');
+      result.final = result.final.replace("nn'", 'nn');
 
       return result;
     },
