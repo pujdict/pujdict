@@ -547,7 +547,7 @@ function addPUJToneMarkSentence(sentence) {
         result += cur;
       });
   // 为了美观轻声调用点表示
-  result = result.replace(/(?<=\w)--(?=\w)/g, '·');
+  result = result.replace(/(?<=\S)--(?=\S)/g, '·');
   return result;
 }
 
