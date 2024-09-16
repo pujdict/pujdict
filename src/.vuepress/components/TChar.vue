@@ -28,7 +28,9 @@
             <h5 class="card-subtitle mb-auto text-body-secondary">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
-                  {{ pronunciation.display }} </template>
+                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};
+                  <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
+                </template>
               </span>
             </h5>
             <p class="card-text">
@@ -71,6 +73,7 @@ import {
 import {
   fuzzyRules,
   convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
+  convertPUJToDPSentence,
 } from './QPuj.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -160,6 +163,7 @@ export default {
             raw: fuzzyPronunciation,
             plain: combination,
             display: display,
+            display_dp: convertPUJToDPSentence(display),
           };
         });
         return {

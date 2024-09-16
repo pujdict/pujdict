@@ -763,6 +763,8 @@ function convertPronunciationToDP(pronunciation) {
     result.final = 'eng';
   }
 
+  // 去掉 nn'
+  if (result.final.endsWith("'")) result.final = result.final.substring(0, result.final.length - 1);
   return new Pronunciation(result.initial, result.final, result.tone);
 }
 
