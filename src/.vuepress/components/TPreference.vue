@@ -1,14 +1,15 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
-    <form onsubmit="return false;">
+    <form @submit.prevent="saveAction">
       <div class="row">
 
         <fieldset class="form-group mb-2">
           <legend class="col-form-label" for="custom-puj-fuzzy-rule">自定义白话字口音规则</legend>
           <textarea class="form-control" id="custom-puj-fuzzy-rule" rows="8"
                     v-model="customPUJFuzzyRule"
-                    :placeholder="defaultCustomPUJFuzzyRule"></textarea>
+                    :placeholder="defaultCustomPUJFuzzyRule"
+                    @keydown="onFormChanged"></textarea>
         </fieldset>
 
         <fieldset class="form-group mb-2">
@@ -20,7 +21,8 @@
                      name="tone-mark-6"
                      :id="`tone-mark-6-${toneMark.value}`"
                      :value="toneMark.value"
-                     v-model="customToneMark6"/>
+                     v-model="customToneMark6"
+                     @change="onFormChanged"/>
               <label class="form-check-label" :for="`tone-mark-6-${toneMark.value}`">
                 {{ toneMark.name }}
               </label>
@@ -37,7 +39,8 @@
                      name="tone-mark-8"
                      :id="`tone-mark-8-${toneMark.value}`"
                      :value="toneMark.value"
-                     v-model="customToneMark8"/>
+                     v-model="customToneMark8"
+                     @change="onFormChanged"/>
               <label class="form-check-label" :for="`tone-mark-8-${toneMark.value}`">
                 {{ toneMark.name }}
               </label>
@@ -47,7 +50,8 @@
 
         <div class="btn-toolbar">
           <div class="btn-group">
-            <input id="query-button" class="btn btn-outline-primary" type="submit" value="保存" @click="saveAction"/>
+            <input id="query-button" class="btn btn-outline-primary" type="submit" value="保存"
+                   :disabled="!formChanged"/>
           </div>
         </div>
       </div>
@@ -77,6 +81,7 @@ export default {
 }
 `;
     return {
+      formChanged: false,
       defaultCustomPUJFuzzyRule: defaultCustomPUJFuzzyRule,
       customPUJFuzzyRule: defaultCustomPUJFuzzyRule,
       toneMarks6: [
@@ -94,7 +99,11 @@ export default {
     }
   },
   methods: {
+    onFormChanged() {
+      this.formChanged = true;
+    },
     saveAction() {
+      this.formChanged = false;
       setLocalOption('custom-puj-fuzzy-rule', this.customPUJFuzzyRule);
       setLocalOption('custom-tone-mark-6', this.customToneMark6);
       setLocalOption('custom-tone-mark-8', this.customToneMark8);
