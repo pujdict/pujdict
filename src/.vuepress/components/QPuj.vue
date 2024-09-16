@@ -707,7 +707,9 @@ function undoAddPUJToneMarkWord(word) {
         tone = 1;
       }
     }
-    if (tone === 2) {
+    if (getPUJToneMark(2) === getPUJToneMark(8) && tone === 2 ||
+        getPUJToneMark(5) === getPUJToneMark(8) && tone === 2) {
+      // 8 声的声调符号可能与 2 声或 5 声相同，这里额外对入声韵做一次判断
       if ('ptkhPTKH'.includes(word[word.length - 1])) {
         tone = 8;
       }
