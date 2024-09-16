@@ -69,6 +69,18 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-style: normal;
 }
 
+@font-face {
+  font-display: swap;
+  font-family: NotoSansMono;
+  src: local('Noto Sans Mono'), local('NotoSans Mono-Normal'),
+    url('//lib.baomitu.com/fonts/noto-sans-mono/noto-sans-mono-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//lib.baomitu.com/fonts/noto-sans-mono/noto-sans-mono-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('//lib.baomitu.com/fonts/noto-sans-mono/noto-sans-mono-regular.woff') format('woff'), /* Modern Browsers */
+    url('//lib.baomitu.com/fonts/noto-sans-mono/noto-sans-mono-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('//lib.baomitu.com/fonts/noto-sans-mono/noto-sans-mono-regular.svg#NotoSans Mono') format('svg'); /* Legacy iOS */
+  font-style: normal;
+}
+
 body {
   font-family: var(--font-family);
 }

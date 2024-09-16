@@ -84,6 +84,7 @@ export default defineUserConfig({
         "bib.md",
       ],
       '/tool/': [
+        "preference.md",
         "puj_unify.md",
         "puj_dp.md",
       ],
@@ -132,6 +133,10 @@ export default defineUserConfig({
         prefix: "/tool/",
         icon: "wrench",
         children: [
+          {
+            text: "偏好设置",
+            link: "preference.md",
+          },
           {
             text: "白话字注音",
             link: "puj_unify.md",
