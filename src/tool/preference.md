@@ -10,9 +10,5 @@ gitInclude:
 import TPreference from '@components/TPreference.vue';
 </script>
 
-网站偏好设置。
-
----
-
 <TPreference />
 

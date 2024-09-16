@@ -18,6 +18,21 @@ const PUJToneMarks = [
   /*8:*/ "\u0301", // 锐音符 ́
 ];
 
+function getPUJToneMark(tone) {
+  if (tone <= 0 || tone > 8 || typeof tone !== 'number') {
+    return '';
+  }
+  PUJToneMarks[6] = getLocalOption('custom-tone-mark-6', PUJToneMarks[6]);
+  PUJToneMarks[8] = getLocalOption('custom-tone-mark-8', PUJToneMarks[8]);
+  return PUJToneMarks[tone];
+}
+
+function getPUJToneMarks() {
+  PUJToneMarks[6] = getLocalOption('custom-tone-mark-6', PUJToneMarks[6]);
+  PUJToneMarks[8] = getLocalOption('custom-tone-mark-8', PUJToneMarks[8]);
+  return PUJToneMarks;
+}
+
 const PUJSpecialVowels = {
   "v": "ṳ",
   "V": "Ṳ",
@@ -36,7 +51,7 @@ lang def:
   nucleus ::= "a" | "e" | "o" | "i" | "u" | "v" | "r" | "m" | "ng"
   coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
 */
-const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|tsh|s|j|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 
 // 模糊音规则
 const fuzzyRules = {
@@ -564,7 +579,11 @@ const fuzzyRules = {
         this._fuzzy_function = eval(customFuzzyQueryRule);
       }
       if (typeof this._fuzzy_function === 'function') {
-        return this._fuzzy_function(original);
+        try {
+          return this._fuzzy_function(original);
+        } catch (e) {
+          console.error(e);
+        }
       }
       return original;
     },
@@ -578,8 +597,8 @@ function convertPUJToDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PU
   // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
   sentence = sentence.replace(/v(?![uU])/g, v);
   sentence = sentence.replace(/V(?![uU])/g, V);
-  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)r`, 'g'), r);
-  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${PUJToneMarks.join('')}]?)R`, 'g'), R);
+  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${getPUJToneMarks().join('')}]?)r`, 'g'), r);
+  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${getPUJToneMarks().join('')}]?)R`, 'g'), R);
   // sentence = sentence.replace(/(o)(\W*)(')/g, `${o2}$2`);
   // sentence = sentence.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return sentence;
@@ -597,7 +616,7 @@ function convertPUJFromDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = 
 function forEachWordInSentence(sentence, funcWord, funcNonWord) {
   let cur = "";
   sentence = sentence.normalize('NFD');
-  const regexp = new RegExp(`[a-zA-Z0-9']|${Array.from(Object.values(PUJSpecialVowels)).join('|')}|${PUJToneMarks.filter(e => e.length).join('|')}`);
+  const regexp = new RegExp(`[a-zA-Z0-9']|${Array.from(Object.values(PUJSpecialVowels)).join('|')}|${getPUJToneMarks().filter(e => e.length).join('|')}`);
   for (let i = 0; i < sentence.length; i++) {
     if (regexp.test(sentence[i])) {
       cur += sentence[i];
@@ -652,9 +671,9 @@ function addPUJToneMarkWord(word, tone) {
     let nucleus = match.groups.nucleus ?? '';
     let coda = match.groups.coda ?? '';
     if (nucleus !== '') {
-      if (nucleus.length === 1) nucleus += PUJToneMarks[tone];
-      else if (nucleus.length === 2) nucleus = nucleus[0] + PUJToneMarks[tone] + nucleus[1];
-      else nucleus = nucleus[0] + PUJToneMarks[tone] + nucleus.substring(1);
+      if (nucleus.length === 1) nucleus += getPUJToneMark(tone);
+      else if (nucleus.length === 2) nucleus = nucleus[0] + getPUJToneMark(tone) + nucleus[1];
+      else nucleus = nucleus[0] + getPUJToneMark(tone) + nucleus.substring(1);
     }
     return initial + medial + nucleus + coda;
   } else {
@@ -673,7 +692,7 @@ function undoAddPUJToneMarkWord(word) {
     tone = parseInt(word[word.length - 1]);
     word = word.substring(0, word.length - 1);
   } else {
-    PUJToneMarks.forEach((toneMark, index) => {
+    getPUJToneMarks().forEach((toneMark, index) => {
       if (toneMark === '' || tone) return;
       if (word.includes(toneMark)) {
         word = word.replace(toneMark, '');
