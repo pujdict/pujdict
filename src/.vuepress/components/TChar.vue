@@ -25,18 +25,29 @@
             <h4 class="card-title">{{
                 result.entry.char_sim
               }}{{ result.entry.char_sim !== result.entry.char ? ` (${result.entry.char})` : '' }}</h4>
-            <h5 class="card-subtitle mb-auto text-body-secondary">
+            <button class="btn active dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    :data-bs-target="`#entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`"
+                    aria-expanded="false"
+                    aria-controls="collapseExample">
               <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.getCombination() }};
-              <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }}
+              <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }};
               <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.getCombination() }}
-<!--              <span v-for="(pronunciation, key) in result.pronunciations" :key="key">-->
-<!--                <template v-if="key === 'dummy'">-->
-<!--                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};-->
-<!--                  <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}-->
-<!--                  <span style="font-size: 80%">[反切]</span> {{ pronunciation.display_fq }}-->
-<!--                </template>-->
-<!--              </span>-->
-            </h5>
+            </button>
+            <div class="row">
+              <div class="collapse" :id="`entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`">
+                <div class="card card-body">
+                  <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
+                    <template v-if="key !== 'dummy'">
+                      <span style="font-size: 80%">{{ pronunciation.name }}: </span>
+                      <span style="font-size: 80%">[PUJ]</span>  {{ pronunciation.display }};
+                      <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
+                    </template>
+                  </span>
+                </div>
+              </div>
+            </div>
             <p class="card-text">
               <template v-for="(meaningItem, i) in result.meaningItem">
                 <br v-if="i > 0"/>
@@ -87,6 +98,7 @@ import jquery from 'jquery';
 
 const $ = jquery;
 
+import 'bootstrap/dist/js/bootstrap.min.js';
 // import 'bootstrap';
 // import 'khroma';
 
@@ -170,7 +182,7 @@ export default {
             raw: fuzzyPronunciation,
             plain: combination,
             display: display,
-            display_dp: convertPUJToDPSentence(display),
+            display_dp: convertPronunciationToDP(fuzzyPronunciation).getCombination(),
             display_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation).getCombination(),
           };
         });
