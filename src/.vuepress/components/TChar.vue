@@ -102,7 +102,6 @@ import jquery from 'jquery';
 
 const $ = jquery;
 
-import 'bootstrap/dist/js/bootstrap.min.js';
 // import 'bootstrap';
 // import 'khroma';
 
@@ -276,6 +275,9 @@ export default {
     },
   },
   mounted() {
+    if (typeof window !== 'undefined') {
+      import('bootstrap');
+    }
     initFromDatabase().then(this.onInitFromDatabaseFinished);
 
     $("#reset-button").click(function () {
