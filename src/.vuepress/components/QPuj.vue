@@ -784,13 +784,125 @@ function convertPUJToDPSentence(sentence) {
   return result;
 }
 
+function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
+  const initial_map = {
+    '': '',
+    '0': '0',
+    'p': '波',
+    'ph': '颇',
+    'm': '毛',
+    'b': '无',
+    't': '多',
+    'th': '胎',
+    'n': '娜',
+    'l': '罗',
+    'k': '哥',
+    'kh': '戈',
+    'ng': '俄',
+    'g': '鹅',
+    'h': '何',
+    'ts': '之',
+    'tsh': '徐',
+    's': '思',
+    'j': '而',
+  }
+  const final_map = {
+    '' : '',
+    'a': '亚',
+    'o': '窝',
+    'v': '余',
+    'r': '倭',
+    'e': '哑',
+    'i': '衣',
+    'u': '污',
+    'ai': '埃',
+    'au': '欧',
+    'oi': '挨',
+    'ou': '乌',
+    'ia': '呀',
+    'io': '腰',
+    'iu': '忧',
+    'iau': '妖',
+    'ua': '娃',
+    'ue': '锅',
+    'ui': '威',
+    'uai': '歪',
+    'am': '庵',
+    'ap': '庵',
+    'an': '安',
+    'at': '安',
+    'ang': '红',
+    'ak': '红',
+    'ong': '翁',
+    'ok': '翁',
+    'eng': '英',
+    'ek': '英',
+    'im': '音',
+    'ip': '音',
+    'in': '因',
+    'it': '因',
+    'iam': '奄',
+    'iap': '奄',
+    'ian': '嫣',
+    'iat': '嫣',
+    'iang': '央',
+    'iak': '央',
+    'iong': '雍',
+    'iok': '雍',
+    'uam': '凡',
+    'uap': '凡',
+    'uan': '冤',
+    'uat': '冤',
+    'uang': '汪',
+    'uak': '汪',
+    'ueng': '荣',
+    'uek': '荣',
+    'un': '温',
+    'ut': '温',
+    'ng': '秧',
+    'vn': '恩',
+    'vt': '恩',
+    'rm': '森',
+    'ann': '嗳',
+    'oinn': '闲',
+    'enn': '楹',
+    'inn': '丸',
+    'iann': '影',
+    'ionn': '羊',
+    'uann': '鞍',
+
+    'm': '姆',
+  }
+  let fq_initial = initial_map[pronunciation.initial];
+  let final = pronunciation.final;
+  final = final.replace("nn'", 'nn');
+  let fq_final = final_map[final];
+  if (!fq_final) {
+    // 这里剩下的是一些 h 尾入声和鼻化音，以及 m、ngh，都单独处理
+    if (final.endsWith('nnh')) {
+      fq_final = final_map[final.substring(0, final.length - 3)] + '(鼻化;喉塞)';
+    } else if (final.endsWith('nn')) {
+      fq_final = final_map[final.substring(0, final.length - 2)] + '(鼻化)';
+    } else if (final.endsWith('h')) {
+      fq_final = final_map[final.substring(0, final.length - 1)] + '(喉塞)';
+    } else {
+      console.error(`反切拼音缺失：${final}`);
+      fq_final = final; // 错误待修复
+    }
+  }
+  let fq_tone = pronunciation.tone;
+  return new Pronunciation(fq_initial, fq_final, fq_tone);
+}
+
 export {
   fuzzyRules,
   convertPUJToDisplaySentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplaySentence,
-  convertPUJToDPSentence
+  convertPUJToDPSentence,
+  convertPronunciationToDP,
+  convertPUJPronunciationToFanQiePronunciation,
 }
 
 export default {}

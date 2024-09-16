@@ -26,12 +26,16 @@
                 result.entry.char_sim
               }}{{ result.entry.char_sim !== result.entry.char ? ` (${result.entry.char})` : '' }}</h4>
             <h5 class="card-subtitle mb-auto text-body-secondary">
-              <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
-                <template v-if="key === 'dummy'">
-                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};
-                  <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
-                </template>
-              </span>
+              <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.getCombination() }};
+              <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }}
+              <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.getCombination() }}
+<!--              <span v-for="(pronunciation, key) in result.pronunciations" :key="key">-->
+<!--                <template v-if="key === 'dummy'">-->
+<!--                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};-->
+<!--                  <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}-->
+<!--                  <span style="font-size: 80%">[反切]</span> {{ pronunciation.display_fq }}-->
+<!--                </template>-->
+<!--              </span>-->
             </h5>
             <p class="card-text">
               <template v-for="(meaningItem, i) in result.meaningItem">
@@ -74,6 +78,8 @@ import {
   fuzzyRules,
   convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
   convertPUJToDPSentence,
+  convertPronunciationToDP,
+  convertPUJPronunciationToFanQiePronunciation,
 } from './QPuj.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -153,8 +159,9 @@ export default {
       let result = queryResult[0].values.map(row => {
         let entry = new Entry(...row);
         let pronunciations = {};
+        const pronunciation = new Pronunciation(entry.initial, entry.final, entry.tone);
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
-          let fuzzyPronunciation = rule.fuzzy(new Pronunciation(entry.initial, entry.final, entry.tone));
+          let fuzzyPronunciation = rule.fuzzy(pronunciation);
           let combination = fuzzyPronunciation.getCombination();
           let display = addPUJToneMarkAndConvertToDisplaySentence(combination);
           pronunciations[key] = {
@@ -164,10 +171,14 @@ export default {
             plain: combination,
             display: display,
             display_dp: convertPUJToDPSentence(display),
+            display_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation).getCombination(),
           };
         });
         return {
           entry: entry,
+          pronunciation: pronunciation,
+          pronunciation_dp: convertPronunciationToDP(pronunciation),
+          pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
           pronunciations: pronunciations,
           meaningItem: this.makeMeaningItems(entry),
         };
