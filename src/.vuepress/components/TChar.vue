@@ -31,9 +31,13 @@
                     :data-bs-target="`#entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`"
                     aria-expanded="false"
                     aria-controls="collapseExample">
-              <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.getCombination() }};
-              <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }};
-              <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.getCombination() }}
+              <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
+                <template v-if="key === 'dummy'">
+                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};
+                  <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }};
+                  <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.getCombination() }}
+                </template>
+              </span>
             </button>
             <div class="row">
               <div class="collapse" :id="`entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`">
