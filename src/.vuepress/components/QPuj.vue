@@ -580,7 +580,7 @@ const fuzzyRules = {
       }
       if (typeof this._fuzzy_function === 'function') {
         try {
-          return this._fuzzy_function(original);
+          return this._fuzzy_function(new Pronunciation(original.initial, original.final, original.tone));
         } catch (e) {
           console.error(e);
         }
