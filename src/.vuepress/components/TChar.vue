@@ -28,9 +28,9 @@
             <button class="btn active dropdown-toggle"
                     type="button"
                     data-bs-toggle="collapse"
-                    :data-bs-target="`#entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`"
+                    :data-bs-target="`#entryCollapse${result.entry.entry_index}`"
                     aria-expanded="false"
-                    aria-controls="collapseExample">
+                    :aria-controls="`entryCollapse${result.entry.entry_index}`">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
                   <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};
@@ -40,7 +40,7 @@
               </span>
             </button>
             <div class="row">
-              <div class="collapse" :id="`entryCollapse${result.entry.char}${result.pronunciation.getCombination()}`">
+              <div class="collapse" :id="`entryCollapse${result.entry.entry_index}`">
                 <div class="card card-body">
                   <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                     <template v-if="key !== 'dummy'">
