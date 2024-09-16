@@ -700,16 +700,15 @@ function undoAddPUJToneMarkWord(word) {
       }
     });
     if (!tone) {
-      // 1 声或 4 声？
+      // 没有找到调符，即 1 声或 4 声
       if ('ptkhPTKH'.includes(word[word.length - 1])) {
         tone = 4;
       } else {
         tone = 1;
       }
-    }
-    if (getPUJToneMark(2) === getPUJToneMark(8) && tone === 2 ||
-        getPUJToneMark(5) === getPUJToneMark(8) && tone === 2) {
-      // 8 声的声调符号可能与 2 声或 5 声相同，这里额外对入声韵做一次判断
+    } else {
+      // 8 声的声调符号可能与 2 声或 5 声相同，这里额外对入声韵做一次判断。
+      // 这里简化了判断的依据。如果是入声韵并且有声调符号，那么就认为是 8 声。
       if ('ptkhPTKH'.includes(word[word.length - 1])) {
         tone = 8;
       }
