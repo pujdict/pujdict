@@ -723,7 +723,7 @@ function convertPronunciationToDP(pronunciation) {
 
   const initialMap = {
     '': '',
-    '0': '0',
+    '0': '',
     'p': 'b',
     'ph': 'p',
     'm': 'm',
@@ -787,7 +787,7 @@ function convertPUJToDPSentence(sentence) {
 function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
   const initial_map = {
     '': '',
-    '0': '0',
+    '0': '',
     'p': '波',
     'ph': '颇',
     'm': '毛',
