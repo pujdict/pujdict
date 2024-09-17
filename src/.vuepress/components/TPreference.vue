@@ -85,15 +85,15 @@ export default {
       defaultCustomPUJFuzzyRule: defaultCustomPUJFuzzyRule,
       customPUJFuzzyRule: defaultCustomPUJFuzzyRule,
       toneMarks6: [
-        {value: '̃', name: '波浪符 ◌̃'},
-        {value: '̆', name: '短音符 ◌̆'},
-        {value: '̌', name: '抑扬符 ◌̌'},
+        {value: "\u0303", name: '波浪符 ◌̃'},
+        {value: "\u0306", name: '短音符 ◌̆'},
+        {value: "\u030C", name: '抑扬符 ◌̌'},
       ],
       customToneMark6: '̃',
       toneMarks8: [
-        {value: '́', name: '锐音符 ◌́'},
-        {value: '̍', name: '竖线符 ◌̍'},
-        {value: '̂', name: '扬抑符 ◌̂'},
+        {value: "\u0301", name: '锐音符 ◌́'},
+        {value: "\u030D", name: '竖线符 ◌̍'},
+        {value: "\u0302", name: '扬抑符 ◌̂'},
       ],
       customToneMark8: '́',
     }

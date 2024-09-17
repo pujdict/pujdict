@@ -33,6 +33,43 @@ function getPUJToneMarks() {
   return PUJToneMarks;
 }
 
+/**
+ * 这个函数照顾到 6、8 两个声调自定义的情况，也照顾到形状相同但 Unicode 编码有不同的情况（例如第二声的锐音符，Unicode 中有 U+0301 U+0341 两个外观基本相同的符号）
+ */
+function getToneFromPUJDisplay(word) {
+  let tone = 0;
+  let toneMark = '';
+  if (word[word.length - 1].match(/\d/)) {
+    tone = parseInt(word[word.length - 1]);
+  } else {
+    const possibleToneMarks = {
+      2: ["\u0301", "\u0341"],
+      3: ["\u0300", "\u0340"],
+      5: ["\u0302"],
+      6: ["\u0303", "\u0342", "\u030C", "\u0306"],
+      7: ["\u0304"],
+      8: ["\u0301", "\u0341", "\u0302", "\u030D"],
+    }
+    for (const curTone in possibleToneMarks) {
+      for (const possibleToneMark in possibleToneMarks[curTone]) {
+        if (word.includes(possibleToneMark)) {
+          tone = curTone;
+          toneMark = possibleToneMark;
+          break;
+        }
+      }
+      if (tone) break;
+    }
+    // 入声做一次额外处理：4 声无调符，8 声的调符可能与 2 声或 5 声相同。
+    // 这里简化了判断的依据。如果是入声韵并且有声调符号，那么就认为是 8 声。
+    // 如果是入声韵并且前面没发现调符，就是 4 声。
+    if ('ptkhPTKH'.includes(word[word.length - 1])) {
+      tone = tone ? 8 : 4;
+    }
+  }
+  return [tone, toneMark];
+}
+
 const PUJSpecialVowels = {
   "v": "ṳ",
   "V": "Ṳ",
@@ -697,26 +734,10 @@ function undoAddPUJToneMarkWord(word) {
     tone = parseInt(word[word.length - 1]);
     word = word.substring(0, word.length - 1);
   } else {
-    getPUJToneMarks().forEach((toneMark, index) => {
-      if (toneMark === '' || tone) return;
-      if (word.includes(toneMark)) {
-        word = word.replace(toneMark, '');
-        tone = index;
-      }
-    });
-    if (!tone) {
-      // 没有找到调符，即 1 声或 4 声
-      if ('ptkhPTKH'.includes(word[word.length - 1])) {
-        tone = 4;
-      } else {
-        tone = 1;
-      }
-    } else {
-      // 8 声的声调符号可能与 2 声或 5 声相同，这里额外对入声韵做一次判断。
-      // 这里简化了判断的依据。如果是入声韵并且有声调符号，那么就认为是 8 声。
-      if ('ptkhPTKH'.includes(word[word.length - 1])) {
-        tone = 8;
-      }
+    let toneMark;
+    [tone, toneMark] = getToneFromPUJDisplay(word);
+    if (toneMark) {
+      word = word.replace(toneMark, '');
     }
   }
   const match = word.match(regexpWord);
