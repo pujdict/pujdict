@@ -46,7 +46,10 @@
                     <template v-if="key !== 'dummy'">
                       <span style="font-size: 80%">{{ pronunciation.name }}: </span>
                       <span style="font-size: 80%">[PUJ]</span>  {{ pronunciation.display }};
-                      <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
+                      <template v-if="key !== 'custom'">
+                        <!-- 自定义可能改到声母（如 ts -> ch），不提供自动转为潮拼。 -->
+                        <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
+                      </template>
                     </template>
                   </span>
                 </div>
