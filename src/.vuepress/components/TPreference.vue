@@ -75,8 +75,9 @@ export default {
     const defaultCustomPUJFuzzyRule = `(puj) => {
   let result = new Pronunciation(puj.initial, puj.final, puj.tone);
   // 请在此处编写自定义规则，可修改其中的 initial final tone 变量
-  // if (result.initial === 'ts' && result.final.startsWith('i')) result.initial = 'ch';
-  // if (result.final === 'io') result.final = 'ie';
+  // if (result.initial == 'ts' && result.final.startsWith('i')) result.initial = 'ch';
+  // if (result.final == 'io') result.final = 'ie';
+  // if (result.tone == 6) result.tone = 3;
   return result;
 }
 `;

@@ -186,7 +186,6 @@ export default {
             plain: combination,
             display: display,
             display_dp: convertPronunciationToDP(fuzzyPronunciation).getCombination(),
-            display_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation).getCombination(),
           };
         });
         return {
