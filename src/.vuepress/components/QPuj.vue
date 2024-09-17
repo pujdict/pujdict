@@ -576,7 +576,12 @@ const fuzzyRules = {
       const customFuzzyQueryRule = getLocalOption('custom-puj-fuzzy-rule');
       if (customFuzzyQueryRule !== this._fuzzy_str) {
         this._fuzzy_str = customFuzzyQueryRule;
-        this._fuzzy_function = eval(customFuzzyQueryRule);
+        try {
+          this._fuzzy_function = eval(customFuzzyQueryRule);
+        } catch (e) {
+          console.error(e);
+          this._fuzzy_function = null;
+        }
       }
       if (typeof this._fuzzy_function === 'function') {
         try {
