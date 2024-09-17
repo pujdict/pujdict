@@ -111,8 +111,8 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'ieu$1');
+      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1');
       result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
       result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
 
@@ -160,8 +160,8 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
 
       // 府城特色 m 阳声韵前 n -> l
       if (result.final.endsWith('m') && result.initial === 'n')
@@ -245,8 +245,8 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uinn';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'ieu$1');
+      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1');
       result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
       result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
 
@@ -339,8 +339,8 @@ const fuzzyRules = {
         result.final = 'uak';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn|h|nnh)*/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
+      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
 
       // 澄海特色 m 阳声韵前 l -> n，这一步骤发生在 m 韵尾丢失之前
       if (result.final.endsWith('m') && result.initial === 'l')
@@ -396,7 +396,7 @@ const fuzzyRules = {
         result.final = 'uak';
 
       // 府城特色高化元音
-      result.final = result.final.replace(/^iau(nn|h|nnh)*/, 'iou$1');
+      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
 
       // mu- 阳声韵变为 bu-
       if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
@@ -810,7 +810,7 @@ function convertPronunciationToDP(pronunciation) {
   // 特殊韵母
   result.final = result.final.replace('e', 'ê');
   result.final = result.final.replace(/v|ir|ur/, 'e');
-  result.final = result.final.replace('r', 'er');
+  result.final = result.final.replace(/r|er/, 'er');
   result.final = result.final.replace('iau', 'iou');
   result.final = result.final.replace('au', 'ao');
   // 鼻化韵尾
