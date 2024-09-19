@@ -26,7 +26,7 @@
 import {
   fuzzyRules,
   convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
-} from './QPuj.vue';
+} from './SPuj.js';
 // import papaparse
 import Papaparse from 'papaparse';
 

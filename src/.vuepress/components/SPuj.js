@@ -1,8 +1,5 @@
-<script>
-import {
-  Entry, Pronunciation,
-  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-} from './QCommon.vue';
+import {getLocalOption} from "./SUtils.js";
+import {Pronunciation} from "./SCommon.js";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -869,7 +866,7 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
     'j': '而',
   }
   const final_map = {
-    '' : '',
+    '': '',
     'a': '亚',
     'o': '窝',
     'v': '余',
@@ -966,6 +963,3 @@ export {
   convertPronunciationToDP,
   convertPUJPronunciationToFanQiePronunciation,
 }
-
-export default {}
-</script>

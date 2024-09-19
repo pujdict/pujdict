@@ -92,7 +92,7 @@ import {
 import {
   fuzzyRules,
   convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
-} from './QPuj.vue';
+} from './SPuj.js';
 import jquery from 'jquery';
 // import 'jquery.cookie';
 

@@ -4,7 +4,7 @@
 <script>
 import {
   addPUJToneMarkAndConvertToDisplaySentence
-} from "./QPuj.vue";
+} from "./SPuj.js";
 
 export default {
   props: {

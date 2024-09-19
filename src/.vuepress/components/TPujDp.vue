@@ -30,7 +30,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   convertPUJToDPSentence,
-} from "./QPuj.vue";
+} from "./SPuj.js";
 
 export default {
   data() {

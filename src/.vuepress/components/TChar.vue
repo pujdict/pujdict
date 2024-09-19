@@ -98,7 +98,7 @@ import {
   convertPUJToDPSentence,
   convertPronunciationToDP,
   convertPUJPronunciationToFanQiePronunciation,
-} from './QPuj.vue';
+} from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';
