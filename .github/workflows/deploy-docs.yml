@@ -61,6 +61,9 @@ jobs:
         run: |
           pnpm run docs:build
           touch src/.vuepress/dist/.nojekyll
+      - name: Unit tests
+        run: |
+          pnpm run test
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
