@@ -57,13 +57,13 @@ jobs:
       - name: Prepare files
         run: |-
           bash prepare_files.sh
+      - name: Unit tests
+        run: |
+          pnpm run test
       - name: Build VuePress site
         run: |
           pnpm run docs:build
           touch src/.vuepress/dist/.nojekyll
-      - name: Unit tests
-        run: |
-          pnpm run test
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
