@@ -29,7 +29,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 </script>
 <script>
 import {
-  addPUJToneMarkAndConvertToDisplaySentence,
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from "./SPuj.js";
 
 export default {
@@ -42,7 +42,7 @@ export default {
   methods: {
     convertAction() {
       try {
-        this.convertOutput = addPUJToneMarkAndConvertToDisplaySentence(this.convertInput);
+        this.convertOutput = addPUJToneMarkAndConvertToDisplayPUJSentence(this.convertInput);
       } catch (e) {
         alert(`发生错误：${e}`);
       }

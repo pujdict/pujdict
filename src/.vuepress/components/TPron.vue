@@ -58,7 +58,7 @@
       <div v-else>
         <ul>
           <li v-for="(item, key) in queryResult" :key="key">
-            <span>{{ convertPUJToDisplaySentence(key) }}:</span>
+            <span>{{ convertPlainPUJSentenceToDisplayPUJSentence(key) }}:</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
@@ -91,7 +91,7 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
+  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from './SPuj.js';
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -174,7 +174,7 @@ export default {
         return {key: item, display: item};
       });
       this.finalsList = fuzzyFinals.map(item => {
-        return {key: item, display: convertPUJToDisplaySentence(item)};
+        return {key: item, display: convertPlainPUJSentenceToDisplayPUJSentence(item)};
       });
       this.tonesList = fuzzyTones.map(item => {
         return {key: item, display: item};

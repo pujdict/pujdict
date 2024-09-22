@@ -25,7 +25,7 @@
 <script>
 import {
   fuzzyRules,
-  convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
+  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from './SPuj.js';
 // import papaparse
 import Papaparse from 'papaparse';
@@ -63,7 +63,7 @@ export default {
           complete: (results) => {
             this.items = results.data.map((item) => {
               const teochew = item.teochew;
-              const puj = addPUJToneMarkAndConvertToDisplaySentence(item.puj);
+              const puj = addPUJToneMarkAndConvertToDisplayPUJSentence(item.puj);
               const mandarin = item.mandarin !== '' ? item.mandarin : item.teochew;
               return new TableEntry(teochew, puj, mandarin);
             });

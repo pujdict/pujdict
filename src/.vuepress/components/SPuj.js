@@ -631,7 +631,7 @@ const fuzzyRules = {
   },
 };
 
-function convertPUJToDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+function convertPlainPUJSentenceToDisplayPUJSentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   sentence = sentence.replace(/0/g, '');
   // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
   sentence = sentence.replace(/v(?![uU])/g, v);
@@ -750,17 +750,17 @@ function undoAddPUJToneMarkWord(word) {
   return new Pronunciation(initial, final, tone);
 }
 
-function addPUJToneMarkAndConvertToDisplaySentence(sentence) {
-  return convertPUJToDisplaySentence(addPUJToneMarkSentence(sentence));
+function addPUJToneMarkAndConvertToDisplayPUJSentence(sentence) {
+  return convertPlainPUJSentenceToDisplayPUJSentence(addPUJToneMarkSentence(sentence));
 }
 
-function convertPUJToPronunciationWord(word) {
+function convertPlainPUJToPronunciationWord(word) {
   word = convertPUJFromDisplaySentence(word);
   let pronunciation = undoAddPUJToneMarkWord(word);
   return pronunciation;
 }
 
-function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord = convertPUJToPronunciationWord, funcNonWord = null) {
+function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord = convertPlainPUJToPronunciationWord, funcNonWord = null) {
   // 如果有组合的符号，先解离开来
   pujDisplaySentence = pujDisplaySentence.normalize('NFD');
   // 特殊韵母替换
@@ -777,7 +777,7 @@ function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord =
   return result;
 }
 
-function convertPronunciationToDP(pronunciation) {
+function convertPUJPronunciationToDPPronunciation(pronunciation) {
   let result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
 
   const initialMap = {
@@ -831,9 +831,9 @@ function convertPUJToDPSentence(sentence) {
   let result = '';
   forEachWordInSentence(sentence, (cur) => {
     cur = cur.toLowerCase(); // 潮拼的作用只限于标记拼音，一般不用于作为拉丁语形式书写。
-    let pronunciation = convertPUJToPronunciationWord(cur);
+    let pronunciation = convertPlainPUJToPronunciationWord(cur);
     if (pronunciation) {
-      pronunciation = convertPronunciationToDP(pronunciation);
+      pronunciation = convertPUJPronunciationToDPPronunciation(pronunciation);
       pronunciation.initial = pronunciation.initial === '0' ? '' : pronunciation.initial;
       result += pronunciation.initial + pronunciation.final + pronunciation.tone;
     }
@@ -955,11 +955,11 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
 
 export {
   fuzzyRules,
-  convertPUJToDisplaySentence,
+  convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
-  addPUJToneMarkAndConvertToDisplaySentence,
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
   convertPUJToDPSentence,
-  convertPronunciationToDP,
+  convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
 }

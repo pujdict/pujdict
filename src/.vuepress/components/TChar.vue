@@ -94,9 +94,9 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  convertPUJToDisplaySentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplaySentence,
+  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
   convertPUJToDPSentence,
-  convertPronunciationToDP,
+  convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
 } from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
@@ -181,20 +181,20 @@ export default {
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
           let fuzzyPronunciation = rule.fuzzy(pronunciation);
           let combination = fuzzyPronunciation.getCombination();
-          let display = addPUJToneMarkAndConvertToDisplaySentence(combination);
+          let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);
           pronunciations[key] = {
             key: key,
             name: rule.name,
             raw: fuzzyPronunciation,
             plain: combination,
             display: display,
-            display_dp: convertPronunciationToDP(fuzzyPronunciation).getCombination(),
+            display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).getCombination(),
           };
         });
         return {
           entry: entry,
           pronunciation: pronunciation,
-          pronunciation_dp: convertPronunciationToDP(pronunciation),
+          pronunciation_dp: convertPUJPronunciationToDPPronunciation(pronunciation),
           pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
           pronunciations: pronunciations,
           meaningItem: this.makeMeaningItems(entry),
@@ -249,7 +249,7 @@ export default {
           }
           if (splits.length >= 2) {
             puj = splits[1];
-            puj = addPUJToneMarkAndConvertToDisplaySentence(puj);
+            puj = addPUJToneMarkAndConvertToDisplayPUJSentence(puj);
           }
           if (splits.length >= 3) {
             mandarin = splits[2];
@@ -311,7 +311,7 @@ export default {
         let wordSpan = $("<span></span>");
         wordSpan.text(word);
         if (pronunciation !== undefined) {
-          let pronunciationText = addPUJToneMarkAndConvertToDisplaySentence(pronunciation);
+          let pronunciationText = addPUJToneMarkAndConvertToDisplayPUJSentence(pronunciation);
           let pronunciationSpan2 = $("<span></span>");
           pronunciationSpan2.text(` [${pronunciationText}]`);
           wordSpan.append(pronunciationSpan2);

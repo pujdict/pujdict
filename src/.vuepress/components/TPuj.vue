@@ -3,7 +3,7 @@
 </template>
 <script>
 import {
-  addPUJToneMarkAndConvertToDisplaySentence
+  addPUJToneMarkAndConvertToDisplayPUJSentence
 } from "./SPuj.js";
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     parsePUJ() {
-      this.result = addPUJToneMarkAndConvertToDisplaySentence(this.puj);
+      this.result = addPUJToneMarkAndConvertToDisplayPUJSentence(this.puj);
     },
   }
 };
