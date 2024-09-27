@@ -1,5 +1,6 @@
-import {getLocalOption} from "./SUtils.js";
-import {Pronunciation} from "./SCommon.js";
+import {getLocalOption} from "./SUtils";
+import {Pronunciation} from "./SCommon";
+import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -953,6 +954,86 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
   return new Pronunciation(fq_initial, fq_final, fq_tone);
 }
 
+const PUJInitialToXSAMPAMap = {
+  '0': '?',
+  'p': 'p',
+  'pf': 'p_df',
+  'ph': 'p_h',
+  'phf': 'p_d_hf',
+  'm': 'm',
+  'mv': 'F',
+  'b': 'b',
+  'bv': 'b_d',
+  't':'t',
+  'th': 't_h',
+  'n': 'n',
+  'l': 'l',
+  'k': 'k',
+  'kh': 'k_h',
+  'ng': 'N',
+  'g': 'g',
+  'h': 'h',
+  'ts': 'ts',
+  'ch': 'tS',
+  'tsh': 'ts_h',
+  'chh': 'tS_h',
+  's': 's',
+  'j': 'dz',
+  'z': 'z',
+}
+
+const PUJFinalToXSAMPAMap = {
+  'a': 'a',
+  'o': 'o',
+  'v': 'M',
+  'r': '@',
+  'e': 'e',
+  'i': 'i',
+  'u': 'u',
+
+  'nn': '~',
+  'ng': 'N',
+  'n': 'n',
+  'm': 'm',
+  'h': '?',
+  'k': 'k_}',
+  't': 't_}',
+  'p': 'p_}',
+}
+
+function convertPUJPronunciationToXSAMPAPronunciation(pronunciation) {
+  const result = new Pronunciation(
+      pronunciation.initial.toLowerCase(), pronunciation.final.toLowerCase(), pronunciation.tone);
+  result.initial = PUJInitialToXSAMPAMap[result.initial] ?? result.initial;
+  result.final = result.final.replace("'", '');
+  for (const [key, value] of Object.entries(PUJFinalToXSAMPAMap)) {
+    result.final = result.final.replace(key, value);
+  }
+  result.tone = '__' + result.tone;
+  return result;
+}
+
+function convertXSAMPAToIPAWord(word) {
+  for (const x_sampa of XSAMPAList) {
+    const ipa = XSAMPAToIPAMap[x_sampa];
+    word = word.replace(x_sampa, ipa);
+  }
+  return word;
+}
+
+function convertXSAMPAPronunciationToIPAPronunciation(pronunciation) {
+  const result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
+  result.initial = convertXSAMPAToIPAWord(result.initial);
+  result.final = convertXSAMPAToIPAWord(result.final);
+  result.tone = convertXSAMPAToIPAWord(result.tone);
+  return result;
+}
+
+function convertPUJPronunciationToIPAPronunciation(pronunciation) {
+  return convertXSAMPAPronunciationToIPAPronunciation(
+      convertPUJPronunciationToXSAMPAPronunciation(pronunciation));
+}
+
 export {
   fuzzyRules,
   convertPlainPUJSentenceToDisplayPUJSentence,
@@ -962,4 +1043,8 @@ export {
   convertPUJToDPSentence,
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
+  convertXSAMPAToIPAWord,
+  convertXSAMPAPronunciationToIPAPronunciation,
+  convertPUJPronunciationToXSAMPAPronunciation,
+  convertPUJPronunciationToIPAPronunciation,
 }

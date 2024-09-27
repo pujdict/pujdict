@@ -34,6 +34,7 @@
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
                   <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.combination }};
+                  <span style="font-size: 80%">[IPA]</span> {{ result.pronunciation_ipa.combination }};
                   <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.combination }};
                   <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.combination }}
                 </template>
@@ -48,6 +49,7 @@
                       <span style="font-size: 80%">[PUJ]</span>  {{ pronunciation.display }};
                       <template v-if="key !== 'custom'">
                         <!-- 自定义可能改到声母（如 ts -> ch），不提供自动转为潮拼。 -->
+                        <span style="font-size: 80%">[IPA]</span> {{ pronunciation.display_ipa }};
                         <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
                       </template>
                     </template>
@@ -94,11 +96,15 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
+  convertPlainPUJSentenceToDisplayPUJSentence,
+  addPUJToneMarkSentence,
+  addPUJToneMarkWord,
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
   convertPUJToDPSentence,
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
-} from './SPuj.js';
+  convertPUJPronunciationToIPAPronunciation,
+} from './SPuj';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';
@@ -189,6 +195,7 @@ export default {
             plain: combination,
             display: display,
             display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).combination,
+            display_ipa: convertPUJPronunciationToIPAPronunciation(fuzzyPronunciation).combination,
           };
         });
         return {
@@ -196,6 +203,7 @@ export default {
           pronunciation: pronunciation,
           pronunciation_dp: convertPUJPronunciationToDPPronunciation(pronunciation),
           pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
+          pronunciation_ipa: convertPUJPronunciationToIPAPronunciation(pronunciation),
           pronunciations: pronunciations,
           meaningItem: this.makeMeaningItems(entry),
         };

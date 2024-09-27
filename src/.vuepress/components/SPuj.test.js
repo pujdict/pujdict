@@ -1,6 +1,14 @@
 import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
+  convertPUJPronunciationToXSAMPAPronunciation,
+  convertXSAMPAPronunciationToIPAPronunciation,
+  convertPUJPronunciationToIPAPronunciation,
+  convertXSAMPAToIPAWord,
 } from "./SPuj";
+
+import {
+  Pronunciation
+} from "./SCommon";
 
 describe('白话字注音', () => {
   function expect_puj(plain, display) {
@@ -81,3 +89,94 @@ describe('白话字注音', () => {
     expect_puj('TER5', `TE${PUJToneMarks[5]}R`);
   });
 });
+
+describe('白话字与国际音标转换', () => {
+  function expect_x_sampa(puj_i, puj_f, puj_t, x_sampa_i, x_sampa_f, x_sampa_t) {
+    const puj_pron = new Pronunciation(puj_i, puj_f, puj_t);
+    const x_sampa_pron = new Pronunciation(x_sampa_i, x_sampa_f, x_sampa_t);
+    const calculated_x_sampa_pron = convertPUJPronunciationToXSAMPAPronunciation(puj_pron);
+    expect(calculated_x_sampa_pron).toEqual(x_sampa_pron);
+  }
+
+  function expect_ipa(x_sampa_i, x_sampa_f, x_sampa_t, ipa_i, ipa_f, ipa_t) {
+    const x_sampa_pron = new Pronunciation(x_sampa_i, x_sampa_f, x_sampa_t);
+    const ipa_pron = new Pronunciation(ipa_i, ipa_f, ipa_t);
+    const calculated_ipa_pron = convertXSAMPAPronunciationToIPAPronunciation(x_sampa_pron);
+    expect(calculated_ipa_pron).toEqual(ipa_pron);
+  }
+
+  const UPPER_NUMS = [
+    '',
+    "\u00b9",
+    "\u00b2",
+    "\u00b3",
+    "\u2074",
+    "\u2075",
+    "\u2076",
+    "\u2077",
+    "\u2078",
+    "\u2079",
+  ]
+
+  it('白话字转X-SAMPA', () => {
+    expect_x_sampa('p', 'eh', '8', 'p', 'e?', '__8');
+    expect_x_sampa('0', 'ue', '7', '?', 'ue', '__7');
+    expect_x_sampa('j', 'i', '7', 'dz', 'i', '__7');
+
+    expect_x_sampa('t', 'iong', '1', 't', 'ioN', '__1');
+    expect_x_sampa('h', 'ua', '5', 'h', 'ua', '__5');
+    expect_x_sampa('n', 'ang', '5', 'n', 'aN', '__5');
+    expect_x_sampa('m', 'in', '5', 'm', 'in', '__5');
+    expect_x_sampa('k', 'ang', '7', 'k', 'aN', '__7');
+    expect_x_sampa('H', 'UA', '5', 'h', 'ua', '__5');
+    expect_x_sampa('k', 'ok', '4', 'k', 'ok_}', '__4');
+
+    expect_x_sampa('ts', 'ek', '8', 'ts', 'ek_}', '__8');
+    expect_x_sampa('ph', 'ian', '3', 'p_h', 'ian', '__3');
+    expect_x_sampa('tsh', 'i', '1', 'ts_h', 'i', '__1');
+    expect_x_sampa('tsh', 'eng', '5', 'ts_h', 'eN', '__5');
+    expect_x_sampa('s', 'i', '6', 's', 'i', '__6');
+    expect_x_sampa('kh', 'ou', '2', 'k_h', 'ou', '__2');
+    expect_x_sampa('l', 'uan', '3', 'l', 'uan', '__3');
+
+    expect_x_sampa('ts', 'ap', '8', 'ts', 'ap_}', '__8');
+    expect_x_sampa('j', 'i', '7', 'dz', 'i', '__7');
+    expect_x_sampa('l', 'ou', '7', 'l', 'ou', '__7');
+    expect_x_sampa('p', 'inn', '1', 'p', 'i~', '__1');
+    expect_x_sampa('p', 'a', '2', 'p', 'a', '__2');
+    expect_x_sampa('l', 'v', '2', 'l', 'M', '__2');
+    expect_x_sampa('h', 'u', '1', 'h', 'u', '__1');
+    expect_x_sampa('h', 'am', '3', 'h', 'am', '__3');
+  });
+
+  it('X-SAMPA转IPA', () => {
+    expect_ipa('p', 'e?', '__8', 'p', 'eʔ', UPPER_NUMS[8]);
+    expect_ipa('?', 'ue', '__7', 'ʔ', 'ue', UPPER_NUMS[7]);
+    expect_ipa('dz', 'i', '__7', 'dz', 'i', UPPER_NUMS[7]);
+
+    expect_ipa('t', 'ioN', '__1', 't', 'ioŋ', UPPER_NUMS[1]);
+    expect_ipa('h', 'ua', '__5', 'h', 'ua', UPPER_NUMS[5]);
+    expect_ipa('n', 'aN', '__5', 'n', 'aŋ', UPPER_NUMS[5]);
+    expect_ipa('m', 'in', '__5', 'm', 'in', UPPER_NUMS[5]);
+    expect_ipa('k', 'aN', '__7', 'k', 'aŋ', UPPER_NUMS[7]);
+    expect_ipa('h', 'ua', '__5', 'h', 'ua', UPPER_NUMS[5]);
+    expect_ipa('k', 'ok_}', '__4', 'k', 'ok̚', UPPER_NUMS[4]);
+
+    expect_ipa('ts', 'ek_}', '__8', 'ts', 'ek̚', UPPER_NUMS[8]);
+    expect_ipa('p_h', 'ian', '__3', 'pʰ', 'ian', UPPER_NUMS[3]);
+    expect_ipa('ts_h', 'i', '__1', 'tsʰ', 'i', UPPER_NUMS[1]);
+    expect_ipa('ts_h', 'eN', '__5', 'tsʰ', 'eŋ', UPPER_NUMS[5]);
+    expect_ipa('s', 'i', '__6', 's', 'i', UPPER_NUMS[6]);
+    expect_ipa('k_h', 'ou', '__2', 'kʰ', 'ou', UPPER_NUMS[2]);
+    expect_ipa('l', 'uan', '__3', 'l', 'uan', UPPER_NUMS[3]);
+
+    expect_ipa('ts', 'ap_}', '__8', 'ts', 'ap̚', UPPER_NUMS[8]);
+    expect_ipa('dz', 'i', '__7', 'dz', 'i', UPPER_NUMS[7]);
+    expect_ipa('l', 'ou', '__7', 'l', 'ou', UPPER_NUMS[7]);
+    expect_ipa('p', 'i~', '__1', 'p', 'ĩ', UPPER_NUMS[1]);
+    expect_ipa('p', 'a', '__2', 'p', 'a', UPPER_NUMS[2]);
+    expect_ipa('l', 'M', '__2', 'l', 'ɯ', UPPER_NUMS[2]);
+    expect_ipa('h', 'u', '__1', 'h', 'u', UPPER_NUMS[1]);
+    expect_ipa('h', 'am', '__3', 'h', 'am', UPPER_NUMS[3]);
+  });
+})
