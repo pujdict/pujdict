@@ -844,7 +844,7 @@ function convertPUJToDPSentence(sentence) {
   return result;
 }
 
-function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
+function convertPUJPronunciationToFanQiePronunciation(pronunciation, fallback_pronunciation = null) {
   const initial_map = {
     '': '',
     '0': '',
@@ -934,10 +934,17 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
     'm': '姆',
   }
   let fq_initial = initial_map[pronunciation.initial];
+  if (!fq_initial && fallback_pronunciation) {
+    fq_initial = initial_map[fallback_pronunciation.initial];
+  }
+  if (fq_initial === undefined) {
+    fq_initial = pronunciation.initial;
+    console.error(`反切声母缺失：${fq_initial}`);
+  }
   let final = pronunciation.final;
   final = final.replace("nn'", 'nn');
   let fq_final = final_map[final];
-  if (!fq_final) {
+  if (fq_final === undefined) {
     // 这里剩下的是一些 h 尾入声和鼻化音，以及 m、ngh，都单独处理
     if (final.endsWith('nnh')) {
       fq_final = final_map[final.substring(0, final.length - 3)] + '(鼻化;喉塞)';
@@ -945,10 +952,16 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation) {
       fq_final = final_map[final.substring(0, final.length - 2)] + '(鼻化)';
     } else if (final.endsWith('h')) {
       fq_final = final_map[final.substring(0, final.length - 1)] + '(喉塞)';
-    } else {
-      console.error(`反切拼音缺失：${final}`);
-      fq_final = final; // 错误待修复
     }
+  }
+  if (fq_final === undefined && fallback_pronunciation) {
+    final = fallback_pronunciation.final;
+    final = final.replace("nn'", 'nn');
+    fq_final = final_map[final];
+  }
+  if (fq_final === undefined) {
+    fq_final = final;
+    console.error(`反切拼音缺失：${fq_final}`);
   }
   let fq_tone = pronunciation.tone;
   return new Pronunciation(fq_initial, fq_final, fq_tone);

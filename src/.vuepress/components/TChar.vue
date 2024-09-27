@@ -50,7 +50,8 @@
                       <template v-if="key !== 'custom'">
                         <!-- 自定义可能改到声母（如 ts -> ch），不提供自动转为潮拼。 -->
                         <span style="font-size: 80%">[IPA]</span> {{ pronunciation.display_ipa }};
-                        <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }}
+                        <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }};
+                        <span style="font-size: 80%">[反切]</span> {{ pronunciation.display_fq }}
                       </template>
                     </template>
                   </span>
@@ -195,6 +196,7 @@ export default {
             plain: combination,
             display: display,
             display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).combination,
+            display_fq: convertPUJPronunciationToFanQiePronunciation(fuzzyPronunciation, pronunciation).combination,
             display_ipa: convertPUJPronunciationToIPAPronunciation(fuzzyPronunciation).combination,
           };
         });
