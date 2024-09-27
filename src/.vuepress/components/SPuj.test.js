@@ -1,10 +1,10 @@
 import {
-  addPUJToneMarkAndConvertToDisplaySentence,
-} from "@components/SPuj";
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
+} from "./SPuj";
 
 describe('白话字注音', () => {
   function expect_puj(plain, display) {
-    const calculated_display = addPUJToneMarkAndConvertToDisplaySentence(plain);
+    const calculated_display = addPUJToneMarkAndConvertToDisplayPUJSentence(plain);
     expect(calculated_display.normalize('NFD')).toBe(display.normalize('NFD'));
   }
 
