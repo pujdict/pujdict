@@ -11,10 +11,6 @@ class Entry {
     this.char_ref = char_ref;
     this.details = details;
   }
-
-  getCombination() {
-    return this.combination;
-  }
 }
 
 class Pronunciation {
@@ -22,10 +18,9 @@ class Pronunciation {
     this.initial = initial;
     this.final = final;
     this.tone = tone;
-    this.combination = initial + final + tone;
   }
 
-  getCombination() {
+  get combination() {
     return this.initial + this.final + this.tone;
   }
 }

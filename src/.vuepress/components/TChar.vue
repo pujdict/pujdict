@@ -33,9 +33,9 @@
                     :aria-controls="`entryCollapse${result.entry.entry_index}`">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
-                  <span style="font-size: 80%">[PUJ]</span> {{ pronunciation.display }};
-                  <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.getCombination() }};
-                  <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.getCombination() }}
+                  <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.combination }};
+                  <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.combination }};
+                  <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.combination }}
                 </template>
               </span>
             </button>
@@ -180,7 +180,7 @@ export default {
         const pronunciation = new Pronunciation(entry.initial, entry.final, entry.tone);
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
           let fuzzyPronunciation = rule.fuzzy(pronunciation);
-          let combination = fuzzyPronunciation.getCombination();
+          let combination = fuzzyPronunciation.combination;
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);
           pronunciations[key] = {
             key: key,
@@ -188,7 +188,7 @@ export default {
             raw: fuzzyPronunciation,
             plain: combination,
             display: display,
-            display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).getCombination(),
+            display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).combination,
           };
         });
         return {
