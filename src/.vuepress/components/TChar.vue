@@ -33,7 +33,7 @@
                     :aria-controls="`entryCollapse${result.entry.entry_index}`">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
-                  <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation.combination }};
+                  <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation_display }};
                   <span style="font-size: 80%">[IPA]</span> {{ result.pronunciation_ipa.combination }};
                   <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.combination }};
                   <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.combination }}
@@ -201,6 +201,7 @@ export default {
         return {
           entry: entry,
           pronunciation: pronunciation,
+          pronunciation_display: addPUJToneMarkAndConvertToDisplayPUJSentence(pronunciation.combination),
           pronunciation_dp: convertPUJPronunciationToDPPronunciation(pronunciation),
           pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
           pronunciation_ipa: convertPUJPronunciationToIPAPronunciation(pronunciation),
