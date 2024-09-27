@@ -1,6 +1,6 @@
-import {getLocalOption} from "./SUtils";
-import {Pronunciation} from "./SCommon";
-import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa";
+import {getLocalOption} from "./SUtils.js";
+import {Pronunciation} from "./SCommon.js";
+import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa.js";
 
 const PUJToneMarks = [
   /*0:*/ "",

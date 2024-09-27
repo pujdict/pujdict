@@ -104,7 +104,7 @@ import {
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
   convertPUJPronunciationToIPAPronunciation,
-} from './SPuj';
+} from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 // import 'jquery.cookie';
