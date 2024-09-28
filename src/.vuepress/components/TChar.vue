@@ -33,10 +33,10 @@
                     :aria-controls="`entryCollapse${result.entry.entry_index}`">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
-                  <span style="font-size: 80%">[PUJ]</span> {{ result.pronunciation_display }};
-                  <span style="font-size: 80%">[IPA]</span> {{ result.pronunciation_ipa.combination }};
-                  <span style="font-size: 80%">[潮拼]</span> {{ result.pronunciation_dp.combination }};
-                  <span style="font-size: 80%">[反切]</span> {{ result.pronunciation_fq.combination }}
+                  {{ result.pronunciation_display }};
+                  {{ result.pronunciation_dp.combination }};
+                  [{{ result.pronunciation_ipa.combination }}];
+                  {{ result.pronunciation_fq.combination }}
                 </template>
               </span>
             </button>
@@ -46,12 +46,12 @@
                   <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                     <template v-if="key !== 'dummy'">
                       <span style="font-size: 80%">{{ pronunciation.name }}: </span>
-                      <span style="font-size: 80%">[PUJ]</span>  {{ pronunciation.display }};
+                      {{ pronunciation.display }};
                       <template v-if="key !== 'custom'">
                         <!-- 自定义可能改到声母（如 ts -> ch），不提供自动转为潮拼。 -->
-                        <span style="font-size: 80%">[IPA]</span> {{ pronunciation.display_ipa }};
-                        <span style="font-size: 80%">[潮拼]</span> {{ pronunciation.display_dp }};
-                        <span style="font-size: 80%">[反切]</span> {{ pronunciation.display_fq }}
+                        {{ pronunciation.display_dp }};
+                        {{ pronunciation.display_ipa }};
+                        {{ pronunciation.display_fq }}
                       </template>
                     </template>
                   </span>
