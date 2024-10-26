@@ -1,4 +1,10 @@
-# 字典条目说明
+## 字典数据与现状说明
+
+字典原始数据来源于仓库 [kahaani/dieghv](https://github.com/kahaani/dieghv/issues)，并转写为白话字，其协议为 [GPL-v3](https://github.com/kahaani/dieghv/blob/master/LICENSE)。
+
+但目前该字典的数据只作展示用，后续准备重构并接入 [teochew-lexicon](https://github.com/hokkien-writing/teochew-lexicon) 的数据。
+
+## 字典条目说明
 
 所有汉字的条目列于 entries.csv 文件中。
 该文件中第一行为表头，后续每一行是一个汉字发音组合。
