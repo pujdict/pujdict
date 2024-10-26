@@ -82,6 +82,7 @@ export default defineUserConfig({
         "puj.md",
         "dp_fq.md",
         "bib.md",
+        "acknowledgments.md",
       ],
       '/tool/': [
         "preference.md",
@@ -125,6 +126,10 @@ export default defineUserConfig({
           {
             text: "参考文献",
             link: "bib.md",
+          },
+          {
+            text: "鸣谢",
+            link: "acknowledgments.md",
           },
         ]
       },
