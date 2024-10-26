@@ -5,11 +5,6 @@ order: 10001
 #hide: [toc, navigation]
 ---
 
-<script setup>
-import dieghv_license from '@public/licenses/dieghv-license.txt?url';
-import TFileLink from '@components/TFileLink.vue';
-</script>
-
 # 鸣谢
 
 ## 网站
@@ -21,6 +16,6 @@ import TFileLink from '@components/TFileLink.vue';
 ## 字体
 
 - [思源黑体（Source Hans Sans）](https://github.com/adobe-fonts/source-han-sans)/[Noto Sans (CJK) SC](https://github.com/notofonts/noto-cjk)：默认中文字体。
-- [遍黑体（Plangothic）](https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic-Project)：与思源黑体外观兼容的字体，用于扩展 B 区及之后区块的生僻汉字。为了加载速度，生僻汉字只根据字表中的生僻字，取出了 Plangothic 文件中的一部分生成为 CJKExtSubset1.generated.woff2 和 CJKExtSubset2.generated.woff2 两个字体文件。遵循其 
+- [遍黑体（Plangothic）](https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic-Project)：与思源黑体外观兼容的字体，用于扩展 B 区及之后区块的生僻汉字。为了加载速度，生僻汉字只根据字表中的生僻字，取出了 Plangothic 文件中的一部分生成为 CJKExtSubset1.generated.woff2 和 CJKExtSubset2.generated.woff2 两个字体文件。遵循其 SIL 协议。
 - [Source Sans 3](https://github.com/adobe-fonts/source-sans)：默认西文字体，可以正确显示国际音标，以及白话字声调和西文字符的组合。
 - [Gentium Book Plus](https://github.com/silnrsi/font-gentium)：用于标记声调。只用于五度标记法的几个字符，可以组合成连字。
