@@ -81,6 +81,7 @@ export default defineUserConfig({
       '/doc/': [
         "puj.md",
         "dp_fq.md",
+        "deduce.md",
         "bib.md",
         "acknowledgments.md",
       ],
@@ -122,6 +123,10 @@ export default defineUserConfig({
           {
             text: "扩展潮拼与反切",
             link: "dp_fq.md",
+          },
+          {
+            text: "文读音推导",
+            link: "deduce.md",
           },
           {
             text: "参考文献",
