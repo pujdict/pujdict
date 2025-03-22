@@ -86,7 +86,12 @@ lang def:
   nucleus ::= "a" | "e" | "o" | "i" | "u" | "v" | "r" | "m" | "ng"
   coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
 */
-const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|r|er|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+// 使用 v r 代替 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 i 是介音，r 是韵腹。
+const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+// 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
+const regexpWordOptional = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|r|er|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+// 只分为 initial final 两部分。
+const regexpWordSimple = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>[aeoyiuvr]*(m|n|ng|nn'?|p|t|k|h)|ng|ngh|m|mh)$/i;
 
 // 模糊音规则
 const fuzzyRules = {
@@ -632,13 +637,15 @@ const fuzzyRules = {
   },
 };
 
-function convertPlainPUJSentenceToDisplayPUJSentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+function convertPlainPUJSentenceToDisplayPUJSentence(sentence, optional = false, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   sentence = sentence.replace(/0/g, '');
-  // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
-  sentence = sentence.replace(/v(?![uU])/g, v);
-  sentence = sentence.replace(/V(?![uU])/g, V);
-  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${getPUJToneMarks().join('')}]?)r`, 'g'), r);
-  sentence = sentence.replace(new RegExp(`(?<![eiyuEIYU][${getPUJToneMarks().join('')}]?)R`, 'g'), R);
+  if (!optional) {
+    // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
+    sentence = sentence.replace(/v(?![uU])/g, v);
+    sentence = sentence.replace(/V(?![uU])/g, V);
+    sentence = sentence.replace(new RegExp(`r`, 'g'), r);
+    sentence = sentence.replace(new RegExp(`R`, 'g'), R);
+  }
   // sentence = sentence.replace(/(o)(\W*)(')/g, `${o2}$2`);
   // sentence = sentence.replace(/(O)(\W*)(')/g, `${O2}$2`);
   return sentence;
@@ -673,11 +680,11 @@ function forEachWordInSentence(sentence, funcWord, funcNonWord) {
   }
 }
 
-function addPUJToneMarkSentence(sentence) {
+function addPUJToneMarkSentence(sentence, optional) {
   let result = "";
   forEachWordInSentence(sentence,
       (cur) => {
-        result += addPUJToneMarkWord(cur);
+        result += addPUJToneMarkWord(cur, null, optional);
       },
       (cur) => {
         result += cur;
@@ -690,11 +697,11 @@ function addPUJToneMarkSentence(sentence) {
 /**
  * 为单个字添加音调符号
  */
-function addPUJToneMarkWord(word, tone) {
+function addPUJToneMarkWord(word, tone, optional) {
   if (tone === 0 || tone === 1 || tone === 4) {
     return word;
   }
-  if (tone === undefined) {
+  if (!tone) {
     tone = 0;
     for (let i = word.length - 1; i >= 0; --i) {
       if (word[i] >= '1' && word[i] <= '8') {
@@ -704,7 +711,7 @@ function addPUJToneMarkWord(word, tone) {
       }
     }
   }
-  const match = word.match(regexpWord);
+  const match = word.match(optional ? regexpWordOptional : regexpWord);
   if (match) {
     let initial = match.groups.initial ?? '0';
     let medial = match.groups.medial ?? '';
@@ -738,7 +745,7 @@ function undoAddPUJToneMarkWord(word) {
       word = word.replace(toneMark, '');
     }
   }
-  const match = word.match(regexpWord);
+  const match = word.match(regexpWordSimple);
   if (match) {
     if (match.groups.initial) {
       initial = match.groups.initial;
@@ -751,8 +758,8 @@ function undoAddPUJToneMarkWord(word) {
   return new Pronunciation(initial, final, tone);
 }
 
-function addPUJToneMarkAndConvertToDisplayPUJSentence(sentence) {
-  return convertPlainPUJSentenceToDisplayPUJSentence(addPUJToneMarkSentence(sentence));
+function addPUJToneMarkAndConvertToDisplayPUJSentence(sentence, optional = false) {
+  return convertPlainPUJSentenceToDisplayPUJSentence(addPUJToneMarkSentence(sentence, optional), optional);
 }
 
 function convertPlainPUJToPronunciationWord(word) {

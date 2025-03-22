@@ -11,8 +11,8 @@ import {
 } from "./SCommon";
 
 describe('白话字注音', () => {
-  function expect_puj(plain, display) {
-    const calculated_display = addPUJToneMarkAndConvertToDisplayPUJSentence(plain);
+  function expect_puj(plain, display, optional) {
+    const calculated_display = addPUJToneMarkAndConvertToDisplayPUJSentence(plain, optional);
     expect(calculated_display.normalize('NFD')).toBe(display.normalize('NFD'));
   }
 
@@ -64,29 +64,32 @@ describe('白话字注音', () => {
   });
   it('特殊韵母（余、倭）', () => {
     expect_puj('v5', `${PUJSpecialVowels.v}${PUJToneMarks[5]}`);
-    expect_puj('ur5', `u${PUJToneMarks[5]}r`);
-    expect_puj('tur5', `tu${PUJToneMarks[5]}r`);
-    expect_puj('ir5', `i${PUJToneMarks[5]}r`);
-    expect_puj('tir5', `ti${PUJToneMarks[5]}r`);
+    expect_puj('ur5', `u${PUJToneMarks[5]}r`, true);
+    expect_puj('tur5', `tu${PUJToneMarks[5]}r`, true);
+    expect_puj('ir5', `i${PUJToneMarks[5]}r`, true);
+    expect_puj('tir5', `ti${PUJToneMarks[5]}r`, true);
 
     expect_puj('V5', `${PUJSpecialVowels.V}${PUJToneMarks[5]}`);
-    expect_puj('Ur5', `U${PUJToneMarks[5]}r`);
-    expect_puj('UR5', `U${PUJToneMarks[5]}R`);
-    expect_puj('TUR5', `TU${PUJToneMarks[5]}R`);
-    expect_puj('Ir5', `I${PUJToneMarks[5]}r`);
-    expect_puj('IR5', `I${PUJToneMarks[5]}R`);
-    expect_puj('Tir5', `Ti${PUJToneMarks[5]}r`);
-    expect_puj('TIR5', `TI${PUJToneMarks[5]}R`);
+    expect_puj('Ur5', `U${PUJToneMarks[5]}r`, true);
+    expect_puj('UR5', `U${PUJToneMarks[5]}R`, true);
+    expect_puj('TUR5', `TU${PUJToneMarks[5]}R`, true);
+    expect_puj('Ir5', `I${PUJToneMarks[5]}r`, true);
+    expect_puj('IR5', `I${PUJToneMarks[5]}R`, true);
+    expect_puj('Tir5', `Ti${PUJToneMarks[5]}r`, true);
+    expect_puj('TIR5', `TI${PUJToneMarks[5]}R`, true);
 
     expect_puj('r5', `${PUJSpecialVowels.r}${PUJToneMarks[5]}`);
-    expect_puj('er5', `e${PUJToneMarks[5]}r`);
-    expect_puj('ter5', `te${PUJToneMarks[5]}r`);
+    expect_puj('er5', `e${PUJToneMarks[5]}r`, true);
+    expect_puj('ter5', `te${PUJToneMarks[5]}r`, true);
 
     expect_puj('R5', `${PUJSpecialVowels.R}${PUJToneMarks[5]}`);
-    expect_puj('Er5', `E${PUJToneMarks[5]}r`);
-    expect_puj('ER5', `E${PUJToneMarks[5]}R`);
-    expect_puj('Ter5', `Te${PUJToneMarks[5]}r`);
-    expect_puj('TER5', `TE${PUJToneMarks[5]}R`);
+    expect_puj('Er5', `E${PUJToneMarks[5]}r`, true);
+    expect_puj('ER5', `E${PUJToneMarks[5]}R`, true);
+    expect_puj('Ter5', `Te${PUJToneMarks[5]}r`, true);
+    expect_puj('TER5', `TE${PUJToneMarks[5]}R`, true);
+
+    expect_puj('sirm5', `si${PUJToneMarks[5]}rm`, true);
+    expect_puj('sirm5', `si${PUJSpecialVowels.r}${PUJToneMarks[5]}m`);
   });
 });
 
