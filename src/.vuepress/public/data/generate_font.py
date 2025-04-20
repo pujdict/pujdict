@@ -40,7 +40,7 @@ def ensure_noto_sans_sc():
 
 def ensure_plangothic():
     if not os.path.exists(PLANGOTHIC_PATH):
-        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic-Project/raw/main/Plangothic.ttc'
+        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic-Project/raw/main/fonts/static/Plangothic.ttc'
         urllib.request.urlretrieve(url, PLANGOTHIC_PATH)
 
 
