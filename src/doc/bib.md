@@ -33,7 +33,7 @@ order: 10000
 
 ### 《台湾闽南语罗马字拼音方案使用手册》
 
-- 台湾教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2007. <https://ws.moe.edu.tw/001/Upload/FileUpload/3677-15601/Documents/tshiutsheh.pdf>.
+- 中国台湾省教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2024. <https://language.moe.gov.tw/files/people_files/tshiutsheh_1131025.pdf>.
 
 ### 【罗杰瑞1973】
 
