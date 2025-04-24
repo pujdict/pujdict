@@ -92,11 +92,14 @@ def post_process():
 
 
 def get_chars():
-    with open('entries.csv', 'r', encoding='utf-8') as f:
+    with open('entries.tsv', 'r', encoding='utf-8') as f:
         lines = f.readlines()
     lines = lines[1:]
-    csv_reader = csv.reader(lines, delimiter=',')
-    entries = [Entry(*line) for line in csv_reader]
+    csv_reader = csv.reader(lines, delimiter='\t')
+    entries = []
+    for line in csv_reader:
+        ent = Entry(*line)
+        entries.append(ent)
 
     # CJK B~I
     result = set()
