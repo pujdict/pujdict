@@ -6,3 +6,8 @@ src/.vuepress/dist/
 
 # ignore every __pycache__
 **/__pycache__/
+
+venv/
+.venv/
+
+.idea/

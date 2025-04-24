@@ -41,9 +41,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
