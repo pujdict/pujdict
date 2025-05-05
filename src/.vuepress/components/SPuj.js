@@ -124,7 +124,7 @@ const fuzzyRules = {
         result.initial = 'l';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 丢失 nt 韵尾
@@ -171,7 +171,7 @@ const fuzzyRules = {
         result.initial = 'l';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 丢失 nt 韵尾
@@ -216,7 +216,7 @@ const fuzzyRules = {
         result.initial = 'l';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // ng 增生 v 元音
@@ -258,7 +258,7 @@ const fuzzyRules = {
         result.initial = 'l';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 丰顺特色 en et 韵尾
@@ -300,7 +300,7 @@ const fuzzyRules = {
         result.initial = 'l';
 
       // bu- 阳声韵变为 mu-
-      if (result.initial === 'b' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'b' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'm';
 
       // 丢失 nt 韵尾
@@ -350,7 +350,7 @@ const fuzzyRules = {
         result.initial = 'n';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 丢失 nt 韵尾
@@ -402,7 +402,7 @@ const fuzzyRules = {
       result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 丢失 nt 韵尾
@@ -442,7 +442,7 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uainn';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 揭阳特色 in it vn vt -> eng ek
@@ -483,7 +483,7 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uainn';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 西部地区特色 vn vt -> ing ik
@@ -551,7 +551,7 @@ const fuzzyRules = {
       if (result.final === 'uoinn') result.final = 'uainn';
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 西部地区特色 vn vt -> ing ik
@@ -590,7 +590,7 @@ const fuzzyRules = {
       if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au');
 
       // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u\w*(m|n|ng)$/))
+      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
         result.initial = 'b';
 
       // 陆丰特色 ue -> uei
