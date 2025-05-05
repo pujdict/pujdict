@@ -819,7 +819,8 @@ function convertPUJPronunciationToDPPronunciation(pronunciation) {
   result.final = result.final.replace('iau', 'iou');
   result.final = result.final.replace('au', 'ao');
   // 鼻化韵尾
-  result.final = result.final.replace('nn', 'ⁿ');
+  result.final = result.final.replace(/(?<!n)n$/, 'nd');
+  result.final = result.final.replace('nn', 'n');
   // 入声韵尾
   result.final = result.final.replace(/p$/, 'b');
   result.final = result.final.replace(/t$/, 'd');

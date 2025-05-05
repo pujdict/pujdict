@@ -9,9 +9,9 @@ order: 11
 **关于潮拼**：
 广东省教育部门于 1960 年 9 月公布的“潮州话拼音方案”，简称“潮拼”，依然是目前比较主流的潮州话拼音方案。
 为了方便读者，本站在拼音的标注中会同时标注潮拼。
-不过，原有的潮拼方案中将 -n 用于表示鼻化韵。
-本站使用的扩展潮拼方案中，-n 表示前鼻音韵尾 [n] 而非鼻化韵，对应的入声韵用 -d 表示。
-而鼻化韵则改以上标的小 n 即 ⁿ 表示。
+因潮拼方案中习惯上将 -n 用于表示鼻化韵，
+本辞典使用的扩展潮拼方案中，-nd 表示“前鼻音”韵尾 [n]，对应的入声韵用 -d 表示。
+韵母 o̤ 则记为 er。
 其他韵母与原有潮拼方案相同。
 
 **关于反切**：
@@ -69,40 +69,40 @@ order: 11
 | 威       | ui        | ui       | ui       |
 | 歪       | uai       | uai      | uai      |
 | 庵       | am/ap     | am/ab    | am/ap̚   |
-| 安       | an/at     | an/ad    | an/at̚   |
+| 安       | an/at     | and/ad   | an/at̚   |
 | 红       | ang/ak    | ang/ag   | aŋ/ak̚   |
 | 翁       | ong/ok    | ong/og   | oŋ/ok̚   |
 | 英       | eng/ek    | êng/êg   | eŋ/ek̚   |
 | 音       | im/ip     | im/ib    | im/ip̚   |
-| 因       | in/it     | in/id    | in/it̚   |
+| 因       | in/it     | ind/id   | in/it̚   |
 | 奄       | iam/iat   | iam/iab  | iam/iat̚ |
-| 嫣       | ian/iat   | ian/iad  | ian/iat̚ |
+| 嫣       | ian/iat   | iand/iad | ian/iat̚ |
 | 央       | iang/iak  | iang/iag | iaŋ/iak̚ |
 | 雍       | iong/iok  | iong/iog | ioŋ/iok̚ |
 | 凡       | uam/uap   | uam/uab  | uam/uap̚ |
-| 冤       | uan/uat   | uan/uad  | uan/uat̚ |
+| 冤       | uan/uat   | uand/uad | uan/uat̚ |
 | 汪       | uang/uak  | uang/uag | uaŋ/uak̚ |
 | 荣       | ueng/uek  | ueng/ueg | ueŋ/uek̚ |
-| 温       | un/ut     | un/ud    | un/ut̚   |
+| 温       | un/ut     | und/ud   | un/ut̚   |
 | 秧       | ng        | ng/eng   | ŋ        |
-| 恩       | ṳn/ṳt     | en/ed    | ɯn/ɯt̚   |
+| 恩       | ṳn/ṳt     | end/ed   | ɯn/ɯt̚   |
 | 森       | o̤m       | erm      | əm       |
-| 嗳       | aⁿ        | aⁿ       | ã       |
-| 闲       | oiⁿ       | oiⁿ      | õĩ     |
-| 楹       | eⁿ        | êⁿ       | ẽ       |
-| 丸       | iⁿ        | iⁿ       | ĩ       |
-| 影       | iaⁿ       | iaⁿ      | ĩã     |
-| 羊       | ioⁿ       | ioⁿ      | ĩõ     |
-| 鞍       | uaⁿ       | uaⁿ      | ũã     |
+| 嗳       | aⁿ        | an       | ã       |
+| 闲       | oiⁿ       | oin      | õĩ     |
+| 楹       | eⁿ        | ên       | ẽ       |
+| 丸       | iⁿ        | in       | ĩ       |
+| 影       | iaⁿ       | ian      | ĩã     |
+| 羊       | ioⁿ       | ion      | ĩõ     |
+| 鞍       | uaⁿ       | uan      | ũã     |
 
 阳声韵、入声韵、鼻化韵的韵母后缀如下：
 
 | 白话字    | 扩展潮拼   | 国际音标 |
 |--------|--------|------|
 | m      | m      | m    |
-| n      | n      | n    |
+| n      | nd     | n    |
 | ng     | ng     | ŋ    |
-| ⁿ (nn) | ⁿ (nn) | ◌̃   |
+| ⁿ (nn) | n      | ◌̃   |
 | p      | b      | p̚   |
 | t      | d      | t̚   |
 | k      | g      | k̚   |
