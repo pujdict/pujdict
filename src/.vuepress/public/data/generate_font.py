@@ -92,7 +92,7 @@ def post_process():
 
 
 def get_chars():
-    with open('entries.tsv', 'r', encoding='utf-8') as f:
+    with open('pujdict-data/entries.tsv', 'r', encoding='utf-8') as f:
         lines = f.readlines()
     lines = lines[1:]
     csv_reader = csv.reader(lines, delimiter='\t')

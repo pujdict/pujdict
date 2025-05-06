@@ -8,7 +8,7 @@ from puj import *
 if __name__ == '__main__':
     # open entries.csv and parse it to entries.db
     # read and drop first line of entries.csv
-    with open('entries.tsv', 'r', encoding='utf-8') as f:
+    with open('pujdict-data/entries.tsv', 'r', encoding='utf-8') as f:
         lines = f.readlines()
     lines = lines[1:]
     csv_reader = csv.reader(lines, delimiter='\t')
