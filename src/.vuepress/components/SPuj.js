@@ -757,6 +757,7 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation, fallback_pr
     'iann': '影',
     'ionn': '羊',
     'uann': '鞍',
+    'uoinn': '县',
 
     'm': '姆',
   }
