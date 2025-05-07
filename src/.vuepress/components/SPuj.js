@@ -1,6 +1,6 @@
-import {getLocalOption} from "./SUtils.js";
-import {Pronunciation} from "./SCommon.js";
-import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa.js";
+import { getLocalOption } from "./SUtils.js";
+import { Pronunciation } from "./SCommon.js";
+import { XSAMPAList, XSAMPAToIPAMap } from "./SXSampaIpa.js";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -93,523 +93,342 @@ const regexpWordOptional = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n
 // 只分为 initial final 两部分。
 const regexpWordSimple = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>[aeoyiuvr]*(m|n|ng|nn'?|p|t|k|h)|ng|ngh|m|mh)$/i;
 
+class FuzzyRuleBase {
+  fuzzy(result) { return result; }
+}
+
+const AtomicFuzzyRule = {
+  V_As_U: result => { if (result.final === 'v') result.final = 'u'; },
+  R_As_O: result => { if (result.final === 'r') result.final = 'o'; },
+  R_As_E: result => { if (result.final === 'r') result.final = 'e'; },
+  RH_As_OH: result => { if (result.final === 'rh') result.final = 'oh'; },
+  RM_As_IAM: result => { if (result.final === 'rm') result.final = 'iam'; },
+  EU_As_IU: result => { if (result.final === 'eu') result.final = 'iu'; },
+  OINN_As_AINN: result => { if (result.final === 'oinn') result.final = 'ainn'; },
+  UOINN_As_UINN: result => { if (result.final === 'uoinn') result.final = 'uinn'; },
+  UOINN_As_UAINN: result => { if (result.final === 'uoinn') result.final = 'uainn'; },
+  OI_As_UE: result => { if (result.initial.match(/^(p|ph|m|b)$/)) result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1'); },
+  OU_As_AU: result => { if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au'); },
+  UE_As_UEI: result => { result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1'); },
+  IN_As_EN: result => { result.final = result.final.replace(/^[iv]([nt])$/, 'e$1'); },
+  VN_As_IN: result => { result.final = result.final.replace(/^v([nt])$/, 'i$1'); },
+  UENG_As_ENG: result => { if (result.final === 'ueng') result.final = result.initial === '0' ? 'eng' : 'uang'; },
+  UEK_As_UAK: result => { if (result.final === 'uek') result.final = 'uak'; },
+  IO_As_IE: result => { result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1'); },
+  IAU_As_IEU: result => { result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1'); },
+  IAU_As_IOU: result => { result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1'); },
+  IAN_As_IEN: result => { result.final = result.final.replace(/^ia([nt])$/, 'ie$1'); },
+  UAN_As_UEN: result => { result.final = result.final.replace(/^ua([nt])$/, 'ue$1'); },
+  IAM_As_IEM: result => { result.final = result.final.replace(/^ia([mp])$/, 'ie$1'); },
+  N_As_L_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'n') result.initial = 'l'; },
+  N_As_L_ForNOrNGEnding: result => { if ((result.final.endsWith('n') || result.final.endsWith('ng')) && result.initial === 'n') result.initial = 'l'; },
+  L_As_N_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'l')result.initial = 'n'; },
+  MU_As_BU_ForNasalEnding: result => { if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'b'; },
+  BU_As_MU_ForNasalEnding: result => { if (result.initial === 'b' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'm'; },
+  N_As_NG: result => {
+    result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
+    result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
+  },
+  M_As_NG: result => {
+    result.final = result.final.replace(/^([aoveiu]+)m$/, '$1ng');
+    result.final = result.final.replace(/^([aoveiu]+)p$/, '$1k');
+  },
+  ENG_As_EN: result => {
+    if (result.final === 'eng') result.final = 'en';
+    if (result.final === 'ek') result.final = 'et';
+  },
+  NG_As_UNG: result => { if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng') result.final = 'ung'; },
+  NG_As_VNG: result => { if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0') result.final = 'vng'; },
+  IONG_As_ONG: result => {
+    if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong') result.final = 'ong';
+    if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok') result.final = 'ok';
+  },
+  RemoveApostrophe: result => { result.final = result.final.replace("'", ''); },
+}
+
+class FuzzyRulesGroup extends FuzzyRuleBase {
+  constructor(name, rules) {
+    super();
+    this.name = name;
+    this.rules = rules;
+  }
+  fuzzy(original) {
+    let result = original.clone();
+    for (const rule of this.rules)
+      rule(result);
+    return result;
+  }
+}
+
+class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
+  constructor() {
+    super('辞典', []);
+  }
+}
+
+class FuzzyRulesGroup_ChaoZhou extends FuzzyRulesGroup {
+  constructor() {
+    super('潮州', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.IO_As_IE,
+      AtomicFuzzyRule.IAU_As_IEU,
+      AtomicFuzzyRule.IAN_As_IEN,
+      AtomicFuzzyRule.UAN_As_UEN,
+      AtomicFuzzyRule.IAM_As_IEM,
+      AtomicFuzzyRule.N_As_L_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_UNG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_XiQiang extends FuzzyRulesGroup {
+  constructor() {
+    super('戏腔', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.IO_As_IE,
+      AtomicFuzzyRule.IAU_As_IOU,
+      AtomicFuzzyRule.N_As_L_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_ChaoAn extends FuzzyRulesGroup {
+  constructor() {
+    super('潮安', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.OI_As_UE,
+      AtomicFuzzyRule.IAN_As_IEN,
+      AtomicFuzzyRule.N_As_L_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_FengShun extends FuzzyRulesGroup {
+  constructor() {
+    super('丰顺', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.IO_As_IE,
+      AtomicFuzzyRule.IAU_As_IEU,
+      AtomicFuzzyRule.IAN_As_IEN,
+      AtomicFuzzyRule.UAN_As_UEN,
+      AtomicFuzzyRule.IAM_As_IEM,
+      AtomicFuzzyRule.N_As_L_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.ENG_As_EN,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_RaoPing extends FuzzyRulesGroup {
+  constructor() {
+    super('饶平', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.OI_As_UE,
+      AtomicFuzzyRule.N_As_L_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.BU_As_MU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_ChengHai extends FuzzyRulesGroup {
+  constructor() {
+    super('澄海', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.UENG_As_ENG,
+      AtomicFuzzyRule.UEK_As_UAK,
+      AtomicFuzzyRule.IO_As_IE,
+      AtomicFuzzyRule.IAU_As_IOU,
+      AtomicFuzzyRule.L_As_N_ForMEnding,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.M_As_NG,
+      AtomicFuzzyRule.NG_As_UNG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_ShanTou extends FuzzyRulesGroup {
+  constructor() {
+    super('汕头', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.UOINN_As_UINN,
+      AtomicFuzzyRule.UENG_As_ENG,
+      AtomicFuzzyRule.UEK_As_UAK,
+      AtomicFuzzyRule.IO_As_IE,
+      AtomicFuzzyRule.IAU_As_IOU,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_UNG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_JieYang extends FuzzyRulesGroup {
+  constructor() {
+    super('揭阳', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.OINN_As_AINN,
+      AtomicFuzzyRule.UOINN_As_UAINN,
+      AtomicFuzzyRule.N_As_L_ForNOrNGEnding,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.IONG_As_ONG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_ChaoYang extends FuzzyRulesGroup {
+  constructor() {
+    super('潮阳', [
+      AtomicFuzzyRule.V_As_U,
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.OINN_As_AINN,
+      AtomicFuzzyRule.UOINN_As_UAINN,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.VN_As_IN,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_PuNing extends FuzzyRulesGroup {
+  constructor() {
+    super('普宁', [
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.OINN_As_AINN,
+      AtomicFuzzyRule.UOINN_As_UAINN,
+      AtomicFuzzyRule.VN_As_IN,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_HuiLai extends FuzzyRulesGroup {
+  constructor() {
+    super('惠来', [
+      AtomicFuzzyRule.V_As_U,
+      AtomicFuzzyRule.R_As_O,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.OINN_As_AINN,
+      AtomicFuzzyRule.UOINN_As_UAINN,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.VN_As_IN,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
+class FuzzyRulesGroup_LuFeng extends FuzzyRulesGroup {
+  constructor() {
+    super('陆丰', [
+      AtomicFuzzyRule.V_As_U,
+      AtomicFuzzyRule.R_As_E,
+      AtomicFuzzyRule.RH_As_OH,
+      AtomicFuzzyRule.RM_As_IAM,
+      AtomicFuzzyRule.EU_As_IU,
+      AtomicFuzzyRule.OINN_As_AINN,
+      AtomicFuzzyRule.UOINN_As_UAINN,
+      AtomicFuzzyRule.OU_As_AU,
+      AtomicFuzzyRule.MU_As_BU_ForNasalEnding,
+      AtomicFuzzyRule.UE_As_UEI,
+      AtomicFuzzyRule.N_As_NG,
+      AtomicFuzzyRule.NG_As_VNG,
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
+  }
+}
+
 // 模糊音规则
 const fuzzyRules = {
-  dummy: {
-    name: '辞典',
-    fuzzy: function (original) {
-      return original;
-    },
-  },
-  chaozhou: {
-    name: '潮州',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iem';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1');
-      result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
-      result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
-
-      // 府城特色 m 阳声韵前 n -> l
-      if (result.final.endsWith('m') && result.initial === 'n')
-        result.initial = 'l';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // 双唇音接 ng 圆唇化
-      if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
-        result.final = 'ung';
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  xiqiang: {
-    name: '戏腔',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
-
-      // 府城特色 m 阳声韵前 n -> l
-      if (result.final.endsWith('m') && result.initial === 'n')
-        result.initial = 'l';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  chaoan: {
-    name: '潮安',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // 潮安饶平特色 oi -> ue
-      if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1');
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^ia([nt])$/, 'ie$1');
-
-      // 府城特色 m 阳声韵前 n -> l
-      if (result.final.endsWith('m') && result.initial === 'n')
-        result.initial = 'l';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  fengshun: {
-    name: '丰顺',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iem';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1');
-      result.final = result.final.replace(/^([iu])a([nt])$/, '$1e$2');
-      result.final = result.final.replace(/^ia([mp])$/, 'ie$1');
-
-      // 府城特色 m 阳声韵前 n -> l
-      if (result.final.endsWith('m') && result.initial === 'n')
-        result.initial = 'l';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 丰顺特色 en et 韵尾
-      if (result.final === 'eng') result.final = 'en';
-      if (result.final === 'ek') result.final = 'et';
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  raoping: {
-    name: '饶平',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // 潮安饶平特色 oi -> ue
-      if (result.initial.match(/^(p|ph|m|b)$/))
-        result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1');
-
-      // 府城特色 m 阳声韵前 n -> l
-      if (result.final.endsWith('m') && result.initial === 'n')
-        result.initial = 'l';
-
-      // bu- 阳声韵变为 mu-
-      if (result.initial === 'b' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'm';
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  chenghai: {
-    name: '澄海',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // ueng -> 零声母eng / 非零声母uang, uek -> uak
-      if (result.final === 'ueng')
-        result.final = result.initial === '0' ? 'eng' : 'uang';
-      if (result.final === 'uek')
-        result.final = 'uak';
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1');
-      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
-
-      // 澄海特色 m 阳声韵前 l -> n，这一步骤发生在 m 韵尾丢失之前
-      if (result.final.endsWith('m') && result.initial === 'l')
-        result.initial = 'n';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // 丢失 mp 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)m$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)p$/, '$1k');
-
-      // 双唇音接 ng 圆唇化
-      if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
-        result.final = 'ung';
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  shantou: {
-    name: '汕头',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'uoinn') result.final = 'uinn';
-
-      // ueng -> 零声母eng / 非零声母uang, uek -> uak
-      if (result.final === 'ueng')
-        result.final = result.initial === '0' ? 'eng' : 'uang';
-      if (result.final === 'uek')
-        result.final = 'uak';
-
-      // 府城特色高化元音
-      result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1');
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // 双唇音接 ng 圆唇化
-      if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng')
-        result.final = 'ung';
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  jieyang: {
-    name: '揭阳',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'oinn') result.final = 'ainn';
-      if (result.final === 'uoinn') result.final = 'uainn';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 揭阳特色 in it vn vt -> eng ek
-      result.final = result.final.replace(/^[iv]([nt])$/, 'e$1');
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 齿龈音接 iong iok 丢失介音
-      if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong')
-        result.final = 'ong';
-      if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok')
-        result.final = 'ok';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  chaoyang: {
-    name: '潮阳',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === 'v') result.final = 'u';
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'oinn') result.final = 'ainn';
-      if (result.final === 'uoinn') result.final = 'uainn';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 西部地区特色 vn vt -> ing ik
-      result.final = result.final.replace(/^v([nt])$/, 'i$1');
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 声调：3 6 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
-      // if (result.tone === '6') result.tone = '3';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  puning: {
-    name: '普宁',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'oinn') result.final = 'ainn';
-      if (result.final === 'uoinn') result.final = 'uainn';
-
-      // 西部地区特色 vn vt -> ing ik
-      result.final = result.final.replace(/^v([nt])$/, 'i$1');
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  huilai: {
-    name: '惠来',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === 'v') result.final = 'u';
-      if (result.final === "r") result.final = 'o';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'oinn') result.final = 'ainn';
-      if (result.final === 'uoinn') result.final = 'uainn';
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 西部地区特色 vn vt -> ing ik
-      result.final = result.final.replace(/^v([nt])$/, 'i$1');
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 声调 3 7 混为 3 // 变调目前依然是能区分的，单字调要不要分需要再考虑
-      // if (result.tone === '7') result.tone = '3';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
-  lufeng: {
-    name: '陆丰',
-    fuzzy: function (original) {
-      let result = new Pronunciation(original.initial, original.final, original.tone);
-
-      // 特殊韵母直接映射
-      if (result.final === 'v') result.final = 'u';
-      if (result.final === "r") result.final = 'e';
-      if (result.final === "rh") result.final = 'oh';
-      if (result.final === "rm") result.final = 'iam';
-      if (result.final === 'eu') result.final = 'iu';
-      if (result.final === 'oinn') result.final = 'ainn';
-      if (result.final === 'uoinn') result.final = 'uainn';
-      if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au');
-
-      // mu- 阳声韵变为 bu-
-      if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/))
-        result.initial = 'b';
-
-      // 陆丰特色 ue -> uei
-      result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1');
-
-      // 丢失 nt 韵尾
-      result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-      result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-
-      // ng 增生 v 元音
-      if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '0')
-        result.final = 'vng';
-
-      // 去除所有撇号 '
-      result.final = result.final.replace("nn'", 'nn');
-
-      return result;
-    },
-  },
+  dummy: new FuzzyRulesGroup_Dummy(),
+  chaozhou: new FuzzyRulesGroup_ChaoZhou(),
+  xiqiang: new FuzzyRulesGroup_XiQiang(),
+  chaoan: new FuzzyRulesGroup_ChaoAn(),
+  fengshun: new FuzzyRulesGroup_FengShun(),
+  raoping: new FuzzyRulesGroup_RaoPing(),
+  chenghai: new FuzzyRulesGroup_ChengHai(),
+  shantou: new FuzzyRulesGroup_ShanTou(),
+  jieyang: new FuzzyRulesGroup_JieYang(),
+  chaoyang: new FuzzyRulesGroup_ChaoYang(),
+  puning: new FuzzyRulesGroup_PuNing(),
+  huilai: new FuzzyRulesGroup_HuiLai(),
+  lufeng: new FuzzyRulesGroup_LuFeng(),
   custom: {
     name: '自定',
     fuzzy: function (original) {
@@ -683,12 +502,12 @@ function forEachWordInSentence(sentence, funcWord, funcNonWord) {
 function addPUJToneMarkSentence(sentence, optional) {
   let result = "";
   forEachWordInSentence(sentence,
-      (cur) => {
-        result += addPUJToneMarkWord(cur, null, optional);
-      },
-      (cur) => {
-        result += cur;
-      });
+    (cur) => {
+      result += addPUJToneMarkWord(cur, null, optional);
+    },
+    (cur) => {
+      result += cur;
+    });
   // 为了美观轻声调用点表示
   result = result.replace(/(?<=\S)--(?=\S)/g, '·');
   return result;
@@ -992,7 +811,7 @@ const PUJInitialToXSAMPAMap = {
   'mv': 'F',
   'b': 'b',
   'bv': 'b_d',
-  't':'t',
+  't': 't',
   'th': 't_h',
   'n': 'n',
   'l': 'l',
@@ -1031,7 +850,7 @@ const PUJFinalToXSAMPAMap = {
 
 function convertPUJPronunciationToXSAMPAPronunciation(pronunciation) {
   const result = new Pronunciation(
-      pronunciation.initial.toLowerCase(), pronunciation.final.toLowerCase(), pronunciation.tone);
+    pronunciation.initial.toLowerCase(), pronunciation.final.toLowerCase(), pronunciation.tone);
   result.initial = PUJInitialToXSAMPAMap[result.initial] ?? result.initial;
   result.final = result.final.replace("'", '');
   for (const [key, value] of Object.entries(PUJFinalToXSAMPAMap)) {
@@ -1059,7 +878,7 @@ function convertXSAMPAPronunciationToIPAPronunciation(pronunciation) {
 
 function convertPUJPronunciationToIPAPronunciation(pronunciation) {
   return convertXSAMPAPronunciationToIPAPronunciation(
-      convertPUJPronunciationToXSAMPAPronunciation(pronunciation));
+    convertPUJPronunciationToXSAMPAPronunciation(pronunciation));
 }
 
 export {

@@ -23,6 +23,10 @@ class Pronunciation {
   get combination() {
     return this.initial + this.final + this.tone;
   }
+
+  clone() {
+    return new Pronunciation(this.initial, this.final, this.tone);
+  }
 }
 
 export {
