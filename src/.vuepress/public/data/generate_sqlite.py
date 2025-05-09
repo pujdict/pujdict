@@ -1,22 +1,41 @@
-import csv
 import os
 import sqlite3
 import sys
+import yaml
 
 from puj import *
 
 if __name__ == '__main__':
     # open entries.csv and parse it to entries.db
     # read and drop first line of entries.csv
-    with open('pujdict-data/entries.tsv', 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-    lines = lines[1:]
-    csv_reader = csv.reader(lines, delimiter='\t')
-    entries = [Entry(*line) for line in csv_reader]
-
-
-    def get_entry(index):
-        return entries[int(index) - 1]
+    with open('pujdict-data/entries.yml', 'r', encoding='utf-8') as f:
+        yaml_entries = yaml.load(f, yaml.Loader)
+    entries = []
+    for yaml_ent in yaml_entries:
+        chars, pronunciations = yaml_ent
+        char, char_sim = chars.split(',')
+        for pronunciation, details in pronunciations.items():
+            initial, final, tone, sp_nasal, cat, freq, char_ref = pronunciation.split(',')
+            # Detail encoded as strings separated by a tab:
+            # The first string is n, the number of meanings;
+            # Then n groups of meanings follow, each group is encoded as:
+            #   The first string is the meaning, might be empty;
+            #   The second string is m, the number of examples;
+            #   Then m tuples of examples follow, each one has three items:
+            #     word of the Teochew dialect, PUJ of the word, mandarin explanation of the word
+            sql_detail = []
+            if not details:
+                sql_detail.append('0')
+            else:
+                sql_detail.append(str(len(details)))
+                for meaning, examples in details.items():
+                    sql_detail.append(meaning)
+                    sql_detail.append(str(len(examples)))
+                    for teochew_puj_mandarin in examples:
+                        sql_detail.extend(teochew_puj_mandarin)
+            sql_detail_str = '\t'.join(sql_detail)
+            entries.append(
+                Entry(char, char_sim, initial, final, tone, sp_nasal, cat, freq, char_ref, sql_detail_str))
 
 
     # create initials -> entry index map
@@ -58,7 +77,7 @@ if __name__ == '__main__':
 
     # create table entries
     c.execute(
-        'CREATE TABLE entries (entry_index int, char text, char_sim text, initial text, final text, tone int, sp_nasal int, cat text, char_ref text, details text)')
+        'CREATE TABLE entries (entry_index int, char text, char_sim text, initial text, final text, tone int, sp_nasal int, cat int, char_ref text, details text)')
     # create index for entry_index
     c.execute('CREATE INDEX entry_index_index ON entries (entry_index)')
     # create index for initial-final-tone

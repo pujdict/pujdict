@@ -5,6 +5,7 @@ import sys
 import tempfile
 import urllib.request
 import fontTools.merge
+import yaml
 from fontname import main as fontname
 from fontTools.subset import main as pyftsubset
 from fontTools.ttLib.woff2 import compress as woff2_compress
@@ -92,22 +93,21 @@ def post_process():
 
 
 def get_chars():
-    with open('pujdict-data/entries.tsv', 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-    lines = lines[1:]
-    csv_reader = csv.reader(lines, delimiter='\t')
+    with open('pujdict-data/entries.yml', 'r', encoding='utf-8') as f:
+        yaml_entries = yaml.load(f, yaml.Loader)
     entries = []
-    for line in csv_reader:
-        ent = Entry(*line)
-        entries.append(ent)
+    for yaml_ent in yaml_entries:
+        entries.append(yaml_ent[0].split(','))
 
     # CJK B~I
     result = set()
-    for entry in entries:
-        if not is_cjk_basic(entry.char):
-            result.add(entry.char)
-        if not is_cjk_basic(entry.char_sim):
-            result.add(entry.char_sim)
+    for char, char_sim in entries:
+        if not is_cjk_basic(char):
+            result.add(char)
+        if char == char_sim:
+            continue
+        if not is_cjk_basic(char_sim):
+            result.add(char_sim)
     return result
 
 

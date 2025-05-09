@@ -61,15 +61,15 @@
             <p class="card-text">
               <template v-for="(meaningItem, i) in result.meaningItem">
                 <br v-if="i > 0"/>
-                <template>{{ meaningItem.explanation }}</template>
-                <template v-for="(word, j) in meaningItem.words">
+                <template>{{ meaningItem.meaning }}</template>
+                <template v-for="(example, j) in meaningItem.examples">
                   <template v-if="j > 0">；</template>
-                  <span v-if="word.teochew">{{ word.teochew }}</span>
-                  <span v-if="word.puj">
-                    <span> [{{ word.puj }}] </span>
+                  <span v-if="example.teochew">{{ example.teochew }}</span>
+                  <span v-if="example.puj">
+                    <span> [{{ example.puj }}] </span>
                   </span>
-                  <span v-if="word.mandarin">
-                    <span> ({{ word.mandarin }})</span>
+                  <span v-if="example.mandarin">
+                    <span> ({{ example.mandarin }})</span>
                   </span>
                 </template>
               </template>
@@ -124,8 +124,8 @@ class MeaningWord {
 }
 
 class MeaningItem {
-  constructor(explanation, words) {
-    this.explanation = explanation;
+  constructor(meaning, words) {
+    this.meaning = meaning;
     this.words = words;
   }
 }
@@ -208,7 +208,7 @@ export default {
           pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
           pronunciation_ipa: convertPUJPronunciationToIPAPronunciation(pronunciation),
           pronunciations: pronunciations,
-          meaningItem: this.makeMeaningItems(entry),
+          meaningItem: entry.details.meanings,
         };
       });
       return result;
@@ -230,47 +230,6 @@ export default {
         setLoading(false);
         setUrlQueryParameter("chars", charsInput);
       }
-    },
-    makeMeaningItems(entry) {
-      // 每个字的div，外面一个带半透明边框、浅色背景的div，里面一个带字的div，大概这样：
-      // +---------------------+
-      // | 简（繁）  注音        |
-      // |                     |
-      // | 释义和词例正文        |
-      // +---------------------+
-      let rawMeaningItems = entry.details.split("//");
-      let meaningItems = [];
-      rawMeaningItems.forEach(item => {
-        let meaningSplit = item.split("::");
-        let explanation = '';
-        let rawWords = [];
-        if (meaningSplit.length === 1) {
-          rawWords = meaningSplit[0].split(";;");
-        } else if (meaningSplit.length === 2) {
-          rawWords = meaningSplit[1].split(";;");
-        }
-        let words = [];
-        rawWords.forEach(rawWord => {
-          let teochew = '';
-          let puj = '';
-          let mandarin = '';
-          let splits = rawWord.split('@');
-          if (splits.length >= 1) {
-            teochew = splits[0];
-          }
-          if (splits.length >= 2) {
-            puj = splits[1];
-            puj = addPUJToneMarkAndConvertToDisplayPUJSentence(puj);
-          }
-          if (splits.length >= 3) {
-            mandarin = splits[2];
-          }
-          words.push(new MeaningWord(teochew, puj, mandarin));
-        });
-        meaningItems.push(new MeaningItem(explanation, words));
-      });
-
-      return meaningItems;
     },
     resetQuery() {
       this.queryInput = '';
