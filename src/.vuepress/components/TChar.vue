@@ -61,7 +61,7 @@
             <p class="card-text">
               <template v-for="(meaningItem, i) in result.meaningItem">
                 <br v-if="i > 0"/>
-                <template>{{ meaningItem.meaning }}</template>
+                <span v-if="meaningItem.meaning">{{ meaningItem.meaning }}<template v-if="meaningItem.examples.length">：</template></span>
                 <template v-for="(example, j) in meaningItem.examples">
                   <template v-if="j > 0">；</template>
                   <span v-if="example.teochew">{{ example.teochew }}</span>

@@ -30,9 +30,12 @@ if __name__ == '__main__':
                 sql_detail.append(str(len(details)))
                 for meaning, examples in details.items():
                     sql_detail.append(meaning)
-                    sql_detail.append(str(len(examples)))
-                    for teochew_puj_mandarin in examples:
-                        sql_detail.extend(teochew_puj_mandarin)
+                    if examples:
+                        sql_detail.append(str(len(examples)))
+                        for teochew_puj_mandarin in examples:
+                            sql_detail.extend(teochew_puj_mandarin)
+                    else:
+                        sql_detail.append('0')
             sql_detail_str = '\t'.join(sql_detail)
             entries.append(
                 Entry(char, char_sim, initial, final, tone, sp_nasal, cat, freq, char_ref, sql_detail_str))
