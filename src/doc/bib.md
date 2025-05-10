@@ -35,6 +35,10 @@ order: 10000
 
 - 中国台湾省教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2024. <https://language.moe.gov.tw/files/people_files/tshiutsheh_1131025.pdf>.
 
+### 《新编台湾闽南语用字汇编》
+
+- 吴昭新. 新编台湾闽南语用字汇编[EB/OL]. 2013. <https://xiaoxue.iis.sinica.edu.tw/download/files/WSL_TPS_Huibian.pdf>.
+
 ### 【罗杰瑞1973】
 
 - Norman J. Tonal development in Min[J]. Journal of Chinese Linguistics, 1973: 222-238.
