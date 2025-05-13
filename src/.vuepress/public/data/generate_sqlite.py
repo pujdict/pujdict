@@ -80,15 +80,15 @@ if __name__ == '__main__':
 
     # create table entries
     c.execute(
-        'CREATE TABLE entries (entry_index int, char text, char_sim text, initial text, final text, tone int, sp_nasal int, cat int, char_ref text, details text)')
+        'CREATE TABLE entries (entry_index int, char text, char_sim text, initial text, final text, tone int, sp_nasal int, cat int, freq int, char_ref text, details text)')
     # create index for entry_index
     c.execute('CREATE INDEX entry_index_index ON entries (entry_index)')
     # create index for initial-final-tone
     c.execute('CREATE INDEX initial_final_tone_index ON entries (initial, final, tone)')
     # insert entries into entries.db
     for entry in entries:
-        c.execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                  (entry.entry_index, entry.char, entry.char_sim, entry.initial, entry.final, entry.tone, entry.sp_nasal, entry.cat, entry.char_ref, entry.details))
+        c.execute('INSERT INTO entries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                  (entry.entry_index, entry.char, entry.char_sim, entry.initial, entry.final, entry.tone, entry.sp_nasal, entry.cat, entry.freq, entry.char_ref, entry.details))
 
     # # create table initials
     # c.execute('CREATE TABLE initials (initial text, entry_index int)')

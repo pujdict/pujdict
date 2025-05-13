@@ -40,15 +40,17 @@ class EntryDetails {
 }
 
 class Entry {
-  constructor(entry_index, char, char_sim, initial, final, tone, cat, freq, char_ref, details) {
+  constructor(entry_index, char, char_sim, initial, final, tone, sp_nasal, cat, freq, char_ref, details) {
     this.entry_index = entry_index;
     this.char = char;
     this.char_sim = char_sim;
     this.initial = initial;
     this.final = final;
     this.combination = initial + final + tone;
-    this.tone = tone;
-    this.cat = cat;
+    this.tone = parseInt(tone);
+    this.sp_nasal = parseInt(sp_nasal);
+    this.cat = parseInt(cat);
+    this.freq = parseInt(freq);
     this.char_ref = char_ref;
     this.details = new EntryDetails(details);
   }

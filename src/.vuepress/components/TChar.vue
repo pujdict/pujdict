@@ -22,9 +22,23 @@
         <div class="card border-dark mb-3" v-for="result in queryResult">
           <!--        <div class="card-header"></div>&lt;!&ndash;字&ndash;&gt;-->
           <div class="card-body">
-            <h4 class="card-title">{{
+            <div class="card-title">
+              <span style="font-size: 1.8em">{{
                 result.entry.char_sim
-              }}{{ result.entry.char_sim !== result.entry.char ? ` (${result.entry.char})` : '' }}</h4>
+              }}{{ result.entry.char_sim !== result.entry.char ? `(${result.entry.char})` : '' }}</span>
+              <span style="font-size: 0.8em; margin: 0 0 0 10px">
+                <span v-if="result.entry.cat === 0"></span>
+                <span v-if="result.entry.cat === 1"> [白] </span>
+                <span v-if="result.entry.cat === 2"> [文] </span>
+                <span v-if="result.entry.cat === 3"> [俗] </span>
+              </span>
+              <span>
+                <span v-if="result.entry.freq === 0">★★★★</span>
+                <span v-if="result.entry.freq === 1">★★★</span>
+                <span v-if="result.entry.freq === 2">★★</span>
+                <span v-if="result.entry.freq === 3">★</span>
+              </span>
+            </div>
             <button class="btn active dropdown-toggle"
                     type="button"
                     data-bs-toggle="collapse"
@@ -175,7 +189,7 @@ export default {
         FROM entries
                JOIN tmp_chars ON
           entries.char = tmp_chars.char OR entries.char_sim = tmp_chars.char
-        ORDER BY tmp_chars.order_id, entries.char, entries.initial || entries.final || initial || tone DESC
+        ORDER BY tmp_chars.order_id, entries.char, entries.freq, entries.cat, entries.initial || entries.final || entries.tone DESC
       `;
       let queryResult = db.exec(querySql);
       if (queryResult.length === 0) {
