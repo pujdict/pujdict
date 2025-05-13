@@ -80,7 +80,7 @@
                   <template v-if="j > 0">；</template>
                   <span v-if="example.teochew">{{ example.teochew }}</span>
                   <span v-if="example.puj">
-                    <span> [{{ example.puj }}] </span>
+                    <span> [{{ addPUJToneMarkAndConvertToDisplayPUJSentence(example.puj) }}] </span>
                   </span>
                   <span v-if="example.mandarin">
                     <span> ({{ example.mandarin }})</span>
