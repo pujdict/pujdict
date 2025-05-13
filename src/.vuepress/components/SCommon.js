@@ -17,6 +17,8 @@ class EntryDetails {
   constructor(details) {
     // List of EntryDetailMeaningExample
     this.meanings = [];
+    if (!details)
+      return;
     let detailsSplit = details.split('\t');
     let len = parseInt(detailsSplit[0]);
     let index = 1;
