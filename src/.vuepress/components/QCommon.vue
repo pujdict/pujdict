@@ -41,13 +41,7 @@ function makeEntryFromJson(json) {
 
 function makeEntryFromSqlResult(sqlResult) {
   let entry = new Entry(
-      sqlResult[0],
-      sqlResult[1],
-      sqlResult[2],
-      sqlResult[3],
-      sqlResult[4],
-      sqlResult[5],
-      sqlResult[6]
+      ...sqlResult
   );
   return entry;
 }

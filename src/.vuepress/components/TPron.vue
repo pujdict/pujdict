@@ -62,9 +62,10 @@
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
-                <a target="_blank" class="text-decoration-none" :href="withBase('query/qchar.html?chars=' + entry.char)">{{
-                    entry.char_sim
-                  }}{{ entry.char_sim !== entry.char ? '(' + entry.char + ')' : '' }}</a>
+                <a target="_blank" :class="`query-result-entry-${entry.cat}`" :href="withBase('query/qchar.html?chars=' + entry.char)">
+                  <span>{{ entry.char_sim }}</span>
+                  <span v-if="entry.char_sim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
+                </a>
               </span>
             </span>
           </li>
@@ -447,6 +448,7 @@ export default {
 ////@import 'bootstrap/scss/custom-forms';
 ////@import 'bootstrap/scss/buttons';
 //@import 'bootstrap/scss/helpers';
+$link-decoration: none;
 @import 'bootstrap/scss/bootstrap';
 
 </style>
@@ -490,4 +492,21 @@ export default {
 #query-result .query-result-entry {
   margin: 0 3px 0 3px;
 }
+
+#query-result .query-result-entry-0 {
+  text-decoration: none;
+}
+
+#query-result .query-result-entry-1 {
+  text-decoration: underline;
+}
+
+#query-result .query-result-entry-2 {
+  text-decoration: double underline;
+}
+
+#query-result .query-result-entry-3 {
+  text-decoration: wavy underline;
+}
+
 </style>
