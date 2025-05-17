@@ -122,27 +122,8 @@ import {
 } from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
-// import 'jquery.cookie';
 
 const $ = jquery;
-
-// import 'bootstrap';
-// import 'khroma';
-
-class MeaningWord {
-  constructor(teochew, puj, mandarin) {
-    this.teochew = teochew;
-    this.puj = puj;
-    this.mandarin = mandarin;
-  }
-}
-
-class MeaningItem {
-  constructor(meaning, words) {
-    this.meaning = meaning;
-    this.words = words;
-  }
-}
 
 export default {
   data() {
@@ -273,42 +254,6 @@ export default {
     $("#query-button").click(function () {
       this.blur();
     });
-
-    function makeMeaningWord(str) {
-      // 词例@注音@释义
-      let result = $("<span></span>");
-      let word;
-      let pronunciation;
-      let meaning;
-      let splits = str.split('@');
-      if (splits.length >= 1) {
-        word = splits[0];
-      }
-      if (splits.length >= 2) {
-        pronunciation = splits[1];
-      }
-      if (splits.length >= 3) {
-        meaning = splits[2];
-      }
-      // word 标注 pronunciation, 加一个括号包 meaning
-      if (word !== undefined) {
-        let wordSpan = $("<span></span>");
-        wordSpan.text(word);
-        if (pronunciation !== undefined) {
-          let pronunciationText = addPUJToneMarkAndConvertToDisplayPUJSentence(pronunciation);
-          let pronunciationSpan2 = $("<span></span>");
-          pronunciationSpan2.text(` [${pronunciationText}]`);
-          wordSpan.append(pronunciationSpan2);
-        }
-        if (meaning !== undefined) {
-          let meaningSpan = $("<span></span>");
-          meaningSpan.text(` (${meaning})`);
-          wordSpan.append(meaningSpan);
-        }
-        result.append(wordSpan);
-      }
-      return result;
-    }
   }
 }
 </script>

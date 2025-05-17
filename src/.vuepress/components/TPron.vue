@@ -95,12 +95,8 @@ import {
   convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from './SPuj.js';
 import jquery from 'jquery';
-// import 'jquery.cookie';
 
 const $ = jquery;
-
-// import 'bootstrap';
-// import 'khroma';
 
 export default {
   data() {
@@ -377,41 +373,6 @@ export default {
       }
       return map[tone];
     },
-    makeResultChar(entry) {
-      let entryItem = $("<span></span>");
-
-      let charSimSpan = $("<span></span>");
-      charSimSpan.text(entry.char_sim);
-      switch (entry.cat) {
-        case '0':
-          break;
-        case '1': // 白读音
-          charSimSpan.addClass("char-colloquial");
-          break;
-        case '2': // 文读音
-          charSimSpan.addClass("char-literary");
-          break;
-        default: // 俗读音
-          charSimSpan.addClass("char-conventional");
-          break;
-      }
-      entryItem.append(charSimSpan);
-
-      if (entry.char_sim !== entry.char) {
-        let charSpan = $("<span></span>");
-        charSpan.text("(" + entry.char + ")");
-        charSpan.addClass("char-traditional");
-        entryItem.append(charSpan);
-      }
-
-      // add url <a> link -> /?chars=entry.char
-      let url = "./qchar.html?chars=" + entry.char;
-      let charLink = $("<a></a>");
-      charLink.attr("href", url);
-      charLink.attr("target", "_blank");
-      charLink.append(entryItem);
-      return charLink;
-    },
   },
   mounted() {
     $("#reset-button").click(function () {
@@ -428,43 +389,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
-//@import 'bootstrap/scss/functions';
-//@import 'bootstrap/scss/variables';
-//@import 'bootstrap/scss/variables-dark';
-//@import 'bootstrap/scss/maps';
-//@import 'bootstrap/scss/mixins';
-//@import 'bootstrap/scss/utilities';
-//@import 'bootstrap/scss/root';
-//@import 'bootstrap/scss/reboot';
-//@import 'bootstrap/scss/type';
-////@import 'bootstrap/scss/bootstrap-reboot';
-//@import 'bootstrap/scss/bootstrap-utilities';
-//@import 'bootstrap/scss/buttons';
-//@import 'bootstrap/scss/button-group';
-////@import 'bootstrap/scss/input-group';
-//@import 'bootstrap/scss/forms';
-////@import 'bootstrap/scss/custom-forms';
-////@import 'bootstrap/scss/buttons';
-//@import 'bootstrap/scss/helpers';
 $link-decoration: none;
 @import 'bootstrap/scss/bootstrap';
-
 </style>
 
 <style lang="scss">
-//#query-input {
-//  background-color: transparent;
-//}
-//
-//.query-filter-list label {
-//  /* add fixed width blank between every label */
-//  display: inline-block;
-//  width: 80px;
-//  height: 120%;
-//}
-//
 .query-filter-list * {
   /* add hover mouse icon */
   cursor: pointer;
