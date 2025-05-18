@@ -88,6 +88,7 @@ export default defineUserConfig({
         "preference.md",
         "puj_unify.md",
         "puj_dp.md",
+        "han_puj.md",
       ],
       '/appendix/': [
         "relationships.md",
@@ -149,6 +150,10 @@ export default defineUserConfig({
           {
             text: "白话字—潮拼转换",
             link: "puj_dp.md",
+          },
+          {
+            text: "汉字—白话字转换",
+            link: "han_puj.md",
           },
         ]
       },

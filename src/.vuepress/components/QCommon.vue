@@ -84,10 +84,12 @@ function setLoading(loading) {
     $("#loading")?.css({display: "block"});
     $("#components-button")?.attr("disabled", "disabled");
     $("#reset-button")?.attr("disabled", "disabled");
+    $("#query-button")?.attr("disabled", "disabled");
   } else {
     $("#loading")?.fadeOut(500);
     $("#components-button")?.removeAttr("disabled");
     $("#reset-button")?.removeAttr("disabled");
+    $("#query-button")?.removeAttr("disabled");
   }
 }
 
