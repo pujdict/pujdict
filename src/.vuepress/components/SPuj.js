@@ -144,6 +144,11 @@ const AtomicFuzzyRule = {
     if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok') result.final = 'ok';
   },
   RemoveApostrophe: result => { result.final = result.final.replace("'", ''); },
+  RemoveFinalNasalizationForNasalInitial: result => {
+    if (result.initial === 'm' || result.initial === 'n' || result.initial === 'ng')
+      if (result.final.endsWith('nn'))
+        result.final = result.final.replace('nn', '');
+  }
 }
 
 class FuzzyRulesGroup extends FuzzyRuleBase {
@@ -187,6 +192,7 @@ class FuzzyRulesGroup_ChaoZhou extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -208,6 +214,7 @@ class FuzzyRulesGroup_XiQiang extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -226,6 +233,7 @@ class FuzzyRulesGroup_ChaoAn extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -250,6 +258,7 @@ class FuzzyRulesGroup_FengShun extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -268,6 +277,7 @@ class FuzzyRulesGroup_RaoPing extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -293,6 +303,7 @@ class FuzzyRulesGroup_ChengHai extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -316,6 +327,7 @@ class FuzzyRulesGroup_ShanTou extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -337,6 +349,7 @@ class FuzzyRulesGroup_JieYang extends FuzzyRulesGroup {
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.IONG_As_ONG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -356,6 +369,7 @@ class FuzzyRulesGroup_ChaoYang extends FuzzyRulesGroup {
       AtomicFuzzyRule.N_As_NG,
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -373,6 +387,7 @@ class FuzzyRulesGroup_PuNing extends FuzzyRulesGroup {
       AtomicFuzzyRule.N_As_NG,
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -392,6 +407,7 @@ class FuzzyRulesGroup_HuiLai extends FuzzyRulesGroup {
       AtomicFuzzyRule.N_As_NG,
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
@@ -412,6 +428,7 @@ class FuzzyRulesGroup_LuFeng extends FuzzyRulesGroup {
       AtomicFuzzyRule.N_As_NG,
       AtomicFuzzyRule.NG_As_VNG,
       AtomicFuzzyRule.RemoveApostrophe,
+      AtomicFuzzyRule.RemoveFinalNasalizationForNasalInitial,
     ]);
   }
 }
