@@ -8,7 +8,7 @@ from puj import *
 if __name__ == '__main__':
     # open entries.csv and parse it to entries.db
     # read and drop first line of entries.csv
-    with open('pujdict-data/entries.yml', 'r', encoding='utf-8') as f:
+    with open('pujdict-data-utils/entries.yml', 'r', encoding='utf-8') as f:
         yaml_entries = yaml.load(f, yaml.Loader)
     entries = []
     for yaml_ent in yaml_entries:
