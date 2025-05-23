@@ -102,7 +102,6 @@ const AtomicFuzzyRule = {
   R_As_O: result => { if (result.final === 'r') result.final = 'o'; },
   R_As_E: result => { if (result.final === 'r') result.final = 'e'; },
   RH_As_OH: result => { if (result.final === 'rh') result.final = 'oh'; },
-  RM_As_IAM: result => { if (result.final === 'rm') result.final = 'iam'; },
   EU_As_IU: result => { if (result.final === 'eu') result.final = 'iu'; },
   OINN_As_AINN: result => { if (result.final === 'oinn') result.final = 'ainn'; },
   UOINN_As_UINN: result => { if (result.final === 'uoinn') result.final = 'uinn'; },
@@ -177,7 +176,6 @@ class FuzzyRulesGroup_ChaoZhou extends FuzzyRulesGroup {
     super('潮州', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.UOINN_As_UINN,
       AtomicFuzzyRule.IO_As_IE,
@@ -204,7 +202,6 @@ class FuzzyRulesGroup_XiQiang extends FuzzyRulesGroup {
     super('戏腔', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.UOINN_As_UINN,
       AtomicFuzzyRule.IO_As_IE,
@@ -247,7 +244,6 @@ class FuzzyRulesGroup_FengShun extends FuzzyRulesGroup {
     super('丰顺', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.UOINN_As_UINN,
       AtomicFuzzyRule.IO_As_IE,
@@ -293,7 +289,6 @@ class FuzzyRulesGroup_ChengHai extends FuzzyRulesGroup {
     super('澄海', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.UOINN_As_UINN,
       AtomicFuzzyRule.UENG_As_ENG,
@@ -320,7 +315,6 @@ class FuzzyRulesGroup_ShanTou extends FuzzyRulesGroup {
     super('汕头', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.UOINN_As_UINN,
       AtomicFuzzyRule.UENG_As_ENG,
@@ -345,7 +339,6 @@ class FuzzyRulesGroup_JieYang extends FuzzyRulesGroup {
     super('揭阳', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.OINN_As_AINN,
       AtomicFuzzyRule.UOINN_As_UAINN,
@@ -369,7 +362,6 @@ class FuzzyRulesGroup_ChaoYang extends FuzzyRulesGroup {
       AtomicFuzzyRule.V_As_U,
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.OINN_As_AINN,
       AtomicFuzzyRule.UOINN_As_UAINN,
@@ -388,7 +380,6 @@ class FuzzyRulesGroup_PuNing extends FuzzyRulesGroup {
     super('普宁', [
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.OINN_As_AINN,
       AtomicFuzzyRule.UOINN_As_UAINN,
@@ -408,7 +399,6 @@ class FuzzyRulesGroup_HuiLai extends FuzzyRulesGroup {
       AtomicFuzzyRule.V_As_U,
       AtomicFuzzyRule.R_As_O,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.OINN_As_AINN,
       AtomicFuzzyRule.UOINN_As_UAINN,
@@ -428,7 +418,6 @@ class FuzzyRulesGroup_LuFeng extends FuzzyRulesGroup {
       AtomicFuzzyRule.V_As_U,
       AtomicFuzzyRule.R_As_E,
       AtomicFuzzyRule.RH_As_OH,
-      AtomicFuzzyRule.RM_As_IAM,
       AtomicFuzzyRule.EU_As_IU,
       AtomicFuzzyRule.OINN_As_AINN,
       AtomicFuzzyRule.UOINN_As_UAINN,
