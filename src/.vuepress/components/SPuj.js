@@ -90,8 +90,6 @@ lang def:
 const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
 const regexpWordOptional = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|r|er|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
-// 只分为 initial final 两部分。
-const regexpWordSimple = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>[aeoyiuvr]*(m|n|ng|nn'?|p|t|k|h)|ng|ngh|m|mh)$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -582,7 +580,7 @@ function undoAddPUJToneMarkWord(word) {
       word = word.replace(toneMark, '');
     }
   }
-  const match = word.match(regexpWordSimple);
+  const match = word.match(regexpWord);
   if (match) {
     if (match.groups.initial) {
       initial = match.groups.initial;
@@ -622,30 +620,55 @@ function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord =
   return result;
 }
 
+const PUJ_DP_INITIAL_MAP = {
+  '': '',
+  '0': '',
+  'p': 'b',
+  'ph': 'p',
+  'm': 'm',
+  'b': 'bh',
+  't': 'd',
+  'th': 't',
+  'n': 'n',
+  'l': 'l',
+  'k': 'g',
+  'kh': 'k',
+  'ng': 'ng',
+  'g': 'gh',
+  'h': 'h',
+  'ts': 'z',
+  'tsh': 'c',
+  's': 's',
+  'j': 'r',
+};
+
+function convertPUJInitialOrFinalToDP(part) {
+  let try_to_map_initial = PUJ_DP_INITIAL_MAP[part];
+  if (try_to_map_initial) {
+    return try_to_map_initial;
+  }
+
+  // 特殊韵母
+  part = part.replace('e', 'ê');
+  part = part.replace('v', 'e');
+  part = part.replace('r', 'er');
+  part = part.replace('iau', 'iao');
+  part = part.replace('au', 'ao');
+  // 鼻化韵尾
+  part = part.replace(/(?<!n)n$/, 'nd');
+  part = part.replace('nn', 'n');
+  // 入声韵尾
+  part = part.replace(/p$/, 'b');
+  part = part.replace(/t$/, 'd');
+  part = part.replace(/k$/, 'g');
+
+  return part;
+}
+
 function convertPUJPronunciationToDPPronunciation(pronunciation) {
   let result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
 
-  const initialMap = {
-    '': '',
-    '0': '',
-    'p': 'b',
-    'ph': 'p',
-    'm': 'm',
-    'b': 'bh',
-    't': 'd',
-    'th': 't',
-    'n': 'n',
-    'l': 'l',
-    'k': 'g',
-    'kh': 'k',
-    'ng': 'ng',
-    'g': 'gh',
-    'h': 'h',
-    'ts': 'z',
-    'tsh': 'c',
-    's': 's',
-    'j': 'r',
-  };
+  const initialMap = PUJ_DP_INITIAL_MAP;
 
   result.initial = initialMap[result.initial] ?? result.initial;
 
@@ -902,6 +925,8 @@ function convertPUJPronunciationToIPAPronunciation(pronunciation) {
 
 export {
   fuzzyRules,
+  convertPUJInitialOrFinalToDP,
+  convertPlainPUJToPronunciationWord,
   convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,

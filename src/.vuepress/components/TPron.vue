@@ -9,8 +9,20 @@
             <input class="form-check-input" type="radio"
                    :id="fuzzyQuery.key" :value="fuzzyQuery.key"
                    v-model="selectedFuzzyQueryKey"
-                   @change="updateFuzzyRulesMap(fuzzyQuery.key)"/>
+                   @change="updateFuzzyRulesMap()"/>
             <label class="form-check-label" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="mb-auto">
+        <div class="form-label"><b>拼音方案</b></div>
+        <div id="pinyin" class="query-filter-list">
+          <div class="form-check form-check-inline offset-sm-0" v-for="py in pinyinList">
+            <input class="form-check-input" type="radio"
+                   :id="py.key" :value="py.key"
+                   v-model="selectedPinyin"
+                   @change="updateFuzzyRulesMap()"/>
+            <label class="form-check-label" :for="py.key">{{ py.name }}</label>
           </div>
         </div>
       </div>
@@ -58,7 +70,8 @@
       <div v-else>
         <ul>
           <li v-for="(item, key) in queryResult" :key="key">
-            <span>{{ convertPlainPUJSentenceToDisplayPUJSentence(key) }}:</span>
+            <span v-if="selectedPinyin === 'puj'">{{ convertPlainPUJSentenceToDisplayPUJSentence(key) }}:</span>
+            <span v-else>{{ convertPUJToDPSentence(key).slice(0, -1) }}</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
@@ -92,7 +105,14 @@ import {
 } from './QCommon.vue';
 import {
   fuzzyRules,
-  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
+  convertPlainPUJSentenceToDisplayPUJSentence,
+  addPUJToneMarkSentence,
+  addPUJToneMarkWord,
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
+  convertPUJToDPSentence,
+  convertPUJPronunciationToDPPronunciation,
+  convertPlainPUJToPronunciationWord,
+  convertPUJInitialOrFinalToDP,
 } from './SPuj.js';
 import jquery from 'jquery';
 
@@ -101,12 +121,23 @@ const $ = jquery;
 export default {
   data() {
     return {
+      pinyinList: [
+        {
+          key: "puj",
+          name: "PUJ",
+        },
+        {
+          key: "dp",
+          name: "潮拼",
+        },
+      ],
       fuzzyQueryList: Object.entries(fuzzyRules).map(([key, rule]) => ({
         key,
         name: rule.name,
         fuzzy: rule.fuzzy,
       })),
       selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
+      selectedPinyin: 'puj',
       initialsList: {},
       finalsList: {},
       tonesList: {},
@@ -131,7 +162,8 @@ export default {
     },
   },
   methods: {
-    updateFuzzyRulesMap(ruleKey) {
+    updateFuzzyRulesMap() {
+      let ruleKey = this.selectedFuzzyQueryKey;
       let rule = fuzzyRules[ruleKey];
       this.fuzzyRulesMap = {};
       this.fuzzyRulesMapReverse = {};
@@ -167,15 +199,27 @@ export default {
       fuzzyFinals = [...fuzzyFinals].sort();
       fuzzyTones = [...fuzzyTones].sort();
 
-      this.initialsList = fuzzyInitials.map(item => {
-        return {key: item, display: item};
-      });
-      this.finalsList = fuzzyFinals.map(item => {
-        return {key: item, display: convertPlainPUJSentenceToDisplayPUJSentence(item)};
-      });
-      this.tonesList = fuzzyTones.map(item => {
-        return {key: item, display: item};
-      });
+      if (this.selectedPinyin === 'dp') {
+        this.initialsList = fuzzyInitials.map(item => {
+          return {key: item, display: convertPUJInitialOrFinalToDP(item)};
+        });
+        this.finalsList = fuzzyFinals.map(item => {
+          return {key: item, display: convertPUJInitialOrFinalToDP(item)};
+        });
+        this.tonesList = fuzzyTones.map(item => {
+          return {key: item, display: item};
+        });
+      } else {
+        this.initialsList = fuzzyInitials.map(item => {
+          return {key: item, display: item};
+        });
+        this.finalsList = fuzzyFinals.map(item => {
+          return {key: item, display: convertPlainPUJSentenceToDisplayPUJSentence(item)};
+        });
+        this.tonesList = fuzzyTones.map(item => {
+          return {key: item, display: item};
+        });
+      }
       // 重新设置选项 cookie
       setLocalOption("fuzzy-query", ruleKey);
     },
