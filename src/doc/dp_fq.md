@@ -60,6 +60,7 @@ order: 11
 | 欧       | au        | ao       | au       |
 | 挨       | oi        | oi       | oi       |
 | 乌       | ou        | ou       | ou       |
+| 梳       | eu        | êu       | eu       |
 | 呀       | ia        | ia       | ia       |
 | 腰       | io        | io       | io       |
 | 忧       | iu        | iu       | iu       |
