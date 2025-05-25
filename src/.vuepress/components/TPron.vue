@@ -196,6 +196,9 @@ export default {
         }
       }
       fuzzyInitials = [...fuzzyInitials].sort();
+      // 目前的各地口音暂不需要区别，按这个固定的顺序来。
+      // （唇齿音作为自由变体暂不考虑引入，等有朝一日轻重唇真正意义上产生对立了再说吧）
+      fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '0',]
       fuzzyFinals = [...fuzzyFinals].sort();
       fuzzyTones = [...fuzzyTones].sort();
 
