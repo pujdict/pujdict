@@ -54,6 +54,10 @@ jobs:
       - name: Install Node.js dependencies
         run: |-
           pnpm install --frozen-lockfile
+      - name: Setup protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          version: 28.x
       - name: Prepare files
         run: |-
           bash prepare_files.sh

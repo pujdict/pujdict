@@ -14,7 +14,7 @@
                :key="index"
                class="pinyin-item">
             <template v-if="pinyinObj.isPolyphonic">
-              <div class="dropdown d-inline">
+              <div class="dropdown d-inline-block">
                 <span
                     class="text-primary dropdown-toggle"
                     data-bs-toggle="dropdown"
@@ -71,7 +71,7 @@ import {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  db, combinations,
+  db, entries, combinations,
 } from './QCommon.vue';
 
 import jquery from 'jquery';
@@ -80,17 +80,15 @@ import {isChineseChar} from "./SUtils.js";
 const $ = jquery;
 
 function getHanCharPUJ(han) {
-  let cmd = `SELECT * FROM entries WHERE entries.char = '${han}' or entries.char_sim = '${han}' ORDER BY entries.freq, entries.cat`;
-  let result = db.exec(cmd);
-  if (result.length === 0)
-    return [];
-  result = result[0].values;
-  let entries = new Set();
-  for (let i = 0; i < result.length; i++) {
-    const entry = makeEntryFromSqlResult(result[i]);
-    entries.add(addPUJToneMarkAndConvertToDisplayPUJSentence(entry.combination));
+  let pujResults = new Set();
+  for (const entry of entries) {
+    if (entry.char === han || entry.charSim === han) {
+      let pron = entry.pron;
+      let combination = `${pron.initial}${pron.final}${pron.tone}`;
+      pujResults.add(addPUJToneMarkAndConvertToDisplayPUJSentence(combination));
+    }
   }
-  return [...entries];
+  return [...pujResults];
 }
 
 export default {

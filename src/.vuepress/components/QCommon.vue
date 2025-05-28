@@ -7,9 +7,7 @@ import {h, ref} from 'vue';
 import {h, ref} from 'vue';
 import {withBase} from "vuepress/client";
 
-// import sql js
-import initSqlJs from "sql.js";
-import sqlWasm from "sql.js/dist/sql-wasm.wasm?url";
+import protobuf from "protobufjs";
 import jquery from "jquery";
 const $ = jquery;
 
@@ -46,8 +44,9 @@ function makeEntryFromSqlResult(sqlResult) {
   return entry;
 }
 
-// 改用 sql.js 读取数据库
+// 改用 protobuf
 var db = null;
+var entries = [];
 var entriesCount = 0;
 var initials = [];
 var finals = [];
@@ -55,23 +54,21 @@ var combinations = [];
 
 async function initFromDatabase() {
   async function load() {
-    // Load sql.js WebAssembly file
-    let config = {
-      locateFile: () => sqlWasm,
-      // locateFile: () => "https://lib.baomitu.com/sql.js/1.9.0/sql-wasm.wasm",
-      // locateFile: () => '/data/sql-wasm.wasm',
-    };
-    const sqlPromise = initSqlJs(config);
-    const dataPromise = fetch(withBase('/data/entries.db')).then(response => response.arrayBuffer());
-    const [sql, buf] = await Promise.all([sqlPromise, dataPromise]);
-    db = new sql.Database(new Uint8Array(buf));
-    // read basic desc data from dbdesc table
-    entriesCount = db.exec("SELECT description FROM dbdesc WHERE id='entries_count'")[0].values[0][0];
-    initials = db.exec("SELECT description FROM dbdesc WHERE id='initials'")[0].values[0][0].split(",");
-    finals = db.exec("SELECT description FROM dbdesc WHERE id='finals'")[0].values[0][0].split(",");
-    // combinations are initial-final-tone connected by '-' and separated by ','
-    combinations = db.exec("SELECT description FROM dbdesc WHERE id='combinations'")[0].values[0][0].split(",").map(combination =>
-        new Pronunciation(...combination.split("-")));
+    const protoPromise = fetch(withBase('/data/pujdict-data-utils/entries.proto')).then(response => response.text());
+    const dataPromise = fetch(withBase('/data/pujdict-data-utils/dist/entries.pb')).then(response => response.arrayBuffer());
+    const protoResponse = await protoPromise;
+    const dataResponse = await dataPromise;
+
+    const root = protobuf.parse(protoResponse).root;
+    const typeEntries = root.lookupType("puj.Entries");
+    db = typeEntries.decode(new Uint8Array(dataResponse));
+    entries = db.entries;
+
+    entriesCount = entries.length;
+    initials = Array.from(new Set(entries.map(entry => entry.pron.initial))).sort();
+    finals = Array.from(new Set(entries.map(entry => entry.pron.final))).sort();
+    combinations = Array.from(new Set(entries.map(entry => entry.pron)));
+    console.log();
   }
 
   await load();
@@ -98,7 +95,7 @@ export {
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  db, entriesCount, initials, finals, combinations,
+  db, entries, entriesCount, initials, finals, combinations,
   isChineseChar,
 }
 

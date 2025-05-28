@@ -24,8 +24,8 @@
           <div class="card-body">
             <div class="card-title">
               <span style="font-size: 1.8em">{{
-                result.entry.char_sim
-              }}{{ result.entry.char_sim !== result.entry.char ? `(${result.entry.char})` : '' }}</span>
+                result.entry.charSim
+              }}{{ result.entry.charSim !== result.entry.char ? `(${result.entry.char})` : '' }}</span>
               <span style="font-size: 0.8em; margin: 0 0 0 10px">
                 <span v-if="result.entry.cat === 0"></span>
                 <span v-if="result.entry.cat === 1"> [白] </span>
@@ -42,9 +42,9 @@
             <button class="btn active dropdown-toggle"
                     type="button"
                     data-bs-toggle="collapse"
-                    :data-bs-target="`#entryCollapse${result.entry.entry_index}`"
+                    :data-bs-target="`#entryCollapse${result.entry.index}`"
                     aria-expanded="false"
-                    :aria-controls="`entryCollapse${result.entry.entry_index}`">
+                    :aria-controls="`entryCollapse${result.entry.index}`">
               <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                 <template v-if="key === 'dummy'">
                   {{ result.pronunciation_display }};
@@ -55,7 +55,7 @@
               </span>
             </button>
             <div class="row">
-              <div class="collapse" :id="`entryCollapse${result.entry.entry_index}`">
+              <div class="collapse" :id="`entryCollapse${result.entry.index}`">
                 <div class="card card-body">
                   <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                     <template v-if="key !== 'dummy'">
@@ -106,7 +106,7 @@ import {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  db, entriesCount, initials, finals, combinations,
+  db, entries, entriesCount, initials, finals, combinations,
   isChineseChar,
 } from './QCommon.vue';
 import {
@@ -142,6 +142,9 @@ export default {
     }
   },
   methods: {
+    makeCombinationString(pron) {
+      return `${pron.initial}${pron.final}${pron.tone}`;
+    },
     queryChars(chars) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
@@ -151,19 +154,7 @@ export default {
       if (chars.length === 0) {
         return [];
       }
-      let dropTmpTableIfExistSql = "DROP TABLE IF EXISTS tmp_chars";
-      db.exec(dropTmpTableIfExistSql);
-      let createTmpTableSql = "CREATE TEMPORARY TABLE tmp_chars (char TEXT, order_id INTEGER)";
-      db.exec(createTmpTableSql);
-
-      let insertCharsSql = "INSERT INTO tmp_chars VALUES ";
-      let conditions = [];
-      for (let i = 0; i < chars.length; i++) {
-        let curCondition = `('${chars[i]}', ${i + 1})`;
-        conditions.push(curCondition);
-      }
-      insertCharsSql += conditions.join(",");
-      db.exec(insertCharsSql);
+      chars = new Set(chars);
 
       let querySql = `
         SELECT *
@@ -172,17 +163,19 @@ export default {
           entries.char = tmp_chars.char OR entries.char_sim = tmp_chars.char
         ORDER BY tmp_chars.order_id, entries.char, entries.freq, entries.cat, entries.initial || entries.final || entries.tone DESC
       `;
-      let queryResult = db.exec(querySql);
-      if (queryResult.length === 0) {
-        return [];
+      let queryResult = [];
+      for (const entry of entries) {
+        if (chars.has(entry.char) || chars.has(entry.charSim)) {
+          queryResult.push(entry);
+        }
       }
-      let result = queryResult[0].values.map(row => {
-        let entry = new Entry(...row);
+      let result = queryResult.map(entry => {
         let pronunciations = {};
-        const pronunciation = new Pronunciation(entry.initial, entry.final, entry.tone);
+        let pron = entry.pron;
+        const pronunciation = new Pronunciation(pron.initial, pron.final, pron.tone);
         Object.entries(fuzzyRules).forEach(([key, rule]) => {
           let fuzzyPronunciation = rule.fuzzy(pronunciation);
-          let combination = fuzzyPronunciation.combination;
+          let combination = this.makeCombinationString(fuzzyPronunciation);
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);
           pronunciations[key] = {
             key: key,

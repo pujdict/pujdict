@@ -156,7 +156,7 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
     this.rules = rules;
   }
   fuzzy(original) {
-    let result = original.clone();
+    let result = structuredClone(original);
     for (const rule of this.rules)
       rule(result);
     return result;

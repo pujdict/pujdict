@@ -58,7 +58,7 @@
       </div>
       <div class="btn-toolbar">
         <div class="btn-group" v-if="tonesList">
-          <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" @click="querySqlite"/>
+          <input id="query-button" class="btn btn-outline-primary" type="button" value="查询" @click="queryDatabase"/>
           <input id="reset-button" class="btn btn-outline-danger" type="button" value="重置" @click="resetQuery"/>
         </div>
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
@@ -76,8 +76,8 @@
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
                 <a target="_blank" :class="`query-result-entry-${entry.cat}`" :href="withBase('query/qchar.html?chars=' + entry.char)">
-                  <span>{{ entry.char_sim }}</span>
-                  <span v-if="entry.char_sim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
+                  <span>{{ entry.charSim }}</span>
+                  <span v-if="entry.charSim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
                 </a>
               </span>
             </span>
@@ -101,7 +101,7 @@ import {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  db, combinations,
+  db, entries, combinations,
 } from './QCommon.vue';
 import {
   fuzzyRules,
@@ -162,6 +162,9 @@ export default {
     },
   },
   methods: {
+    makeCombinationString(pron) {
+      return `${pron.initial}${pron.final}${pron.tone}`;
+    },
     updateFuzzyRulesMap() {
       let ruleKey = this.selectedFuzzyQueryKey;
       let rule = fuzzyRules[ruleKey];
@@ -261,12 +264,12 @@ export default {
             this.selectedTones.push(queryTones[i]);
           }
         }
-        await this.querySqlite();
+        await this.queryDatabase();
       } else {
         this.updateFuzzyRulesMap(this.selectedFuzzyQueryKey);
       }
     },
-    async querySqlite() {
+    async queryDatabase() {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
         return;
@@ -280,26 +283,9 @@ export default {
       let [queryInitials, queryFinals, queryTones, queryAll] = this.getQueryConditionList(true);
       // append to url
       if (queryAll) { // quick components all
-        let querySql = "SELECT * FROM entries";
-        let sqlResult = db.exec(querySql);
-        if (sqlResult) {
-          let queryResultEntries = sqlResult[0].values;
-          for (let i = 0; i < queryResultEntries.length; i++) {
-            let entryData = queryResultEntries[i];
-            let entry = makeEntryFromSqlResult(entryData);
-            resultEntries.push(entry);
-          }
-        }
+        resultEntries = entries;
       } else {
-        // change another components way: create a tmp words table, then components from it
-        let dropTmpTableIfExistSql = "DROP TABLE IF EXISTS tmp_combinations";
-        db.exec(dropTmpTableIfExistSql);
-        let createTmpTableSql = "CREATE TEMPORARY TABLE tmp_combinations (combination)";
-        db.exec(createTmpTableSql);
-
-        let insertTmpTableSql = "INSERT INTO tmp_combinations VALUES ";
-        let insertTmpTableSqlValues = new Set();
-        let sqlResult = null;
+        let fuzzyProns = new Set();
         let fuzzyRulesMapReverse = this.fuzzyRulesMapReverse;
         for (let i = 0; i < queryInitials.length; i++) {
           let curInitial = queryInitials[i];
@@ -314,33 +300,19 @@ export default {
               let curFuzzyList = fuzzyRulesMapReverse[curCombination];
               for (let l = 0; l < curFuzzyList.length; l++) {
                 let curFuzzy = curFuzzyList[l];
-                insertTmpTableSqlValues.add(`("${curFuzzy.combination}")`);
-              }
-              // avoid too many values in one sql
-              if (insertTmpTableSqlValues.size > 1000) {
-                db.exec(insertTmpTableSql + [...insertTmpTableSqlValues].join(","));
-                insertTmpTableSqlValues = new Set();
+                fuzzyProns.add(this.makeCombinationString(curFuzzy));
               }
             }
           }
         }
-        if (insertTmpTableSqlValues.size > 0) {
-          db.exec(insertTmpTableSql + [...insertTmpTableSqlValues].join(","));
-        }
 
-        // now, select all hit entries that match the pronunciation
-        let querySql = "SELECT * FROM entries WHERE entries.initial||entries.final||entries.tone IN (SELECT combination FROM tmp_combinations)";
-        sqlResult = db.exec(querySql);
-        if (sqlResult && sqlResult[0]) {
-          let queryResultEntries = sqlResult[0].values;
-          for (let i = 0; i < queryResultEntries.length; i++) {
-            let entryData = queryResultEntries[i];
-            let entry = makeEntryFromSqlResult(entryData);
+        for (const entry of entries) {
+          const pron = entry.pron;
+          const curCombination = this.makeCombinationString(pron);
+          if (fuzzyProns.has(curCombination)) {
             resultEntries.push(entry);
           }
         }
-        let dropTmpTableSql = "DROP TABLE tmp_combinations";
-        sqlResult = db.exec(dropTmpTableSql);
       }
       this.showQueryResultList(resultEntries);
       setLoading(false);
@@ -366,12 +338,12 @@ export default {
     showQueryResultList(resultEntries) {
       this.queryResultEmpty = resultEntries.length === 0;
       // initial+final -> {tone -> [entryIds]}
-      resultEntries.sort((a, b) => a.combination.localeCompare(b.combination));
+      resultEntries.sort((a, b) => this.makeCombinationString(a.pron).localeCompare(this.makeCombinationString(b.pron)));
       let queryResult = {};
       let fuzzyRulesMap = this.fuzzyRulesMap;
       for (let i = 0; i < resultEntries.length; i++) {
         let entry = resultEntries[i];
-        let fuzzy = fuzzyRulesMap[entry.initial + entry.final + entry.tone];
+        let fuzzy = fuzzyRulesMap[entry.pron.initial + entry.pron.final + entry.pron.tone];
         if (queryResult[fuzzy.initial + fuzzy.final] === undefined) {
           queryResult[fuzzy.initial + fuzzy.final] = {};
         }
