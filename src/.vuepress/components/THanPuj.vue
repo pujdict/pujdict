@@ -80,15 +80,26 @@ import {isChineseChar} from "./SUtils.js";
 const $ = jquery;
 
 function getHanCharPUJ(han) {
-  let pujResults = new Set();
+  let entriesResults = [];
+  let pujResults = [];
   for (const entry of entries) {
     if (entry.char === han || entry.charSim === han) {
-      let pron = entry.pron;
-      let combination = `${pron.initial}${pron.final}${pron.tone}`;
-      pujResults.add(addPUJToneMarkAndConvertToDisplayPUJSentence(combination));
+      entriesResults.push(entry);
     }
   }
-  return [...pujResults];
+  entriesResults.sort((entry1, entry2) => {
+    if (entry1.freq !== entry2.freq)
+      return entry1.freq - entry2.freq;
+    if (entry1.cat !== entry2.cat)
+      return entry1.cat - entry2.cat;
+    return entry1.index - entry2.index;
+  });
+  for (const entry of entriesResults) {
+    let pron = entry.pron;
+    let combination = `${pron.initial}${pron.final}${pron.tone}`;
+    pujResults.push(addPUJToneMarkAndConvertToDisplayPUJSentence(combination));
+  }
+  return pujResults;
 }
 
 export default {
