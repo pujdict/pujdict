@@ -154,22 +154,32 @@ export default {
       if (chars.length === 0) {
         return [];
       }
-      chars = new Set(chars);
+      let charsIndex = new Map();
+      for (let i = 0; i < chars.length; ++i) {
+        charsIndex[chars[i]] = i;
+      }
 
-      let querySql = `
-        SELECT *
-        FROM entries
-               JOIN tmp_chars ON
-          entries.char = tmp_chars.char OR entries.char_sim = tmp_chars.char
-        ORDER BY tmp_chars.order_id, entries.char, entries.freq, entries.cat, entries.initial || entries.final || entries.tone DESC
-      `;
       let queryResult = [];
       for (const entry of entries) {
-        if (chars.has(entry.char) || chars.has(entry.charSim)) {
-          queryResult.push(entry);
-        }
+        let index1 = charsIndex[entry.char];
+        if (index1 !== undefined) queryResult.push([entry, index1]);
+        if (entry.char === entry.charSim)
+          continue;
+        let index2 = charsIndex[entry.charSim];
+        if (index2 !== undefined) queryResult.push([entry, index2]);
       }
-      let result = queryResult.map(entry => {
+      queryResult.sort((item1, item2) => {
+        let [entry1, index1] = item1;
+        let [entry2, index2] = item2;
+        if (index1 !== index2)
+          return index1 - index2;
+        if (entry1.freq !== entry2.freq)
+          return entry1.freq - entry2.freq;
+        if (entry1.cat !== entry2.cat)
+          return entry1.cat - entry2.cat;
+        return entry1.index - entry2.index;
+      });
+      let result = queryResult.map(([entry, index]) => {
         let pronunciations = {};
         let pron = entry.pron;
         const pronunciation = new Pronunciation(pron.initial, pron.final, pron.tone);
