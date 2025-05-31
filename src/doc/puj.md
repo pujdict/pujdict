@@ -95,7 +95,7 @@ flowchart
 
 ::: note
 
-1. 在汕头、潮阳、普宁、惠来、陆丰等地（主要是西部和南部一些地区），近年来出现了声母 p, ph, m, b, h 在接元音 u
+1. 在汕头、潮阳、普宁、惠来、陆丰等地（主要是西南部一些地区），近年来出现了声母 p, ph, m, b, h 在接元音 u
    时，读为唇齿音 [p̪f], [p̪fʰ], [ɱ], [b̪v], [ɸ]/[f] 的现象，例如：飞 <TPuj puj="pfue1"/>，梅 <TPuj puj="bvue5"/>，
    皮 <TPuj puj="pfhue5"/>，糜 <TPuj puj="mvue5"/>，化 <TPuj puj="fue3"/>。
    但唇齿音目前还在扩散过程中，仅在 u 元音之前作为声母的自由变体，并没有产生音位对立，因此本辞典拼音中不予区分，依然记为 p,
@@ -159,7 +159,7 @@ flowchart
    is given in this class of words it is a more open sound than when it occurs in the class just before mentioned; the
    difference is easily perceptible, but does not seem capable of being represented by Roman letters.
    >
-   > ù 在“汝”“去” lù kù 等字中有时会被读为 u，即 lu ku（西部部分地区的口音）。另外，ù 在“代”“塊” tù kù 等字中常被读为 ò，即 tò
+   > ù 在“汝”“去” lù kù 等字中有时会被读为 u，即 lu ku（西南部部分地区的口音）。另外，ù 在“代”“塊” tù kù 等字中常被读为 ò，即 tò
    kò，需要说明的是，当 ù 出现在这类字中的时候，与前文刚提到的那一类相比，它是一个开口度更大的音，区别是很容易察觉的，但似乎难以用罗马字母来表示。
 
    高德字典的拼音系统中，用 ù、ò 表示汉字“余”“窝”的韵母。由此可见，该类字中出现的韵母是一个音质类似于 [ɯ]
@@ -814,17 +814,17 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 1. 该韵母在今天潮州话中仅有少数地区保留，详见单元音一节的讨论，目前，辞典所列举的代表口音点都不包含这个音。辞典中记录时予以保留，便于后续给相关口音点做扩展支持。
 
 2. 蟹、山、咸摄二、四等字白读层在粤东闽语各地主要有 -oi/-oinn/-oih（潮州、汕头、澄海）,
-   -oi/-ainn/-oih（揭阳、普宁、潮阳）等相同层次的不同读法，为了统一起见，本辞典白话字将这些对应的舒声韵和入声韵都采用
-   -oi/-oinn/-oih 记录。需要注意的是，阳声韵鼻化后的 -oinn 和 -ainn 各地是一一对应的，但是，由于潮州话出现一些阴声韵鼻化的现象，-oi,
+   -oi/-ainn/-oih（揭阳、普宁、潮阳）等相同层次的不同读法，为了音系的系统性，本辞典白话字将这些对应的舒声韵和入声韵的元音部分都记为
+   oi。需要注意的是，阳声韵鼻化后的 -oinn 和 -ainn 各地是一一对应的，但是，由于潮州话出现一些阴声韵鼻化的现象，-oi,
    -ai 的鼻化后，元音依然保持不变，例如：爱 <TPuj puj="ainn'3"/>，各地均读为 <TPuj puj="ainn3"/>；
    睇 <TPuj puj="thoinn'2"/>，各地均读为 <TPuj puj="thoinn2"/>，并不需要转读。
    如前文所述，阴声韵鼻化后的韵母本辞典中将加上一个撇号 '，请注意区分。
 3. 该韵母来自山摄合口字白读层，有且仅有三个辖字：
    县 <TPuj puj="kuoinn7"/>、
    悬 <TPuj puj="kuoinn5"/>（形容词，高）、悬 <TPuj puj="huoinn5"/>（动词，挂）、惯 <TPuj puj="kuoinn3"/>（用于“惯势”一词，习惯），
-   在西部多转读为 -uainn，在东部多转读为 -uinn。
-   因为东部读 -uinn 的地区音系中也有 -uainn 的音——檨 <TPuj puj="suainn7"/>（芒果），
-   西部读 -uainn 的地区音系中也有 -uinn 的音——毁 <TPuj puj="huinn'2"/>，两个音都不太适合用于区分这个特殊韵母。
+   在西南部多转读为 -uainn，在东北部多转读为 -uinn。
+   因为东北部读 -uinn 的地区音系中也有 -uainn 的音——檨 <TPuj puj="suainn7"/>（芒果），
+   西南部读 -uainn 的地区音系中也有 -uinn 的音——毁 <TPuj puj="huinn'2"/>，两个音都不太适合用于区分这个特殊韵母。
    因其来源于山摄合口字白读层，为了音系的系统性，与开口字的 -oinn 一组相对应，本辞典中记为 -uoinn。
 4. -iau/-iauh/-iam/-iap/-ian/-iat 等韵母中，元音 a 受韵尾的影响，各地发生不同程度的变化。例如 -iam/-iau 中的 a
    在潮州等地的高化为 [ɜ]/[ɤ]，在 -ian/-uan 中又进一步前化为 [e]；-iau 中的 a 在澄海等地则进一步圆唇化为 [o]。
@@ -836,11 +836,11 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    不过，在唱戏、讲古等创作中，-eng/-ek 和 -in/-it 韵母的韵腹也可以都读为 [ɪ] 并进行押韵。
    揭阳地区的 -in/-it 转为 -eng/-ek 实际上音质也接近于 [ɪ] 音。
 6. 通摄三等字文读音韵母为 -iong, -iok，当接在齿龈音 t/th/n/l/ts/tsh/s/j 后时，
-   包括三市市中心在内的东部多数地区都读为 -ong, -ok，西部潮阳、普宁、惠来、陆丰等地则保留介音 i。
+   包括三市市中心在内的东北多数地区都读为 -ong, -ok，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i。
    例如：中 <TPuj puj="tiong1"/>，宠 <TPuj puj="thiong2"/>，龙 <TPuj puj="liong5"/>，终 <TPuj puj="tsiong1"/>，
    从 <TPuj puj="tshiong5"/>，松 <TPuj puj="siong1"/>，茸 <TPuj puj="jiong5"/>，
    筑 <TPuj puj="tiok4"/>，六 <TPuj puj="liok8"/>，属 <TPuj puj="siok8"/>，辱 <TPuj puj="jiok8"/>。
-   但有且仅有一组例外：thiok 的辖字（“畜”“蓄”“慉”“搐”等）在东部地区依然保留介音 i。
+   但有且仅有一组例外：thiok 的辖字（“畜”“蓄”“慉”“搐”等）在东北部地区依然保留介音 i。
 7. 微母文读音接阳声韵时，在多数地区读 bu-，但在饶平（黄冈）一律读为 mu-，而阴声韵和入声韵则与其他地区相同。
 8. 潮剧戏腔要求字正腔圆，-ie/-ienn/-ieh、-iou/iouh、-oinn、-in 为标准发音，但偶尔会引入来自其他地区的
    -io/-ionn/-ioh、-iau/-iauh、-ainn、-eng。此外，-ian/-iat、-uan/-uat 为标准发音，但偶尔也会唱为潮州府城音
