@@ -87,9 +87,9 @@ lang def:
   coda ::= "u" | "i" | "m" | "n" | "ng" | "nn" | "p" | "t" | "k" | "h" | "nnh"
 */
 // 使用 v r 代替 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 i 是介音，r 是韵腹。
-const regexpWord = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
-const regexpWordOptional = /^(?<initial>p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|r|er|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|r|er|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -141,7 +141,7 @@ const AtomicFuzzyRule = {
     if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok') result.final = 'ok';
   },
   NGU_As_U: result => { if (result.initial === 'ng' && result.final === 'u') result.initial = '0'; },
-  RemoveApostrophe: result => { result.final = result.final.replace("'", ''); },
+  RemoveApostrophe: result => { result.initial = result.initial.replace("'", ''); result.final = result.final.replace("'", ''); },
   RemoveFinalNasalizationForNasalInitial: result => {
     if (result.initial === 'm' || result.initial === 'n' || result.initial === 'ng')
       if (result.final.endsWith('nn'))
@@ -165,7 +165,9 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
 
 class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
   constructor() {
-    super('辞典', []);
+    super('辞典', [
+      AtomicFuzzyRule.RemoveApostrophe,
+    ]);
   }
 }
 
@@ -630,6 +632,7 @@ const PUJ_DP_INITIAL_MAP = {
   't': 'd',
   'th': 't',
   'n': 'n',
+  'n\'': 'n',
   'l': 'l',
   'k': 'g',
   'kh': 'k',
@@ -802,12 +805,14 @@ function convertPUJPronunciationToFanQiePronunciation(pronunciation, fallback_pr
 
     'm': '姆',
   }
-  let fq_initial = initial_map[pronunciation.initial];
+  let initial = pronunciation.initial;
+  initial = initial.replace("'", "");
+  let fq_initial = initial_map[initial];
   if (fq_initial === undefined && fallback_pronunciation) {
     fq_initial = initial_map[fallback_pronunciation.initial];
   }
   if (fq_initial === undefined) {
-    fq_initial = pronunciation.initial;
+    fq_initial = initial;
     console.error(`反切声母缺失：${fq_initial}`);
   }
   let final = pronunciation.final;
