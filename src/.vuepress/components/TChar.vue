@@ -23,9 +23,9 @@
           <!--        <div class="card-header"></div>&lt;!&ndash;字&ndash;&gt;-->
           <div class="card-body">
             <div class="card-title">
-              <span style="font-size: 1.8em">{{
-                result.entry.charSim
-              }}{{ result.entry.charSim !== result.entry.char ? `(${result.entry.char})` : '' }}</span>
+              <span style="font-size: 1.8em">{{ result.entry.charSim }}</span>
+              <span style="font-size: 1.25em">{{ result.entry.charSim !== result.entry.char ? ` (${result.entry.char})` : '' }}</span>
+              <span style="font-size: 1.25em">{{ result.entry.charRef ? ` [${result.entry.charRef}]` : '' }}</span>
               <span style="font-size: 0.8em; margin: 0 0 0 10px">
                 <span v-if="result.entry.cat === 0"></span>
                 <span v-if="result.entry.cat === 1"> [白] </span>
@@ -33,10 +33,10 @@
                 <span v-if="result.entry.cat === 3"> [俗] </span>
               </span>
               <span>
-                <span v-if="result.entry.freq === 0">★★★★</span>
-                <span v-if="result.entry.freq === 1">★★★</span>
-                <span v-if="result.entry.freq === 2">★★</span>
-                <span v-if="result.entry.freq === 3">★</span>
+                <span v-if="result.entry.freq === 0">★★★</span>
+                <span v-if="result.entry.freq === 1">★★☆</span>
+                <span v-if="result.entry.freq === 2">★☆☆</span>
+                <span v-if="result.entry.freq === 3">☆☆☆</span>
               </span>
             </div>
             <button class="btn active dropdown-toggle"
@@ -73,10 +73,10 @@
               </div>
             </div>
             <p class="card-text">
-              <template v-for="(meaningItem, i) in result.meaningItem">
+              <template v-for="(details, i) in result.details">
                 <br v-if="i > 0"/>
-                <span v-if="meaningItem.meaning">{{ meaningItem.meaning }}<template v-if="meaningItem.examples.length">：</template></span>
-                <template v-for="(example, j) in meaningItem.examples">
+                <span v-if="details.meaning">{{ details.meaning }}<template v-if="details.examples.length">：</template></span>
+                <template v-for="(example, j) in details.examples">
                   <template v-if="j > 0">；</template>
                   <span v-if="example.teochew">{{ example.teochew }}</span>
                   <span v-if="example.puj">
@@ -206,7 +206,7 @@ export default {
           pronunciation_fq: convertPUJPronunciationToFanQiePronunciation(pronunciation),
           pronunciation_ipa: convertPUJPronunciationToIPAPronunciation(pronunciation),
           pronunciations: pronunciations,
-          meaningItem: entry.details.meanings,
+          details: entry.details,
         };
       });
       return result;
