@@ -103,6 +103,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   Entry, Pronunciation,
+  getFuzzyRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
@@ -110,7 +111,6 @@ import {
   isChineseChar,
 } from './QCommon.vue';
 import {
-  fuzzyRules,
   convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
@@ -183,7 +183,7 @@ export default {
         let pronunciations = {};
         let pron = entry.pron;
         const pronunciation = new Pronunciation(pron.initial, pron.final, pron.tone);
-        Object.entries(fuzzyRules).forEach(([key, rule]) => {
+        Object.entries(getFuzzyRules()).forEach(([key, rule]) => {
           let fuzzyPronunciation = rule.fuzzy(pronunciation);
           let combination = this.makeCombinationString(fuzzyPronunciation);
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);

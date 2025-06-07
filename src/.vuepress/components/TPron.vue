@@ -98,13 +98,13 @@ import TDarkTheme from "./TDarkTheme.vue";
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
+  getFuzzyRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
   db, entries, combinations,
 } from './QCommon.vue';
 import {
-  fuzzyRules,
   convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
@@ -131,11 +131,7 @@ export default {
           name: "潮拼",
         },
       ],
-      fuzzyQueryList: Object.entries(fuzzyRules).map(([key, rule]) => ({
-        key,
-        name: rule.name,
-        fuzzy: rule.fuzzy,
-      })),
+      fuzzyQueryList: [],
       selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
       selectedPinyin: 'puj',
       initialsList: {},
@@ -167,7 +163,7 @@ export default {
     },
     updateFuzzyRulesMap() {
       let ruleKey = this.selectedFuzzyQueryKey;
-      let rule = fuzzyRules[ruleKey];
+      let rule = getFuzzyRules()[ruleKey];
       this.fuzzyRulesMap = {};
       this.fuzzyRulesMapReverse = {};
       let fuzzyInitials = new Set();
@@ -228,6 +224,13 @@ export default {
       }
       // 重新设置选项 cookie
       setLocalOption("fuzzy-query", ruleKey);
+    },
+    initializeAccents() {
+      this.fuzzyQueryList = Object.entries(getFuzzyRules()).map(([key, rule]) => ({
+        key,
+        name: rule.name,
+        fuzzy: rule.fuzzy,
+      }));
     },
     async initialSelectFromGetParameters() {
       // components using url components string
@@ -402,7 +405,9 @@ export default {
     });
     initFromDatabase().then(() => {
       setLoading(false);
-    }).then(this.initialSelectFromGetParameters);
+    })
+        .then(this.initializeAccents)
+        .then(this.initialSelectFromGetParameters);
   }
 }
 </script>
