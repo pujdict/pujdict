@@ -62,13 +62,13 @@ var combinations = [];
 
 async function initFromDatabase() {
   async function load() {
-    const protoPromise = fetch(withBase('/data/pujdict-data-utils/entries.proto'))
+    const protoPromise = fetch(withBase('/data/pujdict-base/entries.proto'))
         .then(response => response.text());
-    const dataPromise = fetch(withBase('/data/pujdict-data-utils/dist/entries.pb'))
+    const dataPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
         .then(response => response.arrayBuffer());
-    const accentsProtoPromise = fetch(withBase('/data/pujdict-data-utils/accents.proto'))
+    const accentsProtoPromise = fetch(withBase('/data/pujdict-base/accents.proto'))
         .then(response => response.text());
-    const accentsDataPromise = fetch(withBase('/data/pujdict-data-utils/dist/accents.pb'))
+    const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))
         .then(response => response.arrayBuffer());
     const protoResponse = await protoPromise;
     const dataResponse = await dataPromise;
