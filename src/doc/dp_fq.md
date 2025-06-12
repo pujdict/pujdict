@@ -76,7 +76,7 @@ order: 11
 | 英       | eng/ek    | êng/êg   | eŋ/ek̚   |
 | 音       | im/ip     | im/ib    | im/ip̚   |
 | 因       | in/it     | ind/id   | in/it̚   |
-| 奄       | iam/iat   | iam/iab  | iam/iat̚ |
+| 奄       | iam/iat   | iam/iab  | iam/iap̚ |
 | 嫣       | ian/iat   | iand/iad | ian/iat̚ |
 | 央       | iang/iak  | iang/iag | iaŋ/iak̚ |
 | 雍       | iong/iok  | iong/iog | ioŋ/iok̚ |
@@ -87,7 +87,7 @@ order: 11
 | 温       | un/ut     | und/ud   | un/ut̚   |
 | 秧       | ng        | ng/eng   | ŋ        |
 | 恩       | ṳn/ṳt     | end/ed   | ɯn/ɯt̚   |
-| 森       | o̤m       | erm      | əm       |
+| 森       | o̤m       | om       | om       |
 | 嗳       | aⁿ        | an       | ã       |
 | 闲       | oiⁿ       | oin      | õĩ     |
 | 楹       | eⁿ        | ên       | ẽ       |
