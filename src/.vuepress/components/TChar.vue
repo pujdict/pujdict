@@ -106,8 +106,9 @@ import {
   getFuzzyRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
+  getFuzzyPronunciation,
   // $,
-  db, entries, entriesCount, initials, finals, combinations,
+  db, entries, accents, entriesCount, initials, finals, combinations,
   isChineseChar,
 } from './QCommon.vue';
 import {
@@ -184,7 +185,7 @@ export default {
         let pron = entry.pron;
         const pronunciation = new Pronunciation(pron.initial, pron.final, pron.tone);
         Object.entries(getFuzzyRules()).forEach(([key, rule]) => {
-          let fuzzyPronunciation = rule.fuzzy(pronunciation);
+          let fuzzyPronunciation = getFuzzyPronunciation(key, entry);
           let combination = this.makeCombinationString(fuzzyPronunciation);
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);
           pronunciations[key] = {

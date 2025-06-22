@@ -1,3 +1,6 @@
+set -e
+
+export PATH=$PATH:$PWD/node_modules/.bin
 cd src/.vuepress/public/data
 
 if [ -d pujdict-base ]; then
@@ -8,5 +11,8 @@ fi
 
 python3 generate_font.py < /dev/null
 
-cd pujdict-base
+pushd pujdict-base
 bash build_dist.sh
+popd
+
+bash generate_protobuf.sh

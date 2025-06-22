@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A project of vuepress-theme-hope",
   "license": "GPL",
-  "type": "module",
   "scripts": {
     "docs:build": "vuepress build src",
     "docs:clean-dev": "vuepress dev src --clean-cache",
@@ -38,6 +37,7 @@
     "papaparse": "^5.4.1",
     "path-browserify": "^1.0.1",
     "protobufjs": "^7.4.0",
+    "protobufjs-cli": "^1.1.3",
     "raw-loader": "^4.0.2",
     "sass-loader": "^14.1.1",
     "ts-jest": "26.5.6",

@@ -17,6 +17,8 @@ import {
   Pronunciation,
 } from "./SCommon.js";
 
+import {puj as pujpb} from "./SPujPb.js";
+
 import {
   setLocalOption,
   getLocalOption,
@@ -54,44 +56,35 @@ function makeEntryFromSqlResult(sqlResult) {
 // 改用 protobuf
 var db = null;
 var entries = [];
-var accents = [];
+var accents = {};
 var entriesCount = 0;
 var initials = [];
 var finals = [];
 var combinations = [];
+var exceptions = {};
 
 async function initFromDatabase() {
   async function load() {
-    const protoPromise = fetch(withBase('/data/pujdict-base/entries.proto'))
-        .then(response => response.text());
-    const dataPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
+    const entriesPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
         .then(response => response.arrayBuffer());
-    const accentsProtoPromise = fetch(withBase('/data/pujdict-base/accents.proto'))
-        .then(response => response.text());
     const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))
         .then(response => response.arrayBuffer());
-    const protoResponse = await protoPromise;
-    const dataResponse = await dataPromise;
-    const accentsResponse = await accentsProtoPromise;
     const accentsDataResponse = await accentsDataPromise;
-    const accentsRoot = protobuf.parse(accentsResponse).root;
-    const typeAccents = accentsRoot.lookupType("puj.Accents");
-    const typeFuzzyRule = accentsRoot.lookupEnum("puj.FuzzyRule");
-    const accentsData = typeAccents.decode(new Uint8Array(accentsDataResponse));
+
+    const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
     accents = accentsData.accents;
-    accents.forEach(accent => {
+    for (const accent of accents) {
       let rules = [];
       for (const rule of accent.rules) {
-        let ruleString = typeFuzzyRule.values[rule];
+        let ruleString = pujpb.FuzzyRule[rule];
         ruleString = ruleString.replace('FR_', '');
         rules.push(ruleString);
       }
       accent.rulesStrings = rules;
-    });
+    }
 
-    const root = protobuf.parse(protoResponse).root;
-    const typeEntries = root.lookupType("puj.Entries");
-    db = typeEntries.decode(new Uint8Array(dataResponse));
+    const entriesResponse = await entriesPromise;
+    db = pujpb.Entries.decode(new Uint8Array(entriesResponse));
     entries = db.entries;
 
     entriesCount = entries.length;
@@ -151,6 +144,31 @@ const getFuzzyRules = function () {
   };
 }();
 
+function getFuzzyPronunciation(accentId, entry) {
+  let accent = null;
+  for (const a of accents) {
+    if (a.id === accentId) {
+      accent = a;
+      break;
+    }
+  }
+  let rule = getFuzzyRules()[accentId];
+  let fuzzyPron = '';
+  if (accent) {
+    const exception = accent.exceptions[entry.index];
+    if (exception) {
+      fuzzyPron = exception;
+    } else {
+      const pron = entry.pron;
+      fuzzyPron = rule.fuzzy(pron);
+    }
+  } else {
+    // dummy
+    fuzzyPron = entry.pron;
+  }
+  return fuzzyPron;
+}
+
 // var initFromDatabasePromise = initFromDatabase();
 
 function setLoading(loading) {
@@ -173,7 +191,8 @@ export {
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  db, entries, entriesCount, initials, finals, combinations,
+  getFuzzyPronunciation,
+  db, entries, accents, entriesCount, initials, finals, combinations,
   isChineseChar,
 }
 

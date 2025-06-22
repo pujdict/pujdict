@@ -75,7 +75,8 @@
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
-                <a target="_blank" :class="`query-result-entry-${entry.cat}`" :href="withBase('query/qchar.html?chars=' + entry.char)">
+                <a target="_blank" :class="`query-result-entry-${entry.cat}`"
+                   :href="withBase('query/qchar.html?chars=' + entry.char)">
                   <span>{{ entry.charSim }}</span>
                   <span v-if="entry.charSim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
                 </a>
@@ -101,8 +102,9 @@ import {
   getFuzzyRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
+  getFuzzyPronunciation,
   // $,
-  db, entries, combinations,
+  db, entries, accents, combinations,
 } from './QCommon.vue';
 import {
   convertPlainPUJSentenceToDisplayPUJSentence,
@@ -144,6 +146,7 @@ export default {
       fuzzyRulesMapReverse: {},
       queryResult: {},
       queryResultEmpty: false,
+      fuzzyEntriesMap: {},
     };
   },
   computed: {
@@ -158,48 +161,38 @@ export default {
     },
   },
   methods: {
+    addFuzzyEntry(fuzzyPron, entry) {
+      const key = this.makeCombinationString(fuzzyPron);
+      this.fuzzyEntriesMap[key] = this.fuzzyEntriesMap[key] || [];
+      this.fuzzyEntriesMap[key].push(entry);
+    },
     makeCombinationString(pron) {
       return `${pron.initial}${pron.final}${pron.tone}`;
     },
     updateFuzzyRulesMap() {
       let ruleKey = this.selectedFuzzyQueryKey;
-      let rule = getFuzzyRules()[ruleKey];
       this.fuzzyRulesMap = {};
       this.fuzzyRulesMapReverse = {};
       let fuzzyInitials = new Set();
       let fuzzyFinals = new Set();
       let fuzzyTones = new Set();
-      for (let i = 0; i < combinations.length; i++) {
-        let combination = combinations[i];
-        let fuzzy = rule.fuzzy(combination);
-        let fuzzyString = fuzzy.initial + fuzzy.final + fuzzy.tone;
-        let originalString = combination.initial + combination.final + combination.tone;
-        this.fuzzyRulesMap[originalString] = fuzzy;
-        if (this.fuzzyRulesMapReverse[fuzzyString] === undefined) {
-          this.fuzzyRulesMapReverse[fuzzyString] = [];
-        }
-        this.fuzzyRulesMapReverse[fuzzyString].push(combination);
-
-        fuzzyInitials.add(fuzzy.initial);
-        fuzzyFinals.add(fuzzy.final);
-        fuzzyTones.add(fuzzy.tone);
-
-        let fuzzyStringWithoutTone = fuzzy.initial + fuzzy.final;
-        if (this.fuzzyRulesMapReverse[fuzzyStringWithoutTone] === undefined) {
-          let originalWithoutTone = structuredClone(combination);
-          let originalStringWithoutTone = combination.initial + combination.final;
-          let fuzzyWithoutTone = structuredClone(fuzzy);
-          this.fuzzyRulesMapReverse[fuzzyStringWithoutTone] = [originalWithoutTone];
-          fuzzyWithoutTone.tone = "";
-          this.fuzzyRulesMap[originalStringWithoutTone] = fuzzyWithoutTone;
-        }
+      this.fuzzyEntriesMap = {};
+      for (const entry of entries) {
+        const fuzzyPron = getFuzzyPronunciation(ruleKey, entry);
+        this.addFuzzyEntry(fuzzyPron, entry);
+        fuzzyInitials.add(fuzzyPron.initial);
+        fuzzyFinals.add(fuzzyPron.final);
+        fuzzyTones.add(fuzzyPron.tone);
       }
-      fuzzyInitials = [...fuzzyInitials].sort();
       // 目前的各地口音暂不需要区别，按这个固定的顺序来。
       // （唇齿音作为自由变体暂不考虑引入，等有朝一日轻重唇真正意义上产生对立了再说吧）
+      // fuzzyInitials = [...fuzzyInitials].sort();
       fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '0',]
       fuzzyFinals = [...fuzzyFinals].sort();
-      fuzzyTones = [...fuzzyTones].sort();
+      // fuzzyTones = [...fuzzyTones].sort();
+      // 目前的所谓七声调类型的惠来、潮阳，事实上还没有完全变为七声调，他们存在单字调的合并，但在连读变调时，依然能够区分。
+      // 所以依然视为独立的声调。用户分不清的时候可以手动选择合并（例如惠来口音，同时选中 3、7 两个声调）。
+      fuzzyTones = [1, 2, 3, 4, 5, 6, 7, 8];
 
       if (this.selectedPinyin === 'dp') {
         this.initialsList = fuzzyInitials.map(item => {
@@ -288,31 +281,12 @@ export default {
       if (queryAll) { // quick components all
         resultEntries = entries;
       } else {
-        let fuzzyProns = new Set();
-        let fuzzyRulesMapReverse = this.fuzzyRulesMapReverse;
-        for (let i = 0; i < queryInitials.length; i++) {
-          let curInitial = queryInitials[i];
-          for (let j = 0; j < queryFinals.length; j++) {
-            let curFinal = queryFinals[j];
-            for (let k = 0; k < queryTones.length; k++) {
-              let curTone = queryTones[k];
-              let curCombination = curInitial + curFinal + curTone;
-              if (fuzzyRulesMapReverse[curCombination] === undefined) {
-                continue;
-              }
-              let curFuzzyList = fuzzyRulesMapReverse[curCombination];
-              for (let l = 0; l < curFuzzyList.length; l++) {
-                let curFuzzy = curFuzzyList[l];
-                fuzzyProns.add(this.makeCombinationString(curFuzzy));
-              }
-            }
-          }
-        }
-
         for (const entry of entries) {
-          const pron = entry.pron;
-          const curCombination = this.makeCombinationString(pron);
-          if (fuzzyProns.has(curCombination)) {
+          const fuzzyPron = getFuzzyPronunciation(fuzzyName, entry);
+          const matchInitial = !queryInitials || queryInitials.has(fuzzyPron.initial);
+          const matchFinal = !queryFinals || queryFinals.has(fuzzyPron.final);
+          const matchTone = !queryTones || queryTones.has(fuzzyPron.tone);
+          if (matchInitial && matchFinal && matchTone) {
             resultEntries.push(entry);
           }
         }
@@ -334,19 +308,19 @@ export default {
     },
     setUrlQueryParameterPron(queryFuzzy, queryInitials, queryFinals, queryTones) {
       setUrlQueryParameter("fuzzy", queryFuzzy);
-      setUrlQueryParameter("initials", queryInitials.join(","));
-      setUrlQueryParameter("finals", queryFinals.join(","));
-      setUrlQueryParameter("tones", queryTones.join(","));
+      setUrlQueryParameter("initials", [...queryInitials].sort().join(","));
+      setUrlQueryParameter("finals", [...queryFinals].sort().join(","));
+      setUrlQueryParameter("tones", [...queryTones].sort().join(","));
     },
     showQueryResultList(resultEntries) {
       this.queryResultEmpty = resultEntries.length === 0;
       // initial+final -> {tone -> [entryIds]}
       resultEntries.sort((a, b) => this.makeCombinationString(a.pron).localeCompare(this.makeCombinationString(b.pron)));
       let queryResult = {};
-      let fuzzyRulesMap = this.fuzzyRulesMap;
+      let fuzzyName = this.selectedFuzzyQueryKey;
       for (let i = 0; i < resultEntries.length; i++) {
         let entry = resultEntries[i];
-        let fuzzy = fuzzyRulesMap[entry.pron.initial + entry.pron.final + entry.pron.tone];
+        let fuzzy = getFuzzyPronunciation(fuzzyName, entry);
         if (queryResult[fuzzy.initial + fuzzy.final] === undefined) {
           queryResult[fuzzy.initial + fuzzy.final] = {};
         }
@@ -382,10 +356,8 @@ export default {
         selectedTones = this.tonesKeys;
         ++emptyCount;
       }
-      if (emptyCount === 3) {
-        return [selectedInitials, selectedFinals, selectedTones, true];
-      }
-      return [selectedInitials, selectedFinals, selectedTones, false];
+      let selectAll = emptyCount === 3;
+      return [new Set(selectedInitials), new Set(selectedFinals), new Set(selectedTones), selectAll];
     },
     makeResultTone(tone) {
       const map = "⓪①②③④⑤⑥⑦⑧";
@@ -414,6 +386,7 @@ export default {
 
 <style scoped lang="scss">
 $link-decoration: none;
+
 @import 'bootstrap/scss/bootstrap';
 </style>
 

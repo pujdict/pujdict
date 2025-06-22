@@ -94,7 +94,7 @@ def post_process():
 
 def get_chars():
     # TODO: Use released dist
-    with open('pujdict-base/entries.yml', 'r', encoding='utf-8') as f:
+    with open('pujdict-base/data/entries.yml', 'r', encoding='utf-8') as f:
         yaml_entries = yaml.load(f, yaml.Loader)
     entries = []
     for yaml_ent in yaml_entries:
