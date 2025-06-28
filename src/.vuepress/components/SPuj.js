@@ -118,7 +118,7 @@ const AtomicFuzzyRule = {
   UAN_As_UEN: result => { result.final = result.final.replace(/^ua([nt])$/, 'ue$1'); },
   IAM_As_IEM: result => { result.final = result.final.replace(/^ia([mp])$/, 'ie$1'); },
   N_As_L_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'n') result.initial = 'l'; },
-  N_As_L_ForNOrNGEnding: result => { if ((result.final.endsWith('n') || result.final.endsWith('ng')) && result.initial === 'n') result.initial = 'l'; },
+  N_As_L_ForNOrNGEnding: result => { if (((result.final.endsWith('n') && !result.final.endsWith('nn')) || result.final.endsWith('ng')) && result.initial === 'n') result.initial = 'l'; },
   L_As_N_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'l')result.initial = 'n'; },
   MU_As_BU_ForNasalEnding: result => { if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'b'; },
   BU_As_MU_ForNasalEnding: result => { if (result.initial === 'b' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'm'; },
