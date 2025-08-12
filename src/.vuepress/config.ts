@@ -77,6 +77,7 @@ export default defineUserConfig({
       '/query/': [
         "qchar.md",
         "qpron.md",
+        "qphr.md",
       ],
       '/doc/': [
         "puj.md",
@@ -108,6 +109,10 @@ export default defineUserConfig({
           {
             text: "音韵检索",
             link: "qpron.md",
+          },
+          {
+            text: "词汇检索",
+            link: "qphr.md",
           },
         ]
       },

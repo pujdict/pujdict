@@ -57,6 +57,7 @@ function makeEntryFromSqlResult(sqlResult) {
 var db = null;
 var entries = [];
 var accents = {};
+var phrases = [];
 var entriesCount = 0;
 var initials = [];
 var finals = [];
@@ -68,6 +69,8 @@ async function initFromDatabase() {
     const entriesPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
         .then(response => response.arrayBuffer());
     const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))
+        .then(response => response.arrayBuffer());
+    const phrasesPromise = fetch(withBase('/data/pujdict-base/dist/phrases.pb'))
         .then(response => response.arrayBuffer());
     const accentsDataResponse = await accentsDataPromise;
 
@@ -86,6 +89,10 @@ async function initFromDatabase() {
     const entriesResponse = await entriesPromise;
     db = pujpb.Entries.decode(new Uint8Array(entriesResponse));
     entries = db.entries;
+
+    const phrasesResponse = await phrasesPromise;
+    const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
+    phrases = phrasesData.phrases;
 
     entriesCount = entries.length;
     initials = Array.from(new Set(entries.map(entry => entry.pron.initial))).sort();
@@ -193,7 +200,7 @@ export {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
-  db, entries, accents, entriesCount, initials, finals, combinations,
+  db, entries, phrases, accents, entriesCount, initials, finals, combinations,
   isChineseChar,
 }
 
