@@ -107,12 +107,13 @@ const getFuzzyRules = function () {
       const id = accent.id;
       const area = accent.area;
       const rulesStrings = accent.rulesStrings;
+      const accentTones = accent.tones;
       let rules = [];
       for (const rule of rulesStrings) {
         // rule string is the property of AtomicFuzzyRule
         rules.push(AtomicFuzzyRule[rule]);
       }
-      fuzzyRules[id] = new FuzzyRulesGroup(area, rules);
+      fuzzyRules[id] = new FuzzyRulesGroup(area, accentTones, rules);
     }
     // TODO: 这里自定义应该改成允许用户选择单条模糊音规则
     const custom = {

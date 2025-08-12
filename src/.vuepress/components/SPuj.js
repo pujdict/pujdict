@@ -150,9 +150,10 @@ const AtomicFuzzyRule = {
 }
 
 class FuzzyRulesGroup extends FuzzyRuleBase {
-  constructor(name, rules) {
+  constructor(name, accentTones, rules) {
     super();
     this.name = name;
+    this.accentTones = accentTones;
     this.rules = rules;
   }
   fuzzy(original) {
@@ -165,7 +166,10 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
 
 class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
   constructor() {
-    super('辞典', [
+    super('辞典', {
+      citation: [33, 52, 212, 2, 55, 25, 22, 5],
+      sandhi: [33, 25, 52, 5, 22, 21, 22, 2],
+    }, [
       AtomicFuzzyRule.RemoveApostrophe,
     ]);
   }
@@ -625,6 +629,31 @@ function convertPUJPronunciationToIPAPronunciation(pronunciation) {
     convertPUJPronunciationToXSAMPAPronunciation(pronunciation));
 }
 
+function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = false) {
+  const citation = ['˩', '˨', '˧', '˦', '˥'];
+  const sandhi = ['꜖', '꜕', '꜔', '꜓', '꜒'];
+  const neutral = ['꜌', '꜋', '꜊', '꜉', '꜈']
+  const neutral_reversed = ['꜑', '꜐', '꜏', '꜎', '꜍']
+  let table;
+  if (!isSandhi)
+    table = isNeutral ? neutral : citation;
+  else
+    table = isNeutral ? neutral_reversed : sandhi;
+  let result = [];
+  while (tone > 0) {
+    let cur = tone % 10;
+    tone -= cur;
+    tone /= 10;
+    if (cur >= 1 && cur <= 5) {
+      result.push(table[cur - 1]);
+    } else {
+      console.log("调值错误：" + tone);
+      return '';
+    }
+  }
+  return result.reverse().join('');
+}
+
 export {
   AtomicFuzzyRule,
   FuzzyRulesGroup,
@@ -642,4 +671,5 @@ export {
   convertXSAMPAPronunciationToIPAPronunciation,
   convertPUJPronunciationToXSAMPAPronunciation,
   convertPUJPronunciationToIPAPronunciation,
+  convertToneNumeralsToToneLetters,
 }

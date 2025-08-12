@@ -132,6 +132,7 @@ import {
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
   convertPUJPronunciationToIPAPronunciation,
+  convertToneNumeralsToToneLetters,
 } from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -200,6 +201,10 @@ export default {
           let fuzzyPronunciation = getFuzzyPronunciation(key, entry);
           let combination = this.makeCombinationString(fuzzyPronunciation);
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);
+          let display_ipa = convertPUJPronunciationToIPAPronunciation(fuzzyPronunciation);
+          let tone = parseInt(pron.tone) - 1;
+          let citation_tone = convertToneNumeralsToToneLetters(rule.accentTones.citation[tone], false);
+          let sandhi_tone = convertToneNumeralsToToneLetters(rule.accentTones.sandhi[tone], true);
           pronunciations[key] = {
             key: key,
             name: rule.name,
@@ -208,7 +213,7 @@ export default {
             display: display,
             display_dp: convertPUJPronunciationToDPPronunciation(fuzzyPronunciation).combination,
             display_fq: convertPUJPronunciationToFanQiePronunciation(fuzzyPronunciation, pronunciation).combination,
-            display_ipa: convertPUJPronunciationToIPAPronunciation(fuzzyPronunciation).combination,
+            display_ipa: `${display_ipa.initial}${display_ipa.final} ${citation_tone} ${sandhi_tone}`,
           };
         });
         return {
