@@ -19,6 +19,10 @@ actions:
     icon: search
     link: ./query/qpron
     type: primary
+#  - text: 词汇检索
+#    icon: search
+#    link: ./query/qpron
+#    type: primary
 
 #  - text: 文档
 #    link: ./doc/
