@@ -39,13 +39,9 @@
                   <span class="badge bg-primary text-light" v-if="result.entry.freq === 3">☆☆☆</span>
                 </div>
               </div>
-              <div class="card-body">
-                <button class="btn btn-outline-primary mb-2 w-100 text-start dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        :data-bs-target="`#entryCollapse${result.entry.index}`"
-                        aria-expanded="false"
-                        :aria-controls="`entryCollapse${result.entry.index}`">
+              <div class="card-body" style="padding: 10px 0">
+
+                <div class="card card-result-entry mb-2 w-100 text-start" @click.stop="togglePopup(result.entry.index)">
                 <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
                   <template v-if="key === 'dummy'">
                     {{ result.pronunciation_display }};
@@ -54,8 +50,27 @@
                     {{ result.pronunciation_fq.combination }}
                   </template>
                 </span>
-                  <i class="bi bi-chevron-down float-end"></i>
-                </button>
+                </div>
+
+                <i class="bi bi-chevron-right float-end"></i>
+
+                <div class="pronunciation-popup" v-if="activePopup === result.entry.index">
+                  <div class="row g-2">
+                    <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
+                      <template v-if="key !== 'dummy'">
+                        <div class="col-12">
+                          <span class="badge border border-primary text-primary">{{ pronunciation.name }}</span>
+                          {{ pronunciation.display }};
+                          <template v-if="key !== 'custom'">
+                            {{ pronunciation.display_dp }};
+                            [{{ pronunciation.display_ipa }}];
+                            {{ pronunciation.display_fq }}
+                          </template>
+                        </div>
+                      </template>
+                    </span>
+                  </div>
+                </div>
 
                 <div class="collapse mb-3" :id="`entryCollapse${result.entry.index}`">
                   <div class="card card-body">
@@ -145,6 +160,7 @@ export default {
       queryInput: '',
       queryResult: {},
       queryResultEmpty: false,
+      activePopup: null,
     };
   },
   watch: {
@@ -156,6 +172,9 @@ export default {
     }
   },
   methods: {
+    togglePopup(index) {
+      this.activePopup = this.activePopup === index ? null : index;
+    },
     makeCombinationString(pron) {
       return `${pron.initial}${pron.final}${pron.tone}`;
     },
@@ -281,4 +300,30 @@ export default {
 
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
+</style>
+
+<style scoped lang="scss">
+.card-result-entry {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.3s;
+  background-color: var(--bs-body-bg);
+}
+.card-result-entry:hover {
+  background-color: var(--bs-tertiary-bg);
+}
+.pronunciation-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 4px;
+  padding: 0 10px 10px 10px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  max-width: none;
+  width: auto;
+}
 </style>
