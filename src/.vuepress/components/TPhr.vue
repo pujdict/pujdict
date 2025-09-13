@@ -161,17 +161,23 @@ export default {
       }
       let result = [];
       let resultPhrases = [];
+      let resultPhrasesIndices = new Set();
+      let pushResult = (phrase) => {
+        if (resultPhrasesIndices.has(phrase.index)) return;
+        resultPhrasesIndices.add(phrase.index);
+        resultPhrases.push(phrase);
+      };
       for (const [key, phrases] of Object.entries(this.teochewIndexing)) {
         if (key.includes(chars)) {
           for (const phrase of phrases) {
-            resultPhrases.push(phrase);
+            pushResult(phrase);
           }
         }
       }
       for (const [key, phrases] of Object.entries(this.cmnIndexing)) {
         if (key.includes(chars)) {
           for (const phrase of phrases) {
-            resultPhrases.push(phrase);
+            pushResult(phrase);
           }
         }
       }
