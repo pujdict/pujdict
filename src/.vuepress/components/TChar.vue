@@ -139,7 +139,6 @@ import {
   isChineseChar,
 } from './QCommon.vue';
 import {
-  convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,

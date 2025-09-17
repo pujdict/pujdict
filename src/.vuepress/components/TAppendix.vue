@@ -24,7 +24,7 @@
 
 <script>
 import {
-  convertPlainPUJSentenceToDisplayPUJSentence, addPUJToneMarkSentence, addPUJToneMarkWord, addPUJToneMarkAndConvertToDisplayPUJSentence,
+  addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from './SPuj.js';
 // import papaparse
 import Papaparse from 'papaparse';

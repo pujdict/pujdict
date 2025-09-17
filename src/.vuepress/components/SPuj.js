@@ -1,6 +1,6 @@
-import { getLocalOption } from "./SUtils.js";
-import { Pronunciation } from "./SCommon.js";
-import { XSAMPAList, XSAMPAToIPAMap } from "./SXSampaIpa.js";
+import {getLocalOption} from "./SUtils.js";
+import {Pronunciation} from "./SCommon.js";
+import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa.js";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -175,7 +175,7 @@ class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
   }
 }
 
-function convertPlainPUJSentenceToDisplayPUJSentence(sentence, optional = false, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
+function convertPlainPUJSentenceToDisplayPUJInSentence(sentence, optional = false, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   sentence = sentence.replace(/0/g, '');
   if (!optional) {
     // sentence = sentence.replace(/nn(\W)/g, 'ⁿ$1');
@@ -189,6 +189,66 @@ function convertPlainPUJSentenceToDisplayPUJSentence(sentence, optional = false,
   return sentence;
 }
 
+function convertPlainPUJSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy(), funcPlainPUJPronunciationToStr, funcNonWordStr = null) {
+  let result = '';
+  let isInNeutral = false;
+  forEachWordInSentence(sentence, (word, nextHyphenCount) => {
+    let isNeutral = isInNeutral;
+    let isSandhi = false;
+    switch (nextHyphenCount) {
+      case 0:
+        isSandhi = false;
+        isInNeutral = false;
+        break;
+      case 1:
+        isSandhi = true;
+        break;
+      case 2:
+        isSandhi = false;
+        isInNeutral = true;
+        break;
+    }
+    let pronunciation = convertPlainPUJToPronunciationWord(word);
+    let fuzzy = fuzzyRule.fuzzy(pronunciation);
+    let str = funcPlainPUJPronunciationToStr(fuzzy, isSandhi, isNeutral);
+    result += str;
+  },  (word) => {
+    result += funcNonWordStr ? funcNonWordStr(word) : word;
+  });
+  return result;
+}
+
+function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+  return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
+    let initial = pron.initial === '0' ? '' : pron.initial;
+    return convertPlainPUJSentenceToDisplayPUJInSentence(addPUJToneMarkWord(`${initial}${pron.final}${pron.tone}`));
+  }, (nonWord) => {
+    if (nonWord === '--') {
+      return '·';
+    } else {
+      return nonWord;
+    }
+  });
+}
+
+function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+  // TODO
+  return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
+    let ipaPron = convertPUJPronunciationToIPAPronunciation(pron);
+    let accentTones;
+    let ipaTone = convertToneNumeralsToToneLetters(fuzzyRule.accentTones, isSandhi, isNeutral);
+    return `${ipaPron.initial}${ipaPron.final} ${ipaTone}`;
+  });
+}
+
+function convertPlainPUJSentenceToDPSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+  return convertPlainPUJSentence(sentence, fuzzyRule,  (pron, isSandhi, isNeutral) => {
+    let dpPron = convertPUJPronunciationToDPPronunciation(pron);
+    let initial = dpPron.initial === '0' ? '' : dpPron.initial;
+    return `${initial}${dpPron.final}${dpPron.tone}`;
+  });
+}
+
 function convertPUJFromDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = PUJSpecialVowels['V'], r = PUJSpecialVowels["r"], R = PUJSpecialVowels["R"]) {
   // sentence = sentence.replace(/ⁿ/g, 'nn');
   sentence = sentence.replace(new RegExp(v, 'g'), 'v');
@@ -199,22 +259,30 @@ function convertPUJFromDisplaySentence(sentence, v = PUJSpecialVowels['v'], V = 
 }
 
 function forEachWordInSentence(sentence, funcWord, funcNonWord) {
-  let cur = "";
   sentence = sentence.normalize('NFD');
   const regexp = new RegExp(`[a-zA-Z0-9']|${Array.from(Object.values(PUJSpecialVowels)).join('|')}|${getPUJToneMarks().filter(e => e.length).join('|')}`);
-  for (let i = 0; i < sentence.length; i++) {
+  let nextHyphenCount = 0;
+  let i = 0;
+  while (i < sentence.length) {
+    let cur = "";
     if (regexp.test(sentence[i])) {
-      cur += sentence[i];
-    } else {
-      if (cur !== "") {
-        funcWord?.(cur);
-        cur = "";
+      while (i < sentence.length && regexp.test(sentence[i])) {
+        cur += sentence[i++];
       }
-      funcNonWord?.(sentence[i]);
+      nextHyphenCount = 0;
+      if (i < sentence.length && sentence[i] === '-') {
+        ++nextHyphenCount;
+        if  (i + 1 < sentence.length && sentence[i + 1] === '-') {
+          ++nextHyphenCount;
+        }
+      }
+      funcWord?.(cur, nextHyphenCount);
+    } else {
+      while (i < sentence.length && !regexp.test(sentence[i])) {
+        cur += sentence[i++];
+      }
+      funcNonWord?.(cur);
     }
-  }
-  if (cur !== "") {
-    funcWord?.(cur);
   }
 }
 
@@ -297,7 +365,7 @@ function undoAddPUJToneMarkWord(word) {
 }
 
 function addPUJToneMarkAndConvertToDisplayPUJSentence(sentence, optional = false) {
-  return convertPlainPUJSentenceToDisplayPUJSentence(addPUJToneMarkSentence(sentence, optional), optional);
+  return convertPlainPUJSentenceToDisplayPUJInSentence(addPUJToneMarkSentence(sentence, optional), optional);
 }
 
 function convertPlainPUJToPronunciationWord(word) {
@@ -306,7 +374,7 @@ function convertPlainPUJToPronunciationWord(word) {
   return pronunciation;
 }
 
-function makePUJPronunciationsFromDisplaySentence(pujDisplaySentence, funcWord = convertPlainPUJToPronunciationWord, funcNonWord = null) {
+function convertPlainPUJToPronunciationsSentence(pujDisplaySentence, funcWord = convertPlainPUJToPronunciationWord, funcNonWord = null) {
   // 如果有组合的符号，先解离开来
   pujDisplaySentence = pujDisplaySentence.normalize('NFD');
   // 特殊韵母替换
@@ -660,7 +728,11 @@ export {
   FuzzyRulesGroup_Dummy,
   convertPUJInitialOrFinalToDP,
   convertPlainPUJToPronunciationWord,
-  convertPlainPUJSentenceToDisplayPUJSentence,
+  convertPlainPUJToPronunciationsSentence,
+  convertPlainPUJSentenceToPUJSentence,
+  // convertPlainPUJSentenceToIPASentence, // TODO
+  convertPlainPUJSentenceToDPSentence,
+  convertPlainPUJSentenceToDisplayPUJInSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,

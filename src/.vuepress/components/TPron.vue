@@ -70,7 +70,7 @@
       <div v-else>
         <ul>
           <li v-for="(item, key) in queryResult" :key="key">
-            <span v-if="selectedPinyin === 'puj'">{{ convertPlainPUJSentenceToDisplayPUJSentence(key) }}:</span>
+            <span v-if="selectedPinyin === 'puj'">{{ convertPlainPUJSentenceToDisplayPUJInSentence(key) }}:</span>
             <span v-else>{{ convertPUJToDPSentence(key).slice(0, -1) }}</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
@@ -107,7 +107,7 @@ import {
   db, entries, accents, combinations,
 } from './QCommon.vue';
 import {
-  convertPlainPUJSentenceToDisplayPUJSentence,
+  convertPlainPUJSentenceToDisplayPUJInSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,
@@ -209,7 +209,7 @@ export default {
           return {key: item, display: item};
         });
         this.finalsList = fuzzyFinals.map(item => {
-          return {key: item, display: convertPlainPUJSentenceToDisplayPUJSentence(item)};
+          return {key: item, display: convertPlainPUJSentenceToDisplayPUJInSentence(item)};
         });
         this.tonesList = fuzzyTones.map(item => {
           return {key: item, display: item};

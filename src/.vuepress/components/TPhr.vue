@@ -25,72 +25,47 @@
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
-                <h3 class="mb-1 me-3">{{ result.teochew }}</h3>
-                <span class="text-muted me-2">[{{ result.puj }}]</span>
-              </div>
-              <div class="card-body">
-                <!--
-                <button class="btn btn-outline-primary mb-2 w-100 text-start dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        :data-bs-target="`#entryCollapse${result.phrase.index}`"
-                        aria-expanded="false"
-                        :aria-controls="`entryCollapse${result.phrase.index}`">
-                <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
-                  <template v-if="key === 'dummy'">
-                    {{ result.pronunciation_display }};
-                    {{ result.pronunciation_dp.combination }};
-                    [{{ result.pronunciation_ipa.combination }}];
-                    {{ result.pronunciation_fq.combination }}
+                <h3 class="mb-1 me-3">
+                  {{ result.teochew }}<template v-for="char in result.charVar">・{{ char }}</template>
+                </h3>
+                <span class="text-muted me-2">
+                  <template v-for="(cmn, i) in result.cmn">
+                    <template v-if="i > 0">；</template>{{ cmn }}
                   </template>
                 </span>
-                  <i class="bi bi-chevron-down float-end"></i>
-                </button>
+              </div>
+              <div class="card-body" style="padding: 10px 0">
+                <template v-for="(pronunciationLists, iPron) in result.pronunciationLists">
+                  <div class="card card-result-entry mb-2 w-100 text-start" @click.stop="togglePopup(result.index, iPron)">
+                  <span v-for="(pronunciationList, key) in pronunciationLists">
+                    <template v-if="pronunciationList.key === 'dummy'">
+                      {{ pronunciationList.puj }};
+                      {{ pronunciationList.dp }}
+                    </template>
+                  </span>
+                  </div>
 
-                <div class="collapse mb-3" :id="`entryCollapse${result.entry.index}`">
-                  <div class="card card-body">
+                  <i class="bi bi-chevron-right float-end"></i>
+
+                  <div class="pronunciation-popup" v-if="shouldPopup(result.index, iPron)">
                     <div class="row g-2">
-                    <span v-for="(pronunciation, key) in result.pronunciations" :key="key">
-                      <template v-if="key !== 'dummy'">
-                        <div class="col-12">
-                          <span class="badge border border-primary text-primary">{{ pronunciation.name }}</span>
-                          {{ pronunciation.display }};
-                          <template v-if="key !== 'custom'">
-                            {{ pronunciation.display_dp }};
-                            [{{ pronunciation.display_ipa }}];
-                            {{ pronunciation.display_fq }}
-                          </template>
-                        </div>
-                      </template>
-                    </span>
+                      <span v-for="pronunciationList in pronunciationLists" :key="pronunciationList.key">
+                        <template v-if="pronunciationList.key !== 'dummy'">
+                          <div class="col-12">
+                            <span class="badge border border-primary text-primary">{{ pronunciationList.name }}</span>
+                            {{ pronunciationList.puj }};
+                            {{ pronunciationList.dp }}
+                          </div>
+                        </template>
+                      </span>
                     </div>
                   </div>
-                </div>
-                -->
-                <!--
-                <div class="card-text">
-                  <template v-for="(details, i) in result.details">
-                    <div v-if="i > 0" class="border-top my-2"></div>
-                    <div>
-                      <strong v-if="details.meaning">{{ details.meaning }}</strong>
-                      <span v-if="details.meaning.length && details.examples.length">：</span>
-                      <template v-for="(example, j) in details.examples">
-                        <span v-if="j > 0">；</span>
-                        <span v-if="example.teochew">{{ example.teochew }}</span>
-                        <span v-if="example.puj">
-                      <span> [{{
-                          addPUJToneMarkAndConvertToDisplayPUJSentence(example.puj)
-                        }}] </span>
-                        </span>
-                        <span v-if="example.mandarin">
-                      <span> ({{ example.mandarin }})</span>
-                    </span>
-                      </template>
-                    </div>
-                  </template>
-                </div>
-                -->
+                </template>
               </div>
+            </div>
+
+            <div class="card-text">
+
             </div>
           </div>
         </div>
@@ -116,7 +91,6 @@ import {
   isChineseChar,
 } from './QCommon.vue';
 import {
-  convertPlainPUJSentenceToDisplayPUJSentence,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,
@@ -124,6 +98,8 @@ import {
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
   convertPUJPronunciationToIPAPronunciation,
+  convertPlainPUJSentenceToPUJSentence,
+  convertPlainPUJSentenceToDPSentence,
 } from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
@@ -134,11 +110,13 @@ export default {
   data() {
     return {
       queryInput: '',
-      queryResult: {},
+      queryResult: new Array<any>(),
       queryResultEmpty: false,
       teochewIndexing: {},
       cmnIndexing: {},
       pujIndexing: {},
+      activePopupPhraseIndex: -1,
+      activePopupPronunciationIndex: -1,
     };
   },
   watch: {
@@ -150,6 +128,32 @@ export default {
     // }
   },
   methods: {
+    togglePopup(phraseIndex: number, pronunciationIndex: number) {
+      if  (this.activePopupPhraseIndex === phraseIndex && this.activePopupPronunciationIndex === pronunciationIndex) {
+        this.activePopupPhraseIndex = -1;
+        this.activePopupPronunciationIndex = -1;
+      } else {
+        this.activePopupPhraseIndex = phraseIndex;
+        this.activePopupPronunciationIndex = pronunciationIndex;
+      }
+    },
+    shouldPopup(phraseIndex: number, pronunciationIndex: number) {
+      return this.activePopupPhraseIndex === phraseIndex && this.activePopupPronunciationIndex === pronunciationIndex;
+    },
+    makePronunciationList(plainPUJ: string) {
+      let pronunciationList = {};
+      Object.entries(getFuzzyRules()).forEach(([key, rule]) => {
+        const displayPUJ = convertPlainPUJSentenceToPUJSentence(plainPUJ, rule);
+        const displayDP = convertPlainPUJSentenceToDPSentence(plainPUJ, rule);
+        pronunciationList[key] = {
+          key: key,
+          name: rule.name,
+          puj: displayPUJ,
+          dp: displayDP,
+        };
+      });
+      return pronunciationList;
+    },
     queryPhrase(chars) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
@@ -182,13 +186,28 @@ export default {
         }
       }
       for (const phrase of resultPhrases) {
+        const pujVar = [];
+        if (phrase.pujVar) {
+          for (const puj of phrase.pujVar) {
+            pujVar.push(puj);
+          }
+        }
+        const pronunciationLists = [];
+        pronunciationLists.push(this.makePronunciationList(phrase.puj));
+        if (phrase.pujVar) {
+          for (const puj of phrase.pujVar) {
+            pronunciationLists.push(this.makePronunciationList(puj));
+          }
+        }
         result.push({
+          index: phrase.index,
           teochew: phrase.teochew,
-          puj: addPUJToneMarkAndConvertToDisplayPUJSentence(phrase.puj),
+          puj: phrase.puj,
           desc: phrase.desc,
           cmn: phrase.cmn,
-          char_var: phrase.char_var,
-          puj_var: phrase.puj_var,
+          charVar: phrase.charVar,
+          pujVar: pujVar,
+          pronunciationLists: pronunciationLists,
         });
       }
       return result;
@@ -244,4 +263,30 @@ export default {
 
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
+</style>
+
+<style scoped lang="scss">
+.card-result-entry {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.3s;
+  background-color: var(--bs-body-bg);
+}
+.card-result-entry:hover {
+  background-color: var(--bs-tertiary-bg);
+}
+.pronunciation-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 4px;
+  padding: 0 10px 10px 10px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  max-width: none;
+  width: auto;
+}
 </style>
