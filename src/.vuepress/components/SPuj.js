@@ -189,7 +189,7 @@ function convertPlainPUJSentenceToDisplayPUJInSentence(sentence, optional = fals
   return sentence;
 }
 
-function convertPlainPUJSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy(), funcPlainPUJPronunciationToStr, funcNonWordStr = null) {
+function convertPlainPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy(), funcPlainPUJPronunciationToStr, funcNonWordStr = null) {
   let result = '';
   let isInNeutral = false;
   forEachWordInSentence(sentence, (word, nextHyphenCount) => {
@@ -218,7 +218,7 @@ function convertPlainPUJSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy(), 
   return result;
 }
 
-function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
     let initial = pron.initial === '0' ? '' : pron.initial;
     return convertPlainPUJSentenceToDisplayPUJInSentence(addPUJToneMarkWord(`${initial}${pron.final}${pron.tone}`));
@@ -231,7 +231,7 @@ function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = FuzzyRulesGr
   });
 }
 
-function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   // TODO
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
     let ipaPron = convertPUJPronunciationToIPAPronunciation(pron);
@@ -241,7 +241,7 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = FuzzyRulesGr
   });
 }
 
-function convertPlainPUJSentenceToDPSentence(sentence, fuzzyRule = FuzzyRulesGroup_Dummy()) {
+function convertPlainPUJSentenceToDPSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   return convertPlainPUJSentence(sentence, fuzzyRule,  (pron, isSandhi, isNeutral) => {
     let dpPron = convertPUJPronunciationToDPPronunciation(pron);
     let initial = dpPron.initial === '0' ? '' : dpPron.initial;

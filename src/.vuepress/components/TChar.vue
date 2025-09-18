@@ -102,13 +102,13 @@
                         <span v-if="j > 0">；</span>
                         <span v-if="example.teochew">{{ example.teochew }}</span>
                         <span v-if="example.puj">
-                      <span> [{{
-                          addPUJToneMarkAndConvertToDisplayPUJSentence(example.puj)
-                        }}] </span>
+                          <span> [{{
+                            addPUJToneMarkAndConvertToDisplayPUJSentence(example.puj)
+                          }}] </span>
                         </span>
                         <span v-if="example.mandarin">
-                      <span> ({{ example.mandarin }})</span>
-                    </span>
+                          <span> ({{ example.mandarin }})</span>
+                        </span>
                       </template>
                     </div>
                   </template>

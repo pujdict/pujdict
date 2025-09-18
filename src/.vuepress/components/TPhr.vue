@@ -61,11 +61,19 @@
                     </div>
                   </div>
                 </template>
+
+                <div class="card-text">
+                  <div>
+                    <span v-if="result.desc">{{ result.desc }}</span>
+                    <template v-for="(example, iExample) in result.examples">
+                      <div class="border-top my-2"></div>
+                      <span v-if="example.teochew">{{ example.teochew }}</span>
+                      <span v-if="example.puj">{{ convertPlainPUJSentenceToPUJSentence(example.puj) }} </span>
+                      <span v-if="example.mandarin">：{{ example.mandarin }}</span>
+                    </template>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div class="card-text">
-
             </div>
           </div>
         </div>
@@ -154,6 +162,19 @@ export default {
       });
       return pronunciationList;
     },
+    formatDesc(desc: string) {
+      let result = desc;
+      // get all things in @{...}
+      const pujRegExp = /@\{([^}]+)\}/g;
+      const matches = desc.matchAll(pujRegExp);
+      for (const match of matches) {
+        const fullMatch = match[0];
+        const content = match[1];
+        const replacement = convertPlainPUJSentenceToPUJSentence(content);
+        result = result.replace(fullMatch, replacement);
+      }
+      return result;
+    },
     queryPhrase(chars) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
@@ -199,15 +220,17 @@ export default {
             pronunciationLists.push(this.makePronunciationList(puj));
           }
         }
+        let desc = this.formatDesc(phrase.desc);
         result.push({
           index: phrase.index,
           teochew: phrase.teochew,
           puj: phrase.puj,
-          desc: phrase.desc,
+          desc: desc,
           cmn: phrase.cmn,
           charVar: phrase.charVar,
           pujVar: pujVar,
           pronunciationLists: pronunciationLists,
+          examples: phrase.examples,
         });
       }
       return result;
@@ -242,7 +265,7 @@ export default {
           pushIndex(this.cmnIndexing, cmn, phrase);
         }
       }
-    },
+    }
   },
   mounted() {
     if (typeof window !== 'undefined') {
