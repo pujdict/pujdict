@@ -157,7 +157,7 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
     this.rules = rules;
   }
   fuzzy(original) {
-    let result = original.clone();
+    let result = new Pronunciation(original.initial, original.final, original.tone);
     for (const rule of this.rules)
       rule(result);
     return result;
