@@ -99,7 +99,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
-  getFuzzyRules,
+  getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
@@ -219,7 +219,7 @@ export default {
       setLocalOption("fuzzy-query", ruleKey);
     },
     initializeAccents() {
-      this.fuzzyQueryList = Object.entries(getFuzzyRules()).map(([key, rule]) => ({
+      this.fuzzyQueryList = Object.entries(getAccentsRules()).map(([key, rule]) => ({
         key,
         name: rule.name,
         fuzzy: rule.fuzzy,

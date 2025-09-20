@@ -157,7 +157,7 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
     this.rules = rules;
   }
   fuzzy(original) {
-    let result = structuredClone(original);
+    let result = original.clone();
     for (const rule of this.rules)
       rule(result);
     return result;
@@ -448,7 +448,7 @@ function convertPUJPronunciationToDPPronunciation(pronunciation) {
   result.final = result.final.replace('e', 'ê');
   result.final = result.final.replace(/v|ir|ur/, 'e');
   result.final = result.final.replace(/r|er/, 'er');
-  result.final = result.final.replace('iau', 'iou');
+  // result.final = result.final.replace('iau', 'iou');
   result.final = result.final.replace('au', 'ao');
   // 鼻化韵尾
   result.final = result.final.replace(/(?<!n)n$/, 'nd');
@@ -459,9 +459,9 @@ function convertPUJPronunciationToDPPronunciation(pronunciation) {
   result.final = result.final.replace(/k$/, 'g');
 
   // (v)ng -> eng
-  if (result.initial !== '' && result.initial !== 'h' && result.final.match(/^ng$/i)) {
-    result.final = 'eng';
-  }
+  // if (result.initial !== '' && result.initial !== 'h' && result.final.match(/^ng$/i)) {
+  //   result.final = 'eng';
+  // }
 
   // 去掉 nn'
   if (result.final.endsWith("'")) result.final = result.final.substring(0, result.final.length - 1);
@@ -726,6 +726,7 @@ export {
   AtomicFuzzyRule,
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy,
+  forEachWordInSentence,
   convertPUJInitialOrFinalToDP,
   convertPlainPUJToPronunciationWord,
   convertPlainPUJToPronunciationsSentence,

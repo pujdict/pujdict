@@ -7,10 +7,12 @@
           <input class="form-control form-control-lg" id="query-input" type="text" placeholder="输入汉字..."
                  maxlength="256" v-model="queryInput"/>
           <button id="query-button" class="btn btn-outline-primary" type="submit" @click="queryEntries">
-            <i class="bi bi-search"></i> 查询
+            <!--<i class="bi bi-search"></i>-->
+            查询
           </button>
           <button id="reset-button" class="btn btn-outline-danger" type="button" @click="resetQuery">
-            <i class="bi bi-x-circle"></i> 重置
+            <!--<i class="bi bi-x-circle"></i>-->
+            重置
           </button>
         </div>
       </div>
@@ -51,8 +53,6 @@
                   </template>
                 </span>
                 </div>
-
-                <i class="bi bi-chevron-right float-end"></i>
 
                 <div class="pronunciation-popup" v-if="activePopup === result.entry.index">
                   <div class="row g-2">
@@ -130,7 +130,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   Entry, Pronunciation,
-  getFuzzyRules,
+  getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
@@ -215,7 +215,7 @@ export default {
         let pronunciations = {};
         let pron = entry.pron;
         const pronunciation = new Pronunciation(pron.initial, pron.final, pron.tone);
-        Object.entries(getFuzzyRules()).forEach(([key, rule]) => {
+        Object.entries(getAccentsRules()).forEach(([key, rule]) => {
           let fuzzyPronunciation = getFuzzyPronunciation(key, entry);
           let combination = this.makeCombinationString(fuzzyPronunciation);
           let display = addPUJToneMarkAndConvertToDisplayPUJSentence(combination);

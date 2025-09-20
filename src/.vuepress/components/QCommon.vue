@@ -105,7 +105,7 @@ async function initFromDatabase() {
 }
 
 // 口音规则
-const getFuzzyRules = function () {
+const getAccentsRules = function () {
   const fuzzyRules = {};
   return function () {
     if (fuzzyRules.length) return fuzzyRules;
@@ -160,7 +160,7 @@ function getFuzzyPronunciation(accentId, entry) {
       break;
     }
   }
-  let rule = getFuzzyRules()[accentId];
+  let rule = getAccentsRules()[accentId];
   let fuzzyPron = '';
   if (accent) {
     const exception = accent.exceptions[entry.index];
@@ -195,7 +195,7 @@ function setLoading(loading) {
 
 export {
   Entry, Pronunciation,
-  getFuzzyRules,
+  getAccentsRules,
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
