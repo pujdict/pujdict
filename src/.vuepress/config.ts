@@ -94,10 +94,6 @@ export default defineUserConfig({
         "puj_dp.md",
         "han_puj.md",
       ],
-      '/appendix/': [
-        "relationships.md",
-        "human_body.md",
-      ]
     },
     navbar: [
       {
@@ -165,21 +161,6 @@ export default defineUserConfig({
           },
         ]
       },
-      {
-        text: "附录",
-        prefix: "/appendix/",
-        icon: "receipt",
-        children: [
-          {
-            text: "人称",
-            link: "relationships.md",
-          },
-          {
-            text: "人体",
-            link: "human_body.md",
-          },
-        ]
-      }
     ],
     plugins: {
       git: {
