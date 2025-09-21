@@ -75,10 +75,10 @@ export default defineUserConfig({
     sidebarIcon: false,
     sidebar: {
       '/query/': [
-        "qchar.md",
         "qpron.md",
+        "qchar.md",
         {
-          text: "词汇检索 (测试中)",
+          text: "词汇查询 (测试中)",
           link: "qphr.md",
         },
       ],
@@ -102,15 +102,15 @@ export default defineUserConfig({
         icon: "search",
         children: [
           {
-            text: "汉字检索",
-            link: "qchar.md",
-          },
-          {
-            text: "音韵检索",
+            text: "声韵索引",
             link: "qpron.md",
           },
           {
-            text: "词汇检索 (测试中)",
+            text: "汉字查询",
+            link: "qchar.md",
+          },
+          {
+            text: "词汇查询 (测试中)",
             link: "qphr.md",
           },
         ]

@@ -11,18 +11,18 @@ heroText: 潮汕方言白话字辞典
 tagline: |
   整理潮汕方言汉字读音，兼容潮汕各地语音。
 actions:
-  - text: 汉字检索
-    icon: search
-    link: ./query/qchar
-    type: primary
-  - text: 音韵检索
+  - text: 声韵索引
     icon: search
     link: ./query/qpron
     type: primary
-#  - text: 词汇检索
-#    icon: search
-#    link: ./query/qpron
-#    type: primary
+  - text: 汉字查询
+    icon: search
+    link: ./query/qchar
+    type: primary
+  - text: 词汇查询
+    icon: search
+    link: ./query/qpron
+    type: primary
 
 #  - text: 文档
 #    link: ./doc/

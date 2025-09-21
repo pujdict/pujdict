@@ -1,5 +1,5 @@
 ---
-title: 词汇检索
+title: 词汇查询
 icon: search
 order: 10
 gitInclude:

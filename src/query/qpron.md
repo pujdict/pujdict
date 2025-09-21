@@ -1,5 +1,5 @@
 ---
-title: 音韵检索
+title: 声韵索引
 icon: search
 order: 10
 gitInclude:

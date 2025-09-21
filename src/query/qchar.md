@@ -1,5 +1,5 @@
 ---
-title: 汉字检索
+title: 汉字查询
 icon: search
 order: 10
 gitInclude:
