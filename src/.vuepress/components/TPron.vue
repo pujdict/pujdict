@@ -391,7 +391,7 @@ $link-decoration: none;
 @import 'bootstrap/scss/bootstrap';
 </style>
 
-<style lang="scss">
+<style scoped lang="scss">
 .query-filter-list * {
   /* add hover mouse icon */
   cursor: pointer;
