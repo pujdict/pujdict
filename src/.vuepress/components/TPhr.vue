@@ -28,14 +28,16 @@
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
                 <h3 class="mb-1 me-2">
-                  {{ result.teochew }}<template v-for="char in result.charVar">・{{ char }}</template>
+                  <template v-for="(char, i) in result.teochew">
+                    <template v-if="i">・</template>{{ char }}
+                  </template>
                 </h3>
-                <span class="me-1" v-for="pronunciation in result.pronunciationLists">
-                  <TPopupPuj :puj="pronunciation"/>
+                <span class="me-1" v-for="(p, i) in result.puj">
+                  <TPopupPuj :puj="p"/>
                 </span>
                 <span class="text-muted me-1">
                   <template v-for="(cmn, i) in result.cmn">
-                    <template v-if="i > 0">；</template>{{ cmn }}
+                    <template v-if="i">；</template>{{ cmn }}
                   </template>
                 </span>
               </div>
@@ -47,7 +49,7 @@
                       <div class="border-top my-2"></div>
                       <span class="me-1" v-if="example.teochew">{{ example.teochew }}</span>
                       <span class="me-1" v-if="example.puj"><TPopupPuj :puj="example.puj"/></span>
-                      <span class="me-1" v-if="example.mandarin">{{ example.mandarin }}</span>
+                      <span class="me-1 text-muted" v-if="example.mandarin">{{ example.mandarin }}</span>
                     </template>
                   </div>
                 </div>
@@ -99,7 +101,7 @@ export default {
   data() {
     return {
       queryInput: '',
-      queryResult: new Array<any>(),
+      queryResult: [],
       queryResultEmpty: false,
       teochewIndexing: {},
       cmnIndexing: {},
@@ -173,40 +175,26 @@ export default {
         }
       }
       for (const phrase of resultPhrases) {
-        const pujVar = [];
-        if (phrase.pujVar) {
-          for (const puj of phrase.pujVar) {
-            pujVar.push(puj);
-          }
-        }
-        const pronunciationLists: string[] = [];
-        pronunciationLists.push(phrase.puj);
-        if (phrase.pujVar) {
-          for (const puj of phrase.pujVar) {
-            pronunciationLists.push(puj);
-          }
-        }
-        let desc = this.formatDesc(phrase.desc);
+        const desc = this.formatDesc(phrase.desc);
         result.push({
           index: phrase.index,
           teochew: phrase.teochew,
           puj: phrase.puj,
-          desc: desc,
           cmn: phrase.cmn,
-          charVar: phrase.charVar,
-          pujVar: pujVar,
-          pronunciationLists: pronunciationLists,
+          desc: desc,
           examples: phrase.examples,
         });
       }
       return result;
     },
     queryPhrases() {
+      this.queryResult = [];
+      this.renderPopupPujElements();
       let charsInput = this.queryInput;
       let phrases = charsInput.split([' ', ',']);
       let result = [];
       for (const phrase of phrases) {
-        result = result.concat(this.queryPhrase(phrase));
+        result.push(...this.queryPhrase(phrase));
       }
       this.queryResult = result;
     },
@@ -220,12 +208,14 @@ export default {
         indexing[key].push(value);
       }
       for (const phrase of phrases) {
-        const teochew = phrase.teochew;
-        const char_var = phrase.char_var;
+        const teochew_list = phrase.teochew;
+        const puj_list = phrase.puj;
         const cmn_list = phrase.cmn;
-        pushIndex(this.teochewIndexing, teochew, phrase);
-        for (let char in char_var) {
-          pushIndex(this.teochewIndexing, char, phrase);
+        for (let teochew of teochew_list) {
+          pushIndex(this.teochewIndexing, teochew, phrase);
+        }
+        for (let puj of puj_list) {
+          pushIndex(this.pujIndexing, puj, phrase);
         }
         for (const cmn of cmn_list) {
           pushIndex(this.cmnIndexing, cmn, phrase);

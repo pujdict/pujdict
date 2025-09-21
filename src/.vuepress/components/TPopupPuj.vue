@@ -1,6 +1,6 @@
 <template>
   <TDarkTheme/>
-  <div v-bind:data-bs-theme="darkThemeString" class="d-inline-block">
+  <div v-bind:data-bs-theme="darkThemeString" class="d-inline-block" :id="'popup_puj_' + puj">
     <!-- 主按钮 -->
     <a @click="showModal = true"
        class="text-primary card-popup-text"
@@ -81,8 +81,10 @@ export default {
     };
   },
   created() {
-    this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
-    this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+    this.updateDisplay();
+  },
+  updated() {
+    this.updateDisplay();
   },
   mounted() {
     if (typeof window !== 'undefined') {
@@ -90,6 +92,10 @@ export default {
     }
   },
   methods: {
+    updateDisplay() {
+      this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
+      this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+    },
     getPerAccentsPronunciations() {
       let pronunciations = {};
       Object.entries(getAccentsRules()).forEach(([key, rule]) => {
