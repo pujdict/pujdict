@@ -135,7 +135,7 @@ export default {
       ],
       fuzzyQueryList: [],
       selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
-      selectedPinyin: 'puj',
+      selectedPinyin: getLocalOption("q-pron-default-pinyin") ?? 'puj',
       initialsList: {},
       finalsList: {},
       tonesList: {},
@@ -217,6 +217,7 @@ export default {
       }
       // 重新设置选项 cookie
       setLocalOption("fuzzy-query", ruleKey);
+      setLocalOption("q-pron-default-pinyin", this.selectedPinyin);
     },
     initializeAccents() {
       this.fuzzyQueryList = Object.entries(getAccentsRules()).map(([key, rule]) => ({
