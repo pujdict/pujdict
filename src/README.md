@@ -21,7 +21,7 @@ actions:
     type: primary
   - text: 词汇查询
     icon: search
-    link: ./query/qpron
+    link: ./query/qphr
     type: primary
 
 #  - text: 文档
