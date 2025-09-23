@@ -31,6 +31,9 @@
                   <template v-for="(char, i) in result.teochew">
                     <template v-if="i">・</template>{{ char }}
                   </template>
+                  <template v-if="result.informal.length">
+                    [*<template v-for="(char, i) in result.informal"><template v-if="i">・</template>{{ char }}</template>]
+                  </template>
                 </h4>
                 <span class="me-1" v-for="(p, i) in result.puj">
                   <TPopupPuj :puj="p"/>
@@ -189,6 +192,7 @@ export default {
           cmn: phrase.cmn,
           desc: desc,
           examples: phrase.examples,
+          informal: phrase.informal,
           hasDetails: (!!desc.length || !!phrase.examples.length)
         });
       }
@@ -204,9 +208,12 @@ export default {
         result.push(...this.queryPhrase(phrase));
       }
       this.queryResult = result;
+      this.queryResultEmpty = (result.length === 0);
     },
     resetQuery() {
       this.queryInput = '';
+      this.queryResultEmpty = false;
+      this.queryResult = [];
     },
     onInitFromDatabaseFinished() {
       setLoading(false);
@@ -216,10 +223,14 @@ export default {
       }
       for (const phrase of phrases) {
         const teochew_list = phrase.teochew;
+        const informal_list = phrase.informal;
         const puj_list = phrase.puj;
         const cmn_list = phrase.cmn;
         for (let teochew of teochew_list) {
           pushIndex(this.teochewIndexing, teochew, phrase);
+        }
+        for (let informal of informal_list) {
+          pushIndex(this.teochewIndexing, informal, phrase);
         }
         for (let puj of puj_list) {
           pushIndex(this.pujIndexing, puj, phrase);
