@@ -47,9 +47,15 @@
                     <span v-if="result.desc" v-html="result.desc"></span>
                     <template v-for="(example, iExample) in result.examples">
                       <div class="border-top my-2"></div>
-                      <span class="me-1" v-if="example.teochew">{{ example.teochew }}</span>
-                      <span class="me-1" v-if="example.puj"><TPopupPuj :puj="example.puj"/></span>
-                      <span class="me-1 text-muted" v-if="example.mandarin">{{ example.mandarin }}</span>
+                      <template v-for="(teochew, i) in example.teochew">
+                        <span class="me-1"><template v-if="i">/</template>{{ teochew }}</span>
+                      </template>
+                      <template v-for="(p, i) in example.puj">
+                        <span class="me-1"><template v-if="i">/</template><TPopupPuj :puj="p"/></span>
+                      </template>
+                      <template v-for="(mandarin, i) in example.mandarin">
+                        <span class="me-1 text-muted"><template v-if="i">/</template>{{ mandarin }}</span>
+                      </template>
                     </template>
                   </div>
                 </div>
