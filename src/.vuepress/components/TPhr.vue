@@ -22,16 +22,16 @@
     </form>
     <div id="query-result" class="mt-4">
       <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
-      <div v-else class="row g-4">
+      <div v-else class="row g-3">
         <div class="col-12" v-for="result in queryResult">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
-                <h3 class="mb-1 me-2">
+                <h4 class="mb-1 me-2" style="margin-top: 0.3em">
                   <template v-for="(char, i) in result.teochew">
                     <template v-if="i">・</template>{{ char }}
                   </template>
-                </h3>
+                </h4>
                 <span class="me-1" v-for="(p, i) in result.puj">
                   <TPopupPuj :puj="p"/>
                 </span>
@@ -41,7 +41,7 @@
                   </template>
                 </span>
               </div>
-              <div class="card-body" style="padding: 10px 0">
+              <div class="card-body" style="padding: 0.2em 0" v-if="result.hasDetails">
                 <div class="card-text">
                   <div>
                     <span v-if="result.desc" v-html="result.desc"></span>
@@ -189,6 +189,7 @@ export default {
           cmn: phrase.cmn,
           desc: desc,
           examples: phrase.examples,
+          hasDetails: (!!desc.length || !!phrase.examples.length)
         });
       }
       return result;
