@@ -27,26 +27,28 @@
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
-                <h4 class="mb-1 me-2" style="margin-top: 0.3em">
-                  <template v-for="(char, i) in result.teochew">
-                    <template v-if="i"> · </template>{{ char }}
-                  </template>
-                  <template v-if="result.informal.length">
-                    [*<template v-for="(char, i) in result.informal"><template v-if="i"> · </template>{{ char }}</template>]
-                  </template>
-                </h4>
-                <span class="me-1" v-for="(p, i) in result.puj">
-                  <TPopupPuj :puj="p"/>
-                </span>
-                <span class="text-muted me-1">
-                  <template v-for="(cmn, i) in result.cmn">
-                    <template v-if="i">; </template>{{ cmn }}
-                  </template>
-                </span>
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                  <h4 class="mb-1 me-2" style="margin-top: 0.3em">
+                    <template v-for="(char, i) in result.teochew">
+                      <template v-if="i"> · </template>{{ char }}
+                    </template>
+                    <template v-if="result.informal.length">
+                      [*<template v-for="(char, i) in result.informal"><template v-if="i"> · </template>{{ char }}</template>]
+                    </template>
+                  </h4>
+                  <span class="me-1" v-for="(p, i) in result.puj">
+                    <TPopupPuj :puj="p"/>
+                  </span>
+                  <span class="text-muted me-1">
+                    <template v-for="(cmn, i) in result.cmn">
+                      <template v-if="i">; </template>{{ cmn }}
+                    </template>
+                  </span>
+                </div>
                 <div class="ms-auto">
                   <template v-for="(tag, i) in result.tagDisplay">
-                    <span 
-                      class="badge" 
+                    <span
+                      class="badge"
                       :style="{
                         'background-color': getRandomColor(tag),
                       }"
