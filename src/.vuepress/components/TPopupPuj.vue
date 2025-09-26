@@ -68,7 +68,7 @@ export default {
   props: {
     entries: {
       type: Array,
-      default: null,
+      default: [],
     },
     puj: {
       type: String,
