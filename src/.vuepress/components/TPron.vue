@@ -66,16 +66,16 @@
     </form>
     <hr/>
     <div id="query-result">
-      <div v-if="queryResultEmpty">没有找到符合条件的结果。</div>
+      <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
       <div v-else>
-        <ul>
-          <li v-for="(item, key) in queryResult" :key="key">
+        <ul class="list-group">
+          <li v-for="(item, key) in queryResult" :key="key" class="list-group-item">
             <span v-if="selectedPinyin === 'puj'">{{ convertPlainPUJSentenceToDisplayPUJInSentence(key) }}:</span>
             <span v-else>{{ convertPUJToDPSentence(key).slice(0, -1) }}</span>
             <span v-for="(toneItem, tone) in item" :key="tone">
               <span class="tone-number">{{ makeResultTone(tone) }}</span>
               <span class="query-result-entry" v-for="entry in toneItem">
-                <a target="_blank" :class="`query-result-entry-${entry.cat}`"
+                <a target="_blank" :class="`query-result-entry-${entry.cat} list-group-item-action`"
                    :href="withBase('query/qchar.html?chars=' + entry.char)">
                   <span>{{ entry.charSim }}</span>
                   <span v-if="entry.charSim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
