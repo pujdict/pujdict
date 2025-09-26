@@ -31,7 +31,7 @@
                 <span class="text-muted me-2"
                       v-if="result.entry.charSim !== result.entry.char">({{ result.entry.char }})</span>
                 <span class="text-muted me-2" v-if="result.entry.charRef">[{{ result.entry.charRef }}]</span>
-                <TPopupPuj :puj="result.puj"/>
+                <TPopupPuj :puj="result.puj" :entries="[result.entry]"/>
                 <span class="badge bg-primary me-2" v-if="result.entry.cat === 1">白</span>
                 <span class="badge bg-primary me-2" v-if="result.entry.cat === 2">文</span>
                 <span class="badge bg-primary me-2" v-if="result.entry.cat === 3">俗</span>

@@ -54,7 +54,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 
 <script lang="ts">
 import {
-  getAccentsRules,
+  getAccentsRules, getFuzzyPronunciation,
 } from "./QCommon.vue";
 import {
   forEachWordInSentence,
@@ -66,6 +66,10 @@ import {Pronunciation} from "./SCommon.js";
 
 export default {
   props: {
+    entries: {
+      type: Array,
+      default: null,
+    },
     puj: {
       type: String,
       required: true
@@ -101,11 +105,17 @@ export default {
       Object.entries(getAccentsRules()).forEach(([key, rule]) => {
         let display_puj = '';
         let display_dp = '';
+        let iWord = 0;
         forEachWordInSentence(this.puj, (word: string) => {
           let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
-          pron = rule.fuzzy(pron);
-          display_puj += convertPlainPUJSentenceToPUJSentence(pron.combination);
-          display_dp += convertPlainPUJSentenceToDPSentence(pron.combination);
+          if (iWord < this.entries.length && this.entries[iWord]) {
+            pron = getFuzzyPronunciation(key, this.entries[iWord]);
+          } else {
+            pron = rule.fuzzy(pron);
+          }
+          display_puj += convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`);
+          display_dp += convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`);
+          iWord++;
         }, (nonWord: string) => {
           if (nonWord == '--') nonWord = '·';
           display_puj += nonWord;
