@@ -43,6 +43,18 @@
                     <template v-if="i">; </template>{{ cmn }}
                   </template>
                 </span>
+                <div class="ms-auto">
+                  <template v-for="(tag, i) in result.tagDisplay">
+                    <span 
+                      class="badge" 
+                      :style="{
+                        'background-color': getRandomColor(tag),
+                      }"
+                    >
+                      {{ tag }}
+                    </span>
+                  </template>
+                </div>
               </div>
               <div class="card-body" style="padding: 0.2em 0" v-if="result.hasDetails">
                 <div class="card-text">
@@ -117,6 +129,7 @@ export default {
       pujIndexing: {},
       activePopupPhraseIndex: -1,
       activePopupPronunciationIndex: -1,
+      randomTagColor: {},
     };
   },
   watch: {
@@ -128,6 +141,19 @@ export default {
     // }
   },
   methods: {
+    getRandomColor(str: string): string {
+      if (this.randomTagColor[str]) return this.randomTagColor[str];
+      // Generate RGB color with good contrast
+      const randomBytes = new Uint32Array(4);
+      crypto.getRandomValues(randomBytes);
+      const r = randomBytes[0] / 0xffffffff * 96;
+      const g = randomBytes[1] / 0xffffffff * 96;
+      const b = randomBytes[2] / 0xffffffff * 96;
+      // const r = Math.floor(Math.random() * 156)/* + 100*/;
+      // const g = Math.floor(Math.random() * 156)/* + 100*/;
+      // const b = Math.floor(Math.random() * 156)/* + 100*/;
+      return this.randomTagColor[str] = `rgba(${r}, ${g}, ${b}, 0.5)`;
+    },
     formatDesc(desc: string) {
       if (!desc) return '';
       let result = desc;
@@ -193,6 +219,7 @@ export default {
           desc: desc,
           examples: phrase.examples,
           informal: phrase.informal,
+          tagDisplay: phrase.tagDisplay,
           hasDetails: (!!desc.length || !!phrase.examples.length)
         });
       }

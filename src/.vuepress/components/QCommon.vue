@@ -93,6 +93,12 @@ async function initFromDatabase() {
     const phrasesResponse = await phrasesPromise;
     const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
     phrases = phrasesData.phrases;
+    for (const phrase of phrases) {
+      phrase.tagDisplay = [];
+      for (let i = 0; i < phrase.tag.length; ++i) {
+        phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[phrase.tag]]);
+      }
+    }
 
     entriesCount = entries.length;
     initials = Array.from(new Set(entries.map(entry => entry.pron.initial))).sort();
