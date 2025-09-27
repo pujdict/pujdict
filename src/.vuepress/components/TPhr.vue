@@ -48,7 +48,7 @@
                 <div class="ms-auto">
                   <template v-for="(tag, i) in result.tagDisplay">
                     <span
-                      class="badge"
+                      class="badge ms-1"
                       :style="{
                         'background-color': getRandomColor(tag),
                       }"
@@ -136,14 +136,16 @@ export default {
       if (this.randomTagColor[str]) return this.randomTagColor[str];
       // Generate RGB color with good contrast
       const randomBytes = new Uint32Array(4);
+      const randomBytes2 = new Int32Array(4);
       crypto.getRandomValues(randomBytes);
-      const r = randomBytes[0] / 0xffffffff * 96;
-      const g = randomBytes[1] / 0xffffffff * 96;
-      const b = randomBytes[2] / 0xffffffff * 96;
+      crypto.getRandomValues(randomBytes2);
+      const r = randomBytes[0] / 0xffffffff * 136 + randomBytes2[0] % 40;
+      const g = randomBytes[1] / 0xffffffff * 136 + randomBytes2[1] % 40;
+      const b = randomBytes[2] / 0xffffffff * 136 + randomBytes2[2] % 40;
       // const r = Math.floor(Math.random() * 156)/* + 100*/;
       // const g = Math.floor(Math.random() * 156)/* + 100*/;
       // const b = Math.floor(Math.random() * 156)/* + 100*/;
-      return this.randomTagColor[str] = `rgba(${r}, ${g}, ${b}, 0.5)`;
+      return this.randomTagColor[str] = `rgba(${r}, ${g}, ${b}, 0.9)`;
     },
     formatDesc(desc: string) {
       if (!desc) return '';
