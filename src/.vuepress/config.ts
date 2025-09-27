@@ -120,7 +120,7 @@ export default defineUserConfig({
         icon: "file-lines",
         children: [
           {
-            text: "白话字拼音方案",
+            text: "白话字拼音方案与“老潮音”",
             link: "puj.md",
           },
           {
