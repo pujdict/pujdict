@@ -25,6 +25,24 @@
           </div>
         </fieldset>
 
+        <fieldset>
+          <legend class="col-form-label">默认拼音口音规则</legend>
+          <div class="form-check-inline" v-for="defaultPinyinDisplayFuzzyRule in defaultPinyinDisplayFuzzyRules">
+            <div class="form-check">
+              <input class="form-check-input"
+                     name="default-pinyin-display"
+                     type="radio"
+                     :id="`default-pinyin-display-${defaultPinyinDisplayFuzzyRule.value}`"
+                     :value="defaultPinyinDisplayFuzzyRule.value"
+                     v-model="customDefaultPinyinDisplayFuzzyRule"
+                     @change="onFormChanged"/>
+              <label class="form-check-label" :for="`default-pinyin-display-${defaultPinyinDisplayFuzzyRule.value}`">
+                {{ defaultPinyinDisplayFuzzyRule.name }}
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset class="form-group mb-2">
           <legend class="col-form-label">白话字第六声调符</legend>
           <div class="form-check-inline" v-for="toneMark in toneMarks6">
@@ -66,6 +84,7 @@
             <input id="query-button" class="btn btn-outline-primary" type="submit" value="保存"
                    :disabled="!canSave()"/>
           </div>
+          <img id="loading" :src="withBase('/loading.svg')" height="35" width="35" alt="加载中"/>
         </div>
       </div>
     </form>
@@ -75,12 +94,16 @@
 <script setup>
 import {darkThemeString} from "./QDarkTheme.vue";
 import TDarkTheme from "./TDarkTheme.vue";
+import {withBase} from "vuepress/client";
 </script>
 
 <script>
 import {
+  setLoading,
   setLocalOption,
   getLocalOption,
+  initFromDatabase,
+  getAccentsRules,
 } from "./QCommon.vue";
 import {DefaultLocalOptions} from "./SUtils";
 
@@ -96,6 +119,10 @@ export default {
         {value: "IPA", name: "国际音标"},
       ],
       customDefaultPinyinDisplay: DefaultLocalOptions['custom-default-pinyin-display'].split(';'),
+      defaultPinyinDisplayFuzzyRules: [
+        {value: "dummy", name: "辞典"},
+      ],
+      customDefaultPinyinDisplayFuzzyRule: 'dummy',
       toneMarks6: [
         {value: "\u0303", name: '波浪符 ◌̃'},
         {value: "\u0306", name: '短音符 ◌̆'},
@@ -128,6 +155,7 @@ export default {
       // setLocalOption('custom-puj-fuzzy-rules', customPujFuzzyRules);
       let customDefaultPinyinDisplay = this.customDefaultPinyinDisplay.join(';');
       setLocalOption('custom-default-pinyin-display', customDefaultPinyinDisplay);
+      setLocalOption('custom-default-pinyin-display-fuzzy-rule', this.customDefaultPinyinDisplayFuzzyRule);
       setLocalOption('custom-tone-mark-6', this.customToneMark6);
       setLocalOption('custom-tone-mark-8', this.customToneMark8);
     },
@@ -137,8 +165,19 @@ export default {
     // this.customPUJFuzzyRules = customPujFuzzyRules.split(';');
     const customDefaultPinyinDisplay = getLocalOption('custom-default-pinyin-display');
     this.customDefaultPinyinDisplay = customDefaultPinyinDisplay.split(';');
+    this.customDefaultPinyinDisplayFuzzyRule = getLocalOption('custom-default-pinyin-display-fuzzy-rule');
     this.customToneMark6 = getLocalOption('custom-tone-mark-6');
     this.customToneMark8 = getLocalOption('custom-tone-mark-8');
+    initFromDatabase().then(() => {
+      setLoading(false);
+      this.defaultPinyinDisplayFuzzyRules = [];
+      for (const [key, rule] of Object.entries(getAccentsRules())) {
+        this.defaultPinyinDisplayFuzzyRules.push({
+          value: key,
+          name: rule.name,
+        });
+      }
+    });
   }
 }
 </script>

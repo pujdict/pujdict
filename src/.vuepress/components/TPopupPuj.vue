@@ -18,7 +18,7 @@
             <button type="button" class="btn-close" @click="showModal = false"></button>
           </div>
           <div class="modal-body">
-            <template v-for="(pronunciation, key) in getPerAccentsPronunciations(puj)" :key="key">
+            <template v-for="(pronunciation, key) in generatePerAccentsPronunciations(puj)" :key="key">
               <template v-if="key !== 'dummy'">
                 <div class="d-flex align-items-baseline my-2">
                   <span class="badge border border-primary text-primary me-2">{{ pronunciation.name }}</span>
@@ -57,6 +57,7 @@ import {
   getAccentsRules, getFuzzyPronunciation,
 } from "./QCommon.vue";
 import {
+  FuzzyRuleBase,
   forEachWordInSentence,
   convertPlainPUJSentenceToPUJSentence,
   convertPlainPUJSentenceToDPSentence,
@@ -99,8 +100,15 @@ export default {
   },
   methods: {
     updateDisplay() {
-      this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
-      this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+      const defaultFuzzyRule = getLocalOption("custom-default-pinyin-display-fuzzy-rule");
+      if (defaultFuzzyRule === 'dummy') {
+        this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
+        this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+      } else {
+        const result = this.generateAccentPronunciation(defaultFuzzyRule);
+        this.display_puj = result.display_puj;
+        this.display_dp = result.display_dp;
+      }
       const customDefaultPinyinDisplay = getLocalOption('custom-default-pinyin-display').split(';');
       const displayList = [];
       if (customDefaultPinyinDisplay.includes('PUJ')) {
@@ -111,35 +119,40 @@ export default {
       }
       this.display = displayList.join('/');
     },
-    getPerAccentsPronunciations() {
-      let pronunciations = {};
+    generatePerAccentsPronunciations() {
       Object.entries(getAccentsRules()).forEach(([key, rule]) => {
-        let display_puj = '';
-        let display_dp = '';
-        let iWord = 0;
-        forEachWordInSentence(this.puj, (word: string) => {
-          let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
-          if (iWord < this.entries.length && this.entries[iWord]) {
-            pron = getFuzzyPronunciation(key, this.entries[iWord]);
-          } else {
-            pron = rule.fuzzy(pron);
-          }
-          display_puj += convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`);
-          display_dp += convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`);
-          iWord++;
-        }, (nonWord: string) => {
-          if (nonWord == '--') nonWord = '·';
-          display_puj += nonWord;
-          display_dp += nonWord;
-        });
-        pronunciations[key] = {
-          key: key,
-          name: rule.name,
-          display_puj: display_puj,
-          display_dp: display_dp,
-        };
+        this.generateAccentPronunciation(key);
       });
-      return pronunciations;
+      return this.perAccentsResult;
+    },
+    generateAccentPronunciation(accentKey: string) {
+      if (this.perAccentsResult[accentKey]) return this.perAccentsResult[accentKey];
+      const accentRule = getAccentsRules()[accentKey];
+      if (!accentRule) console.error(`Accent rule ${accentKey} not found`)
+      let display_puj = '';
+      let display_dp = '';
+      let iWord = 0;
+      forEachWordInSentence(this.puj, (word: string) => {
+        let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
+        if (iWord < this.entries.length && this.entries[iWord]) {
+          pron = getFuzzyPronunciation(accentKey, this.entries[iWord]);
+        } else {
+          pron = accentRule.fuzzy(pron);
+        }
+        display_puj += convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`);
+        display_dp += convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`);
+        iWord++;
+      }, (nonWord: string) => {
+        if (nonWord == '--') nonWord = '·';
+        display_puj += nonWord;
+        display_dp += nonWord;
+      });
+      return this.perAccentsResult[accentKey] = {
+        key: accentKey,
+        name: accentRule.name,
+        display_puj: display_puj,
+        display_dp: display_dp,
+      };
     },
   }
 };

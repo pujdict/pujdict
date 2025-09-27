@@ -13,6 +13,7 @@ const DefaultLocalOptions = {
   'custom-tone-mark-6': "\u0303",
   'custom-tone-mark-8': "\u0301",
   'custom-default-pinyin-display': "PUJ;DP",
+  'custom-default-pinyin-display-fuzzy-rule': "dummy",
 };
 
 function getLocalOption(optionName, $default = null) {
