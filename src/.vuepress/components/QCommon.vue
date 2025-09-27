@@ -96,7 +96,8 @@ async function initFromDatabase() {
     for (const phrase of phrases) {
       phrase.tagDisplay = [];
       for (let i = 0; i < phrase.tag.length; ++i) {
-        phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[phrase.tag]]);
+        const tag = phrase.tag[i];
+        phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[tag]]);
       }
     }
 
