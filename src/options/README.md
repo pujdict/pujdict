@@ -1,9 +1,11 @@
 ---
-title: 偏好设置
-icon: wrench
-order: 0
+title: 设置
+index: false
+icon: gear
+sidebar: false
+breadcrumb: false
 gitInclude:
-  - ../.vuepress/components/TPreference.vue
+- ../.vuepress/components/TPreference.vue
 ---
 
 <script setup>
@@ -11,4 +13,3 @@ import TPreference from '@components/TPreference.vue';
 </script>
 
 <TPreference />
-

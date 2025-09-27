@@ -89,7 +89,6 @@ export default defineUserConfig({
         "acknowledgments.md",
       ],
       '/tool/': [
-        "preference.md",
         "puj_unify.md",
         "puj_dp.md",
         "han_puj.md",
@@ -144,10 +143,6 @@ export default defineUserConfig({
         icon: "wrench",
         children: [
           {
-            text: "偏好设置",
-            link: "preference.md",
-          },
-          {
             text: "白话字注音",
             link: "puj_unify.md",
           },
@@ -161,6 +156,7 @@ export default defineUserConfig({
           },
         ]
       },
+      "/options/",
     ],
     plugins: {
       git: {
