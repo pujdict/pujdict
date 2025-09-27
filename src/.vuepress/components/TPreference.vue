@@ -3,15 +3,6 @@
   <div v-bind:data-bs-theme="darkThemeString">
     <form @submit.prevent="saveAction">
       <div class="row">
-
-        <fieldset class="form-group mb-2">
-          <legend class="col-form-label" for="custom-puj-fuzzy-rule">自定义白话字口音规则</legend>
-          <textarea class="form-control" id="custom-puj-fuzzy-rule" rows="8"
-                    v-model="customPUJFuzzyRule"
-                    :placeholder="defaultCustomPUJFuzzyRule"
-                    @keydown="onFormChanged"></textarea>
-        </fieldset>
-
         <fieldset class="form-group mb-2">
           <legend class="col-form-label">第六声调符</legend>
           <div class="form-check-inline" v-for="toneMark in toneMarks6">
@@ -72,19 +63,10 @@ import {
 
 export default {
   data() {
-    const defaultCustomPUJFuzzyRule = `(puj) => {
-  let result = new Pronunciation(puj.initial, puj.final, puj.tone);
-  // 请在此处编写自定义规则，可修改其中的 initial final tone 变量
-  // if (result.initial == 'ts' && result.final.startsWith('i')) result.initial = 'ch';
-  // if (result.final == 'io') result.final = 'ie';
-  // if (result.tone == 6) result.tone = 3;
-  return result;
-}
-`;
     return {
       formChanged: false,
-      defaultCustomPUJFuzzyRule: defaultCustomPUJFuzzyRule,
-      customPUJFuzzyRule: defaultCustomPUJFuzzyRule,
+      availableFuzzyRules: [],
+      customPUJFuzzyRules: [],
       toneMarks6: [
         {value: "\u0303", name: '波浪符 ◌̃'},
         {value: "\u0306", name: '短音符 ◌̆'},
@@ -105,13 +87,15 @@ export default {
     },
     saveAction() {
       this.formChanged = false;
-      setLocalOption('custom-puj-fuzzy-rule', this.customPUJFuzzyRule);
+      // let customPujFuzzyRules = this.customPUJFuzzyRules.join(';');
+      // setLocalOption('custom-puj-fuzzy-rules', customPujFuzzyRules);
       setLocalOption('custom-tone-mark-6', this.customToneMark6);
       setLocalOption('custom-tone-mark-8', this.customToneMark8);
     },
   },
   mounted() {
-    this.customPUJFuzzyRule = getLocalOption('custom-puj-fuzzy-rule', this.customPUJFuzzyRule);
+    // let customPujFuzzyRules = getLocalOption('custom-puj-fuzzy-rules', '');
+    // this.customPUJFuzzyRules = customPujFuzzyRules.split(';');
     this.customToneMark6 = getLocalOption('custom-tone-mark-6', this.customToneMark6);
     this.customToneMark8 = getLocalOption('custom-tone-mark-8', this.customToneMark8);
   }
