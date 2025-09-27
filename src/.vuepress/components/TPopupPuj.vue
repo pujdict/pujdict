@@ -6,7 +6,7 @@
        class="text-primary card-popup-text"
        style="text-decoration: none;"
     >
-      {{ display_puj }}
+      {{ display }}
     </a>
 
     <!-- 模态框 -->
@@ -63,6 +63,7 @@ import {
   convertPlainPUJToPronunciationWord,
 } from "./SPuj.js";
 import {Pronunciation} from "./SCommon.js";
+import {getLocalOption} from "./SUtils";
 
 export default {
   props: {
@@ -81,6 +82,7 @@ export default {
       result: '',
       display_puj: '',
       display_dp: '',
+      display: '',
       perAccentsResult: {},
     };
   },
@@ -99,6 +101,15 @@ export default {
     updateDisplay() {
       this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
       this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+      const customDefaultPinyinDisplay = getLocalOption('custom-default-pinyin-display').split(';');
+      const displayList = [];
+      if (customDefaultPinyinDisplay.includes('PUJ')) {
+        displayList.push(this.display_puj);
+      }
+      if (customDefaultPinyinDisplay.includes('DP')) {
+        displayList.push(this.display_dp);
+      }
+      this.display = displayList.join('/');
     },
     getPerAccentsPronunciations() {
       let pronunciations = {};

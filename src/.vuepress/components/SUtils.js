@@ -9,10 +9,16 @@ function setLocalOption(optionName, optionValue) {
   }
 }
 
+const DefaultLocalOptions = {
+  'custom-tone-mark-6': "\u0303",
+  'custom-tone-mark-8': "\u0301",
+  'custom-default-pinyin-display': "PUJ;DP",
+};
+
 function getLocalOption(optionName, $default = null) {
   if (typeof document === 'undefined') return $default;
   try {
-    return localStorage.getItem(`pujdict-${optionName}`) ?? $default;
+    return localStorage.getItem(`pujdict-${optionName}`) ??  DefaultLocalOptions[optionName] ?? $default;
     // return VueCookies.get(optionName) ?? $default;
     // return $.cookie(optionName);
   } catch (e) {
@@ -67,6 +73,7 @@ function isChineseChar(c) {
 }
 
 export {
+  DefaultLocalOptions,
   setUrlQueryParameter,
   resetUrlQueryParameter,
   getLocalOption,

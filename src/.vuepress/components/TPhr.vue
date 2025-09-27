@@ -104,17 +104,6 @@ import {
   db, entries, accents, phrases, entriesCount, initials, finals, combinations,
   isChineseChar,
 } from './QCommon.vue';
-import {
-  addPUJToneMarkSentence,
-  addPUJToneMarkWord,
-  addPUJToneMarkAndConvertToDisplayPUJSentence,
-  convertPUJToDPSentence,
-  convertPUJPronunciationToDPPronunciation,
-  convertPUJPronunciationToFanQiePronunciation,
-  convertPUJPronunciationToIPAPronunciation,
-  convertPlainPUJSentenceToPUJSentence,
-  convertPlainPUJSentenceToDPSentence,
-} from './SPuj.js';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 
