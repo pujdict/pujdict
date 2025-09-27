@@ -37,7 +37,7 @@
                     </template>
                   </h4>
                   <span class="me-1" v-for="(p, i) in result.puj">
-                    <TPopupPuj :puj="p"/>
+                    <TPopupPuj :puj="p" :key="p"/>
                   </span>
                   <span class="text-muted me-1">
                     <template v-for="(cmn, i) in result.cmn">
@@ -68,7 +68,7 @@
                         <span class="me-1"><template v-if="i">/</template>{{ teochew }}</span>
                       </template>
                       <template v-for="(p, i) in example.puj">
-                        <span class="me-1"><template v-if="i">/</template><TPopupPuj :puj="p"/></span>
+                        <span class="me-1"><template v-if="i">/</template><TPopupPuj :puj="p" :key="p"/></span>
                       </template>
                       <template v-for="(mandarin, i) in example.mandarin">
                         <span class="me-1 text-muted"><template v-if="i">/</template>{{ mandarin }}</span>
@@ -220,7 +220,6 @@ export default {
     },
     queryPhrases() {
       this.queryResult = [];
-      this.renderPopupPujElements();
       let charsInput = this.queryInput;
       let phrases = charsInput.split([' ', ',']);
       let result = [];
