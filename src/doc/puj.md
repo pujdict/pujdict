@@ -128,15 +128,15 @@ flowchart
 
 现代潮州话共有以下 7 个单元音：
 
-| 例字   | 白话字   | 潮拼  | 国际音标 |
-|------|-------|-----|------|
-| 亚^1^ | a     | a   | a    |
-| 窝    | o     | o   | o    |
-| 余^2^ | ṳ/ur  | e   | ɯ    |
-| 倭^3^ | o̤/er | er  | ə    |
-| 哑    | e     | ê   | e    |
-| 衣^4^ | i     | i   | i    |
-| 污    | u     | u   | u    |
+| 例字   | 白话字      | 潮拼 | 国际音标 |
+|------|----------|----|------|
+| 亚^1^ | a        | a  | a    |
+| 窝    | o        | o  | o    |
+| 余^2^ | ṳ/ur/ir  | e  | ɯ    |
+| 倭^3^ | o̤/or/er | er | ə    |
+| 哑    | e        | ê  | e    |
+| 衣^4^ | i        | i  | i    |
+| 污    | u        | u  | u    |
 
 ::: note
 
@@ -149,13 +149,13 @@ flowchart
 2. ṳ 在潮阳等地并入 u。在泉漳片闽南语，包括台湾强势腔中也多并入 u 或 i，因此该韵母在台罗中也没有明确标准。泉漳潮各地的闽南语白话字拼音方案中有许多不同写法，包括但不限于
    ṳ/ü/ɨ/ᵻ/ur/ir 等等。杜嘉德《厦英大辞典》中记为 u 上加两点，即 ü，但考虑到在字母上方标记声调时比较拥挤，本辞典采用卓威廉词典中的写法，即字母
    u 下加两点。输入不方便时，建议用 ur 或其他变体写法代替。
-3. o̤ 主要存在于果、蟹摄一等字，以及山摄一等合口入声字白读层，例如：袋 <TPuj puj="tr7"/>、块 <TPuj puj="kr3"/>
-   、胎 <TPuj puj="thr1"/>、
-   罪 <TPuj puj="tsr6"/>、坐 <TPuj puj="tsr6"/>、夺 <TPuj puj="trh8"/>。
+3. o̤ 主要存在于果、蟹摄一等字，以及山摄一等合口入声字白读层，例如：袋 <TPuj puj="tor7"/>、块 <TPuj puj="kor3"/>
+   、胎 <TPuj puj="thor1"/>、
+   罪 <TPuj puj="tsor6"/>、坐 <TPuj puj="tsor6"/>、夺 <TPuj puj="torh8"/>。
    该韵母在今天潮汕片闽南语中大多并入 o，但在陆丰、漳州、厦门、台湾强势腔中该韵母并入 e；在泉州，依然保留 [ə] 的音，并与
    o [o]、e [e] 韵母保持对立。为了能够兼容陆丰地区的发音，本辞典依然保留该韵母以便区分于 o/e，其记法取自泉州话白话字。泉州话白话字中将其记为
    o 上加两点，即 ö，本辞典与 ṳ 保持一致记为下加两点。
-   输入不方便时，建议用 er 或其他变体写法代替。
+   输入不方便时，建议用 or/er 或其他变体写法代替。
    该韵母曾在晚清时期的潮州话中存在——高德《汉英潮州方言字典》（1883）的序言中提到：
    > The ù in such words as 汝, 去, lù, kù is sometimes pronounced u; as lu, ku. Also ù in such words as 代, 塊 tù kù is often pronounced ò; as tò, kò; and it may be remarked that when the ù
    sound
@@ -336,7 +336,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 但在书写汉字时，轻声调可能是比较难以直接通过文字判断的。
 在排版方便的时候，建议在可能出现歧义的轻声调中，在轻声调的单词使用着重号 ◌̣ 或者粗体、斜体等不同字体来做区分。
 
-- 你烦恼？<TPuj puj="Lv2-huan5-lo2?"/>（你操心什么？）——你*烦恼*？<TPuj puj="Lv2--huan5-lo2?"/>（要你来操心？）
+- 你烦恼？<TPuj puj="Lur2-huan5-lo2?"/>（你操心什么？）——你*烦恼*？<TPuj puj="Lur2--huan5-lo2?"/>（要你来操心？）
 - 后日。<TPuj puj="Au6-jit8."/>（以后，之后的某一天）——后*日*。<TPuj puj="Au6--jit8."/>（后天，专指明天的明天）
 - 记者。<TPuj puj="Ki3-tsia2."/>（新闻记者）——记*者*。<TPuj puj="Ki3--tsia2."/>（做记录的人）
 
@@ -350,14 +350,14 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 （作词：陈小奇 作曲：宋书华 主唱：宋亦乐）
 
 一片痴情是苦恋 <TPuj puj="Tsek8-phian3-tshi1-tsheng5 si6-khou2-luan3"/>  
-十字路边把你呼喊 <TPuj puj="Tsap8-ji7-lou7-pinn1 pa2-lv2 hu1-ham3"/>  
+十字路边把你呼喊 <TPuj puj="Tsap8-ji7-lou7-pinn1 pa2-lur2 hu1-ham3"/>  
 当初咱山盟海誓 <TPuj puj="Tng1-tsho1 nan2 suann1-meng5 hai2-si7"/>  
 为何如今对影只一人 <TPuj puj="Ui5-ho5-ju5-kim1 tui3-iann2 tsi2-tsek8-nang5"/>  
-心头千般相思意 <TPuj puj="Sim1-thau5 tshoinn1-puann1 siang1-sv1-i3"/>  
+心头千般相思意 <TPuj puj="Sim1-thau5 tshoinn1-puann1 siang1-sur1-i3"/>  
 夜夜梦中泪不干 <TPuj puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
 情痴痴 我痴痴等 <TPuj puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
 多少风雨多少无奈 <TPuj puj="To1-tsio2-huang1-hou6 to1-tsio2-bo5-nai6"/>  
-你可明白这地老天荒 <TPuj puj="Lv2 kho2-meng5-peh8-tse2-ti7-lau2 thian1-huang1"/>
+你可明白这地老天荒 <TPuj puj="Lur2 kho2-meng5-peh8-tse2-ti7-lau2 thian1-huang1"/>
 
 ## 记录标准与转读规则
 
