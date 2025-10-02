@@ -12,6 +12,8 @@ from fontTools.ttLib.woff2 import compress as woff2_compress
 from puj import *
 
 FONTS_DIR = '../assets/fonts'
+DOWNLOAD_TEMP_DIR = './assets/fonts/.tmp'
+os.makedirs(DOWNLOAD_TEMP_DIR, exist_ok=True)
 
 
 def is_cjk_basic(c):
@@ -20,11 +22,11 @@ def is_cjk_basic(c):
 
 TEMP_DIR = tempfile.mkdtemp()
 
-NOTO_SANS_SC_PATH = os.path.join(FONTS_DIR, 'NotoSansSC-Regular.otf')
+NOTO_SANS_SC_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'NotoSansSC-Regular.otf')
 BASIC_SUBSET_FONT_NAME_OTF = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generated.otf')
 BASIC_SUBSET_FONT_NAME_WOFF2 = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generated.woff2')
 
-PLANGOTHIC_PATH = os.path.join(FONTS_DIR, 'Plangothic.ttc')
+PLANGOTHIC_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'Plangothic.ttc')
 SUBSET_FONT_NAME1 = 'CJKExtSubset1'
 SUBSET_FONT_NAME2 = 'CJKExtSubset2'
 SUBSET_FONT_NAME_TTF1 = os.path.join(TEMP_DIR, 'CJKExtSubset1.generated.ttf')
@@ -41,7 +43,7 @@ def ensure_noto_sans_sc():
 
 def ensure_plangothic():
     if not os.path.exists(PLANGOTHIC_PATH):
-        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic-Project/raw/main/fonts/static/Plangothic.ttc'
+        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project/raw/main/fonts/otf/Plangothic.ttc'
         urllib.request.urlretrieve(url, PLANGOTHIC_PATH)
 
 
@@ -109,6 +111,20 @@ def get_chars():
             continue
         if not is_cjk_basic(char_sim):
             result.add(char_sim)
+
+    with open('pujdict-base/data/phrases.yml', 'r', encoding='utf-8') as f:
+        yaml_phrases = yaml.load(f, yaml.Loader)
+
+    phrases = []
+    for i, yaml_phrase in enumerate(yaml_phrases):
+        k, v = next(iter(yaml_phrase.items()))
+        teochew_list, puj_list, cmn_list, word_class_list, tag_list = k.split('|')
+        teochew_list = teochew_list.split('/')
+        for teochew in teochew_list:
+            for char in teochew:
+                if not is_cjk_basic(char):
+                    result.add(char)
+
     return result
 
 
