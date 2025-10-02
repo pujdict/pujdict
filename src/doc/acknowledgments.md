@@ -1,6 +1,5 @@
 ---
 title: 鸣谢
-icon: handshake
 order: 10001
 #hide: [toc, navigation]
 ---

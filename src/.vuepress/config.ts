@@ -84,7 +84,8 @@ export default defineUserConfig({
       ],
       '/doc/': [
         "puj.md",
-        "dp_fq.md",
+        "pinyin.md",
+        "latin_written.md",
         "bib.md",
         "acknowledgments.md",
       ],
@@ -119,22 +120,11 @@ export default defineUserConfig({
         prefix: "/doc/",
         icon: "file-lines",
         children: [
-          {
-            text: "白话字拼音方案与“老潮音”",
-            link: "puj.md",
-          },
-          {
-            text: "扩展潮拼与反切",
-            link: "dp_fq.md",
-          },
-          {
-            text: "参考文献",
-            link: "bib.md",
-          },
-          {
-            text: "鸣谢",
-            link: "acknowledgments.md",
-          },
+          "puj.md",
+          "pinyin.md",
+          "latin_written.md",
+          "bib.md",
+          "acknowledgments.md",
         ]
       },
       {

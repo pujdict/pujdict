@@ -1,6 +1,5 @@
 ---
 title: 参考文献
-icon: book-open
 order: 10000
 #hide: [toc, navigation]
 ---

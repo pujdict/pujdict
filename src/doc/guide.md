@@ -1,6 +1,5 @@
 ---
 title: 凡例
-icon: hashtag
 order: 100
 ---
 
