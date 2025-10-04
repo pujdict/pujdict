@@ -196,7 +196,7 @@ export default {
 
       if (this.selectedPinyin === 'dp') {
         this.initialsList = fuzzyInitials.map(item => {
-          return {key: item, display: convertPUJInitialOrFinalToDP(item)};
+          return {key: item, display: item === '' ? '0' : convertPUJInitialOrFinalToDP(item)};
         });
         this.finalsList = fuzzyFinals.map(item => {
           return {key: item, display: convertPUJInitialOrFinalToDP(item)};
@@ -206,7 +206,7 @@ export default {
         });
       } else {
         this.initialsList = fuzzyInitials.map(item => {
-          return {key: item, display: item};
+          return {key: item, display: item === '' ? '0' : item};
         });
         this.finalsList = fuzzyFinals.map(item => {
           return {key: item, display: convertPlainPUJSentenceToDisplayPUJInSentence(item)};
