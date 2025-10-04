@@ -97,10 +97,10 @@ class FuzzyRuleBase {
 }
 
 const AtomicFuzzyRule = {
-  UR_As_U: result => { if (result.final === 'v') result.final = 'u'; },
-  OR_As_O: result => { if (result.final === 'r') result.final = 'o'; },
-  OR_As_E: result => { if (result.final === 'r') result.final = 'e'; },
-  ORH_As_OH: result => { if (result.final === 'rh') result.final = 'oh'; },
+  UR_As_U: result => { if (result.final === 'ur') result.final = 'u'; },
+  OR_As_O: result => { if (result.final === 'or') result.final = 'o'; },
+  OR_As_E: result => { if (result.final === 'or') result.final = 'e'; },
+  ORH_As_OH: result => { if (result.final === 'orh') result.final = 'oh'; },
   EU_As_IU: result => { if (result.final === 'eu') result.final = 'iu'; },
   OINN_As_AINN: result => { if (result.final === 'oinn') result.final = 'ainn'; },
   UOINN_As_UINN: result => { if (result.final === 'uoinn') result.final = 'uinn'; },
@@ -108,7 +108,7 @@ const AtomicFuzzyRule = {
   OI_As_UE: result => { if (result.initial.match(/^(p|ph|m|b)$/)) result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1'); },
   OU_As_AU: result => { if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au'); },
   UE_As_UEI: result => { result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1'); },
-  VN_As_IN: result => { result.final = result.final.replace(/^v([nt])$/, 'i$1'); },
+  URN_As_IN: result => { result.final = result.final.replace(/^ur([nt])$/, 'i$1'); },
   IN_As_EN: result => { result.final = result.final.replace(/^i([nt])$/, 'e$1'); },
   UENG_As_ENG: result => { if (result.final === 'ueng') result.final = result.initial === '' ? 'eng' : 'uang'; },
   UEK_As_UAK: result => { if (result.final === 'uek') result.final = 'uak'; },
@@ -136,7 +136,7 @@ const AtomicFuzzyRule = {
     if (result.final === 'ek') result.final = 'et';
   },
   NG_As_UNG: result => { if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng') result.final = 'ung'; },
-  NG_As_VNG: result => { if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '') result.final = 'vng'; },
+  NG_As_URNG: result => { if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '') result.final = 'urng'; },
   IONG_As_ONG: result => {
     if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong') result.final = 'ong';
     if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok') result.final = 'ok';
