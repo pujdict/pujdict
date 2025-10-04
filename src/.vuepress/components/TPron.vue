@@ -89,13 +89,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {withBase} from "vuepress/client";
 import {darkThemeString} from "./QDarkTheme.vue";
 import TDarkTheme from "./TDarkTheme.vue";
 </script>
 
-<script>
+<script lang="ts">
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
@@ -117,6 +117,7 @@ import {
   convertPUJInitialOrFinalToDP,
 } from './SPuj.js';
 import jquery from 'jquery';
+import {pujpb} from "./SPujPb";
 
 const $ = jquery;
 
@@ -225,24 +226,37 @@ export default {
 
       for (const [accentId, accentRule] of Object.entries(getAccentsRules())) {
         let accentEntries = this.accentEntriesMap[accentId] = [];
-        for (const entry of entries) {
-          const allPossibleProns = [];
-          const pushPossiblePron = (pron) => {
-            allPossibleProns.push(pron);
-          };
+        for (const entry: pujpb.Entry of entries) {
+          let allPossibleProns = [];
           const fuzzyPron = accentRule.fuzzy(entry.pron);
-          pushPossiblePron(fuzzyPron);
-          if (entry.accentsNasalized.includes(accentId)) {
+          allPossibleProns.push(fuzzyPron);
+          // 特殊鼻化发音
+          if (entry.accentsNasalized.indexOf(accentId) !== -1) {
             const nasalizedPron = structuredClone(fuzzyPron);
             nasalizedPron.final += 'nn';
-            pushPossiblePron(nasalizedPron);
+            allPossibleProns.push(nasalizedPron);
           }
           for (const pronAka of entry.pronAka) {
             if (pronAka.accentId === accentId) {
-              for (const pron of pronAka.prons)
-                pushPossiblePron(pron);
               if (pronAka.replace)
-                allPossibleProns.shift();
+                allPossibleProns = [];
+              for (const pron of pronAka.prons)
+                allPossibleProns.push(pron);
+              break;
+            }
+          }
+          // 如果声母为 m n ng，韵母鼻化韵可与阴声韵互查，方便使用。辞典原数据的发音则不加这个优化
+          if (accentId !== 'dummy') {
+            if (fuzzyPron.initial === 'm' || fuzzyPron.initial === 'n' || fuzzyPron.initial === 'ng') {
+              if (fuzzyPron.final.endsWith('nn')) {
+                const denasalizedPron = structuredClone(fuzzyPron);
+                denasalizedPron.final = denasalizedPron.final.replace('nn', '');
+                allPossibleProns.push(denasalizedPron);
+              } else if (fuzzyPron.final.match(/[aoeiur]/)) {
+                const nasalizedPron = structuredClone(fuzzyPron);
+                nasalizedPron.final += 'nn';
+                allPossibleProns.push(nasalizedPron);
+              }
             }
           }
           for (const pron of allPossibleProns) {
@@ -398,6 +412,7 @@ export default {
     },
   },
   mounted() {
+    setLoading(true);
     $("#reset-button").click(function () {
       this.blur();
     });

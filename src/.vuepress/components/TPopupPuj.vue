@@ -153,7 +153,10 @@ export default {
             if (entry) {
               if (entry.accentsNasalized.includes(accentKey)) {
                 curPuj += '(nn)';
-                curDp += '(n)';
+                if (curDp[curDp.length - 1].match(/\d/))
+                  curDp = curDp.slice(0, curDp.length - 1) + '(n)' + curDp[curDp.length - 1];
+                else
+                  curDp += '(n)';
               }
               for (const pronAka of entry.pronAka) {
                 if (pronAka.accentId === accentKey) {

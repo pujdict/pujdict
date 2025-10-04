@@ -90,16 +90,13 @@ async function initFromDatabase() {
         switch (action.action) {
           case 'final':
             fuzzyFunction = (pron: pujpb.IPronunciation) => {
-              console.debug(`Running rule ${fuzzyRuleId} on ${pron.initial} ${pron.final}`);
+              // console.debug(`Running rule ${fuzzyRuleId} on ${pron.initial} ${pron.final}`);
               pron.final = pron.final.replace(re, action.replacementDollar);
             };
             break;
           case 'initial+final':
             fuzzyFunction = (pron: pujpb.IPronunciation) => {
-              if (fuzzyRuleId == pujpb.FuzzyRule.FR_N_As_NG) {
-                console.log();
-              }
-              console.debug(`Running rule ${pujpb.FuzzyRule[fuzzyRuleId]} on ${pron.initial} ${pron.final}`);
+              // console.debug(`Running rule ${pujpb.FuzzyRule[fuzzyRuleId]} on ${pron.initial} ${pron.final}`);
               const initialFinal = `${pron.initial}${pron.final}`;
               const newInitialFinal = initialFinal.replace(re, action.replacementDollar);
               const match = newInitialFinal.match(regexpWordOptional);
@@ -153,7 +150,6 @@ async function initFromDatabase() {
     initials = Array.from(new Set(entries.map(entry => entry.pron.initial))).sort();
     finals = Array.from(new Set(entries.map(entry => entry.pron.final))).sort();
     combinations = Array.from(new Set(entries.map(entry => entry.pron)));
-    console.log();
   }
 
   await load();
