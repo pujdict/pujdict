@@ -184,7 +184,7 @@ export default {
       // 目前的各地口音暂不需要区别，按这个固定的顺序来。
       // （唇齿音作为自由变体暂不考虑引入，等有朝一日轻重唇真正意义上产生对立了再说吧）
       // fuzzyInitials = [...fuzzyInitials].sort();
-      fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '',]
+      fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '0',]
       fuzzyFinals = [...fuzzyFinals].sort();
       // fuzzyTones = [...fuzzyTones].sort();
       // 目前的所谓七声调类型的惠来、潮阳，事实上还没有完全变为七声调，他们存在单字调的合并，但在连读变调时，依然能够区分。
@@ -309,7 +309,8 @@ export default {
       } else {
         for (const item of this.accentEntriesMap[accentId]) {
           const [, fuzzyPron] = item;
-          const matchInitial = !queryInitials || queryInitials.has(fuzzyPron.initial);
+          const initial = fuzzyPron.initial === '' ? '0' : fuzzyPron.initial;
+          const matchInitial = !queryInitials || queryInitials.has(initial);
           const matchFinal = !queryFinals || queryFinals.has(fuzzyPron.final);
           const matchTone = !queryTones || queryTones.has(fuzzyPron.tone);
           if (matchInitial && matchFinal && matchTone) {
