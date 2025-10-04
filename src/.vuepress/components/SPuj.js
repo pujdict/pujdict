@@ -702,6 +702,7 @@ function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = fa
 }
 
 export {
+  regexpWordOptional,
   AtomicFuzzyRule,
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy,

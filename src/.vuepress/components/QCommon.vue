@@ -30,7 +30,7 @@ import {
 import {
   AtomicFuzzyRule,
   FuzzyRulesGroup,
-  FuzzyRulesGroup_Dummy,
+  FuzzyRulesGroup_Dummy, regexpWordOptional,
 } from "./SPuj.js";
 
 function makeEntryFromJson(json) {
@@ -59,6 +59,7 @@ var entries : pujpb.IEntry[] = [];
 // key: char; value: list of possible entries
 var entriesCharMap = {}
 var accents : pujpb.IAccent[] = [];
+var fuzzyRulesAction: Map<pujpb.FuzzyRule, Function> = new Map();
 var phrases : pujpb.IPhrase[] = [];
 var entriesCount = 0;
 var initials = [];
@@ -78,14 +79,49 @@ async function initFromDatabase() {
 
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
     accents = accentsData.accents;
-    for (const accent of accents) {
-      let rules = [];
-      for (const rule of accent.rules) {
-        let ruleString = pujpb.FuzzyRule[rule];
-        ruleString = ruleString.replace('FR_', '');
-        rules.push(ruleString);
+
+    const fuzzyRuleDescriptors = accentsData.fuzzyRuleDescriptors;
+    for (const fuzzyRuleDescriptor of fuzzyRuleDescriptors) {
+      const fuzzyRuleId: pujpb.FuzzyRule = fuzzyRuleDescriptor.id;
+      const fuzzyFunctions = [];
+      for (const action of fuzzyRuleDescriptor.actions) {
+        let fuzzyFunction = null;
+        const re = new RegExp(action.pattern);
+        switch (action.action) {
+          case 'final':
+            fuzzyFunction = (pron: pujpb.IPronunciation) => {
+              console.debug(`Running rule ${fuzzyRuleId} on ${pron.initial} ${pron.final}`);
+              pron.final = pron.final.replace(re, action.replacementDollar);
+            };
+            break;
+          case 'initial+final':
+            fuzzyFunction = (pron: pujpb.IPronunciation) => {
+              if (fuzzyRuleId == pujpb.FuzzyRule.FR_N_As_NG) {
+                console.log();
+              }
+              console.debug(`Running rule ${pujpb.FuzzyRule[fuzzyRuleId]} on ${pron.initial} ${pron.final}`);
+              const initialFinal = `${pron.initial}${pron.final}`;
+              const newInitialFinal = initialFinal.replace(re, action.replacementDollar);
+              const match = newInitialFinal.match(regexpWordOptional);
+              if (!match) {
+                console.error('Initial & final not matched: ' + newInitialFinal);
+                return;
+              }
+              pron.initial = match.groups.initial ?? '';
+              pron.final = match.groups.final ?? '';
+            };
+            break;
+          default:
+            fuzzyFunction = () => {
+            };
+            console.error('Unknown fuzzy rule action ' + action.action);
+            break;
+        }
+        fuzzyFunctions.push(fuzzyFunction);
       }
-      accent.rulesStrings = rules;
+      fuzzyRulesAction.set(fuzzyRuleId, (pron: pujpb.IPronunciation) => {
+        fuzzyFunctions.forEach(fuzzyFunction => { fuzzyFunction(pron); });
+      });
     }
 
     const entriesResponse = await entriesPromise;
@@ -132,12 +168,11 @@ const getAccentsRules = function () {
     for (const accent of accents) {
       const id = accent.id;
       const area = accent.area;
-      const rulesStrings = accent.rulesStrings;
+      const rulesIds = accent.rules;
       const accentTones = accent.tones;
       let rules = [];
-      for (const rule of rulesStrings) {
-        // rule string is the property of AtomicFuzzyRule
-        rules.push(AtomicFuzzyRule[rule]);
+      for (const ruleId of rulesIds) {
+        rules.push(fuzzyRulesAction.get(ruleId));
       }
       fuzzyRules[id] = new FuzzyRulesGroup(area, accentTones, rules);
     }
