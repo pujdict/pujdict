@@ -9,7 +9,7 @@ bgImageStyle:
   background-attachment: fixed
 heroText: 潮汕方言白话字辞典
 tagline: |
-  整理潮汕方言汉字读音，兼容潮汕各地语音。
+  开源的轻量级潮汕方言辞典，兼容各地语音。
 actions:
   - text: 声韵索引
     icon: search

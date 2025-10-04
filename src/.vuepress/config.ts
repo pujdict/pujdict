@@ -21,6 +21,7 @@ export default defineUserConfig({
   base: process.env.VUE_APP_BASEURL || "/",
   lang: "zh-CN",
   title: "潮汕方言白话字辞典",
+  description: "开源的轻量级潮汕方言辞典，兼容各地语音，支持潮拼与白话字两种拼音方案，查询响应迅速。",
   alias: {
     '@src': path.resolve(__dirname, ".."),
     '@components': path.resolve(__dirname, "components"),
@@ -36,7 +37,7 @@ export default defineUserConfig({
   //   },
   // }),
   head: [
-    ["meta", {name: "keywords", content: "潮州话, 潮汕话, 潮汕方言, 白话字, 辞典"}]
+    ["meta", {name: "keywords", content: "潮州话, 潮汕话, 潮汕方言, 辞典, 字典, 词典, 白话字, 潮拼"}]
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
