@@ -17,7 +17,7 @@ import {
   Pronunciation,
 } from "./SCommon.js";
 
-import {pujpb} from "./SPujPb.js";
+import {pujpb} from "./SPujPb";
 
 import {
   setLocalOption,
@@ -55,11 +55,11 @@ function makeEntryFromSqlResult(sqlResult) {
 
 // 改用 protobuf
 var db = null;
-var entries : pujpb.Entry[] = [];
+var entries : pujpb.IEntry[] = [];
 // key: char; value: list of possible entries
 var entriesCharMap = {}
-var accents : pujpb.Accent[] = {};
-var phrases : pujpb.Phrase[] = [];
+var accents : pujpb.IAccent[] = [];
+var phrases : pujpb.IPhrase[] = [];
 var entriesCount = 0;
 var initials = [];
 var finals = [];
