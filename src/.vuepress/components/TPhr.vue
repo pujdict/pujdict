@@ -37,7 +37,7 @@
                     </template>
                   </h4>
                   <span class="me-1" v-for="(p, i) in result.puj">
-                    <TPopupPuj :puj="p" :key="p"/>
+                    <TPopupPuj :puj="p" :key="p" :charsList="[...result.teochew, ...result.informal]"/>
                   </span>
                   <span class="text-muted me-1">
                     <template v-for="(cmn, i) in result.cmn">

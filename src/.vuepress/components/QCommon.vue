@@ -56,6 +56,8 @@ function makeEntryFromSqlResult(sqlResult) {
 // 改用 protobuf
 var db = null;
 var entries : pujpb.Entry[] = [];
+// key: char; value: list of possible entries
+var entriesCharMap = {}
 var accents : pujpb.Accent[] = {};
 var phrases : pujpb.Phrase[] = [];
 var entriesCount = 0;
@@ -89,6 +91,16 @@ async function initFromDatabase() {
     const entriesResponse = await entriesPromise;
     db = pujpb.Entries.decode(new Uint8Array(entriesResponse));
     entries = db.entries;
+    const pushEntryMap = (c, entry) => {
+      if (!entriesCharMap[c]) entriesCharMap[c] = [];
+      entriesCharMap[c].push(entry);
+    };
+    for (const entry of db.entries) {
+      const char = entry.char;
+      const charSim = entry.charSim;
+      pushEntryMap(char, entry);
+      pushEntryMap(charSim, entry);
+    }
 
     const phrasesResponse = await phrasesPromise;
     const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
@@ -184,6 +196,19 @@ function getFuzzyPronunciation(accentId, entry) {
   return fuzzyPron;
 }
 
+function getCharEntryOfPronunciation(char: string, pron: Pronunciation) : pujpb.Entry {
+  const results = entriesCharMap[char];
+  if (!results) return null;
+  for (const result of results) {
+    if (result.pron.initial === pron.initial
+        && result.pron.final === pron.final
+        && result.pron.tone === pron.tone) {
+      return result;
+    }
+  }
+  return null;
+}
+
 // var initFromDatabasePromise = initFromDatabase();
 
 function setLoading(loading) {
@@ -207,6 +232,7 @@ export {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
+  getCharEntryOfPronunciation,
   db, entries, phrases, accents, entriesCount, initials, finals, combinations,
   isChineseChar,
 }

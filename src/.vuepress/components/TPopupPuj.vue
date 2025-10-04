@@ -55,6 +55,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script lang="ts">
 import {
   getAccentsRules, getFuzzyPronunciation,
+  getCharEntryOfPronunciation,
 } from "./QCommon.vue";
 import {
   FuzzyRuleBase,
@@ -68,7 +69,10 @@ import {getLocalOption} from "./SUtils";
 
 export default {
   props: {
-    entries: {
+    // 此参数为二维列表，也就是 Array<Array<Char>>
+    // Char 为字符串类型的单个汉字
+    // 这个列表用于针对某种口音的又音字进行转换。
+    charsList: {
       type: Array,
       default: [],
     },
@@ -134,13 +138,49 @@ export default {
       let iWord = 0;
       forEachWordInSentence(this.puj, (word: string) => {
         let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
-        if (iWord < this.entries.length && this.entries[iWord]) {
-          pron = getFuzzyPronunciation(accentKey, this.entries[iWord]);
-        } else {
-          pron = accentRule.fuzzy(pron);
+
+        let fuzzyPron = accentRule.fuzzy(pron);
+        let curPuj = convertPlainPUJSentenceToPUJSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+        let curDp = convertPlainPUJSentenceToDPSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+
+        L_trySearchForAka:
+        for (let i = 0; i < this.charsList.length; i++) {
+          const possibleChars = this.charsList[i];
+          if (possibleChars.length <= iWord) continue;
+          for (let j = 0; j < possibleChars.length; j++) {
+            const possibleChar = possibleChars[j];
+            const entry = getCharEntryOfPronunciation(possibleChar, pron);
+            if (entry) {
+              if (entry.accentsNasalized.includes(accentKey)) {
+                curPuj += '(nn)';
+                curDp += '(n)';
+              }
+              for (const pronAka of entry.pronAka) {
+                if (pronAka.accentId === accentKey) {
+                  let akaPuj = [];
+                  let akaDp = [];
+                  for (const pron of pronAka.prons) {
+                    akaPuj.push(convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`));
+                    akaDp.push(convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`));
+                  }
+                  if (pronAka.replace) {
+                    curPuj = akaPuj[0];
+                    curDp = akaDp[0];
+                    akaPuj.shift();
+                    akaDp.shift();
+                  }
+                  let akaPujStr = akaPuj.join('/');
+                  let akaDpStr = akaDp.join('/');
+                  curPuj += `(${akaPujStr})`;
+                  curDp += `(${akaDpStr})`;
+                  break L_trySearchForAka;
+                }
+              }
+            }
+          }
         }
-        display_puj += convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`);
-        display_dp += convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`);
+        display_puj += curPuj;
+        display_dp += curDp;
         iWord++;
       }, (nonWord: string) => {
         if (nonWord == '--') nonWord = '·';

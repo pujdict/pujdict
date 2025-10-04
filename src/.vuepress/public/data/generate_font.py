@@ -12,7 +12,7 @@ from fontTools.ttLib.woff2 import compress as woff2_compress
 from puj import *
 
 FONTS_DIR = '../assets/fonts'
-DOWNLOAD_TEMP_DIR = './assets/fonts/.tmp'
+DOWNLOAD_TEMP_DIR = '../assets/fonts/.tmp'
 os.makedirs(DOWNLOAD_TEMP_DIR, exist_ok=True)
 
 

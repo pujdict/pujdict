@@ -9,7 +9,7 @@
             <input class="form-check-input" type="radio"
                    :id="fuzzyQuery.key" :value="fuzzyQuery.key"
                    v-model="selectedFuzzyQueryKey"
-                   @change="updateFuzzyRulesMap()"/>
+                   @change="initializeFuzzyRulesMap()"/>
             <label class="form-check-label" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
           </div>
         </div>
@@ -21,7 +21,7 @@
             <input class="form-check-input" type="radio"
                    :id="py.key" :value="py.key"
                    v-model="selectedPinyin"
-                   @change="updateFuzzyRulesMap()"/>
+                   @change="initializeFuzzyRulesMap()"/>
             <label class="form-check-label" :for="py.key">{{ py.name }}</label>
           </div>
         </div>
@@ -146,7 +146,10 @@ export default {
       fuzzyRulesMapReverse: {},
       queryResult: {},
       queryResultEmpty: false,
-      fuzzyEntriesMap: {},
+      accentEntriesMap: {},
+      fuzzyEntriesInitialMap: {},
+      fuzzyEntriesFinalMap: {},
+      fuzzyEntriesToneMap: {},
     };
   },
   computed: {
@@ -161,33 +164,27 @@ export default {
     },
   },
   methods: {
-    addFuzzyEntry(fuzzyPron, entry) {
-      const key = this.makeCombinationString(fuzzyPron);
-      this.fuzzyEntriesMap[key] = this.fuzzyEntriesMap[key] || [];
-      this.fuzzyEntriesMap[key].push(entry);
-    },
     makeCombinationString(pron) {
       return `${pron.initial}${pron.final}${pron.tone}`;
     },
-    updateFuzzyRulesMap() {
-      let ruleKey = this.selectedFuzzyQueryKey;
+    initializeFuzzyRulesMap() {
+      let accentId = this.selectedFuzzyQueryKey;
+      let accentRule = getAccentsRules()[accentId];
       this.fuzzyRulesMap = {};
       this.fuzzyRulesMapReverse = {};
       let fuzzyInitials = new Set();
       let fuzzyFinals = new Set();
       let fuzzyTones = new Set();
-      this.fuzzyEntriesMap = {};
       for (const entry of entries) {
-        const fuzzyPron = getFuzzyPronunciation(ruleKey, entry);
-        this.addFuzzyEntry(fuzzyPron, entry);
-        fuzzyInitials.add(fuzzyPron.initial);
+        const fuzzyPron = accentRule.fuzzy(entry.pron);
+        // fuzzyInitials.add(fuzzyPron.initial);
         fuzzyFinals.add(fuzzyPron.final);
-        fuzzyTones.add(fuzzyPron.tone);
+        // fuzzyTones.add(fuzzyPron.tone);
       }
       // 目前的各地口音暂不需要区别，按这个固定的顺序来。
       // （唇齿音作为自由变体暂不考虑引入，等有朝一日轻重唇真正意义上产生对立了再说吧）
       // fuzzyInitials = [...fuzzyInitials].sort();
-      fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '0',]
+      fuzzyInitials = ['p', 'ph', 'm', 'b', 't', 'th', 'n', 'l', 'k', 'kh', 'ng', 'g', 'h', 'ts', 'tsh', 's', 'j', '',]
       fuzzyFinals = [...fuzzyFinals].sort();
       // fuzzyTones = [...fuzzyTones].sort();
       // 目前的所谓七声调类型的惠来、潮阳，事实上还没有完全变为七声调，他们存在单字调的合并，但在连读变调时，依然能够区分。
@@ -216,7 +213,7 @@ export default {
         });
       }
       // 重新设置选项 cookie
-      setLocalOption("fuzzy-query", ruleKey);
+      setLocalOption("fuzzy-query", accentId);
       setLocalOption("q-pron-default-pinyin", this.selectedPinyin);
     },
     initializeAccents() {
@@ -225,6 +222,34 @@ export default {
         name: rule.name,
         fuzzy: rule.fuzzy,
       }));
+
+      for (const [accentId, accentRule] of Object.entries(getAccentsRules())) {
+        let accentEntries = this.accentEntriesMap[accentId] = [];
+        for (const entry of entries) {
+          const allPossibleProns = [];
+          const pushPossiblePron = (pron) => {
+            allPossibleProns.push(pron);
+          };
+          const fuzzyPron = accentRule.fuzzy(entry.pron);
+          pushPossiblePron(fuzzyPron);
+          if (entry.accentsNasalized.includes(accentId)) {
+            const nasalizedPron = structuredClone(fuzzyPron);
+            nasalizedPron.final += 'nn';
+            pushPossiblePron(nasalizedPron);
+          }
+          for (const pronAka of entry.pronAka) {
+            if (pronAka.accentId === accentId) {
+              for (const pron of pronAka.prons)
+                pushPossiblePron(pron);
+              if (pronAka.replace)
+                allPossibleProns.shift();
+            }
+          }
+          for (const pron of allPossibleProns) {
+            accentEntries.push([entry, pron]);
+          }
+        }
+      }
     },
     async initialSelectFromGetParameters() {
       // components using url components string
@@ -238,7 +263,7 @@ export default {
         if (queryFuzzy !== null) {
           // $("#fuzzy-query-" + queryFuzzy).attr("checked", "checked");
           this.selectedFuzzyQueryKey = queryFuzzy;
-          this.updateFuzzyRulesMap(queryFuzzy);
+          this.initializeFuzzyRulesMap(queryFuzzy);
         }
         if (queryInitials !== null && queryInitials !== '') {
           queryInitials = queryInitials.split(",");
@@ -263,7 +288,7 @@ export default {
         }
         await this.queryDatabase();
       } else {
-        this.updateFuzzyRulesMap(this.selectedFuzzyQueryKey);
+        this.initializeFuzzyRulesMap(this.selectedFuzzyQueryKey);
       }
     },
     async queryDatabase() {
@@ -274,21 +299,21 @@ export default {
       setLoading(true);
 
       let resultEntries = [];
-      let fuzzyName = this.selectedFuzzyQueryKey;
+      let accentId = this.selectedFuzzyQueryKey;
 
-      this.setUrlQueryParameterPron(fuzzyName, ...this.getQueryConditionList(false));
+      this.setUrlQueryParameterPron(accentId, ...this.getQueryConditionList(false));
       let [queryInitials, queryFinals, queryTones, queryAll] = this.getQueryConditionList(true);
       // append to url
       if (queryAll) { // quick components all
-        resultEntries = entries;
+        resultEntries = this.accentEntriesMap[accentId];
       } else {
-        for (const entry of entries) {
-          const fuzzyPron = getFuzzyPronunciation(fuzzyName, entry);
+        for (const item of this.accentEntriesMap[accentId]) {
+          const [, fuzzyPron] = item;
           const matchInitial = !queryInitials || queryInitials.has(fuzzyPron.initial);
           const matchFinal = !queryFinals || queryFinals.has(fuzzyPron.final);
           const matchTone = !queryTones || queryTones.has(fuzzyPron.tone);
           if (matchInitial && matchFinal && matchTone) {
-            resultEntries.push(entry);
+            resultEntries.push(item);
           }
         }
       }
@@ -316,12 +341,14 @@ export default {
     showQueryResultList(resultEntries) {
       this.queryResultEmpty = resultEntries.length === 0;
       // initial+final -> {tone -> [entryIds]}
-      resultEntries.sort((a, b) => this.makeCombinationString(a.pron).localeCompare(this.makeCombinationString(b.pron)));
+      resultEntries.sort((a, b) => {
+        const [, aPron] = a;
+        const [, bPron] = b;
+        return this.makeCombinationString(aPron).localeCompare(this.makeCombinationString(bPron));
+      });
       let queryResult = {};
-      let fuzzyName = this.selectedFuzzyQueryKey;
       for (let i = 0; i < resultEntries.length; i++) {
-        let entry = resultEntries[i];
-        let fuzzy = getFuzzyPronunciation(fuzzyName, entry);
+        let [entry, fuzzy] = resultEntries[i];
         if (queryResult[fuzzy.initial + fuzzy.final] === undefined) {
           queryResult[fuzzy.initial + fuzzy.final] = {};
         }

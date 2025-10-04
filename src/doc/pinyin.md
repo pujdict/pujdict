@@ -72,7 +72,7 @@ order: 2
 | 英   | eng/ek     | êng/êg   | eŋ/ek̚   |
 | 音   | im/ip      | im/ib    | im/ip̚   |
 | 因   | in/it      | ind/id   | in/it̚   |
-| 奄   | iam/iat    | iam/iab  | iam/iap̚ |
+| 奄   | iam/iap    | iam/iab  | iam/iap̚ |
 | 嫣   | ian/iat    | iand/iad | ian/iat̚ |
 | 央   | iang/iak   | iang/iag | iaŋ/iak̚ |
 | 雍   | iong/iok   | iong/iog | ioŋ/iok̚ |
