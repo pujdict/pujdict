@@ -231,9 +231,11 @@ export default {
           const fuzzyPron = accentRule.fuzzy(entry.pron);
           allPossibleProns.push(fuzzyPron);
           // 特殊鼻化发音
-          if (entry.accentsNasalized.indexOf(accentId) !== -1) {
-            const nasalizedPron = structuredClone(fuzzyPron);
+          if (entry.accentsNasalized.includes("*") || entry.accentsNasalized.indexOf(accentId) !== -1) {
+            let nasalizedPron = structuredClone(fuzzyPron);
             nasalizedPron.final += 'nn';
+            // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
+            nasalizedPron = accentRule.fuzzy(nasalizedPron);
             allPossibleProns.push(nasalizedPron);
           }
           for (const pronAka of entry.pronAka) {

@@ -151,12 +151,22 @@ export default {
             const possibleChar = possibleChars[j];
             const entry = getCharEntryOfPronunciation(possibleChar, pron);
             if (entry) {
-              if (entry.accentsNasalized.includes(accentKey)) {
-                curPuj += '(nn)';
-                if (curDp[curDp.length - 1].match(/\d/))
-                  curDp = curDp.slice(0, curDp.length - 1) + '(n)' + curDp[curDp.length - 1];
-                else
-                  curDp += '(n)';
+              if (accentKey !== 'dummy') {
+                if (entry.accentsNasalized.includes("*") || entry.accentsNasalized.includes(accentKey)) {
+                  let nasalizedPron = structuredClone(fuzzyPron);
+                  nasalizedPron.final += 'nn';
+                  nasalizedPron = accentRule.fuzzy(nasalizedPron);
+                  if (nasalizedPron.final !== fuzzyPron.final + 'nn') {
+                    curPuj += `(${convertPlainPUJSentenceToPUJSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`
+                    curDp += `(${convertPlainPUJSentenceToDPSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`
+                  } else {
+                    curPuj += '(nn)';
+                    if (curDp[curDp.length - 1].match(/\d/))
+                      curDp = curDp.slice(0, curDp.length - 1) + '(n)' + curDp[curDp.length - 1];
+                    else
+                      curDp += '(n)';
+                  }
+                }
               }
               for (const pronAka of entry.pronAka) {
                 if (pronAka.accentId === accentKey) {
