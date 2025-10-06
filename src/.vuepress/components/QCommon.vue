@@ -69,6 +69,7 @@ var exceptions = {};
 
 async function initFromDatabase() {
   async function load() {
+    if (db) return;
     const entriesPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
         .then(response => response.arrayBuffer());
     const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))

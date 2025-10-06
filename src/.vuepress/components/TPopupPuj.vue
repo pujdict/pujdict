@@ -66,6 +66,7 @@ import {
 } from "./SPuj.js";
 import {Pronunciation} from "./SCommon.js";
 import {getLocalOption} from "./SUtils";
+import {pujpb} from "./SPujPb";
 
 export default {
   props: {
@@ -143,6 +144,7 @@ export default {
         let curPuj = convertPlainPUJSentenceToPUJSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
         let curDp = convertPlainPUJSentenceToDPSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
 
+        // TODO: 重构
         L_trySearchForAka:
         for (let i = 0; i < this.charsList.length; i++) {
           const possibleChars = this.charsList[i];
@@ -152,7 +154,13 @@ export default {
             const entry = getCharEntryOfPronunciation(possibleChar, pron);
             if (entry) {
               if (accentKey !== 'dummy') {
-                if (entry.accentsNasalized.includes("*") || entry.accentsNasalized.includes(accentKey)) {
+                if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS) {
+                  if (!fuzzyPron.final.endsWith('nn')) {
+                    fuzzyPron.final += 'nn';
+                    curPuj = convertPlainPUJSentenceToPUJSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+                    curDp = convertPlainPUJSentenceToDPSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+                  }
+                } else if (entry.accentsNasalized.includes(accentKey)) {
                   let nasalizedPron = structuredClone(fuzzyPron);
                   nasalizedPron.final += 'nn';
                   nasalizedPron = accentRule.fuzzy(nasalizedPron);
