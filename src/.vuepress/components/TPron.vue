@@ -176,8 +176,7 @@ export default {
       let fuzzyInitials = new Set();
       let fuzzyFinals = new Set();
       let fuzzyTones = new Set();
-      for (const entry of entries) {
-        const fuzzyPron = accentRule.fuzzy(entry.pron);
+      for (const [, fuzzyPron] of this.accentEntriesMap[accentId]) {
         // fuzzyInitials.add(fuzzyPron.initial);
         fuzzyFinals.add(fuzzyPron.final);
         // fuzzyTones.add(fuzzyPron.tone);
@@ -231,9 +230,12 @@ export default {
           const fuzzyPron = accentRule.fuzzy(entry.pron);
           allPossibleProns.push(fuzzyPron);
           // 特殊鼻化发音
-          if (entry.accentsNasalized.includes("*") || entry.accentsNasalized.indexOf(accentId) !== -1) {
+          if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS || entry.accentsNasalized.indexOf(accentId) !== -1) {
             let nasalizedPron = structuredClone(fuzzyPron);
             nasalizedPron.final += 'nn';
+            if (nasalizedPron.final.endsWith('nnnn')) {
+              console.log();
+            }
             // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
             nasalizedPron = accentRule.fuzzy(nasalizedPron);
             allPossibleProns.push(nasalizedPron);
@@ -254,9 +256,12 @@ export default {
                 const denasalizedPron = structuredClone(fuzzyPron);
                 denasalizedPron.final = denasalizedPron.final.replace('nn', '');
                 allPossibleProns.push(denasalizedPron);
-              } else if (fuzzyPron.final.match(/[aoeiur]/)) {
+              } else if (fuzzyPron.final.match(/^[aoeiur]+$/)) {
                 const nasalizedPron = structuredClone(fuzzyPron);
                 nasalizedPron.final += 'nn';
+                if (nasalizedPron.final.endsWith('nnnn')) {
+                  console.log();
+                }
                 allPossibleProns.push(nasalizedPron);
               }
             }
