@@ -107,7 +107,7 @@ export default defineUserConfig({
             link: "qpron.md",
           },
           {
-            text: "汉字查询",
+            text: "字音查询",
             link: "qchar.md",
           },
           {

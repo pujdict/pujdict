@@ -15,7 +15,7 @@ actions:
     icon: search
     link: ./query/qpron
     type: primary
-  - text: 汉字查询
+  - text: 字音查询
     icon: search
     link: ./query/qchar
     type: primary
