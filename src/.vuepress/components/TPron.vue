@@ -104,7 +104,7 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   // $,
-  db, entries, accents, combinations,
+  db,
 } from './QCommon.vue';
 import {
   convertPlainPUJSentenceToDisplayPUJInSentence,
@@ -225,7 +225,7 @@ export default {
 
       for (const [accentId, accentRule] of Object.entries(getAccentsRules())) {
         let accentEntries = this.accentEntriesMap[accentId] = [];
-        for (const entry: pujpb.Entry of entries) {
+        for (const entry: pujpb.Entry of db.entries) {
           let allPossibleProns = [];
           const fuzzyPron = accentRule.fuzzy(entry.pron);
           allPossibleProns.push(fuzzyPron);

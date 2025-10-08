@@ -101,7 +101,7 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   // $,
-  db, entries, accents, phrases,
+  db,
   isChineseChar,
 } from './QCommon.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
@@ -240,7 +240,7 @@ export default {
         if (!indexing[key]) indexing[key] = [];
         indexing[key].push(value);
       }
-      for (const phrase of phrases) {
+      for (const phrase of db.phrases) {
         const teochew_list = phrase.teochew;
         const informal_list = phrase.informal;
         const puj_list = phrase.puj;

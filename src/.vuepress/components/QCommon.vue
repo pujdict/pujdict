@@ -7,7 +7,6 @@ import {h, ref} from 'vue';
 import {h, ref} from 'vue';
 import {withBase} from "vuepress/client";
 
-import protobuf from "protobufjs";
 import jquery from "jquery";
 
 const $ = jquery;
@@ -53,18 +52,14 @@ function makeEntryFromSqlResult(sqlResult) {
   return entry;
 }
 
-// 改用 protobuf
-var db = null;
-var entries : pujpb.IEntry[] = [];
-// key: char; value: list of possible entries
-var entriesCharMap = {}
-var accents : pujpb.IAccent[] = [];
-var fuzzyRulesAction: Map<pujpb.FuzzyRule, Function> = new Map();
-var phrases : pujpb.IPhrase[] = [];
+class PUJDictDatabase {
+  entries: pujpb.IEntry[];
+  entriesCharMap: Map<string, pujpb.IEntry[]>;
+  accents: pujpb.IAccent[];
+  fuzzyRulesAction: Map<pujpb.FuzzyRule, (pron: pujpb.IPronunciation) => void>;
+  phrases : pujpb.IPhrase[];
 
-async function initFromDatabase() {
-  async function load() {
-    if (db) return;
+  async load() {
     const entriesPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
         .then(response => response.arrayBuffer());
     const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))
@@ -74,7 +69,8 @@ async function initFromDatabase() {
     const accentsDataResponse = await accentsDataPromise;
 
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
-    accents = accentsData.accents;
+    this.accents = accentsData.accents;
+    this.fuzzyRulesAction = new Map();
 
     const fuzzyRuleDescriptors = accentsData.fuzzyRuleDescriptors;
     for (const fuzzyRuleDescriptor of fuzzyRuleDescriptors) {
@@ -112,19 +108,20 @@ async function initFromDatabase() {
         }
         fuzzyFunctions.push(fuzzyFunction);
       }
-      fuzzyRulesAction.set(fuzzyRuleId, (pron: pujpb.IPronunciation) => {
+      this.fuzzyRulesAction.set(fuzzyRuleId, (pron: pujpb.IPronunciation) => {
         fuzzyFunctions.forEach(fuzzyFunction => { fuzzyFunction(pron); });
       });
     }
 
     const entriesResponse = await entriesPromise;
-    db = pujpb.Entries.decode(new Uint8Array(entriesResponse));
-    entries = db.entries;
-    const pushEntryMap = (c, entry) => {
-      if (!entriesCharMap[c]) entriesCharMap[c] = [];
-      entriesCharMap[c].push(entry);
+    const database: pujpb.IEntries = pujpb.Entries.decode(new Uint8Array(entriesResponse));
+    this.entries = database.entries;
+    this.entriesCharMap = new Map();
+    const pushEntryMap = (c: string, entry: pujpb.Entry) => {
+      if (!this.entriesCharMap[c]) this.entriesCharMap[c] = [];
+      this.entriesCharMap[c].push(entry);
     };
-    for (const entry of db.entries) {
+    for (const entry of database.entries) {
       const char = entry.char;
       const charSim = entry.charSim;
       pushEntryMap(char, entry);
@@ -133,8 +130,8 @@ async function initFromDatabase() {
 
     const phrasesResponse = await phrasesPromise;
     const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
-    phrases = phrasesData.phrases;
-    for (const phrase of phrases) {
+    this.phrases = phrasesData.phrases;
+    for (const phrase of this.phrases) {
       phrase.tagDisplay = [];
       for (let i = 0; i < phrase.tag.length; ++i) {
         const tag = phrase.tag[i];
@@ -142,8 +139,21 @@ async function initFromDatabase() {
       }
     }
   }
+}
 
-  await load();
+// 改用 protobuf
+var db: PUJDictDatabase = null;
+// key: char; value: list of possible entries
+
+async function initFromDatabase() {
+  async function load() {
+    if (db) return db;
+    const res = new PUJDictDatabase();
+    await res.load();
+    return res;
+  }
+
+  db = await load();
 }
 
 // 口音规则
@@ -152,14 +162,14 @@ const getAccentsRules = function () {
   return function () {
     if (fuzzyRules.length) return fuzzyRules;
     fuzzyRules['dummy'] = new FuzzyRulesGroup_Dummy();
-    for (const accent of accents) {
+    for (const accent of db.accents) {
       const id = accent.id;
       const area = accent.area;
       const rulesIds = accent.rules;
       const accentTones = accent.tones;
       let rules = [];
       for (const ruleId of rulesIds) {
-        rules.push(fuzzyRulesAction.get(ruleId));
+        rules.push(db.fuzzyRulesAction.get(ruleId));
       }
       fuzzyRules[id] = new FuzzyRulesGroup(area, accentTones, rules);
     }
@@ -195,7 +205,7 @@ const getAccentsRules = function () {
 
 function getFuzzyPronunciation(accentId, entry) {
   let accent = null;
-  for (const a of accents) {
+  for (const a of db.accents) {
     if (a.id === accentId) {
       accent = a;
       break;
@@ -219,7 +229,7 @@ function getFuzzyPronunciation(accentId, entry) {
 }
 
 function getCharEntryOfPronunciation(char: string, pron: Pronunciation) : pujpb.Entry {
-  const results = entriesCharMap[char];
+  const results = db.entriesCharMap[char];
   if (!results) return null;
   for (const result of results) {
     if (result.pron.initial === pron.initial
@@ -255,7 +265,7 @@ export {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   getCharEntryOfPronunciation,
-  db, entries, phrases, accents,
+  db,
   isChineseChar,
 }
 

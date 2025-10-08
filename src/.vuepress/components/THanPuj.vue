@@ -71,7 +71,7 @@ import {
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,
-  db, entries, combinations,
+  db,
 } from './QCommon.vue';
 
 import jquery from 'jquery';
@@ -82,7 +82,7 @@ const $ = jquery;
 function getHanCharPUJ(han) {
   let entriesResults = [];
   let pujResults = [];
-  for (const entry of entries) {
+  for (const entry of db.entries) {
     if (entry.char === han || entry.charSim === han) {
       entriesResults.push(entry);
     }

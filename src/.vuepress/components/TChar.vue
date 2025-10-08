@@ -85,7 +85,7 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   // $,
-  db, entries, accents,
+  db,
   isChineseChar,
 } from './QCommon.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
@@ -132,7 +132,7 @@ export default {
       }
 
       let queryResult = [];
-      for (const entry of entries) {
+      for (const entry of db.entries) {
         let index1 = charsIndex[entry.char];
         if (index1 !== undefined) queryResult.push([entry, index1]);
         if (entry.char === entry.charSim)
