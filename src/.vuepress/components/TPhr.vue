@@ -101,7 +101,7 @@ import {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   // $,
-  db, entries, accents, phrases, entriesCount, initials, finals, combinations,
+  db, entries, accents, phrases,
   isChineseChar,
 } from './QCommon.vue';
 import {darkThemeString} from "./QDarkTheme.vue";

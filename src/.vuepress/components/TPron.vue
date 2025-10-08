@@ -233,9 +233,6 @@ export default {
           if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS || entry.accentsNasalized.indexOf(accentId) !== -1) {
             let nasalizedPron = structuredClone(fuzzyPron);
             nasalizedPron.final += 'nn';
-            if (nasalizedPron.final.endsWith('nnnn')) {
-              console.log();
-            }
             // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
             nasalizedPron = accentRule.fuzzy(nasalizedPron);
             allPossibleProns.push(nasalizedPron);
@@ -259,9 +256,6 @@ export default {
               } else if (fuzzyPron.final.match(/^[aoeiur]+$/)) {
                 const nasalizedPron = structuredClone(fuzzyPron);
                 nasalizedPron.final += 'nn';
-                if (nasalizedPron.final.endsWith('nnnn')) {
-                  console.log();
-                }
                 allPossibleProns.push(nasalizedPron);
               }
             }

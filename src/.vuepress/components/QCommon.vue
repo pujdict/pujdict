@@ -61,11 +61,6 @@ var entriesCharMap = {}
 var accents : pujpb.IAccent[] = [];
 var fuzzyRulesAction: Map<pujpb.FuzzyRule, Function> = new Map();
 var phrases : pujpb.IPhrase[] = [];
-var entriesCount = 0;
-var initials = [];
-var finals = [];
-var combinations = [];
-var exceptions = {};
 
 async function initFromDatabase() {
   async function load() {
@@ -146,11 +141,6 @@ async function initFromDatabase() {
         phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[tag]]);
       }
     }
-
-    entriesCount = entries.length;
-    initials = Array.from(new Set(entries.map(entry => entry.pron.initial))).sort();
-    finals = Array.from(new Set(entries.map(entry => entry.pron.final))).sort();
-    combinations = Array.from(new Set(entries.map(entry => entry.pron)));
   }
 
   await load();
@@ -265,7 +255,7 @@ export {
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
   getCharEntryOfPronunciation,
-  db, entries, phrases, accents, entriesCount, initials, finals, combinations,
+  db, entries, phrases, accents,
   isChineseChar,
 }
 
