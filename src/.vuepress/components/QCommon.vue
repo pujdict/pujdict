@@ -52,12 +52,45 @@ function makeEntryFromSqlResult(sqlResult) {
   return entry;
 }
 
+class PhraseSyllable {
+  charsMap: Map<number, string[]>;
+  pronsMap: Map<number, string[][]>;
+
+  constructor(phrase: pujpb.IPhrase) {
+    const charsMap = new Map<number, string[][]>();
+    const wordsMap = new Map<number, string[][]>();
+    for (const teochew of phrase.teochew) {
+      const chars = [...teochew];
+      const nChar = chars.length;
+      if (!charsMap.get(nChar)) charsMap.set(nChar, []);
+      charsMap.get(nChar).push(chars);
+    }
+    for (const puj: string of phrase.puj) {
+      const words = puj.matchAll(/\w+/g).toArray();
+      const nWord = words.length;
+      if (!wordsMap.get(nWord)) wordsMap.set(nWord, []);
+      wordsMap.get(nWord).push(words);
+    }
+    this.charsMap = charsMap;
+    this.pronsMap = wordsMap;
+  }
+}
+
 class PUJDictDatabase {
   entries: pujpb.IEntry[];
+  // 输入汉字，映射到这个汉字的 entry 列表（如果一简对多繁则表数量大于1）
   entriesCharMap: Map<string, pujpb.IEntry[]>;
   accents: pujpb.IAccent[];
   fuzzyRulesAction: Map<pujpb.FuzzyRule, (pron: pujpb.IPronunciation) => void>;
-  phrases : pujpb.IPhrase[];
+  phrases: pujpb.IPhrase[];
+  // 输入单词，映射到该单词的 phrase 列表。
+  phrasesTeochewMap: Map<string/*teochew*/, pujpb.IPhrase[]>;
+  phrasesMandarinMap: Map<string/*mandarin*/, pujpb.IPhrase[]>;
+  phrasesInformalMap: Map<string/*informal teochew*/, pujpb.IPhrase[]>;
+  // 合音表，存储所有有可能读合音的词，key 为合音写法或完整写法。
+  phrasesFusionMap: Map<string/*phrase*/, pujpb.IPhrase[]>;
+  // 可能有多个读音且音节数量不同（汉字数量不同）的单词单独存音节表
+  phrasesSyllableMap: Map<number/*phrase index*/, PhraseSyllable>;
 
   async load() {
     const entriesPromise = fetch(withBase('/data/pujbase/dist/entries.pb'))
@@ -131,7 +164,36 @@ class PUJDictDatabase {
     const phrasesResponse = await phrasesPromise;
     const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
     this.phrases = phrasesData.phrases;
+    this.phrasesTeochewMap = new Map();
+    this.phrasesInformalMap = new Map();
+    this.phrasesMandarinMap = new Map();
+    this.phrasesFusionMap = new Map();
+    this.phrasesSyllableMap = new Map();
+    const pushPhraseMap = (map: Map, key: string, val: pujpb.IPhrase) => {
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(val);
+    }
     for (const phrase of this.phrases) {
+      this.phrasesSyllableMap.set(phrase.index, new PhraseSyllable(phrase));
+      const nFirstWrittenCharCount = phrase.teochew[0].length;
+      let hasFusion = false;
+      for (const teochew of phrase.teochew) {
+        pushPhraseMap(this.phrasesTeochewMap, teochew, phrase);
+        if (teochew.length !== nFirstWrittenCharCount)
+          hasFusion = true;
+      }
+      if (hasFusion) {
+        for (const teochew of phrase.teochew) {
+          pushEntryMap(this.phrasesFusionMap, teochew, phrase);
+        }
+      }
+      for (const informal of phrase.informal) {
+        pushPhraseMap(this.phrasesInformalMap, informal, phrase);
+      }
+      for (const mandarin of phrase.cmn) {
+        pushPhraseMap(this.phrasesMandarinMap, mandarin, phrase);
+      }
+      // tagDisplay: enum 转成可读的文本（中文）
       phrase.tagDisplay = [];
       for (let i = 0; i < phrase.tag.length; ++i) {
         const tag = phrase.tag[i];
@@ -141,9 +203,7 @@ class PUJDictDatabase {
   }
 }
 
-// 改用 protobuf
 var db: PUJDictDatabase = null;
-// key: char; value: list of possible entries
 
 async function initFromDatabase() {
   async function load() {
@@ -259,6 +319,7 @@ function setLoading(loading) {
 
 export {
   Entry, Pronunciation,
+  PhraseSyllable,
   getAccentsRules,
   makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,

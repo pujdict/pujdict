@@ -102,12 +102,300 @@ import {
   getFuzzyPronunciation,
   // $,
   db,
-  isChineseChar,
+  isChineseChar, PhraseSyllable,
 } from './QCommon.vue';
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
+import {pujpb} from "./SPujPb";
 
 const $ = jquery;
+
+// A preprocessed phrase unit could be:
+// 1. a Chinese character
+// 2. a word with more than one valid written forms (e.g. 脚/骹, 姿娘/诸娘)
+// 3. a pinyin word for one Chinese character (e.g. huai5)
+class PreprocessedPhraseUnit {
+  str: string;
+  children: PreprocessedPhraseUnit[];
+  tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number;
+  tryMatch(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
+    if (curI >= possibleChars[0].length) return 0;
+    const matchSelf = this.tryMatchSelf(phrase, possibleChars, possibleProns, curI);
+    if (matchSelf) {
+      if (!this.children.length)
+        return matchSelf;
+      for (const child of this.children) {
+        const matchChild = child.tryMatch(phrase, possibleChars, possibleProns, curI + matchSelf);
+        if (matchChild)
+          return matchSelf + matchChild;
+      }
+    }
+    return 0;
+  }
+}
+
+class PreprocessedPhraseUnitChar extends PreprocessedPhraseUnit {
+  str: string;
+
+  constructor(rawInput: string) {
+    super();
+    this.str = rawInput;
+  }
+
+  tryMatchSelf(): number {
+    const possibleEntries: pujpb.IEntry[] = db.entriesCharMap[this.str];
+    if (possibleEntries) {
+      for (const entry of possibleEntries) {
+        if (entry.char === this.str || entry.charSim === this.str)
+          return 1;
+      }
+    }
+    return 0;
+  }
+}
+
+class PreprocessedPhraseUnitChars extends PreprocessedPhraseUnit {
+  str: string;
+  chars: string[];
+  children: PreprocessedPhraseUnit[];
+  otherWritten: pujpb.IPhrase[];
+
+  constructor(str: string) {
+    super();
+    this.str = str;
+    this.chars = [...str];
+    this.otherWritten = [];
+    if (db.phrasesTeochewMap[this.str])
+      this.otherWritten.push(...db.phrasesTeochewMap[this.str]);
+    if (db.phrasesInformalMap[this.str])
+      this.otherWritten.push(...db.phrasesInformalMap[this.str]);
+  }
+
+  tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
+    const lenSelf = this.chars.length;
+    const lenMatch = possibleChars[0].length;
+    if (curI + lenSelf > lenMatch) {
+      return 0;
+    }
+    if (this.children.length === 0 && curI + lenSelf !== lenMatch) {
+      return 0;
+    }
+    if (this.xTryMatchTeochew(this.chars, possibleChars, curI)) {
+      return lenSelf;
+    }
+    for (let phraseTeochew of this.otherWritten) {
+      if (this.xTryMatchSelf(phraseTeochew, possibleChars, curI))
+        return lenSelf;
+    }
+    return 0;
+  }
+
+  private xTryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], curI: number): boolean {
+    for (let teochew of phrase.teochew) {
+      if (this.xTryMatchTeochew([...teochew], possibleChars, curI))
+        return true;
+    }
+    for (let teochew of phrase.informal) {
+      if (this.xTryMatchTeochew([...teochew], possibleChars, curI))
+        return true;
+    }
+    return false;
+  }
+
+  private xTryMatchTeochew(teochew: string[], possibleChars: string[][], curI: number): boolean {
+    for (const charsList of possibleChars) {
+      let i = curI;
+      let thisI = 0;
+      let allMatched = true;
+      for (; i < charsList.length && thisI < teochew.length; ++i, ++thisI) {
+        if (charsList[i] !== teochew[thisI]) {
+          allMatched = false;
+          break;
+        }
+      }
+      if (allMatched) return true;
+    }
+    return false;
+  }
+}
+
+class PreprocessedPhraseUnitWildcardOne extends PreprocessedPhraseUnit {
+  str: string;
+  children: PreprocessedPhraseUnit[];
+
+  constructor() {
+    super();
+    this.str = '?';
+  }
+
+  tryMatchSelf(/*phrase: pujpb.IPhrase, chars: string[], curI: number*/): number {
+    return 1;
+  }
+}
+
+class PreprocessedPhraseUnitWildcardAny extends PreprocessedPhraseUnit {
+  str: string;
+  children: PreprocessedPhraseUnit[];
+
+  constructor() {
+    super();
+    this.str = '*';
+  }
+
+  tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
+    console.error('PreprocessedPhraseUnitWildcardAny.tryMatchSelf should never be called');
+  }
+
+  tryMatch(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
+    const maxLengthToMatch = possibleChars[0].length;
+    if (this.children.length === 0) {
+      // Match all left
+      return maxLengthToMatch - curI;
+    }
+    for (let i = maxLengthToMatch - curI - 1; i >= 1; --i) {
+      for (const child of this.children) {
+        const matchChild = child.tryMatch(phrase, possibleChars, possibleProns, curI + i);
+        if (matchChild) {
+          return i + matchChild;
+        }
+      }
+    }
+    return 0;
+  }
+}
+
+class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
+  children: PreprocessedPhraseUnit[];
+  str: string;
+
+  constructor(pinyin: string) {
+    super();
+    this.str = pinyin;
+  }
+}
+
+class PreprocessedPhraseUnitsTree {
+  input: string[];
+  children: PreprocessedPhraseUnit[];
+  treeCache: Map<number, PreprocessedPhraseUnit[]>;
+  str: string;
+
+  constructor(queryInput: string) {
+    this.str = queryInput;
+    this.input = [...queryInput];
+    this.treeCache = new Map();
+    this.children = this.buildTree(0);
+  }
+
+  private buildTree(curI: number): PreprocessedPhraseUnit[] {
+    if (curI >= this.input.length) return [];
+    if (this.treeCache.has(curI)) return this.treeCache.get(curI);
+    const cur = this.input[curI];
+    const latinRegex = /[a-zA-Z]/;
+    if (latinRegex.test(cur)) {
+      let i = 0;
+      let s = '';
+      while (i < this.input.length && latinRegex.test(this.input[i])) s += this.input[i++];
+      const curUnit = new PreprocessedPhraseUnitPinyin(s);
+      curUnit.children = this.buildTree(i);
+      this.treeCache.set(curI, [curUnit]);
+      return this.treeCache.get(curI);
+    }
+    if (isChineseChar(cur)) {
+      const nMaxMultiWrittenDetect = 3;
+      const result = [];
+      let s = '';
+      for (let j = 0; j < nMaxMultiWrittenDetect; ++j) {
+        if (curI + j >= this.input.length) break;
+        let newChar = this.input[curI + j];
+        if (!isChineseChar(newChar)) break;
+        s += newChar;
+        if (j > 0 && !db.phrasesTeochewMap.has(s) && !db.phrasesInformalMap.has(s)) break;
+        const multiWritten = new PreprocessedPhraseUnitChars(s);
+        multiWritten.children = this.buildTree(curI + j + 1);
+        result.push(multiWritten);
+      }
+      this.treeCache.set(curI, result);
+      return this.treeCache.get(curI);
+    }
+    if (cur === '?') {
+      const wildcard = new PreprocessedPhraseUnitWildcardOne();
+      wildcard.children = this.buildTree(curI + 1);
+      this.treeCache.set(curI, [wildcard]);
+      return this.treeCache.get(curI);
+    }
+    if (cur === '*') {
+      const wildcard = new PreprocessedPhraseUnitWildcardAny();
+      wildcard.children = [];
+      for (let j = curI + 1; j < this.input.length; ++j) {
+        if (this.input[j] !== '*') {
+          wildcard.children = this.buildTree(j);
+          break;
+        }
+      }
+      this.treeCache.set(curI, [wildcard]);
+      return this.treeCache.get(curI);
+    }
+    // current char is ignored
+    this.treeCache.set(curI, this.buildTree(curI + 1));
+    return this.treeCache.get(curI);
+  }
+}
+
+class PreprocessedPhraseInput {
+  // The original user input
+  rawInput: string;
+  // Pinyin method: puj or dp
+  pinyin: string;
+  input: string[];
+  root: PreprocessedPhraseUnitsTree;
+  allChineseChars: boolean;
+  hasWildcard: boolean;
+
+  constructor(rawInput: string, pinyin: string = 'puj') {
+    this.rawInput = rawInput;
+    this.input = [...rawInput];
+    this.pinyin = pinyin.toLowerCase();
+    this.root = new PreprocessedPhraseUnitsTree(rawInput);
+    this.allChineseCharacters = true;
+    this.hasWildcard = false;
+    for (const char of this.input) {
+      if (!isChineseChar(char)) {
+        this.allChineseChars = false;
+      }
+      if (char === '*' || char === '?') {
+        this.hasWildcard = true;
+      }
+    }
+  }
+  tryMatch(phrase: pujpb.IPhrase): boolean {
+    // Fast path
+    if (this.allChineseChars) {
+      for (const teochew of phrase.teochew) {
+        if (teochew === this.rawInput) {
+          return true;
+        }
+      }
+    }
+
+    for (let child of this.root.children) {
+      const phraseSyllableMap: PhraseSyllable = db.phrasesSyllableMap.get(phrase.index);
+      if (phraseSyllableMap) {
+        for (const [nSyllable, prons] of phraseSyllableMap.pronsMap.entries()) {
+          const chars = phraseSyllableMap.charsMap.get(nSyllable);
+          if (!chars) {
+            console.error(`No chars of nSyllable ${nSyllable} ${phrase.index} ${phrase.puj.join('/')}`);
+            continue;
+          }
+          if (child.tryMatch(phrase, chars, prons, 0))
+            return true;
+        }
+      }
+    }
+
+    return false;
+  }
+}
 
 export default {
   data() {
@@ -171,7 +459,11 @@ export default {
         element.replaceWith(span);
       });
     },
-    queryPhrase(chars) {
+    tryMatch(input: string, phrase: pujpb.IPhrase): boolean {
+      const preprocessedInput = new PreprocessedPhraseInput(input);
+      return preprocessedInput.tryMatch(phrase);
+    },
+    queryPhrase(chars: string) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
         return [];
@@ -188,18 +480,23 @@ export default {
         resultPhrasesIndices.add(phrase.index);
         resultPhrases.push(phrase);
       };
-      for (const [key, phrases] of Object.entries(this.teochewIndexing)) {
+      for (const [key, phrases] of Object.entries(db.phrasesTeochewMap)) {
         if (key.includes(chars)) {
           for (const phrase of phrases) {
             pushResult(phrase);
           }
         }
       }
-      for (const [key, phrases] of Object.entries(this.cmnIndexing)) {
+      for (const [key, phrases] of Object.entries(db.phrasesMandarinMap)) {
         if (key.includes(chars)) {
           for (const phrase of phrases) {
             pushResult(phrase);
           }
+        }
+      }
+      for (const phrase of db.phrases) {
+        if (this.tryMatch(chars, phrase)) {
+          pushResult(phrase);
         }
       }
       for (const phrase of resultPhrases) {
@@ -221,11 +518,7 @@ export default {
     queryPhrases() {
       this.queryResult = [];
       let charsInput = this.queryInput;
-      let phrases = charsInput.split([' ', ',']);
-      let result = [];
-      for (const phrase of phrases) {
-        result.push(...this.queryPhrase(phrase));
-      }
+      let result = this.queryPhrase(charsInput);
       this.queryResult = result;
       this.queryResultEmpty = (result.length === 0);
     },
@@ -236,28 +529,6 @@ export default {
     },
     onInitFromDatabaseFinished() {
       setLoading(false);
-      let pushIndex = (indexing, key, value) => {
-        if (!indexing[key]) indexing[key] = [];
-        indexing[key].push(value);
-      }
-      for (const phrase of db.phrases) {
-        const teochew_list = phrase.teochew;
-        const informal_list = phrase.informal;
-        const puj_list = phrase.puj;
-        const cmn_list = phrase.cmn;
-        for (let teochew of teochew_list) {
-          pushIndex(this.teochewIndexing, teochew, phrase);
-        }
-        for (let informal of informal_list) {
-          pushIndex(this.teochewIndexing, informal, phrase);
-        }
-        for (let puj of puj_list) {
-          pushIndex(this.pujIndexing, puj, phrase);
-        }
-        for (const cmn of cmn_list) {
-          pushIndex(this.cmnIndexing, cmn, phrase);
-        }
-      }
     }
   },
   mounted() {
