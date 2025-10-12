@@ -40,6 +40,7 @@ function resetUrlQueryParameter(key) {
   window.history.replaceState({}, "", url);
 }
 
+const ChineseCharRegex = /\p{Script=Han}/us;
 function isChineseChar(c) {
   /*
   CJK Unified Ideographs                  4E00-9FFF   Common
@@ -57,20 +58,7 @@ function isChineseChar(c) {
   CJK Radicals Supplement                 2E80–2EFF
   CJK Symbols and Punctuation             3000–303F
    */
-  let charCode = c.charCodeAt(0);
-  return (charCode >= 0x4E00 && charCode <= 0x9FFF) ||
-      (charCode >= 0x3400 && charCode <= 0x4DBF) ||
-      (charCode >= 0x20000 && charCode <= 0x2A6DF) ||
-      (charCode >= 0x2A700 && charCode <= 0x2B73F) ||
-      (charCode >= 0x2B740 && charCode <= 0x2B81F) ||
-      (charCode >= 0x2B820 && charCode <= 0x2CEAF) ||
-      (charCode >= 0x2CEB0 && charCode <= 0x2EBEF) ||
-      (charCode >= 0x30000 && charCode <= 0x3134F) ||
-      (charCode >= 0x31350 && charCode <= 0x323AF) ||
-      (charCode >= 0xF900 && charCode <= 0xFAFF) ||
-      (charCode >= 0x2F800 && charCode <= 0x2FA1F) ||
-      (charCode >= 0x2F00 && charCode <= 0x2FDF) ||
-      (charCode >= 0x2E80 && charCode <= 0x2EFF);
+  return ChineseCharRegex.test(c);
 }
 
 export {
