@@ -96,7 +96,7 @@ def post_process():
 
 def get_chars():
     # TODO: Use released dist
-    with open('pujdict-base/data/entries.yml', 'r', encoding='utf-8') as f:
+    with open('pujbase/data/entries.yml', 'r', encoding='utf-8') as f:
         yaml_entries = yaml.load(f, yaml.Loader)
     entries = []
     for yaml_ent in yaml_entries:
@@ -112,7 +112,7 @@ def get_chars():
         if not is_cjk_basic(char_sim):
             result.add(char_sim)
 
-    with open('pujdict-base/data/phrases.yml', 'r', encoding='utf-8') as f:
+    with open('pujbase/data/phrases.yml', 'r', encoding='utf-8') as f:
         yaml_phrases = yaml.load(f, yaml.Loader)
 
     phrases = []

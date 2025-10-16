@@ -60,11 +60,11 @@ class PUJDictDatabase {
   phrases : pujpb.IPhrase[];
 
   async load() {
-    const entriesPromise = fetch(withBase('/data/pujdict-base/dist/entries.pb'))
+    const entriesPromise = fetch(withBase('/data/pujbase/dist/entries.pb'))
         .then(response => response.arrayBuffer());
-    const accentsDataPromise = fetch(withBase('/data/pujdict-base/dist/accents.pb'))
+    const accentsDataPromise = fetch(withBase('/data/pujbase/dist/accents.pb'))
         .then(response => response.arrayBuffer());
-    const phrasesPromise = fetch(withBase('/data/pujdict-base/dist/phrases.pb'))
+    const phrasesPromise = fetch(withBase('/data/pujbase/dist/phrases.pb'))
         .then(response => response.arrayBuffer());
     const accentsDataResponse = await accentsDataPromise;
 
