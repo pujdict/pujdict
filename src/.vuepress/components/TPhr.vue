@@ -113,6 +113,11 @@ import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 import {pujpb} from "./SPujPb";
 import {ChineseCharRegex, ChineseCharRegexGlobal} from "./SUtils";
+import {
+  convertPlainPUJToPronunciationWord,
+  regexpWordOptional,
+  undoAddPUJToneMarkWord,
+} from "./SPuj";
 
 const $ = jquery;
 
@@ -278,6 +283,76 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
     super();
     this.str = pinyin;
   }
+
+  tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
+    if (curI >= possibleProns[0].length) {
+      return 0;
+    }
+    for (const possiblePron of possibleProns) {
+      if (this.matchPinyin(possiblePron[curI], this.str)) {
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  private matchPinyin(pinyin: string, userInput: string): boolean {
+    // TODO: more powerful matching method
+    return pinyin === userInput;
+    let pinyinPron = convertPlainPUJToPronunciationWord(pinyin.normalize('NFD'));
+    let userInputPron = undoAddPUJToneMarkWord(userInput.normalize('NFD'));
+    if (!matchPinyin || !matchUserInput) {
+      console.error(`Cannot match pinyin or userInput: ${pinyin} ${userInput}`);
+      return 0;
+    }
+    // check initials
+    if (!this.matchInitials(pinyinPron.initial, userInputPron.initial)) {
+      return 0;
+    }
+    if (!this.matchTones(pinyinPron.tone, userInputPron.tone)) {
+      return 0;
+    }
+    if (!this.matchFinals(pinyinPron.final, userInputPron.final)) {
+      return 0;
+    }
+    return 1;
+  }
+  private matchInitials(pinyin: string, userInput: string): boolean {
+    if (pinyin === '0' || !pinyin) pinyin = '';
+    if (userInput === '0' || !userInput) userInput = '';
+    return pinyin === userInput;
+  }
+  private matchTones(pinyin: string, userInput: string): boolean {
+    // if no tones, match all
+    if (!userInput) return true;
+    return pinyin === userInput;
+  }
+  private matchFinals(pinyin: string, userInput: string): boolean {
+    if (pinyin === userInput) return true;
+    if (pinyin === 'or') return ['o', 'e', 'or'].includes(userInput);
+    if (pinyin === 'orh') return ['oh', 'ee', 'orh'].includes(userInput);
+    if (pinyin === 'eu') return ['iu', 'eu'].includes(userInput);
+    if (pinyin === 'oinn') return ['oinn', 'ainn'].includes(userInput);
+    if (pinyin === 'uoinn') return ['uoinn', 'uinn', 'uainn'].includes(userInput);
+    const matchPinyin = regexpWordOptional.match(pinyin);
+    const matchUserInput = regexpWordOptional.match(userInput);
+    // ian iam uan uam 的各类变体
+    if (['i', 'u'].includes(matchPinyin.medial)
+        && matchUserInput.nucleus === 'a'
+        && ['m', 'n'].includes(matchUserInput.coda)) {
+      // 允许模糊匹配高化、前化、圆唇化、韵尾任意的所有变体。
+      return (matchUserInput.medial === matchPinyin.medial || matchPinyin === 'i' && !matchUserInput.medial)
+          && ['a', 'o', 'e', 'ur'].includes(matchUserInput.nucleus)
+          && ['ng', 'm', 'n'].includes(matchUserInput.coda);
+    }
+    if (matchPinyin.medial === 'i'
+        && matchPinyin.nucleus === 'o'
+        && (!matchPinyin.coda || ['nn', 'nnh'].includes(matchPinyin.coda))) {
+      return matchUserInput.medial === matchPinyin.medial
+          && ['o', 'e', 'ur'].includes(matchUserInput.nucleus)
+          && matchUserInput.coda === matchPinyin.coda;
+    }
+  }
 }
 
 class PreprocessedPhraseUnitsTree {
@@ -297,9 +372,9 @@ class PreprocessedPhraseUnitsTree {
     if (curI >= this.input.length) return [];
     if (this.treeCache.has(curI)) return this.treeCache.get(curI);
     const cur = this.input[curI];
-    const latinRegex = /[a-zA-Z]/;
+    const latinRegex = /[a-zA-Z0-9]/;
     if (latinRegex.test(cur)) {
-      let i = 0;
+      let i = curI;
       let s = '';
       while (i < this.input.length && latinRegex.test(this.input[i])) s += this.input[i++];
       const curUnit = new PreprocessedPhraseUnitPinyin(s);

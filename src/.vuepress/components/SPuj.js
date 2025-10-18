@@ -336,7 +336,7 @@ function undoAddPUJToneMarkWord(word) {
   let initial = '';
   let final = '';
   let tone = 0;
-  if (!word.length) return new Pronunciation(initial, final, tone);
+  if (!word.length) return null;
 
   if (word[word.length - 1].match(/\d/)) {
     tone = parseInt(word[word.length - 1]);
@@ -716,6 +716,7 @@ export {
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,
+  undoAddPUJToneMarkWord,
   convertPUJToDPSentence,
   convertPUJPronunciationToDPPronunciation,
   convertPUJPronunciationToFanQiePronunciation,
