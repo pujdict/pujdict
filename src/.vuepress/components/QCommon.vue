@@ -91,6 +91,9 @@ class PUJDictDatabase {
   phrasesFusionMap: Map<string/*phrase*/, pujpb.IPhrase[]>;
   // 可能有多个读音且音节数量不同（汉字数量不同）的单词单独存音节表
   phrasesSyllableMap: Map<number/*phrase index*/, PhraseSyllable>;
+  // 快速索引单词中包含某个汉字的所有词组，用于查询词汇预筛。
+  private phrasesFastIndexByCharList: pujpb.IPhrase[][];
+  private phrasesFastIndexByCharPrime = 499;
 
   async load() {
     const entriesPromise = fetch(withBase('/data/pujbase/dist/entries.pb'))
@@ -200,6 +203,58 @@ class PUJDictDatabase {
         phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[tag]]);
       }
     }
+    this.phrasesFastIndexByCharList = this.createPhrasesFastIndexByCharMap(this.phrases);
+  }
+
+  private createPhrasesFastIndexByCharMap(phrases: pujpb.IPhrase[]): pujpb.IPhrase[][] {
+    const result = [];
+    for (let i = 0; i < this.phrasesFastIndexByCharPrime; ++i) {
+      result.push([]);
+    }
+    const funcAddIndex = (phrase: pujpb.IPhrase, teochewList: string[]) => {
+      for (const item of teochewList) {
+        const chars = [...item];
+        for (const char: string of chars) {
+          if (char === '＊') continue;
+          const index = this.getPhrasesFastIndexByCharIndexNumber(char);
+          result[index].push(phrase);
+        }
+      }
+    };
+    for (const phrase of phrases) {
+      funcAddIndex(phrase, phrase.teochew);
+      funcAddIndex(phrase, phrase.informal);
+    }
+    return result;
+  }
+
+  private getPhrasesFastIndexByCharIndexNumber(char: string): number {
+    const charCode = char.charCodeAt(0);
+    const res = charCode % this.phrasesFastIndexByCharPrime;
+    return res;
+  }
+
+  /**
+   * Get the phrases containing the given character.
+   * @param char The SINGLE chinese character.
+   * @return A set of phrase indices.
+   */
+  public getPhrasesFastIndexByChar(char: string): number/*phrase index*/[] {
+    const index = this.getPhrasesFastIndexByCharIndexNumber(char);
+    const res = [];
+    const funcPushResult = (phrase: pujpb.IPhrase, teochewList: string[]) => {
+      for (const teochew of teochewList) {
+        if (teochew.indexOf(char) !== -1) {
+          res.push(phrase.index);
+          return true;
+        }
+      }
+      return false;
+    };
+    for (const phrase of this.phrasesFastIndexByCharList[index]) {
+      funcPushResult(phrase, phrase.teochew) || funcPushResult(phrase, phrase.informal);
+    }
+    return res;
   }
 }
 
