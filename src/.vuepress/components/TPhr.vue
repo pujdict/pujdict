@@ -30,18 +30,23 @@
                 <div style="display: flex; flex-wrap: wrap; align-items: center;">
                   <h4 class="mb-1 me-2" style="margin-top: 0.3em">
                     <template v-for="(char, i) in result.teochew">
-                      <template v-if="i"> · </template>{{ char }}
+                      <template v-if="i <= 4 || result.__isExpanded">
+                        <span v-if="i" class="text-muted">; </span>{{ char }}
+                      </template>
+                    </template>
+                    <template v-if="result.teochew.length > 4">
+                      <span v-if="!result.__isExpanded" @click="result.__isExpanded = true" style="cursor: pointer; color: #007bff;">…</span>
                     </template>
                     <template v-if="result.informal.length">
-                      [*<template v-for="(char, i) in result.informal"><template v-if="i"> · </template>{{ char }}</template>]
+                      [*<template v-for="(char, i) in result.informal"><span v-if="i" class="text-muted">; </span>{{ char }}</template>]
                     </template>
                   </h4>
                   <span class="me-1" v-for="(p, i) in result.puj">
-                    <TPopupPuj :puj="p" :key="p" :charsList="[...result.teochew, ...result.informal]"/>
+                    <span v-if="i" class="text-muted">; </span><TPopupPuj :puj="p" :key="p" :charsList="[...result.teochew, ...result.informal]"/>
                   </span>
                   <span class="text-muted me-1">
                     <template v-for="(cmn, i) in result.cmn">
-                      <template v-if="i">; </template>{{ cmn }}
+                      <span v-if="i" class="text-muted">; </span>{{ cmn }}
                     </template>
                   </span>
                 </div>
