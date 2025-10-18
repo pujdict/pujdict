@@ -59,12 +59,16 @@ class PhraseSyllable {
   constructor(phrase: pujpb.IPhrase) {
     const charsMap = new Map<number, string[][]>();
     const wordsMap = new Map<number, string[][]>();
-    for (const teochew of phrase.teochew) {
-      const chars = [...teochew];
-      const nChar = chars.length;
-      if (!charsMap.get(nChar)) charsMap.set(nChar, []);
-      charsMap.get(nChar).push(chars);
-    }
+    const funcPushTeochew = (teochewList: string[]) => {
+      for (const teochew of teochewList) {
+        const chars = [...teochew];
+        const nChar = chars.length;
+        if (!charsMap.get(nChar)) charsMap.set(nChar, []);
+        charsMap.get(nChar).push(chars);
+      }
+    };
+    funcPushTeochew(phrase.teochew);
+    funcPushTeochew(phrase.informal);
     for (const puj: string of phrase.puj) {
       const words = puj.matchAll(/\w+/g).toArray();
       const nWord = words.length;

@@ -107,6 +107,7 @@ import {
 import {darkThemeString} from "./QDarkTheme.vue";
 import jquery from 'jquery';
 import {pujpb} from "./SPujPb";
+import {ChineseCharRegex, ChineseCharRegexGlobal} from "./SUtils";
 
 const $ = jquery;
 
@@ -480,21 +481,8 @@ export default {
         resultPhrasesIndices.add(phrase.index);
         resultPhrases.push(phrase);
       };
-      for (const [key, phrases] of Object.entries(db.phrasesTeochewMap)) {
-        if (key.includes(chars)) {
-          for (const phrase of phrases) {
-            pushResult(phrase);
-          }
-        }
-      }
-      for (const [key, phrases] of Object.entries(db.phrasesMandarinMap)) {
-        if (key.includes(chars)) {
-          for (const phrase of phrases) {
-            pushResult(phrase);
-          }
-        }
-      }
-      for (const phrase of db.phrases) {
+      for (let i = 0; i < db.phrases.length; i++) {
+        const phrase = db.phrases[i];
         if (this.tryMatch(chars, phrase)) {
           pushResult(phrase);
         }
@@ -513,6 +501,7 @@ export default {
           hasDetails: (!!desc.length || !!phrase.examples.length)
         });
       }
+      result.sort(obj => obj.index);
       return result;
     },
     queryPhrases() {

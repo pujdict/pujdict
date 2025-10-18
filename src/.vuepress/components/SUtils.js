@@ -41,6 +41,7 @@ function resetUrlQueryParameter(key) {
 }
 
 const ChineseCharRegex = /\p{Script=Han}/us;
+const ChineseCharRegexGlobal = /\p{Script=Han}/usg;
 function isChineseChar(c) {
   /*
   CJK Unified Ideographs                  4E00-9FFF   Common
@@ -67,5 +68,7 @@ export {
   resetUrlQueryParameter,
   getLocalOption,
   setLocalOption,
+  ChineseCharRegex,
+  ChineseCharRegexGlobal,
   isChineseChar,
 }
