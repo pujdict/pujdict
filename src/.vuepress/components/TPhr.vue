@@ -498,7 +498,8 @@ class PreprocessedPhraseUnitsTree {
           console.error(`Cannot convert dp pinyin ${s} to puj pinyin`);
           this.treeError = true;
         } else {
-          s = `${pujPron.initial}${pujPron.final}${pujPron.tone}`;
+          s = `${pujPron.initial || ''}${pujPron.final || ''}${pujPron.tone || ''}`;
+          console.log(s);
         }
       }
       const pinyinMatch = s.match(regexpWordOptional);
