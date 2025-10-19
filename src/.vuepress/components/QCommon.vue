@@ -27,7 +27,7 @@ import {
 } from "./SUtils.js";
 
 import {
-  AtomicFuzzyRule,
+  AtomicFuzzyRule, convertPlainPUJToPronunciationWord,
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy, regexpWordOptional,
 } from "./SPuj.js";
@@ -268,7 +268,7 @@ class PUJDictDatabase {
     return res;
   }
 
-  public getCachedFuzzyResult(accentId: string, pron: string): pujpb.IPronunciation {
+  public getCachedFuzzyResult(accentId: string, pron: Pronunciation): pujpb.IPronunciation {
     const accentMap = this.accentResults.get(accentId);
     if (!accentMap) {
       return null;
@@ -277,10 +277,11 @@ class PUJDictDatabase {
     if (!accentRule) {
       return null;
     }
-    let res = accentMap.get(pron);
+    let pronStr = `${pron.initial}${pron.final}${pron.tone}`;
+    let res = accentMap.get(pronStr);
     if (!res) {
       res = getAccentsRules()[accentId].fuzzy(pron);
-      accentMap.set(pron, res);
+      accentMap.set(pronStr, res);
     }
     return res;
   }

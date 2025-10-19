@@ -329,9 +329,9 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
   pinyinMatch: RegExpMatchArray;
   pinyinMatchCached: Map<string, RegExpMatchArray>;
   exact: boolean;
-  accentRule: any;
+  accent: string;
 
-  constructor(pinyin: string, pinyinMatch: RegExpMatchArray, exact: boolean, accentRule: any) {
+  constructor(pinyin: string, pinyinMatch: RegExpMatchArray, exact: boolean, accent: string) {
     super();
     this.str = pinyin;
     this.inputPron = new Pronunciation(pinyinMatch.groups.initial || '', pinyinMatch.groups.final || '', pinyinMatch.groups.tone || '');
@@ -339,7 +339,7 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
     this.pinyinMatch = pinyinMatch;
     this.pinyinMatchCached = new Map();
     this.exact = exact;
-    this.accentRule = accentRule;
+    this.accent = accent;
   }
 
   tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
@@ -366,9 +366,10 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
     const matched = this.getCachedMatch(pinyinToMatch);
     const toMatchPron = new Pronunciation(matched.groups.initial || '', matched.groups.final || '', matched.groups.tone || '');
     if (this.exact) {
-      return this.inputPron.initial === toMatchPron.initial
-          && this.inputPron.final === toMatchPron.final
-          && (this.inputPron.tone === toMatchPron.tone || !this.inputPron.tone)
+      const fuzzyPron = db.getCachedFuzzyResult(this.accent, toMatchPron);
+      return this.inputPron.initial === fuzzyPron.initial
+          && this.inputPron.final === fuzzyPron.final
+          && (this.inputPron.tone === fuzzyPron.tone || !this.inputPron.tone)
     }
     const toMatchWithoutTone = toMatchPron.initial + toMatchPron.final;
     if (!db.getCachedPossibleFuzzyResults(this.inputPron).has(toMatchWithoutTone)) {
@@ -502,7 +503,7 @@ class PreprocessedPhraseUnitsTree {
       }
       const pinyinMatch = s.match(regexpWordOptional);
       if (pinyinMatch) {
-        const curUnit = new PreprocessedPhraseUnitPinyin(s, pinyinMatch, this.exact, this.accentRule);
+        const curUnit = new PreprocessedPhraseUnitPinyin(s, pinyinMatch, this.exact, this.accent);
         curUnit.children = this.buildTree(i);
         this.treeCache.set(curI, [curUnit]);
       } else {
@@ -563,11 +564,11 @@ class PreprocessedPhraseInput {
   allChineseChars: boolean;
   hasWildcard: boolean;
 
-  constructor(rawInput: string, pinyinType: string = 'puj', exact: boolean = true) {
+  constructor(rawInput: string, pinyinType: string = 'puj', exact: boolean = true, accentId: string) {
     this.rawInput = rawInput;
     this.input = [...rawInput];
     this.pinyinType = pinyinType.toLowerCase();
-    this.root = new PreprocessedPhraseUnitsTree(rawInput, pinyinType, exact);
+    this.root = new PreprocessedPhraseUnitsTree(rawInput, pinyinType, exact, accentId);
     this.allChineseCharacters = true;
     this.hasWildcard = false;
     for (const char of this.input) {
@@ -683,7 +684,7 @@ export default {
       });
     },
     tryMatch(input: string, phrase: pujpb.IPhrase): boolean {
-      const preprocessedInput = new PreprocessedPhraseInput(input, this.selectedPinyin, this.matchType === 'exact');
+      const preprocessedInput = new PreprocessedPhraseInput(input, this.selectedPinyin, this.matchType === 'exact', this.selectedFuzzyQueryKey);
       return preprocessedInput.tryMatch(phrase);
     },
     queryPhrase(chars: string) {
