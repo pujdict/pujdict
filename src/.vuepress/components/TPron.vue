@@ -134,7 +134,11 @@ export default {
           name: "潮拼",
         },
       ],
-      fuzzyQueryList: [],
+      fuzzyQueryList: [{
+        key: 'dummy',
+        name: '辞典',
+        fuzzy: () => {},
+      }],
       selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
       selectedPinyin: getLocalOption("q-pron-default-pinyin") ?? 'puj',
       initialsList: {},

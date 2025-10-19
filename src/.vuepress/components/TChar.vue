@@ -1,10 +1,10 @@
 <template>
   <TDarkTheme/>
-  <div v-bind:data-bs-theme="darkThemeString" class="container py-4">
-    <form class="row g-3 mb-4" onsubmit="return false;">
+  <div v-bind:data-bs-theme="darkThemeString" class="container py-1">
+    <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area col-md-8">
         <div class="input-group">
-          <input class="form-control form-control-lg" id="query-input" type="text" placeholder="输入汉字..."
+          <input class="form-control" id="query-input" type="text" placeholder="输入汉字..."
                  maxlength="256" v-model="queryInput"/>
           <button id="query-button" class="btn btn-outline-primary" type="submit" @click="queryEntries">
             <!--<i class="bi bi-search"></i>-->
@@ -20,7 +20,8 @@
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
     </form>
-    <div id="query-result" class="mt-4">
+    <div v-if="queryResultEmpty !== undefined" id="query-result" class="mt-3">
+      <hr/>
       <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
       <div v-else class="row g-3">
         <div class="col-12" v-for="result in queryResult">
@@ -98,7 +99,7 @@ export default {
     return {
       queryInput: '',
       queryResult: {},
-      queryResultEmpty: false,
+      queryResultEmpty: undefined,
       activePopup: null,
     };
   },
@@ -194,9 +195,6 @@ export default {
     },
   },
   mounted() {
-    if (typeof window !== 'undefined') {
-      import('bootstrap');
-    }
     initFromDatabase().then(this.onInitFromDatabaseFinished);
 
     $("#reset-button").click(function () {
