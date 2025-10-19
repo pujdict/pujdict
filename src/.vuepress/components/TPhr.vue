@@ -1,7 +1,7 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString" class="container">
-    <form class="row g-3 mb-4" onsubmit="return false;">
+    <form class="row g-3 mb-0" onsubmit="return false;">
       <div class="query-input-area col-md-8">
         <div class="mb-3">
           <div class="form-label fw-bold d-flex align-items-center mb-2">输入拼音方案
@@ -41,7 +41,7 @@
             </select>
           </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-0">
           <div class="form-label fw-bold d-flex align-items-center mb-2">输入字词
             <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="支持输入拼音，拼音若无声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。"></i>
           </div>
