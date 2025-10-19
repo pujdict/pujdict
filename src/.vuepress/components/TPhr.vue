@@ -1,17 +1,56 @@
 <template>
   <TDarkTheme/>
-  <div v-bind:data-bs-theme="darkThemeString" class="container py-4">
-    <form class="row g-3 mb-4" onsubmit="return false;">
+  <div v-bind:data-bs-theme="darkThemeString" class="container">
+    <form class="row g-3 mb-2" onsubmit="return false;">
       <div class="query-input-area col-md-8">
-        <div class="input-group">
-          <input class="form-control form-control-lg" id="query-input" type="text" placeholder="输入字词..."
+        <div class="mb-2">
+          <div class="form-label fw-bold d-flex align-items-center">输入拼音方案
+            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="因两种拼音方案不兼容，如需输入拼音，请先指定其中一种。"></i>
+          </div>
+          <div class="d-flex align-items-center flex-wrap gap-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="pinyin-type-puj" value="puj" v-model="selectedPinyin">
+              <label class="form-check-label" for="pinyin-type-puj">白话字</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="pinyin-type-dp" value="dp" v-model="selectedPinyin">
+              <label class="form-check-label" for="pinyin-type-dp">潮拼</label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="form-label fw-bold d-flex align-items-center">拼音匹配模式
+            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="自由匹配：将输入的拼音和所有口音可能的读音进行匹配；<br>口音匹配：只匹配给定的口音。"></i>
+          </div>
+          <div class="d-flex align-items-center flex-wrap gap-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="auto-match" value="auto" v-model="matchType">
+              <label class="form-check-label" for="auto-match">自由匹配</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="exact-match" value="exact" v-model="matchType">
+              <label class="form-check-label" for="exact-match">口音匹配</label>
+            </div>
+            <select class="form-select form-select-sm" style="width: auto;" v-model="selectedFuzzyQueryKey" :disabled="matchType !== 'exact'">
+              <!--<option value="" disabled selected>请选择精确匹配选项</option>-->
+              <template v-for="fuzzyQuery in fuzzyQueryList">
+                <option :id="fuzzyQuery.key" :value="fuzzyQuery.key">
+                  {{ fuzzyQuery.name }}
+                </option>
+              </template>
+            </select>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="form-label fw-bold d-flex align-items-center">输入字词
+            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="支持输入拼音，拼音若无声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。"></i>
+          </div>
+          <input class="form-control" id="query-input" type="text"
                  maxlength="256" v-model="queryInput"/>
           <button id="query-button" class="btn btn-outline-primary" type="submit" @click="queryPhrases">
-            <!--<i class="bi bi-search"></i>-->
             查询
           </button>
           <button id="reset-button" class="btn btn-outline-danger" type="button" @click="resetQuery">
-            <!--<i class="bi bi-x-circle"></i>-->
             重置
           </button>
         </div>
@@ -20,7 +59,8 @@
         <img id="loading" :src="withBase('/loading.svg')" height="30" width="30" alt="加载中"/>
       </div>
     </form>
-    <div id="query-result" class="mt-4">
+    <div v-if="queryResultEmpty !== undefined" id="query-result" class="mt-3">
+      <hr/>
       <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
       <div v-else class="row g-3">
         <div class="col-12" v-for="result in queryResult">
@@ -87,6 +127,10 @@
         </div>
       </div>
     </div>
+    <div id="bs-tooltips-template">
+      <!-- Vue 会自动填充 data-v-xxx tag -->
+      <div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>
+    </div>
   </div>
 </template>
 
@@ -116,7 +160,8 @@ import {ChineseCharRegex, ChineseCharRegexGlobal} from "./SUtils";
 import {
   convertPlainPUJToPronunciationWord,
   regexpWordOptional,
-  undoAddPUJToneMarkWord,
+  regexpWordDp,
+  undoAddPUJToneMarkWord, convertDPWordToPronunciation, convertDPPronunciationToPUJPronunciation,
 } from "./SPuj";
 
 const $ = jquery;
@@ -133,7 +178,7 @@ class PreprocessedPhraseUnit {
     if (curI >= possibleChars[0].length) return 0;
     const matchSelf = this.tryMatchSelf(phrase, possibleChars, possibleProns, curI);
     if (matchSelf) {
-      if (!this.children.length)
+      if (!this.children.length && curI + matchSelf === possibleProns[0].length)
         return matchSelf;
       for (const child of this.children) {
         const matchChild = child.tryMatch(phrase, possibleChars, possibleProns, curI + matchSelf);
@@ -278,44 +323,60 @@ class PreprocessedPhraseUnitWildcardAny extends PreprocessedPhraseUnit {
 class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
   children: PreprocessedPhraseUnit[];
   str: string;
+  inputPron: Pronunciation;
+  inputPinyinWithoutTone: string;
+  pinyinMatch: RegExpMatchArray;
+  pinyinMatchCached: Map<string, RegExpMatchArray>;
+  exact: boolean;
+  accentRule: any;
 
-  constructor(pinyin: string) {
+  constructor(pinyin: string, pinyinMatch: RegExpMatchArray, exact: boolean, accentRule: any) {
     super();
     this.str = pinyin;
+    this.inputPron = new Pronunciation(pinyinMatch.groups.initial || '', pinyinMatch.groups.final || '', pinyinMatch.groups.tone || '');
+    this.inputPinyinWithoutTone = this.inputPron.initial + this.inputPron.final;
+    this.pinyinMatch = pinyinMatch;
+    this.pinyinMatchCached = new Map();
+    this.exact = exact;
+    this.accentRule = accentRule;
   }
 
   tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
     if (curI >= possibleProns[0].length) {
       return 0;
     }
-    for (const possiblePron of possibleProns) {
-      if (this.matchPinyin(possiblePron[curI], this.str)) {
+    for (let i = 0; i < possibleProns.length; ++i) {
+      const possiblePron = possibleProns[i];
+      if (this.matchPinyin(possiblePron[curI])) {
         return 1;
       }
     }
     return 0;
   }
 
-  private matchPinyin(pinyin: string, userInput: string): boolean {
-    // TODO: more powerful matching method
-    return pinyin === userInput;
-    let pinyinPron = convertPlainPUJToPronunciationWord(pinyin.normalize('NFD'));
-    let userInputPron = undoAddPUJToneMarkWord(userInput.normalize('NFD'));
-    if (!matchPinyin || !matchUserInput) {
-      console.error(`Cannot match pinyin or userInput: ${pinyin} ${userInput}`);
-      return 0;
+  private getCachedMatch(pinyin: string): RegExpMatchArray {
+    if (!this.pinyinMatchCached.has(pinyin)) {
+      this.pinyinMatchCached.set(pinyin, pinyin.match(regexpWordOptional));
     }
-    // check initials
-    if (!this.matchInitials(pinyinPron.initial, userInputPron.initial)) {
-      return 0;
+    return this.pinyinMatchCached.get(pinyin);
+  }
+
+  private matchPinyin(pinyinToMatch: string): boolean {
+    const matched = this.getCachedMatch(pinyinToMatch);
+    const toMatchPron = new Pronunciation(matched.groups.initial || '', matched.groups.final || '', matched.groups.tone || '');
+    if (this.exact) {
+      return this.inputPron.initial === toMatchPron.initial
+          && this.inputPron.final === toMatchPron.final
+          && (this.inputPron.tone === toMatchPron.tone || !this.inputPron.tone)
     }
-    if (!this.matchTones(pinyinPron.tone, userInputPron.tone)) {
-      return 0;
+    const toMatchWithoutTone = toMatchPron.initial + toMatchPron.final;
+    if (!db.getCachedPossibleFuzzyResults(this.inputPron).has(toMatchWithoutTone)) {
+      return false;
     }
-    if (!this.matchFinals(pinyinPron.final, userInputPron.final)) {
-      return 0;
+    if (!this.inputPron.tone || this.inputPron.tone == 0 || this.inputPron.tone == '') {
+      return true;
     }
-    return 1;
+    return this.inputPron.tone === toMatchPron.tone;
   }
   private matchInitials(pinyin: string, userInput: string): boolean {
     if (pinyin === '0' || !pinyin) pinyin = '';
@@ -327,23 +388,49 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
     if (!userInput) return true;
     return pinyin === userInput;
   }
-  private matchFinals(pinyin: string, userInput: string): boolean {
-    if (pinyin === userInput) return true;
-    if (pinyin === 'or') return ['o', 'e', 'or'].includes(userInput);
-    if (pinyin === 'orh') return ['oh', 'ee', 'orh'].includes(userInput);
-    if (pinyin === 'eu') return ['iu', 'eu'].includes(userInput);
-    if (pinyin === 'oinn') return ['oinn', 'ainn'].includes(userInput);
-    if (pinyin === 'uoinn') return ['uoinn', 'uinn', 'uainn'].includes(userInput);
-    const matchPinyin = regexpWordOptional.match(pinyin);
-    const matchUserInput = regexpWordOptional.match(userInput);
-    // ian iam uan uam 的各类变体
+
+  private freeMatch(pinyinPron: Pronunciation, userInputPron: Pronunciation): boolean {
+    let pinyinInitial = pinyinPron.initial;
+    let userInputInitial = userInputPron.initial;
+    let pinyinFinal = pinyinPron.final;
+    let userInputFinal = userInputPron.final;
+
+    if (pinyinInitial === '0' || !pinyinInitial) pinyinInitial = '';
+    if (userInputInitial === '0' || !userInputInitial) userInputInitial = '';
+    if (pinyinInitial !== userInputInitial) {
+      // buan <-> muan?
+      return false;
+    }
+
+    if (pinyinFinal === userInputFinal) return true;
+    if (pinyinFinal === 'or') return ['o', 'e', 'or'].includes(userInputFinal);
+    if (pinyinFinal === 'orh') return ['oh', 'ee', 'orh'].includes(userInputFinal);
+    if (pinyinFinal === 'eu') return ['iu', 'eu'].includes(userInputFinal);
+    if (pinyinFinal === 'oinn') return ['oinn', 'ainn'].includes(userInputFinal);
+    if (pinyinFinal === 'uoinn') return ['uoinn', 'uinn', 'uainn'].includes(userInputFinal);
+    // 陆丰口音
+    if (pinyinFinal.startsWith('ou')) return userInputFinal.startsWith('au') || userInputFinal.startsWith('ou');
+
+    // 除非以上两种比较特殊的，其他的鼻化一律去掉，更模糊地匹配
+    pinyinFinal = pinyinFinal.replace('nn', '');
+    userInputFinal = userInputFinal.replace('nn', '');
+
+    const matchPinyin = regexpWordOptional.match(pinyinFinal);
+    const matchUserInput = regexpWordOptional.match(userInputFinal);
+    // ian iam uan uam iau 的各类变体
     if (['i', 'u'].includes(matchPinyin.medial)
-        && matchUserInput.nucleus === 'a'
-        && ['m', 'n'].includes(matchUserInput.coda)) {
-      // 允许模糊匹配高化、前化、圆唇化、韵尾任意的所有变体。
-      return (matchUserInput.medial === matchPinyin.medial || matchPinyin === 'i' && !matchUserInput.medial)
-          && ['a', 'o', 'e', 'ur'].includes(matchUserInput.nucleus)
-          && ['ng', 'm', 'n'].includes(matchUserInput.coda);
+        && matchUserInput.nucleus === 'a') {
+      if (['m', 'n'].includes(matchUserInput.coda)) {
+        // 允许模糊匹配高化、前化、圆唇化、韵尾任意的所有变体。
+        return (matchUserInput.medial === matchPinyin.medial || matchPinyin === 'i' && !matchUserInput.medial)
+            && ['a', 'o', 'e', 'ur'].includes(matchUserInput.nucleus)
+            && ['ng', 'm', 'n'].includes(matchUserInput.coda);
+      }
+      if (['u', 'uh'].includes(matchUserInput.coda)) {
+        return (matchUserInput.medial === matchPinyin.medial || matchPinyin === 'i' && !matchUserInput.medial)
+            && ['a', 'o', 'e', 'ur'].includes(matchUserInput.nucleus)
+            && matchUserInput.coda === matchPinyin.coda;
+      }
     }
     if (matchPinyin.medial === 'i'
         && matchPinyin.nucleus === 'o'
@@ -352,6 +439,20 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
           && ['o', 'e', 'ur'].includes(matchUserInput.nucleus)
           && matchUserInput.coda === matchPinyin.coda;
     }
+
+    // 按澄海口音，韵尾全部收 ng/k
+    pinyinFinal = pinyinFinal.replace('n', 'ng');
+    pinyinFinal = pinyinFinal.replace('t', 'k');
+    pinyinFinal = pinyinFinal.replace('m', 'ng');
+    pinyinFinal = pinyinFinal.replace('p', 'k');
+    userInputFinal = userInputFinal.replace('n', 'ng');
+    userInputFinal = userInputFinal.replace('t', 'k');
+    userInputFinal = userInputFinal.replace('m', 'ng');
+    userInputFinal = userInputFinal.replace('p', 'k');
+
+    // buan <-> muan
+
+    return pinyinFinal === userInputFinal;
   }
 }
 
@@ -360,10 +461,22 @@ class PreprocessedPhraseUnitsTree {
   children: PreprocessedPhraseUnit[];
   treeCache: Map<number, PreprocessedPhraseUnit[]>;
   str: string;
+  pinyinType: string;
+  treeError: boolean;
+  exact: boolean;
+  accent: string;
+  accentRule: any;
 
-  constructor(queryInput: string) {
+  constructor(queryInput: string, pinyinType: string, exact: boolean, accent: string) {
     this.str = queryInput;
     this.input = [...queryInput];
+    this.pinyinType = pinyinType;
+    if (pinyinType !== 'puj' && pinyinType !== 'dp') {
+      console.error(`Unknown pinyin type ${pinyinType}`);
+    }
+    this.exact = exact;
+    this.accent = accent;
+    this.accentRule = getAccentsRules()[accent];
     this.treeCache = new Map();
     this.children = this.buildTree(0);
   }
@@ -377,9 +490,25 @@ class PreprocessedPhraseUnitsTree {
       let i = curI;
       let s = '';
       while (i < this.input.length && latinRegex.test(this.input[i])) s += this.input[i++];
-      const curUnit = new PreprocessedPhraseUnitPinyin(s);
-      curUnit.children = this.buildTree(i);
-      this.treeCache.set(curI, [curUnit]);
+      if (this.pinyinType === 'dp') {
+        const pujPron = convertDPPronunciationToPUJPronunciation(convertDPWordToPronunciation(s));
+        if (!pujPron) {
+          console.error(`Cannot convert dp pinyin ${s} to puj pinyin`);
+          this.treeError = true;
+        } else {
+          s = `${pujPron.initial}${pujPron.final}${pujPron.tone}`;
+        }
+      }
+      const pinyinMatch = s.match(regexpWordOptional);
+      if (pinyinMatch) {
+        const curUnit = new PreprocessedPhraseUnitPinyin(s, pinyinMatch, this.exact, this.accentRule);
+        curUnit.children = this.buildTree(i);
+        this.treeCache.set(curI, [curUnit]);
+      } else {
+        console.error(`Cannot verify puj pinyin ${s}`);
+        this.treeError = true;
+        this.treeCache.set(curI, []);
+      }
       return this.treeCache.get(curI);
     }
     if (isChineseChar(cur)) {
@@ -427,17 +556,17 @@ class PreprocessedPhraseInput {
   // The original user input
   rawInput: string;
   // Pinyin method: puj or dp
-  pinyin: string;
+  pinyinType: string;
   input: string[];
   root: PreprocessedPhraseUnitsTree;
   allChineseChars: boolean;
   hasWildcard: boolean;
 
-  constructor(rawInput: string, pinyin: string = 'puj') {
+  constructor(rawInput: string, pinyinType: string = 'puj', exact: boolean = true) {
     this.rawInput = rawInput;
     this.input = [...rawInput];
-    this.pinyin = pinyin.toLowerCase();
-    this.root = new PreprocessedPhraseUnitsTree(rawInput);
+    this.pinyinType = pinyinType.toLowerCase();
+    this.root = new PreprocessedPhraseUnitsTree(rawInput, pinyinType, exact);
     this.allChineseCharacters = true;
     this.hasWildcard = false;
     for (const char of this.input) {
@@ -450,6 +579,10 @@ class PreprocessedPhraseInput {
     }
   }
   tryMatch(phrase: pujpb.IPhrase): boolean {
+    if (this.root.treeError) {
+      return false;
+    }
+
     // Fast path
     if (this.allChineseChars) {
       for (const teochew of phrase.teochew) {
@@ -481,9 +614,17 @@ class PreprocessedPhraseInput {
 export default {
   data() {
     return {
+      matchType: 'auto',
+      selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
+      selectedPinyin: getLocalOption("q-pron-default-pinyin") ?? 'puj',
+      fuzzyQueryList: [{
+        key: 'dummy',
+        name: '辞典',
+        fuzzy: () => {},
+      }],
       queryInput: '',
       queryResult: [],
-      queryResultEmpty: false,
+      queryResultEmpty: undefined,
       teochewIndexing: {},
       cmnIndexing: {},
       pujIndexing: {},
@@ -541,7 +682,7 @@ export default {
       });
     },
     tryMatch(input: string, phrase: pujpb.IPhrase): boolean {
-      const preprocessedInput = new PreprocessedPhraseInput(input);
+      const preprocessedInput = new PreprocessedPhraseInput(input, this.selectedPinyin, this.matchType === 'exact');
       return preprocessedInput.tryMatch(phrase);
     },
     queryPhrase(chars: string) {
@@ -588,6 +729,7 @@ export default {
       this.queryResult = [];
       let charsInput = this.queryInput;
       let result = this.queryPhrase(charsInput);
+      console.log(`Results: ${result.map(item => item.index).join(',')}`);
       this.queryResult = result;
       this.queryResultEmpty = (result.length === 0);
     },
@@ -598,12 +740,14 @@ export default {
     },
     onInitFromDatabaseFinished() {
       setLoading(false);
+      this.fuzzyQueryList = Object.entries(getAccentsRules()).map(([key, rule]) => ({
+        key,
+        name: rule.name,
+        fuzzy: rule.fuzzy,
+      }));
     }
   },
   mounted() {
-    if (typeof window !== 'undefined') {
-      import('bootstrap');
-    }
     initFromDatabase().then(() => {
       this.onInitFromDatabaseFinished();
       this.renderPopupPujElements();
@@ -616,6 +760,21 @@ export default {
     $("#query-button").click(function () {
       this.blur();
     });
+
+    if (typeof window !== 'undefined') {
+      import("bootstrap").then(({ Tooltip: BSTooltip }) => {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const template = document.querySelector("#bs-tooltips-template");
+        const templateHTML = template.innerHTML;
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new BSTooltip(tooltipTriggerEl, {
+            template: templateHTML,
+            sanitize: false, // 不要自动消除 Vue 生成的 data-v-xxx
+            html: true,
+          });
+        });
+      });
+    }
   },
   updated() {
     this.renderPopupPujElements();
@@ -625,10 +784,16 @@ export default {
 
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
-//@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
 </style>
 
 <style scoped lang="scss">
+.query-tooltip:hover {
+  cursor: help;
+}
+.tooltip-inner {
+  text-align: justify;
+}
 .card-result-entry {
   cursor: pointer;
   padding: 10px;

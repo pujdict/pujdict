@@ -53,7 +53,7 @@ function makeEntryFromSqlResult(sqlResult) {
 }
 
 class PhraseSyllable {
-  charsMap: Map<number, string[]>;
+  charsMap: Map<number, string[][]>;
   pronsMap: Map<number, string[][]>;
 
   constructor(phrase: pujpb.IPhrase) {
@@ -86,6 +86,8 @@ class PUJDictDatabase {
   entriesCharMap: Map<string, pujpb.IEntry[]>;
   accents: pujpb.IAccent[];
   fuzzyRulesAction: Map<pujpb.FuzzyRule, (pron: pujpb.IPronunciation) => void>;
+  private accentResults: Map<string/*accent*/,  Map<string/*pronunciation*/, string/*fuzzy result*/>>;
+  private accentPossibleResults: Map<string/*pronunciation*/, Set<string>/*fuzzyResults*/>;
   phrases: pujpb.IPhrase[];
   // 输入单词，映射到该单词的 phrase 列表。
   phrasesTeochewMap: Map<string/*teochew*/, pujpb.IPhrase[]>;
@@ -111,6 +113,11 @@ class PUJDictDatabase {
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
     this.accents = accentsData.accents;
     this.fuzzyRulesAction = new Map();
+    this.accentResults = new Map();
+    for (const accent of this.accents) {
+      this.accentResults.set(accent.id, new Map());
+    }
+    this.accentPossibleResults = new Map();
 
     const fuzzyRuleDescriptors = accentsData.fuzzyRuleDescriptors;
     for (const fuzzyRuleDescriptor of fuzzyRuleDescriptors) {
@@ -259,6 +266,35 @@ class PUJDictDatabase {
       funcPushResult(phrase, phrase.teochew) || funcPushResult(phrase, phrase.informal);
     }
     return res;
+  }
+
+  public getCachedFuzzyResult(accentId: string, pron: string): pujpb.IPronunciation {
+    const accentMap = this.accentResults.get(accentId);
+    if (!accentMap) {
+      return null;
+    }
+    const accentRule = getAccentsRules()[accentId];
+    if (!accentRule) {
+      return null;
+    }
+    let res = accentMap.get(pron);
+    if (!res) {
+      res = getAccentsRules()[accentId].fuzzy(pron);
+      accentMap.set(pron, res);
+    }
+    return res;
+  }
+  public getCachedPossibleFuzzyResults(pron: Pronunciation): Set<string> {
+    const pronStr = `${pron.initial}${pron.final}${pron.tone}`;
+    if (!this.accentPossibleResults.has(pronStr)) {
+      const res = new Set();
+      for (const [, accentRule] of Object.entries(getAccentsRules())) {
+        const fuzzyPron: Pronunciation = accentRule.fuzzy(pron);
+        res.add(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+      }
+      this.accentPossibleResults.set(pronStr, res);
+    }
+    return this.accentPossibleResults.get(pronStr);
   }
 }
 

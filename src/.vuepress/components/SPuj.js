@@ -90,7 +90,8 @@ lang def:
 // 已废弃。
 const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
-const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
+const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0)'?)?(?<final>[a-z]+)(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -372,6 +373,7 @@ function convertPlainPUJToPronunciationWord(word) {
 }
 
 const PUJ_DP_INITIAL_MAP = {
+  '0': '',
   '': '',
   'p': 'b',
   'ph': 'p',
@@ -380,7 +382,6 @@ const PUJ_DP_INITIAL_MAP = {
   't': 'd',
   'th': 't',
   'n': 'n',
-  'n\'': 'n',
   'l': 'l',
   'k': 'g',
   'kh': 'k',
@@ -392,6 +393,27 @@ const PUJ_DP_INITIAL_MAP = {
   's': 's',
   'j': 'r',
 };
+const DP_PUJ_INITIAL_MAP = {
+  '0': '',
+  '': '',
+  'b': 'p',
+  'p': 'ph',
+  'm': 'm',
+  'bh': 'b',
+  'd': 't',
+  't': 'th',
+  'n': 'n',
+  'l': 'l',
+  'g': 'k',
+  'k': 'kh',
+  'ng': 'ng',
+  'gh': 'g',
+  'h': 'h',
+  'z': 'ts',
+  'c': 'tsh',
+  's': 's',
+  'r': 'j',
+}
 
 function convertPUJInitialOrFinalToDP(part) {
   let try_to_map_initial = PUJ_DP_INITIAL_MAP[part];
@@ -415,6 +437,39 @@ function convertPUJInitialOrFinalToDP(part) {
   part = part.replace(/k$/, 'g');
 
   return part;
+}
+
+function convertDPWordToPronunciation(dp) {
+  const matchDP = dp.match(regexpWordDp);
+  if (!matchDP) return null;
+  let initial = matchDP.groups.initial;
+  if (!initial || initial === '0') initial = '';
+  let final = matchDP.groups.final;
+  let tone = matchDP.groups.tone;
+  return new Pronunciation(initial, final, tone);
+}
+
+function convertDPPronunciationToPUJPronunciation(dpPron) {
+  if (!dpPron) return dpPron;
+  let initial = DP_PUJ_INITIAL_MAP[dpPron.initial];
+  if (!initial || initial === '0') initial = '';
+  let final = dpPron.final.normalize('NFC'); // ê 作为单个字符
+  final = final.replace('er', 'or');
+  // 单韵母“余”特殊处理，后续的所有单独存在的 e，都只可能是 iem/ieb/ieu(-nn/-h) 这几个。
+  // 这两属于府城特色音，iam iap iau 的高化。
+  // 辞典和 ieng/iek 保持一致，统一把这个府城特色高化记为 e，不记为 ur/or，减少记忆负担。与之对应的，潮拼改标记为 iêm/iêb/iêu。
+  // 但用户的输入，支持写 iem ieb ieu。
+  if (final === 'e') final = 'ur';
+  final = final.replace('ê', 'e');
+  final = final.replace('ee', 'e');
+
+  if (final.endsWith('n')) final += 'n';
+  final = final.replace('ao', 'au');
+  if (final.endsWith('nd')) final = final.replace('nd', 'n');
+  final = final.replace('b', 'p');
+  final = final.replace('d', 't');
+  final = final.replace('g', 'k');
+  return new Pronunciation(initial, final, dpPron.tone);
 }
 
 function convertPUJPronunciationToDPPronunciation(pronunciation) {
@@ -703,6 +758,7 @@ function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = fa
 
 export {
   regexpWordOptional,
+  regexpWordDp,
   AtomicFuzzyRule,
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy,
@@ -713,6 +769,8 @@ export {
   // convertPlainPUJSentenceToIPASentence, // TODO
   convertPlainPUJSentenceToDPSentence,
   convertPlainPUJSentenceToDisplayPUJInSentence,
+  convertDPWordToPronunciation,
+  convertDPPronunciationToPUJPronunciation,
   addPUJToneMarkSentence,
   addPUJToneMarkWord,
   addPUJToneMarkAndConvertToDisplayPUJSentence,
