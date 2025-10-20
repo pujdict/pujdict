@@ -594,6 +594,9 @@ class PreprocessedPhraseInput {
         }
       }
     }
+    if (this.rawInput.trim().match(/\*+/)) {
+      return true;
+    }
 
     for (let child of this.root.children) {
       const phraseSyllableMap: PhraseSyllable = db.phrasesSyllableMap.get(phrase.index);
