@@ -468,7 +468,7 @@ function convertDPPronunciationToPUJPronunciation(dpPron) {
   if (final.endsWith('nd')) final = final.replace('nd', 'n');
   final = final.replace('b', 'p');
   final = final.replace('d', 't');
-  final = final.replace('g', 'k');
+  if (!final.endsWith('ng')) final = final.replace('g', 'k');
   return new Pronunciation(initial, final, dpPron.tone);
 }
 
