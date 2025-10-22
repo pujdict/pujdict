@@ -36,7 +36,7 @@
                      :value="defaultPinyinDisplayFuzzyRule.value"
                      v-model="customDefaultPinyinDisplayFuzzyRule"
                      @change="onFormChanged"/>
-              <label class="form-check-label" :for="`default-pinyin-display-${defaultPinyinDisplayFuzzyRule.value}`">
+              <label class="form-check-label" style="width: 4em" :for="`default-pinyin-display-${defaultPinyinDisplayFuzzyRule.value}`">
                 {{ defaultPinyinDisplayFuzzyRule.name }}
               </label>
             </div>

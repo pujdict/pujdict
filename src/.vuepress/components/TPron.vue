@@ -10,7 +10,7 @@
                    :id="fuzzyQuery.key" :value="fuzzyQuery.key"
                    v-model="selectedFuzzyQueryKey"
                    @change="initializeFuzzyRulesMap()"/>
-            <label class="form-check-label" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
+            <label class="form-check-label" style="width: 4em" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
                    :id="py.key" :value="py.key"
                    v-model="selectedPinyin"
                    @change="initializeFuzzyRulesMap()"/>
-            <label class="form-check-label" :for="py.key">{{ py.name }}</label>
+            <label class="form-check-label" style="width: 4em" :for="py.key">{{ py.name }}</label>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
           <div class="form-check form-check-inline" v-for="initial in initialsList">
             <input class="form-check-input" type="checkbox"
                    :id="initial.key" :value="initial.key" v-model="selectedInitials"/>
-            <label class="form-check-label" :for="initial.key">{{ initial.display }}</label>
+            <label class="form-check-label" style="width: 2.4em" :for="initial.key">{{ initial.display }}</label>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
           <div class="form-check form-check-inline" v-for="final in finalsList">
             <input class="form-check-input" type="checkbox"
                    :id="final.key" :value="final.key" v-model="selectedFinals"/>
-            <label class="form-check-label" :for="final.key">{{ final.display }}</label>
+            <label class="form-check-label" style="width: 2.4em" :for="final.key">{{ final.display }}</label>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
           <div class="form-check form-check-inline" id="tones-list-proto" v-for="tone in tonesList">
             <input class="form-check-input" type="checkbox"
                    :id="tone.key" :value="tone.key" v-model="selectedTones"/>
-            <label class="form-check-label" :for="tone.key">{{ tone.display }}</label>
+            <label class="form-check-label" style="width: 2.4em" :for="tone.key">{{ tone.display }}</label>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@ export default {
       pinyinList: [
         {
           key: "puj",
-          name: "PUJ",
+          name: "白话字",
         },
         {
           key: "dp",
@@ -447,11 +447,6 @@ $link-decoration: none;
 
 #query-conditions {
   font-size: 110%;
-}
-
-#query-conditions .form-check-label {
-  /* add margin between every two entries */
-  width: 2.4em;
 }
 
 #query-result {

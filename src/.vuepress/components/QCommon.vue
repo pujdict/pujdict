@@ -322,13 +322,14 @@ const getAccentsRules = function () {
     for (const accent of db.accents) {
       const id = accent.id;
       const area = accent.area;
+      const subarea = accent.subarea;
       const rulesIds = accent.rules;
       const accentTones = accent.tones;
       let rules = [];
       for (const ruleId of rulesIds) {
         rules.push(db.fuzzyRulesAction.get(ruleId));
       }
-      fuzzyRules[id] = new FuzzyRulesGroup(area, accentTones, rules);
+      fuzzyRules[id] = new FuzzyRulesGroup(`${area}${subarea}`, accentTones, rules);
     }
     // TODO: 这里自定义应该改成允许用户选择单条模糊音规则
     const custom = {
