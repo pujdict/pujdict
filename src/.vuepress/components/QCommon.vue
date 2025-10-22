@@ -285,13 +285,14 @@ class PUJDictDatabase {
     }
     return res;
   }
+  // Note: this result does not have tone.
   public getCachedPossibleFuzzyResults(pron: Pronunciation): Set<string> {
     const pronStr = `${pron.initial}${pron.final}${pron.tone}`;
     if (!this.accentPossibleResults.has(pronStr)) {
       const res = new Set();
       for (const [, accentRule] of Object.entries(getAccentsRules())) {
         const fuzzyPron: Pronunciation = accentRule.fuzzy(pron);
-        res.add(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+        res.add(`${fuzzyPron.initial}${fuzzyPron.final}`);
       }
       this.accentPossibleResults.set(pronStr, res);
     }

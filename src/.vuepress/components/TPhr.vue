@@ -371,8 +371,7 @@ class PreprocessedPhraseUnitPinyin extends PreprocessedPhraseUnit {
           && this.inputPron.final === fuzzyPron.final
           && (this.inputPron.tone === fuzzyPron.tone || !this.inputPron.tone)
     }
-    const toMatchWithoutTone = toMatchPron.initial + toMatchPron.final;
-    if (!db.getCachedPossibleFuzzyResults(this.inputPron).has(toMatchWithoutTone)) {
+    if (!db.getCachedPossibleFuzzyResults(toMatchPron).has(this.inputPinyinWithoutTone)) {
       return false;
     }
     if (!this.inputPron.tone || this.inputPron.tone == 0 || this.inputPron.tone == '') {
