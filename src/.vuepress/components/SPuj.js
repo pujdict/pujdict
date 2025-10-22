@@ -91,7 +91,7 @@ lang def:
 const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
 const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn|p|t|k|h)*))(?<tone>\d)?$/i;
-const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|ê?|ê|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n|b|d|g|h)*))(?<tone>\d)?$/i;
+const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n|b|d|g|h)*))(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -455,11 +455,12 @@ function convertDPPronunciationToPUJPronunciation(dpPron) {
   if (!initial || initial === '0') initial = '';
   let final = dpPron.final.normalize('NFC'); // ê 作为单个字符
   final = final.replace('er', 'or');
-  // 单韵母“余”特殊处理，后续的所有单独存在的 e，都只可能是 iem/ieb/ieu(-nn/-h) 这几个。
+  // 单韵母“余 秧”特殊处理，后续的所有单独存在的 e，都只可能是 iem/ieb/ieu(-nn/-h) 这几个。
   // 这两属于府城特色音，iam iap iau 的高化。
   // 辞典和 ieng/iek 保持一致，统一把这个府城特色高化记为 e，不记为 ur/or，减少记忆负担。与之对应的，潮拼改标记为 iêm/iêb/iêu。
   // 但用户的输入，支持写 iem ieb ieu。
   if (final === 'e') final = 'ur';
+  if (final === 'eng') final = 'urng';
   final = final.replace('ê', 'e');
   final = final.replace('ee', 'e');
 

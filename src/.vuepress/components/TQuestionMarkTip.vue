@@ -58,6 +58,6 @@ export default {
   cursor: help;
 }
 .tooltip-inner {
-  text-align: justify;
+  text-align: left;
 }
 </style>

@@ -43,7 +43,7 @@
         </div>
         <div class="mb-0">
           <div class="form-label fw-bold d-flex align-items-center mb-2">输入字词
-            <TQuestionMarkTip title="支持输入拼音，拼音若无声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。" />
+            <TQuestionMarkTip title="支持输入拼音，拼音用空格隔开，白话字“余”“倭”韵可分别通过“ur/ir/ṳ”“or/er/o̤”输入，潮拼“哑”韵可通过“ee/ê”输入，声调请用数字标注在拼音后方，例如“pheng1 im1”，若不输入声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。" />
           </div>
           <div class="input-group">
             <input class="form-control" id="query-input" type="text" maxlength="256" v-model="queryInput"/>
@@ -446,6 +446,7 @@ class PreprocessedPhraseUnitsTree {
   accentRule: any;
 
   constructor(queryInput: string, pinyinType: string, exact: boolean, accent: string) {
+    queryInput = queryInput.normalize('NFD');
     this.str = queryInput;
     this.input = [...queryInput];
     this.pinyinType = pinyinType;
@@ -463,7 +464,7 @@ class PreprocessedPhraseUnitsTree {
     if (curI >= this.input.length) return [];
     if (this.treeCache.has(curI)) return this.treeCache.get(curI);
     const cur = this.input[curI];
-    const latinRegex = /[a-zA-Z0-9]/;
+    const latinRegex = /[a-zA-Z0-9̤\u0300-\u030D\u0340-\u0342]/;
     if (latinRegex.test(cur)) {
       let i = curI;
       let s = '';
