@@ -128,10 +128,6 @@
         </div>
       </div>
     </div>
-    <div id="bs-tooltips-template">
-      <!-- Vue 会自动填充 data-v-xxx tag -->
-      <div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>
-    </div>
   </div>
 </template>
 
@@ -775,16 +771,9 @@ export default {
 
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons.min.css';
 </style>
 
 <style scoped lang="scss">
-.query-tooltip:hover {
-  cursor: help;
-}
-.tooltip-inner {
-  text-align: justify;
-}
 .card-result-entry {
   cursor: pointer;
   padding: 10px;
