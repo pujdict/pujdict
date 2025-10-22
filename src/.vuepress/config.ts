@@ -173,6 +173,7 @@ export default defineUserConfig({
         tasklist: true,
       },
       comment: {},
+      photoSwipe: false,
     }
   }),
   extendsMarkdown: (md) => {

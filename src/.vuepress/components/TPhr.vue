@@ -5,7 +5,7 @@
       <div class="query-input-area col-md-8">
         <div class="mb-3">
           <div class="form-label fw-bold d-flex align-items-center mb-2">输入拼音方案
-            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="因两种拼音方案不兼容，如需输入拼音，请先指定其中一种。"></i>
+            <TQuestionMarkTip title="因两种拼音方案不兼容，如需输入拼音，请先指定其中一种。" />
           </div>
           <div class="d-flex align-items-center flex-wrap gap-3">
             <div class="form-check">
@@ -20,7 +20,7 @@
         </div>
         <div class="mb-3">
           <div class="form-label fw-bold d-flex align-items-center mb-2">拼音匹配模式
-            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="自由匹配：将输入的拼音和所有口音可能的读音进行匹配；<br>口音匹配：只匹配给定的口音。"></i>
+            <TQuestionMarkTip title="自由匹配：将输入的拼音和所有口音可能的读音进行匹配；<br>口音匹配：只匹配给定的口音。" />
           </div>
           <div class="d-flex align-items-center flex-wrap gap-3">
             <div class="form-check">
@@ -43,7 +43,7 @@
         </div>
         <div class="mb-0">
           <div class="form-label fw-bold d-flex align-items-center mb-2">输入字词
-            <i class="bi bi-question-circle ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="支持输入拼音，拼音若无声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。"></i>
+            <TQuestionMarkTip title="支持输入拼音，拼音若无声调则匹配所有声调；<br>支持通配符：半角问号 ? 匹配单个字，半角星号 * 匹配单个或多个字。" />
           </div>
           <div class="input-group">
             <input class="form-control" id="query-input" type="text" maxlength="256" v-model="queryInput"/>
@@ -139,6 +139,7 @@
 import {withBase} from "vuepress/client";
 import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
+import TQuestionMarkTip from "./TQuestionMarkTip.vue";
 </script>
 
 <script lang="ts">
