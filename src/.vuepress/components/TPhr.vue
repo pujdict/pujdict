@@ -766,21 +766,6 @@ export default {
     $("#query-button").click(function () {
       this.blur();
     });
-
-    if (typeof window !== 'undefined') {
-      import("bootstrap").then(({ Tooltip: BSTooltip }) => {
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        const template = document.querySelector("#bs-tooltips-template");
-        const templateHTML = template.innerHTML;
-        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-          return new BSTooltip(tooltipTriggerEl, {
-            template: templateHTML,
-            sanitize: false, // 不要自动消除 Vue 生成的 data-v-xxx
-            html: true,
-          });
-        });
-      });
-    }
   },
   updated() {
     this.renderPopupPujElements();
