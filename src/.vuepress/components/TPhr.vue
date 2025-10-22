@@ -570,7 +570,7 @@ class PreprocessedPhraseInput {
         }
       }
     }
-    if (this.rawInput.trim().match(/\*+/)) {
+    if (this.rawInput.trim().match(/^[\*\s]+$/)) {
       return true;
     }
 
