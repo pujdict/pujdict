@@ -188,26 +188,6 @@ class PreprocessedPhraseUnit {
   }
 }
 
-class PreprocessedPhraseUnitChar extends PreprocessedPhraseUnit {
-  str: string;
-
-  constructor(rawInput: string) {
-    super();
-    this.str = rawInput;
-  }
-
-  tryMatchSelf(): number {
-    const possibleEntries: pujpb.IEntry[] = db.entriesCharMap[this.str];
-    if (possibleEntries) {
-      for (const entry of possibleEntries) {
-        if (entry.char === this.str || entry.charSim === this.str)
-          return 1;
-      }
-    }
-    return 0;
-  }
-}
-
 class PreprocessedPhraseUnitChars extends PreprocessedPhraseUnit {
   str: string;
   chars: string[];
@@ -683,10 +663,6 @@ export default {
         element.replaceWith(span);
       });
     },
-    tryMatch(input: string, phrase: pujpb.IPhrase): boolean {
-      const preprocessedInput = new PreprocessedPhraseInput(input, this.selectedPinyin, this.matchType === 'exact', this.selectedFuzzyQueryKey);
-      return preprocessedInput.tryMatch(phrase);
-    },
     queryPhrase(chars: string) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
@@ -704,9 +680,10 @@ export default {
         resultPhrasesIndices.add(phrase.index);
         resultPhrases.push(phrase);
       };
+      const preprocessedInput = new PreprocessedPhraseInput(chars, this.selectedPinyin, this.matchType === 'exact', this.selectedFuzzyQueryKey);
       for (let i = 0; i < db.phrases.length; i++) {
         const phrase = db.phrases[i];
-        if (this.tryMatch(chars, phrase)) {
+        if (preprocessedInput.tryMatch(phrase)) {
           pushResult(phrase);
         }
       }
