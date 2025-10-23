@@ -688,6 +688,11 @@ export default {
           pushResult(phrase);
         }
       }
+      if (db.phrasesMandarinMap.has(chars)) {
+        for (const phrase of db.phrasesMandarinMap.get(chars)) {
+          pushResult(phrase);
+        }
+      }
       for (const phrase of resultPhrases) {
         const desc = this.formatDesc(phrase.desc);
         result.push({
