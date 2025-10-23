@@ -37,7 +37,11 @@ export default defineUserConfig({
   //   },
   // }),
   head: [
-    ["meta", {name: "keywords", content: "潮州话, 潮汕话, 潮汕方言, 辞典, 字典, 词典, 白话字, 潮拼"}]
+    ["meta", {name: "keywords", content: "潮州话, 潮汕话, 潮汕方言, 辞典, 字典, 词典, 白话字, 潮拼"}],
+    // 提前拉取数据
+    ["link", {rel: "prefetch", href: '/data/pujbase/dist/accents.pb'}],
+    ["link", {rel: "prefetch", href: '/data/pujbase/dist/entries.pb'}],
+    ["link", {rel: "prefetch", href: '/data/pujbase/dist/phrases.pb'}],
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
