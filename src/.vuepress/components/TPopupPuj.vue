@@ -153,28 +153,16 @@ export default {
             const possibleChar = possibleChars[j];
             const entry = getCharEntryOfPronunciation(possibleChar, pron);
             if (entry) {
-              if (accentKey !== 'dummy') {
-                if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS) {
-                  if (!fuzzyPron.final.endsWith('nn')) {
-                    fuzzyPron.final += 'nn';
-                    curPuj = convertPlainPUJSentenceToPUJSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
-                    curDp = convertPlainPUJSentenceToDPSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
-                  }
-                } else if (entry.accentsNasalized.includes(accentKey)) {
-                  let nasalizedPron = structuredClone(fuzzyPron);
-                  nasalizedPron.final += 'nn';
-                  nasalizedPron = accentRule.fuzzy(nasalizedPron);
-                  if (nasalizedPron.final !== fuzzyPron.final + 'nn') {
-                    curPuj += `(${convertPlainPUJSentenceToPUJSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`
-                    curDp += `(${convertPlainPUJSentenceToDPSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`
-                  } else {
-                    curPuj += '(nn)';
-                    if (curDp[curDp.length - 1].match(/\d/))
-                      curDp = curDp.slice(0, curDp.length - 1) + '(n)' + curDp[curDp.length - 1];
-                    else
-                      curDp += '(n)';
-                  }
-                }
+              if (accentKey !== 'dummy' && entry.pron.final.endsWith("nn'")) {
+                let nasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", 'nn'), fuzzyPron.tone);
+                // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
+                nasalizedPron = accentRule.fuzzy(nasalizedPron);
+                let denasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", ''), fuzzyPron.tone);
+                denasalizedPron = accentRule.fuzzy(denasalizedPron);
+                curPuj = convertPlainPUJSentenceToPUJSentence(`${denasalizedPron.initial}${denasalizedPron.final}${denasalizedPron.tone}`);
+                curPuj += `(${convertPlainPUJSentenceToPUJSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`;
+                curDp = convertPlainPUJSentenceToDPSentence(`${denasalizedPron.initial}${denasalizedPron.final}${denasalizedPron.tone}`);
+                curDp += `(${convertPlainPUJSentenceToDPSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`;
               }
               for (const pronAka of entry.pronAka) {
                 if (pronAka.accentId === accentKey) {

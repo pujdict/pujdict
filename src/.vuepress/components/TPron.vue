@@ -232,15 +232,25 @@ export default {
         for (const entry: pujpb.Entry of db.entries) {
           let allPossibleProns = [];
           const fuzzyPron = accentRule.fuzzy(entry.pron);
-          allPossibleProns.push(fuzzyPron);
-          // 特殊鼻化发音
-          if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS || entry.accentsNasalized.indexOf(accentId) !== -1) {
-            let nasalizedPron = structuredClone(fuzzyPron);
-            nasalizedPron.final += 'nn';
+          if (accentId !== 'dummy' && fuzzyPron.final.endsWith("nn'")) {
+            let nasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", 'nn'), fuzzyPron.tone);
             // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
             nasalizedPron = accentRule.fuzzy(nasalizedPron);
             allPossibleProns.push(nasalizedPron);
+            let denasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", ''), fuzzyPron.tone);
+            denasalizedPron = accentRule.fuzzy(denasalizedPron);
+            allPossibleProns.push(denasalizedPron);
+          } else {
+            allPossibleProns.push(fuzzyPron);
           }
+          // 特殊鼻化发音
+          // if (entry.spNasal === pujpb.EntrySpecialNasalization.ESN_ALWAYS || entry.accentsNasalized.indexOf(accentId) !== -1) {
+          //   let nasalizedPron = structuredClone(fuzzyPron);
+          //   nasalizedPron.final += 'nn';
+          //   // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”
+          //   nasalizedPron = accentRule.fuzzy(nasalizedPron);
+          //   allPossibleProns.push(nasalizedPron);
+          // }
           for (const pronAka of entry.pronAka) {
             if (pronAka.accentId === accentId) {
               if (pronAka.replace)

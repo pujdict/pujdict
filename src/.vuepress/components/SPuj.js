@@ -90,8 +90,8 @@ lang def:
 // 已废弃。
 const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
-const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn|p|t|k|h)*))(?<tone>\d)?$/i;
-const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n|b|d|g|h)*))(?<tone>\d)?$/i;
+const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
+const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -127,7 +127,6 @@ class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
       citation: [33, 52, 212, 2, 55, 25, 22, 5],
       sandhi: [33, 25, 52, 5, 22, 21, 22, 2],
     }, [
-      AtomicFuzzyRule.RemoveApostrophe,
     ]);
   }
 }
@@ -455,7 +454,7 @@ function convertPUJPronunciationToDPPronunciation(pronunciation) {
   // }
 
   // 去掉 nn'
-  if (result.final.endsWith("'")) result.final = result.final.substring(0, result.final.length - 1);
+  // if (result.final.endsWith("'")) result.final = result.final.substring(0, result.final.length - 1);
   return new Pronunciation(result.initial, result.final, result.tone);
 }
 
