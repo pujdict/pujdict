@@ -115,7 +115,7 @@ export default defineUserConfig({
             link: "qchar.md",
           },
           {
-            text: "词汇查询 (测试中)",
+            text: "字词高级查询 (Alpha)",
             link: "qphr.md",
           },
         ]

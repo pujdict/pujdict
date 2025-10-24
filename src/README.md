@@ -19,7 +19,7 @@ actions:
     icon: search
     link: ./query/qchar
     type: primary
-  - text: 词汇查询
+  - text: 字词高级查询 (Alpha)
     icon: search
     link: ./query/qphr
     type: primary
@@ -290,10 +290,13 @@ copyright: false
 [//]: # ()
 [//]: # (配置项的相关说明详见 [项目主页配置]&#40;https://theme-hope.vuejs.press/zh/guide/layout/home/&#41;。)
 
-**开发中，内容、查询接口随时可能发生变化。**
+**开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助勘误补正。**
+
+网站源码：[Gitee](https://gitee.com/pujdict/pujdict) [Github](https://github.com/pujdict/pujdict)
+数据仓库：[Gitee](https://gitee.com/pujdict/pujbase) [Github](https://github.com/pujdict/pujbase)
 
 本辞典宗旨是：
 1. 收录方言字词，包含各位学者考证的所谓“正字”/“本字”、民间俗写、互联网社交媒体上的非正式写法，有音无字者也同样收录；
 2. 收录罕用字音，包括市面现有方言字典不收录的大量文读音，便于学习、起名、诗歌戏曲创作之用；
 3. 兼容各地口音，不以潮州或汕头口音为标准，内部采用一套能直接映射各地口音的标准音进行数据的记录；
-4. 完全开源，便于传播，利于优秀方言文化的传承。
+
