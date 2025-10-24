@@ -98,51 +98,6 @@ class FuzzyRuleBase {
 }
 
 const AtomicFuzzyRule = {
-  UR_As_U: result => { if (result.final === 'ur') result.final = 'u'; },
-  OR_As_O: result => { if (result.final === 'or') result.final = 'o'; },
-  OR_As_E: result => { if (result.final === 'or') result.final = 'e'; },
-  ORH_As_OH: result => { if (result.final === 'orh') result.final = 'oh'; },
-  EU_As_IU: result => { if (result.final === 'eu') result.final = 'iu'; },
-  OINN_As_AINN: result => { if (result.final === 'oinn') result.final = 'ainn'; },
-  UOINN_As_UINN: result => { if (result.final === 'uoinn') result.final = 'uinn'; },
-  UOINN_As_UAINN: result => { if (result.final === 'uoinn') result.final = 'uainn'; },
-  OI_As_UE: result => { if (result.initial.match(/^(p|ph|m|b)$/)) result.final = result.final.replace(/^oi(nn|h|nnh)*/, 'ue$1'); },
-  OU_As_AU: result => { if (result.final.startsWith('ou')) result.final = result.final.replace('ou', 'au'); },
-  UE_As_UEI: result => { result.final = result.final.replace(/^ue(h|nn|nn'h)?$/, 'uei$1'); },
-  URN_As_IN: result => { result.final = result.final.replace(/^ur([nt])$/, 'i$1'); },
-  IN_As_EN: result => { result.final = result.final.replace(/^i([nt])$/, 'e$1'); },
-  UENG_As_ENG: result => { if (result.final === 'ueng') result.final = result.initial === '' ? 'eng' : 'uang'; },
-  UEK_As_UAK: result => { if (result.final === 'uek') result.final = 'uak'; },
-  IO_As_IE: result => { result.final = result.final.replace(/^io(nn'?|h|nn'?h)*$/, 'ie$1'); },
-  IAU_As_IEU: result => { result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'ieu$1'); },
-  IAU_As_IOU: result => { result.final = result.final.replace(/^iau(nn'?|h|nn'?h)*$/, 'iou$1'); },
-  IAN_As_IEN: result => { result.final = result.final.replace(/^ia([nt])$/, 'ie$1'); },
-  UAN_As_UEN: result => { result.final = result.final.replace(/^ua([nt])$/, 'ue$1'); },
-  IAM_As_IEM: result => { result.final = result.final.replace(/^ia([mp])$/, 'ie$1'); },
-  N_As_L_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'n') result.initial = 'l'; },
-  N_As_L_ForNOrNGEnding: result => { if (((result.final.endsWith('n') && !result.final.endsWith('nn')) || result.final.endsWith('ng')) && result.initial === 'n') result.initial = 'l'; },
-  L_As_N_ForMEnding: result => { if (result.final.endsWith('m') && result.initial === 'l')result.initial = 'n'; },
-  MU_As_BU_ForNasalEnding: result => { if (result.initial === 'm' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'b'; },
-  BU_As_MU_ForNasalEnding: result => { if (result.initial === 'b' && result.final.match(/^u[aoveiu]*(m|n|ng)$/)) result.initial = 'm'; },
-  N_As_NG: result => {
-    result.final = result.final.replace(/^([aoveiu]+)n$/, '$1ng');
-    result.final = result.final.replace(/^([aoveiu]+)t$/, '$1k');
-  },
-  M_As_NG: result => {
-    result.final = result.final.replace(/^([aoveiu]+)m$/, '$1ng');
-    result.final = result.final.replace(/^([aoveiu]+)p$/, '$1k');
-  },
-  ENG_As_EN: result => {
-    if (result.final === 'eng') result.final = 'en';
-    if (result.final === 'ek') result.final = 'et';
-  },
-  NG_As_UNG: result => { if (result.initial.match(/^(p|ph|m|b)$/) && result.final === 'ng') result.final = 'ung'; },
-  NG_As_URNG: result => { if (result.final === 'ng' && result.initial !== 'h' && result.initial !== '') result.final = 'urng'; },
-  IONG_As_ONG: result => {
-    if (result.initial.match(/^(t|th|n|l|ts|tsh|s|j)$/) && result.final === 'iong') result.final = 'ong';
-    if (result.initial.match(/^(t|n|l|ts|tsh|s|j)$/) && result.final === 'iok') result.final = 'ok';
-  },
-  NGU_As_U: result => { if (result.initial === 'ng' && result.final === 'u') result.initial = ''; },
   RemoveApostrophe: result => { result.initial = result.initial.replace("'", ''); result.final = result.final.replace("'", ''); },
   RemoveFinalNasalizationForNasalInitial: result => {
     if (result.initial === 'm' || result.initial === 'n' || result.initial === 'ng')
