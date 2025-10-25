@@ -711,6 +711,10 @@ function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = fa
   return result.reverse().join('');
 }
 
+function getPronunciationCombinationString(pron) {
+  return `${pron.initial}${pron.final}${pron.tone}`;
+}
+
 export {
   regexpWordOptional,
   regexpWordDp,
@@ -738,4 +742,5 @@ export {
   convertPUJPronunciationToXSAMPAPronunciation,
   convertPUJPronunciationToIPAPronunciation,
   convertToneNumeralsToToneLetters,
+  getPronunciationCombinationString,
 }

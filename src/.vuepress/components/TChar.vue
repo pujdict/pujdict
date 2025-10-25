@@ -72,13 +72,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {withBase} from "vuepress/client";
 import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
 </script>
 
-<script>
+<script lang="ts">
 import {
   Entry, Pronunciation,
   getAccentsRules,
@@ -118,7 +118,7 @@ export default {
     makeCombinationString(pron) {
       return `${pron.initial}${pron.final}${pron.tone}`;
     },
-    queryChars(chars) {
+    queryChars(chars: string[]) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
         return [];

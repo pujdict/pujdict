@@ -83,7 +83,7 @@ class PhraseSyllable {
 class PUJDictDatabase {
   entries: pujpb.IEntry[];
   // 输入汉字，映射到这个汉字的 entry 列表（如果一简对多繁则表数量大于1）
-  entriesCharMap: Map<string, pujpb.IEntry[]>;
+  entriesCharMap: Map<string, Set<number/*char entry index*/>>;
   accents: pujpb.IAccent[];
   fuzzyRulesAction: Map<pujpb.FuzzyRule, (pron: pujpb.IPronunciation) => void>;
   private accentResults: Map<string/*accent*/,  Map<string/*pronunciation*/, string/*fuzzy result*/>>;
@@ -164,9 +164,9 @@ class PUJDictDatabase {
     const database: pujpb.IEntries = pujpb.Entries.decode(new Uint8Array(entriesResponse));
     this.entries = database.entries;
     this.entriesCharMap = new Map();
-    const pushEntryMap = (c: string, entry: pujpb.Entry) => {
-      if (!this.entriesCharMap[c]) this.entriesCharMap[c] = [];
-      this.entriesCharMap[c].push(entry);
+    const pushEntryMap = (c: string, entry: pujpb.IEntry) => {
+      if (!this.entriesCharMap.has(c)) this.entriesCharMap.set(c, new Set());
+      this.entriesCharMap.get(c).add(entry.index);
     };
     for (const entry of database.entries) {
       const char = entry.char;
@@ -183,7 +183,7 @@ class PUJDictDatabase {
     this.phrasesMandarinMap = new Map();
     this.phrasesFusionMap = new Map();
     this.phrasesSyllableMap = new Map();
-    const pushPhraseMap = (map: Map, key: string, val: pujpb.IPhrase) => {
+    const pushPhraseMap = (map: Map<string, any>, key: string, val: pujpb.IPhrase) => {
       if (!map.has(key)) map.set(key, []);
       map.get(key).push(val);
     }
@@ -386,10 +386,11 @@ function getFuzzyPronunciation(accentId, entry) {
   return fuzzyPron;
 }
 
-function getCharEntryOfPronunciation(char: string, pron: Pronunciation) : pujpb.Entry {
-  const results = db.entriesCharMap[char];
-  if (!results) return null;
-  for (const result of results) {
+function getCharEntryOfPronunciation(char: string, pron: Pronunciation) : pujpb.IEntry {
+  const indices = db.entriesCharMap.get(char);
+  if (!indices) return null;
+  for (const index of indices) {
+    const result = db.entries[index];
     if (result.pron.initial === pron.initial
         && result.pron.final === pron.final
         && result.pron.tone === pron.tone) {

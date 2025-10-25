@@ -62,7 +62,30 @@
     </form>
     <div v-if="queryResultEmpty !== undefined" id="query-result" class="mt-3">
       <hr/>
-      <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
+      <div class="row g-1" v-if="queryCharsResult.length">
+        <div class="col-sm-3" v-for="result in queryCharsResult">
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent">
+              <div class="d-flex align-items-center">
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                  <div class="col-12">
+                    <h4>{{ result.charInput }}</h4>
+                    <div class="col" v-for="entry of result.entries" :key="entry.index">
+                      <span class="badge border border-primary text-primary" v-if="entry.cat === 1">白</span>
+                      <span class="badge border border-primary text-primary" v-if="entry.cat === 2">文</span>
+                      <span class="badge border border-primary text-primary" v-if="entry.cat === 3">俗</span>
+                      <TPopupPuj :puj="getPronunciationCombinationString(entry.pron)" :charsList="[[entry.char]]"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <div v-if="queryResultEmpty" class="alert alert-info">没有找到词汇。</div>
       <div v-else class="row g-3">
         <div class="col-12" v-for="result in queryResult">
           <div class="card shadow-sm">
@@ -136,6 +159,7 @@ import {withBase} from "vuepress/client";
 import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
 import TQuestionMarkTip from "./TQuestionMarkTip.vue";
+import {getPronunciationCombinationString} from "./SPuj";
 </script>
 
 <script lang="ts">
@@ -160,6 +184,7 @@ import {
   regexpWordOptional,
   regexpWordDp,
   undoAddPUJToneMarkWord, convertDPWordToPronunciation, convertDPPronunciationToPUJPronunciation,
+  getPronunciationCombinationString,
 } from "./SPuj";
 
 const $ = jquery;
@@ -594,6 +619,11 @@ class PreprocessedPhraseInput {
   }
 }
 
+class QueryCharsResult {
+  charInput: string;
+  entries: pujpb.IEntry[];
+}
+
 export default {
   data() {
     return {
@@ -607,6 +637,7 @@ export default {
       }],
       queryInput: '',
       queryResult: [],
+      queryCharsResult: new Array<QueryCharsResult>(),
       queryResultEmpty: undefined,
       teochewIndexing: {},
       cmnIndexing: {},
@@ -664,6 +695,20 @@ export default {
         element.replaceWith(span);
       });
     },
+    queryChars(chars: string): QueryCharsResult[] {
+      let result = [];
+      for (const char of [...chars]) {
+        if (!isChineseChar(char)) continue;
+        const entriesIndices = db.entriesCharMap.get(char);
+        if (entriesIndices) {
+          const res = new QueryCharsResult();
+          res.charInput = char;
+          res.entries = [...entriesIndices].sort().map((index: number) => db.entries[index]);
+          result.push(res);
+        }
+      }
+      return result;
+    },
     queryPhrase(chars: string) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
@@ -715,6 +760,7 @@ export default {
       let charsInput = this.queryInput;
       let result = this.queryPhrase(charsInput);
       console.log(`Results: ${result.map(item => item.index).join(',')}`);
+      this.queryCharsResult = this.queryChars(charsInput);
       this.queryResult = result;
       this.queryResultEmpty = (result.length === 0);
     },
