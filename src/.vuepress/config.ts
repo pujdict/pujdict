@@ -82,10 +82,7 @@ export default defineUserConfig({
       '/query/': [
         "qpron.md",
         "qchar.md",
-        {
-          text: "词汇查询 (测试中)",
-          link: "qphr.md",
-        },
+        "qphr.md",
         "qphrtable.md",
       ],
       '/doc/': [

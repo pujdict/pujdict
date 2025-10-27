@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <TDarkTheme/>
+  <div v-bind:data-bs-theme="darkThemeString">
     <nav aria-label="Page navigation">
       <ul class="pagination">
         <li class="page-item" :class="{ disabled: currentPage === 1 }">
@@ -68,6 +69,11 @@
     </table>
   </div>
 </template>
+
+<script setup lang="ts">
+import TDarkTheme from "./TDarkTheme.vue";
+import {darkThemeString} from "./QDarkTheme.vue";
+</script>
 
 <script lang="ts">
 import {
