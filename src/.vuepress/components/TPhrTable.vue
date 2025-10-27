@@ -6,7 +6,7 @@
           <button class="page-link" @click="prevPage" :disabled="currentPage === 1">上一页</button>
         </li>
         <li class="page-item disabled">
-          <span class="page-link">第 {{ currentPage }} 页 / 共 {{ totalPages }} 页</span>
+          <span class="page-link">{{ currentPage }} 页 / {{ totalPages }} 页</span>
         </li>
         <li class="page-item" :class="{ disabled: currentPage === totalPages }">
           <button class="page-link" @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
@@ -25,12 +25,12 @@
     <table class="table table-striped table-bordered" style="table-layout: fixed;">
       <thead class="thead-dark">
       <tr>
-        <th style="width: 10%;">潮州话</th>
-        <th style="width: 20%;">拼音</th>
-        <th style="width: 10%;">普通话</th>
-        <th style="width: 25%;">释义</th>
-        <th style="width: 10%;">词性</th>
-        <th style="width: 10%;">标签</th>
+        <th style="width: 5em;">潮州话</th>
+        <th style="width: 10em;">拼音</th>
+        <th style="width: 5em;">普通话</th>
+        <th style="width: 12em;">释义</th>
+        <th style="width: 4em;">词性</th>
+        <th style="width: 6em;">标签</th>
       </tr>
       </thead>
       <tbody>
