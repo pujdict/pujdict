@@ -86,6 +86,7 @@ export default defineUserConfig({
           text: "词汇查询 (测试中)",
           link: "qphr.md",
         },
+        "qphrtable.md",
       ],
       '/doc/': [
         "puj.md",
@@ -117,6 +118,10 @@ export default defineUserConfig({
           {
             text: "字词高级查询 (Alpha)",
             link: "qphr.md",
+          },
+          {
+            text: "词汇总表",
+            link: "qphrtable.md",
           },
         ]
       },
