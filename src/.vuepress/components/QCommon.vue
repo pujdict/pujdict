@@ -70,7 +70,7 @@ class PhraseSyllable {
     funcPushTeochew(phrase.teochew);
     funcPushTeochew(phrase.informal);
     for (const puj: string of phrase.puj) {
-      const words = puj.match(/\w+/g);
+      const words = puj.match(/[\w']+/g);
       const nWord = words.length;
       if (!wordsMap.get(nWord)) wordsMap.set(nWord, []);
       wordsMap.get(nWord).push(words);
