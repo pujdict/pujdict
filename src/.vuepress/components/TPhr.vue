@@ -74,7 +74,9 @@
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 1">白</span>
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 2">文</span>
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 3">俗</span>
-                      <TPopupPuj :puj="getPronunciationCombinationString(entry.pron)" :charsList="[[entry.char]]"/>
+                      <TPopupPuj :puj="getPronunciationCombinationString(entry.pron)" :charsList="[[entry.char]]" :additionalStyle="{
+                        'opacity': entry.freq == 3 ? '50%' : '100%',
+                      }"/>
                     </div>
                   </div>
                 </div>

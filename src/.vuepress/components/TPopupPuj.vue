@@ -5,6 +5,7 @@
     <a @click="showModal = true"
        class="text-primary card-popup-text"
        style="text-decoration: none;"
+       :style="additionalStyle"
     >
       {{ display }}
     </a>
@@ -80,7 +81,12 @@ export default {
     puj: {
       type: String,
       required: true
-    }
+    },
+    additionalStyle: {
+      type: Object,
+      required: false,
+      default: {},
+    },
   },
   data() {
     return {
