@@ -35,32 +35,32 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, i) in paginatedItems" :key="i">
+      <tr v-if="items.length" v-for="phraseIndex in paginatedItems" :key="phraseIndex">
         <td>
-          <template v-for="(teochew, i) of item.teochew">
+          <template v-for="(teochew, i) of items[phraseIndex].teochew">
             <template v-if="i"><br/></template>{{ teochew }}
           </template>
         </td>
         <td>
-          <template v-for="(puj, i) of item.puj" :key="`${puj}${i}`">
-            <template v-if="i"><br/></template><TPopupPuj :puj="puj" :charsList="[...item.teochew]"/>
+          <template v-for="(puj, i) of items[phraseIndex].puj" :key="`${puj}${i}`">
+            <template v-if="i"><br/></template><TPopupPuj :puj="puj" :charsList="[...items[phraseIndex].teochew]"/>
           </template>
         </td>
         <td>
-          <template v-for="(cmn, i) of item.cmn">
+          <template v-for="(cmn, i) of items[phraseIndex].cmn">
             <template v-if="i"><br/></template>{{ cmn }}
           </template>
         </td>
         <td>
-          {{ item.desc }}
+          {{ items[phraseIndex].desc }}
         </td>
         <td>
-          <template v-for="(wordClass, i) of item.wordClass">
+          <template v-for="(wordClass, i) of items[phraseIndex].wordClass">
             <template v-if="i"><br/></template>{{ wordClass }}
           </template>
         </td>
         <td>
-          <template v-for="(tag, i) of item.tagDisplay">
+          <template v-for="(tag, i) of items[phraseIndex].tagDisplay">
             <template v-if="i"><br/></template>{{ tag }}
           </template>
         </td>
@@ -110,8 +110,12 @@ export default {
   computed: {
     paginatedItems() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.items.slice(start, end);
+      const end = Math.min(start + this.itemsPerPage, this.items.length);
+      const result = [];
+      for (let i = start; i < end; ++i) {
+        result.push(i);
+      }
+      return result;
     },
     totalPages() {
       return Math.ceil(this.items.length / this.itemsPerPage);
