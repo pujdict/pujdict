@@ -118,23 +118,23 @@ export default {
         {value: "DP", name: "潮拼"},
         {value: "IPA", name: "国际音标"},
       ],
-      customDefaultPinyinDisplay: DefaultLocalOptions['custom-default-pinyin-display'].split(';'),
+      customDefaultPinyinDisplay: getLocalOption('custom-default-pinyin-display').split(';'),
       defaultPinyinDisplayFuzzyRules: [
         {value: "dummy", name: "辞典"},
       ],
-      customDefaultPinyinDisplayFuzzyRule: 'dummy',
+      customDefaultPinyinDisplayFuzzyRule: getLocalOption('custom-default-pinyin-display-fuzzy-rule'),
       toneMarks6: [
         {value: "\u0303", name: '波浪符 ◌̃'},
         {value: "\u0306", name: '短音符 ◌̆'},
         {value: "\u030C", name: '抑扬符 ◌̌'},
       ],
-      customToneMark6: DefaultLocalOptions['custom-tone-mark-6'],
+      customToneMark6: getLocalOption('custom-tone-mark-6'),
       toneMarks8: [
         {value: "\u0301", name: '锐音符 ◌́'},
         {value: "\u030D", name: '竖线符 ◌̍'},
         {value: "\u0302", name: '扬抑符 ◌̂'},
       ],
-      customToneMark8: DefaultLocalOptions['custom-tone-mark-8'],
+      customToneMark8: getLocalOption('custom-tone-mark-8'),
     }
   },
   methods: {
