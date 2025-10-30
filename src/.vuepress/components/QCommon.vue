@@ -211,7 +211,7 @@ class PUJDictDatabase {
       phrase.tagDisplay = [];
       for (let i = 0; i < phrase.tag.length; ++i) {
         const tag = phrase.tag[i];
-        phrase.tagDisplay.push(phrasesData.phraseTagDisplay[pujpb.PhraseTag[tag]]);
+        phrase.tagDisplay.push(phrasesData.phraseTagDisplay[tag]);
       }
     }
     this.phrasesFastIndexByCharList = this.createPhrasesFastIndexByCharMap(this.phrases);
