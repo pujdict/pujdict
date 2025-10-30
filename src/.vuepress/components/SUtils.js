@@ -16,7 +16,7 @@ const DefaultLocalOptions = {
   'custom-default-pinyin-display-fuzzy-rule': "dummy",
 };
 
-function getLocalOption(optionName, $default = null) {
+function getLocalOption(optionName, $default = '') {
   if (typeof document === 'undefined') return $default;
   try {
     return localStorage.getItem(`pujdict-${optionName}`) ??  DefaultLocalOptions[optionName] ?? $default;
