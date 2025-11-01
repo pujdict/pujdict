@@ -215,12 +215,21 @@ export default {
 
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
+[data-bs-theme="dark"] {
+  //--bs-primary: rgb(0, 150, 255);
+  --bs-primary-rgb: 120, 190, 255;
+  //--bs-primary-bg-subtle: rgb(0, 200, 255);
+  //--bs-primary-bg-subtle-dark: rgb(0, 200, 255);
+
+  //.btn-primary {
+  //  --bs-btn-bg: rgb(0, 200, 255);
+  //}
+}
 </style>
 
 <style>
 .card-popup-text {
   cursor: pointer;
-  padding: 0 3px;
 }
 .card-popup-text:hover {
   opacity: 0.7;
