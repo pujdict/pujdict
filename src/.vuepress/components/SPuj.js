@@ -90,8 +90,8 @@ lang def:
 // 已废弃。
 const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))?(?<tone>\d)?$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
-const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)?(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
-const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))?(?<tone>\d)?$/i;
+const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
+const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -280,8 +280,8 @@ function addPUJToneMarkWord(word, tone) {
     }
     return initial + medial + nucleus + coda;
   } else {
-    console.log(`Error addPUJToneMarkWord: ${word} ${tone}`)
-    return '';
+    console.log(`Not a full word: ${word} ${tone}`)
+    return word;
   }
 }
 
@@ -309,6 +309,10 @@ function undoAddPUJToneMarkWord(word) {
     if (match.groups.final) {
       final = match.groups.final;
     }
+  } else {
+    // TODO: 需要重构，现在的逻辑单写 ng- l- n- b- 等等，ng 会被判定为 final，其他会被判定为 initial。暂时这么改能 work。
+    if (PUJ_DP_INITIAL_MAP[word])
+      return new Pronunciation(word, '', 0);
   }
 
   return new Pronunciation(initial, final, tone);

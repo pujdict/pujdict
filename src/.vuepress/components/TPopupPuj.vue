@@ -28,9 +28,6 @@
           <div class="modal-header">
             <h5 class="modal-title">读音详细</h5>
             <button type="button" class="btn-close" @click="showModal = false"></button>
-            <button type="button" class="btn btn-link" @click="showSettingsModal = true">
-              <i class="bi bi-gear">AA</i>
-            </button>
           </div>
           <div class="modal-body">
             <template v-for="(pronunciation, key) in generatePerAccentsPronunciations(puj)" :key="key">
@@ -161,9 +158,6 @@ export default {
   methods: {
     updateDisplay() {
       const defaultFuzzyRule = getLocalOption("custom-default-pinyin-display-fuzzy-rule");
-      if (defaultFuzzyRule === null) {
-        throw "WTF";
-      }
       if (defaultFuzzyRule === 'dummy' || this.noAccent) {
         this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
         this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
