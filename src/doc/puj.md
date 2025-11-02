@@ -16,18 +16,18 @@ import TPopupPuj from '@components/TPopupPuj.vue';
 市面上常见的潮州话辞典，要么以汕头音为标准，要么以潮州音为标准进行记录。
 潮州是曾经的文化中心，汕头是今天的经济特区，各有所谓自诩为标准的依据，
 一些辞典也为两者都提供兼容，同时标注了两者。
-但对其他地区口音的朋友而言，使用起来依然有阻碍。
-澄海的朋友会因为“无闭口韵”的特点，难以查到某些字词；
+但对其他地区口音的朋友而言，使用起来依然有障碍。
+澄海的朋友会因为“无闭口韵尾”的特点，难以查到某些字词；
 同理还有揭阳的朋友“因”“英”不分，潮阳的朋友“余”“污”不分，等等。
 
 一种可行的做法是，主要记录潮州音或汕头音，为除此之外的每个语音点都注明可能不同的发音。
 诚然，字典可以这么做，但如果需要做词典，这或许不是个优雅的解决方案。
 为了一劳永逸地解决口音问题，本辞典制定了一套通用的标准音，各地口音则根据不同的映射规则转读。
 这套标准音，既有依然在潮安、丰顺等地得到保留的“前鼻音韵尾” [n]，也有潮阳、惠来等地“中”“隆”等字的 [i] 介音，也有在极少数地区依然保留的特殊韵母 [ə]、[eu]……
-除了极个别字在某些地区存在不规则的读音（例如潮阳“莲藕”的“藕”有特殊读音 [nau<TToneLetter v=52 />]，澄海的口语中“相”字发生 [sĩẽ˧˧] 到 [sẽ˧˧] 的流变等），其他所有汉字都不需要额外记录读音，节省了人工录入的时间，也方便了计算机处理。
+除了极个别字在某些地区存在不规则的读音（例如潮阳“莲藕”的“藕”有特殊读音 [nau<TToneLetter v=52 />]，澄海的口语中“相”字发生 [sĩẽ<TToneLetter v=33 />] 到 [sẽ<TToneLetter v=33 />] 的流变等），其他所有汉字都不需要额外记录读音，节省了人工录入的时间，也方便了计算机处理。
 
 辞典的这套标准音，我们不妨参照“老国音”的名字，称其为“**老潮音**”，
-或者，也可以称其为“共同潮州话”，它的设计基于“潮汕各地次方言源于一个共同祖先”的前提假设。
+或者，也可以称其为“共同潮州话”，它的设计基于“潮汕各地次方言源于一个共同祖先，各地语音的演变是成系统的”这一前提假设。
 这套标准音的设计灵感和理论基础，主要源于徐馥琼老师的博士论文《粤东闽语语音研究》，以及郭必之老师的《Southern Min》一书。
 需要强调的是，“老潮音”吸收了各地的特色发音，但这套标准音本身并不能真实反映今天某个特定区域的发音，也不作为一种发音规范的要求。
 
@@ -53,11 +53,11 @@ flowchart
 flowchart
     subgraph "“老潮音”"
         kng0["kŋ 卷"];
-        kvn0["kṳn 仅"];
+        kvn0["kɯn 仅"];
         kin0["kin 紧"];
         keng0["keŋ 景"];
     end
-    kng1[kŋ]
+    kng1[kɯŋ]
     king1[kiŋ]
     keng1[keŋ]
     kng0 --->|*| kng1;
@@ -144,7 +144,7 @@ flowchart
 3. 韵母 <TPopupPuj noAccent puj="or"/> 大多数地区已丢失。该韵母属于白读音，对应于泉州话中的科韵，例如：袋 <TPopupPuj noAccent puj="tor7"/>、块 <TPopupPuj noAccent puj="kor3"/>
    、胎 <TPopupPuj noAccent puj="thor1"/>、
    罪 <TPopupPuj noAccent puj="tsor6"/>、坐 <TPopupPuj noAccent puj="tsor6"/>、夺 <TPopupPuj noAccent puj="torh8"/>。
-   今天的泉州话依然保留该韵母，潮汕片闽南语则大多将其并入 [o]，仅潮安县金石镇等极少数地区仍然保留 [ə] 音，在陆丰、漳州、厦门、台湾强势腔中该韵母并入 [e]。
+   今天的泉州话依然保留该韵母，潮汕片闽南语则大多将其并入 [o]，仅潮安金石等极少数地区仍然保留 [ə] 音，在陆丰、漳州、厦门、台湾强势腔中该韵母并入 [e]。
    泉州话白话字中将其记为 o 上加两点，即 ö，本辞典中，白话字记法与 ṳ 保持一致记为下加两点即 o̤，输入不方便时，建议用 or/er 或其他变体写法代替；该韵母潮拼记法遵循借用普通话拼音的原则，记为 er。
    值得一提的是，晚清时期的潮州话中仍存在该韵母——高德《汉英潮州方言字典》（1883）的序言中提到：
    > The ù in such words as 汝, 去, lù, kù is sometimes pronounced u; as lu, ku. Also ù in such words as 代, 塊 tù kù is often pronounced ò; as tò, kò; and it may be remarked that when the ù
@@ -167,15 +167,15 @@ flowchart
 
 | 例字   | 白话字 | 潮拼  | 国际音标 |
 |------|-----|-----|------|
-| 埃^1^ | ai  | ai  | ai   |
-| 欧    | au  | ao  | au   |
+| 埃    | ai  | ai  | ai   |
+| 欧^1^ | au  | ao  | au   |
 | 挨    | oi  | oi  | oi   |
 | 乌    | ou  | ou  | ou   |
 | 梳^2^ | eu  | êu  | eu   |
 | 呀    | ia  | ia  | ia   |
-| 腰    | io  | io  | io   |
+| 腰^3^ | io  | io  | io   |
 | 忧    | iu  | iu  | iu   |
-| 妖    | iau | iou | iau  |
+| 妖    | iau | iao | iau  |
 | 娃    | ua  | ua  | ua   |
 | 锅    | ue  | uê  | ue   |
 | 威    | ui  | ui  | ui   |
@@ -183,9 +183,9 @@ flowchart
 
 ::: note
 
-1. “妖”“腰”等字音具有口音差异，具体规则将在后文讨论。
+1. “欧”韵母白话字写作 au，潮拼则遵循借用普通话拼音的原则写作 ao，iau 和 iao 同理。除此之外的其他音节，白话字和潮拼的记法是一一对应的，参见单元音表。
 
-2. 韵母 <TPopupPuj noAccent puj="-eu" /> 在大多数地区转读为 <TPopupPuj noAccent puj="-iu" />，仅在潮安县凤凰镇等极少数地区保留，出现于若干鱼韵字中：
+2. 韵母 <TPopupPuj noAccent puj="-eu" /> 在大多数地区转读为 <TPopupPuj noAccent puj="-iu" />，仅在潮安凤凰等极少数地区保留，出现于若干鱼韵字中：
    初 <TPopupPuj noAccent puj="tsheu1"/>、
    黍 <TPopupPuj noAccent puj="seu3"/>、
    梳 <TPopupPuj noAccent puj="seu1"/>、
@@ -194,6 +194,8 @@ flowchart
    絮 <TPopupPuj noAccent puj="tsheu3"/>、
    苧 <TPopupPuj noAccent puj="teu6"/>、
    贮 <TPopupPuj noAccent puj="teu2"/>。
+
+3. “妖”“腰”等字音具有口音差异，具体规则将在后文讨论。
 
 :::
 
@@ -214,11 +216,13 @@ flowchart
 
 ::: note
 
-1. 包括潮汕三市市区在内的多数地区已经丢失舌尖韵尾 -n/-t，并入舌根韵尾 -ng/-k，但在少数地区仍有保留，特别是潮安县凤凰镇、丰顺县𨻧隍镇保留了完整的六个韵尾 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-urn />, <TPopupPuj noAccent puj=-un />, <TPopupPuj noAccent puj=-ian />, <TPopupPuj noAccent puj=-uan />，在饶平三饶、揭东西部、揭西东部、普宁西部也不同程度地保留了 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-uan />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-un /> 等韵母（见【吴芳2009】）。本辞典的标准音仍保留舌尖韵尾。
+1. 包括潮汕三市市区在内的多数地区已经丢失舌尖韵尾 -n/-t，并入舌根韵尾 -ng/-k，但在少数地区仍有保留，特别是潮安凤凰、丰顺𨻧隍保留了完整的六个韵尾 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-urn />, <TPopupPuj noAccent puj=-un />, <TPopupPuj noAccent puj=-ian />, <TPopupPuj noAccent puj=-uan />，在饶平三饶、揭东西部、揭西东部、普宁西部也不同程度地保留了 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-uan />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-un /> 等韵母（见【吴芳2009】）。本辞典的标准音仍保留舌尖韵尾。
+   因潮拼方案中 -n 已经被用于记录鼻化韵，本辞典的潮拼记法将这一对韵尾记为 -nd/-d。
 
 2. 潮州话中，跟在鼻辅音声母 m, n, ng 之后的韵母元音都读为鼻化元音，阴声韵与来自阳声韵的鼻化韵已经完全混同。但是否标记为鼻化
    则需要考虑韵母来源，源于阳声韵的标记为鼻化，例如：年 <TPopupPuj noAccent puj="ninn5"/>——尼 <TPopupPuj noAccent puj="ni5"/>，鳗 <TPopupPuj noAccent puj="muann5"/>——
    麻 <TPopupPuj noAccent puj="mua5"/>，尽管二者在读音上已经完全无法区分。鼻声母后的元音一律鼻化也是“潮普”口音的一大特点。
+   本辞典中，为方便使用，各地口音的声韵检索时，鼻辅音声母后的元音可以用鼻化和非鼻化两种变体互查。
 3. 在传统的白话字方案中，鼻化韵也常以上标的 n 即 ◌ⁿ 来记录，为了排版工整和输入方便，辞典采用和台罗方案一致的 -nn 来记录鼻化韵。
 4. 鼻化韵和喉塞韵同时出现时，先写鼻化再写喉塞，例如：夗 <TPopupPuj noAccent puj="innh8"/>（睡觉）。
 
@@ -286,9 +290,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    由于全浊上归去，多数全浊上、浊去文读音归入了相同的阳去声 6 声，另外少部分浊去字仍然保留 7 声，次浊上则归入了唯一的上声即 2 声。
    为了避免分类的混淆，本辞典在需要说明调类时，将采用调序数字 1\~8 进行说明。
 
-2. 声调记号标注在主要元音上。简单来说，就是按照 aoṳo̤eiu 的韵母顺序，找到第一个非介音 i/u 的元音。声化韵母 m、ng 则分别标注于 m、n 上。
-3. 第 6 声声调记号为波浪号 ◌̃（同林雄成和卓威廉词典），也有方案记为短音符 ◌̆（斐尔德字典）或抑扬符 ◌̌（台罗）。
-4. 第 8 声声调记号为锐音符 ◌́（同林雄成），也有方案记为竖线符 ◌̍（台罗和卓威廉词典）或扬抑符
+2. 白话字的声调记号标注在主要元音上。简单来说，就是按照 aoṳo̤eiu 的韵母顺序，找到第一个非介音 i/u 的元音。声化韵母 m、ng 则分别标注于 m、n 上。
+3. 第 6 声声调记号采用波浪号 ◌̃（同林雄成和卓威廉词典），也有方案记为短音符 ◌̆（斐尔德字典）或抑扬符 ◌̌（台罗）。
+4. 第 8 声声调记号采用锐音符 ◌́（同林雄成），也有方案记为竖线符 ◌̍（台罗和卓威廉词典）或扬抑符
    ◌̂（斐尔德字典）。实际上，诸位传教士所著字典使用的衬线字体中，该声调的符号是一个从上往下写、上粗下细的一个垂直撇号 '，但
    Unicode 中没有收录这样的组合上加符号。台罗采取的是上加竖线，但竖线符号在组合到字母 i 上方时会与点号合并成为
    i̍，两者区别可能很不明显，为了增强区分度本辞典默认用锐音符代替。
