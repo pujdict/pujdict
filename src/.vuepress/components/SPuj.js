@@ -88,10 +88,10 @@ lang def:
 */
 // 使用 v r 代替 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 i 是介音，r 是韵腹。
 // 已废弃。
-const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*)(?<tone>\d)?)$/i;
+const regexpWord = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0)'?)?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiuvr]))?(?<nucleus>a|e|o|i|u|v|r|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))?(?<tone>\d)?$/i;
 // 保留 ir/ur/er 的版本。如果有 sirm 这样的组合，那么 ir 是一个整体。
-const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
-const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))(?<tone>\d)?$/i;
+const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|n|l|k|kh|ng|g|h|ts|c|ch|tsh|chh|s|j|z|0))?(?<final>(?<medial>(y|yi|i|u)(?=[aeoiu]))?(?<nucleus>a|e|o|i|u|v|ur|ir|ṳ|or|er|o̤|ng|m)?(?<coda>(y|yi|i|u)?(m|n|ng|nn'?|p|t|k|h)*))(?<tone>\d)?$/i;
+const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))?(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
   fuzzy(result) { return result; }
@@ -174,8 +174,7 @@ function convertPlainPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy
 
 function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
-    let initial = pron.initial === '' ? '' : pron.initial;
-    return addPUJToneMarkWord(convertPlainPUJSentenceToDisplayPUJInSentence(`${initial}${pron.final}${pron.tone}`));
+    return addPUJToneMarkWord(convertPlainPUJSentenceToDisplayPUJInSentence(getPronunciationCombination(pron)));
   }, (nonWord) => {
     if (nonWord === '--') {
       return '·';
@@ -190,7 +189,7 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
     let ipaPron = convertPUJPronunciationToIPAPronunciation(pron);
     let accentTones;
-    let ipaTone = convertToneNumeralsToToneLetters(fuzzyRule.accentTones, isSandhi, isNeutral);
+    let ipaTone = convertToneValueToToneLetters(fuzzyRule.accentTones, isSandhi, isNeutral);
     return `${ipaPron.initial}${ipaPron.final} ${ipaTone}`;
   });
 }
@@ -198,8 +197,7 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
 function convertPlainPUJSentenceToDPSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   return convertPlainPUJSentence(sentence, fuzzyRule,  (pron, isSandhi, isNeutral) => {
     let dpPron = convertPUJPronunciationToDPPronunciation(pron);
-    let initial = dpPron.initial === '' ? '' : dpPron.initial;
-    return `${initial}${dpPron.final}${dpPron.tone}`;
+    return getPronunciationCombination(dpPron);
   });
 }
 
@@ -333,6 +331,12 @@ const PUJ_DP_INITIAL_MAP = {
   'ph': 'p',
   'm': 'm',
   'b': 'bh',
+  'pf': 'bf',
+  'phf': 'pf',
+  'mv': 'mv',
+  'bv': 'bhv',
+  'f': 'f',
+  'v': 'v',
   't': 'd',
   'th': 't',
   'n': 'n',
@@ -354,6 +358,12 @@ const DP_PUJ_INITIAL_MAP = {
   'p': 'ph',
   'm': 'm',
   'bh': 'b',
+  'bf': 'pf',
+  'pf': 'phf',
+  'mv': 'mv',
+  'bhv': 'bv',
+  'f': 'f',
+  'v': 'v',
   'd': 't',
   't': 'th',
   'n': 'n',
@@ -686,7 +696,7 @@ function convertPUJPronunciationToIPAPronunciation(pronunciation) {
     convertPUJPronunciationToXSAMPAPronunciation(pronunciation));
 }
 
-function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = false) {
+function convertToneValueToToneLetters(tone, isSandhi = false, isNeutral = false) {
   const citation = ['˩', '˨', '˧', '˦', '˥'];
   const sandhi = ['꜖', '꜕', '꜔', '꜓', '꜒'];
   const neutral = ['꜌', '꜋', '꜊', '꜉', '꜈']
@@ -711,8 +721,10 @@ function convertToneNumeralsToToneLetters(tone, isSandhi = false, isNeutral = fa
   return result.reverse().join('');
 }
 
-function getPronunciationCombinationString(pron) {
-  return `${pron.initial}${pron.final}${pron.tone}`;
+function getPronunciationCombination(pron) {
+  let initial = pron.initial === '0' ? '' : pron.initial;
+  let tone = !pron.tone || pron.tone == 0 ? '' : pron.tone;
+  return `${initial}${pron.final}${tone}`;
 }
 
 export {
@@ -741,6 +753,6 @@ export {
   convertXSAMPAPronunciationToIPAPronunciation,
   convertPUJPronunciationToXSAMPAPronunciation,
   convertPUJPronunciationToIPAPronunciation,
-  convertToneNumeralsToToneLetters,
-  getPronunciationCombinationString,
+  convertToneValueToToneLetters,
+  getPronunciationCombination,
 }

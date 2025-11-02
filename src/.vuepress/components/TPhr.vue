@@ -74,7 +74,7 @@
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 1">白</span>
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 2">文</span>
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 3">俗</span>
-                      <TPopupPuj :puj="getPronunciationCombinationString(entry.pron)" :charsList="[[entry.char]]" :additionalStyle="{
+                      <TPopupPuj :puj="getPronunciationCombination(entry.pron)" :charsList="[[entry.char]]" :additionalStyle="{
                         'opacity': entry.freq == 3 ? '50%' : '100%',
                       }"/>
                     </div>
@@ -161,7 +161,7 @@ import {withBase} from "vuepress/client";
 import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
 import TQuestionMarkTip from "./TQuestionMarkTip.vue";
-import {getPronunciationCombinationString} from "./SPuj";
+import {getPronunciationCombination} from "./SPuj";
 </script>
 
 <script lang="ts">
@@ -186,7 +186,6 @@ import {
   regexpWordOptional,
   regexpWordDp,
   undoAddPUJToneMarkWord, convertDPWordToPronunciation, convertDPPronunciationToPUJPronunciation,
-  getPronunciationCombinationString,
 } from "./SPuj";
 
 const $ = jquery;

@@ -2,13 +2,24 @@
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString" class="d-inline-block" :id="'popup_puj_' + puj">
     <!-- 主按钮 -->
-    <a @click="showModal = true"
-       class="text-primary card-popup-text"
-       style="text-decoration: none;"
-       :style="additionalStyle"
-    >
-      {{ display }}
-    </a>
+    <template v-if="noAccent">
+      <span :style="additionalStyle">
+        <template v-if="showPUJ">{{ display_puj }}<PinyinTag type="PUJ"/></template>
+        <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
+        <template v-if="showDP">{{ display_dp }}<PinyinTag type="DP"/></template>
+      </span>
+    </template>
+    <template v-else>
+      <a @click="showModal = true"
+         class="text-primary card-popup-text"
+         style="text-decoration: none;"
+         :style="additionalStyle"
+      >
+        <template v-if="showPUJ">{{ display_puj }}<PinyinTag type="PUJ"/></template>
+        <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
+        <template v-if="showDP">{{ display_dp }}<PinyinTag type="DP"/></template>
+      </a>
+    </template>
 
     <!-- 模态框 -->
     <div v-if="showModal" class="modal d-block" tabindex="-1" @click.self="showModal = false">
@@ -17,6 +28,9 @@
           <div class="modal-header">
             <h5 class="modal-title">读音详细</h5>
             <button type="button" class="btn-close" @click="showModal = false"></button>
+            <button type="button" class="btn btn-link" @click="showSettingsModal = true">
+              <i class="bi bi-gear">AA</i>
+            </button>
           </div>
           <div class="modal-body">
             <template v-for="(pronunciation, key) in generatePerAccentsPronunciations(puj)" :key="key">
@@ -63,13 +77,32 @@ import {
   forEachWordInSentence,
   convertPlainPUJSentenceToPUJSentence,
   convertPlainPUJSentenceToDPSentence,
-  convertPlainPUJToPronunciationWord,
+  convertPlainPUJToPronunciationWord, getPronunciationCombination,
 } from "./SPuj.js";
 import {Pronunciation} from "./SCommon.js";
-import {getLocalOption} from "./SUtils";
+import {getLocalOption} from "./SUtils.js";
 import {pujpb} from "./SPujPb";
+import {h} from "vue";
 
 export default {
+  name: "TPopupPuj",
+  components: {
+    PinyinTag: {
+      props: {
+        type: {
+          type: String,
+          required: true,
+          validator: value => ['PUJ', 'DP'].includes(value),
+        }
+      },
+      render() {
+        // img loading.svg
+        return h('sup', {
+          style: 'color: steelblue; font-size: 0.5em; user-select: none;',
+        }, this.type);
+      },
+    }
+  },
   props: {
     // 此参数为二维列表，也就是 Array<Array<Char>>
     // Char 为字符串类型的单个汉字
@@ -81,6 +114,10 @@ export default {
     puj: {
       type: String,
       required: true
+    },
+    noAccent: {
+      type: Boolean,
+      default: false,
     },
     additionalStyle: {
       type: Object,
@@ -108,11 +145,26 @@ export default {
     if (typeof window !== 'undefined') {
       import('bootstrap');
     }
+    this.updateDisplay();
+  },
+  computed: {
+    customDefaultPinyinDisplay() {
+      return getLocalOption('custom-default-pinyin-display').split(';');
+    },
+    showPUJ() {
+      return this.customDefaultPinyinDisplay.includes('PUJ');
+    },
+    showDP() {
+      return this.customDefaultPinyinDisplay.includes('DP');
+    },
   },
   methods: {
     updateDisplay() {
       const defaultFuzzyRule = getLocalOption("custom-default-pinyin-display-fuzzy-rule");
-      if (defaultFuzzyRule === 'dummy') {
+      if (defaultFuzzyRule === null) {
+        throw "WTF";
+      }
+      if (defaultFuzzyRule === 'dummy' || this.noAccent) {
         this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
         this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
       } else {
@@ -120,12 +172,11 @@ export default {
         this.display_puj = result.display_puj;
         this.display_dp = result.display_dp;
       }
-      const customDefaultPinyinDisplay = getLocalOption('custom-default-pinyin-display').split(';');
       const displayList = [];
-      if (customDefaultPinyinDisplay.includes('PUJ')) {
+      if (this.showPUJ) {
         displayList.push(this.display_puj);
       }
-      if (customDefaultPinyinDisplay.includes('DP')) {
+      if (this.showDP) {
         displayList.push(this.display_dp);
       }
       this.display = displayList.join('/');
@@ -147,8 +198,8 @@ export default {
         let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
 
         let fuzzyPron = accentRule.fuzzy(pron);
-        let curPuj = convertPlainPUJSentenceToPUJSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
-        let curDp = convertPlainPUJSentenceToDPSentence(`${fuzzyPron.initial}${fuzzyPron.final}${fuzzyPron.tone}`);
+        let curPuj = convertPlainPUJSentenceToPUJSentence(getPronunciationCombination(fuzzyPron));
+        let curDp = convertPlainPUJSentenceToDPSentence(getPronunciationCombination(fuzzyPron));
 
         // TODO: 重构
         L_trySearchForAka:
@@ -165,18 +216,18 @@ export default {
                 nasalizedPron = accentRule.fuzzy(nasalizedPron);
                 let denasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", ''), fuzzyPron.tone);
                 denasalizedPron = accentRule.fuzzy(denasalizedPron);
-                curPuj = convertPlainPUJSentenceToPUJSentence(`${denasalizedPron.initial}${denasalizedPron.final}${denasalizedPron.tone}`);
-                curPuj += `(${convertPlainPUJSentenceToPUJSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`;
-                curDp = convertPlainPUJSentenceToDPSentence(`${denasalizedPron.initial}${denasalizedPron.final}${denasalizedPron.tone}`);
-                curDp += `(${convertPlainPUJSentenceToDPSentence(`${nasalizedPron.initial}${nasalizedPron.final}${nasalizedPron.tone}`)})`;
+                curPuj = convertPlainPUJSentenceToPUJSentence(getPronunciationCombination(denasalizedPron));
+                curPuj += `(${convertPlainPUJSentenceToPUJSentence(getPronunciationCombination(nasalizedPron))})`;
+                curDp = convertPlainPUJSentenceToDPSentence(getPronunciationCombination(denasalizedPron));
+                curDp += `(${convertPlainPUJSentenceToDPSentence(getPronunciationCombination(nasalizedPron))})`;
               }
               for (const pronAka of entry.pronAka) {
                 if (pronAka.accentId === accentKey) {
                   let akaPuj = [];
                   let akaDp = [];
                   for (const pron of pronAka.prons) {
-                    akaPuj.push(convertPlainPUJSentenceToPUJSentence(`${pron.initial}${pron.final}${pron.tone}`));
-                    akaDp.push(convertPlainPUJSentenceToDPSentence(`${pron.initial}${pron.final}${pron.tone}`));
+                    akaPuj.push(convertPlainPUJSentenceToPUJSentence(getPronunciationCombination(pron)));
+                    akaDp.push(convertPlainPUJSentenceToDPSentence(getPronunciationCombination(pron)));
                   }
                   if (pronAka.replace) {
                     curPuj = akaPuj[0];
