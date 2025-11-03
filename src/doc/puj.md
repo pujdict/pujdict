@@ -333,7 +333,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hng0 />                                                                      |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />                                    |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
@@ -344,8 +346,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                      |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                                      |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                                                |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
@@ -369,7 +371,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | (<TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />)                                  |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | (<TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />)                                |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | (<TPopupPuj noAccent puj=-urng0 />)                                                                  |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | (<TPopupPuj noAccent puj=hurng0 />)                                                                  |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | (<TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />)                                |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | (<TPopupPuj noAccent puj=-ung0 />,-uk)                                                               |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | (<TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />)                                  |
@@ -380,8 +384,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                      |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                                      |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                      |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
@@ -405,7 +409,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     |                                                                                |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urn0 />                                               |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurn0 />                                               |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     |                                                                                |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     |                                                                                |
@@ -416,8 +422,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                 |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                  |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                  |
@@ -441,7 +447,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    | <TPopupPuj noAccent puj=-en0 />, <TPopupPuj noAccent puj=-et0 />                                     |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     |                                                                                                      |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                                      |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urn0 />                                                                     |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurn0 />                                                                     |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                                      |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     |                                                                                                      |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     |                                                                                                      |
@@ -452,8 +460,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | <TPopupPuj noAccent puj=-uen0 />                                                                     |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uet0 />                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                      |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
@@ -477,7 +485,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />              |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />            |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                              |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                              |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />            |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />              |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />              |
@@ -488,8 +498,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=mu- />(阳声韵)                                            |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=mu- />(阳声韵)                                            |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  |                                                                                |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                  |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                  |
@@ -513,7 +523,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                                                    |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />                                    |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
@@ -524,8 +536,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPuj noAccent puj=-eng0 />, (其他音)<TPopupPuj noAccent puj=-uang0 />                        |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uak0 />                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                                                |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                      |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
@@ -549,7 +561,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                               |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                               |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />             |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />           |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                             |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                             |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />           |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />             |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                               |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />             |
@@ -560,8 +574,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPuj noAccent puj=-eng0 />, (其他音)<TPopupPuj noAccent puj=-uang0 /> |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uak0 />                                              |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                         |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />        |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                               |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />        |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                               |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                               |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                 |
@@ -585,7 +599,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />   |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />   |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-eng0 />                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=heng0 />                                    |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />   |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
@@ -596,8 +612,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                       |
@@ -621,7 +637,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
@@ -632,8 +650,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
@@ -657,7 +675,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
@@ -668,8 +688,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  |                                                                     |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
@@ -693,7 +713,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
@@ -704,8 +726,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
@@ -729,7 +751,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-eh0 />                                       |
 | 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                         |
 | 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ih0 />                                       |
-| 恩乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />, <TPopupPuj noAccent puj=-urh0 />                                     |
+| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                       |
+| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                                                       |
+| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />, <TPopupPuj noAccent puj=-urh0 />                                     |
 | 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uh0 />                                       |
 | 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                         |
 | 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ah0 />                                       |
@@ -740,8 +764,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                         |
 | 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-ueh0 />                                                                        |
 | 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                         |
-| 中筑茸辱^6^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | <TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-ioh0 />                                     |
-| 万亡文^7^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                         |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | <TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-ioh0 />                                     |
+| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                         |
 | 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                          |
 | 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                         |
 | 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                                                         |
@@ -773,7 +797,12 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    因此，本辞典中不选择与泉漳片一样将 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 韵母记为 <TPopupPuj noAccent puj=-ing /> <TPopupPuj noAccent puj=-ik0 />。
    不过，在唱戏、讲古等创作中，<TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 和 <TPopupPuj noAccent puj=-in /> <TPopupPuj noAccent puj=-it0 /> 韵母的韵腹也可以都读为 [ɪ] 并进行押韵。
    揭阳地区的 <TPopupPuj noAccent puj=-in /> <TPopupPuj noAccent puj=-it0 /> 转为 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 实际上音质也接近于 [ɪ] 音。
-6. 通摄三等字文读音韵母为 <TPopupPuj noAccent puj=-iong />, <TPopupPuj noAccent puj=-iok0 />，当接在齿龈音后时，
+6. 臻摄开口一等痕韵、三等欣韵，在多数地区没有区别，例如汕头同读 <TPopupPuj noAccent puj=urng0 />，揭阳同读 <TPopupPuj noAccent puj=eng0 />。
+   但是，在潮州府城，声母 h 之后痕韵读 <TPopupPuj noAccent puj=hurng0 />，欣韵读 <TPopupPuj noAccent puj=hng0 />。
+   标准音分别以 <TPopupPuj noAccent puj=orn0 /> 和 <TPopupPuj noAccent puj=urn0 /> 记录痕韵和欣韵，实际上，元音的开口大小在今天各地均不形成对立，该记法仅为区分 <TPopupPuj noAccent puj=horn0 /> 和 <TPopupPuj noAccent puj=hurn0 /> 两个音节在潮州的不同音变规则。
+   记录时区分方式并不复杂，简单而言，普通话中读 en [ɤn] 且潮州话读 [ɯn]/[ən] 的，为痕韵 <TPopupPuj noAccent puj=orn0 />；普通话中读 in [in] 且潮州话读 [ɯn]/[ən] 的，为欣韵 <TPopupPuj noAccent puj=urn0 />。
+   各地的口音中，为了方便起见，统一将 <TPopupPuj noAccent puj=orn0 /> 转读为 <TPopupPuj noAccent puj=urn0 />。
+7. 通摄三等字文读音韵母为 <TPopupPuj noAccent puj=-iong />, <TPopupPuj noAccent puj=-iok0 />，当接在齿龈音后时，
    包括三市市中心在内的东北部多数地区都读为 <TPopupPuj noAccent puj=-ong />, <TPopupPuj noAccent puj=-ok />，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i——这是潮普小片或练江腔的标志性读音。
    例如：中 <TPopupPuj noAccent puj="tiong1"/>，宠 <TPopupPuj noAccent puj="thiong2"/>，龙 <TPopupPuj noAccent puj="liong5"/>，终 <TPopupPuj noAccent puj="tsiong1"/>，
    从 <TPopupPuj noAccent puj="tshiong5"/>，松 <TPopupPuj noAccent puj="siong1"/>，茸 <TPopupPuj noAccent puj="jiong5"/>，
@@ -786,8 +815,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    森 <TPopupPuj noAccent puj="siam1"/> > <TPopupPuj noAccent puj="siong1"/>，
    尖 <TPopupPuj noAccent puj="tsiam1"/> > <TPopupPuj noAccent puj="tsiong1"/>，
    这种模式下产生的介音 i，并非源于中古通摄三等字，不遵循在齿龈音后丢失介音的规则。
-7. 微母文读音接阳声韵时，在多数地区读 <TPopupPuj noAccent puj=bu- />，但在饶平（黄冈）一律读为 <TPopupPuj noAccent puj=mu- />，而阴声韵和入声韵则与其他地区相同。
-8. 潮剧戏腔要求字正腔圆，整体发音接近于未丢失闭口韵的澄海口音，但偶尔会引入来自其他地区的一些口音进行艺术化处理。
+8. 微母文读音接阳声韵时，在多数地区读 <TPopupPuj noAccent puj=bu- />，但在饶平（黄冈）一律读为 <TPopupPuj noAccent puj=mu- />，而阴声韵和入声韵则与其他地区相同。
+9. 潮剧戏腔要求字正腔圆，整体发音接近于未丢失闭口韵的澄海口音，但偶尔会引入来自其他地区的一些口音进行艺术化处理。
    戏腔中，-n/-t 韵尾与 -ng/-k 韵尾一般不要求区分，是否保留 -n/-t
    取决于演员个人的发音习惯（例如方展荣老师的唱词就保留了 -n/-t），但 -m/-p 韵尾一定会保留。
 
