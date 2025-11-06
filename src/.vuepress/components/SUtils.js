@@ -10,6 +10,9 @@ function setLocalOption(optionName, optionValue) {
 }
 
 const DefaultLocalOptions = {
+  'fuzzy-query': 'dummy',
+  'q-pron-default-pinyin': 'puj',
+  'q-phr-match-type': 'auto',
   'custom-tone-mark-6': "\u0303",
   'custom-tone-mark-8': "\u0301",
   'custom-default-pinyin-display': "PUJ;DP",

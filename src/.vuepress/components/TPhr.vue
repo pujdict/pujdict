@@ -628,7 +628,7 @@ class QueryCharsResult {
 export default {
   data() {
     return {
-      matchType: 'auto',
+      matchType: getLocalOption("q-phr-match-type") ?? 'auto',
       selectedFuzzyQueryKey: getLocalOption("fuzzy-query") ?? 'dummy',
       selectedPinyin: getLocalOption("q-pron-default-pinyin") ?? 'puj',
       fuzzyQueryList: [{
@@ -649,6 +649,15 @@ export default {
     };
   },
   watch: {
+    matchType(newVal) {
+      setLocalOption("q-phr-match-type", newVal);
+    },
+    selectedPinyin(newVal) {
+      setLocalOption("q-pron-default-pinyin", newVal);
+    },
+    selectedFuzzyQueryKey(newVal) {
+      setLocalOption("fuzzy-query", newVal);
+    },
     // remove all non-Chinese characters
     // queryInput(newVal, oldVal) {
     //   if (newVal !== oldVal) {
