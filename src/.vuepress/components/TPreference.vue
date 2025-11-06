@@ -197,6 +197,7 @@ export default {
     initFromDatabase().then(() => {
       setLoading(false);
       this.defaultPinyinDisplayFuzzyRules = [];
+      this.listedPinyinDisplayFuzzyRules = [];
       for (const [key, rule] of Object.entries(getAccentsRules())) {
         this.defaultPinyinDisplayFuzzyRules.push({
           value: key,
