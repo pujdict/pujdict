@@ -225,10 +225,10 @@ class PreprocessedPhraseUnitChars extends PreprocessedPhraseUnit {
     this.str = str;
     this.chars = [...str];
     this.otherWritten = [];
-    if (db.phrasesTeochewMap[this.str])
-      this.otherWritten.push(...db.phrasesTeochewMap[this.str]);
-    if (db.phrasesInformalMap[this.str])
-      this.otherWritten.push(...db.phrasesInformalMap[this.str]);
+    if (db.phrasesTeochewMap.has(this.str))
+      this.otherWritten = this.otherWritten.concat(db.phrasesTeochewMap.get(this.str));
+    if (db.phrasesInformalMap.has(this.str))
+      this.otherWritten = this.otherWritten.concat(db.phrasesInformalMap.get(this.str));
   }
 
   tryMatchSelf(phrase: pujpb.IPhrase, possibleChars: string[][], possibleProns: string[][], curI: number): number {
