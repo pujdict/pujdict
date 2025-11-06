@@ -16,6 +16,7 @@ const DefaultLocalOptions = {
   'custom-tone-mark-6': "\u0303",
   'custom-tone-mark-8': "\u0301",
   'custom-default-pinyin-display': "PUJ;DP",
+  'custom-listed-pinyin-display-fuzzy-rules': "",
   'custom-default-pinyin-display-fuzzy-rule': "dummy",
 };
 

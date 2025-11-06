@@ -30,18 +30,14 @@
             <button type="button" class="btn-close" @click="showModal = false"></button>
           </div>
           <div class="modal-body">
-            <template v-for="(pronunciation, key) in generatePerAccentsPronunciations(puj)" :key="key">
-              <template v-if="key !== 'dummy'">
-                <div class="d-flex align-items-baseline my-2">
-                  <span class="badge border border-primary text-primary me-2">{{ pronunciation.name }}</span>
-                  <div class="d-flex flex-column">
-                    <template v-if="key !== 'custom'">
-                      <span>{{ pronunciation.display_puj }}</span>
-                      <span>{{ pronunciation.display_dp }}</span>
-                    </template>
-                  </div>
+            <template v-for="(pronunciation, key) in generatePerAccentsPronunciations()" :key="key">
+              <div class="d-flex align-items-baseline my-2">
+                <span class="badge border border-primary text-primary me-2">{{ pronunciation.name }}</span>
+                <div class="d-flex flex-column">
+                  <span>{{ pronunciation.display_puj }}</span>
+                  <span>{{ pronunciation.display_dp }}</span>
                 </div>
-              </template>
+              </div>
             </template>
           </div>
           <!-- 备用
@@ -176,7 +172,10 @@ export default {
       this.display = displayList.join('/');
     },
     generatePerAccentsPronunciations() {
+      const customListedPinyinDisplayFuzzyRulesStr = getLocalOption('custom-listed-pinyin-display-fuzzy-rules');
+      const customListedPinyinDisplayFuzzyRules = customListedPinyinDisplayFuzzyRulesStr.split(';');
       Object.entries(getAccentsRules()).forEach(([key, rule]) => {
+        if (customListedPinyinDisplayFuzzyRulesStr !== '' && !customListedPinyinDisplayFuzzyRules.includes(key)) return;
         this.generateAccentPronunciation(key);
       });
       return this.perAccentsResult;

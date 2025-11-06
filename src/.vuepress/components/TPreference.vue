@@ -5,7 +5,7 @@
       <div class="row">
         <fieldset class="form-group mb-2">
           <legend class="col-form-label">
-            默认拼音显示方式
+            <b>默认拼音显示方式</b>
             <span v-if="!isCustomDefaultPinyinDisplayValid()" class="text-danger"> (*请至少选中一项)</span>
           </legend>
           <div class="form-check-inline" v-for="defaultPinyinDisplay in defaultPinyinDisplays">
@@ -26,7 +26,7 @@
         </fieldset>
 
         <fieldset>
-          <legend class="col-form-label">默认拼音口音规则</legend>
+          <legend class="col-form-label"><b>默认拼音口音规则</b></legend>
           <div class="form-check-inline" v-for="defaultPinyinDisplayFuzzyRule in defaultPinyinDisplayFuzzyRules">
             <div class="form-check">
               <input class="form-check-input"
@@ -43,8 +43,26 @@
           </div>
         </fieldset>
 
+        <fieldset>
+          <legend class="col-form-label"><b>拼音详情页展示口音</b></legend>
+          <div class="form-check-inline" v-for="listedPinyinDisplayFuzzyRule in listedPinyinDisplayFuzzyRules">
+            <div class="form-check">
+              <input class="form-check-input"
+                     name="listed-pinyin-display"
+                     type="checkbox"
+                     :id="`listed-pinyin-display-${listedPinyinDisplayFuzzyRule.value}`"
+                     :value="listedPinyinDisplayFuzzyRule.value"
+                     v-model="customListedPinyinDisplayFuzzyRules"
+                     @change="onFormChanged"/>
+              <label class="form-check-label" style="width: 4em" :for="`listed-pinyin-display-${listedPinyinDisplayFuzzyRule.value}`">
+                {{ listedPinyinDisplayFuzzyRule.name }}
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset class="form-group mb-2">
-          <legend class="col-form-label">白话字第六声调符</legend>
+          <legend class="col-form-label"><b>白话字第六声调符</b></legend>
           <div class="form-check-inline" v-for="toneMark in toneMarks6">
             <div class="form-check">
               <input class="form-check-input"
@@ -62,7 +80,7 @@
         </fieldset>
 
         <fieldset class="form-group mb-2">
-          <legend class="col-form-label">白话字第八声调符</legend>
+          <legend class="col-form-label"><b>白话字第八声调符</b></legend>
           <div class="form-check-inline" v-for="toneMark in toneMarks8">
             <div class="form-check">
               <input class="form-check-input"
@@ -123,6 +141,10 @@ export default {
         {value: "dummy", name: "辞典"},
       ],
       customDefaultPinyinDisplayFuzzyRule: getLocalOption('custom-default-pinyin-display-fuzzy-rule'),
+      listedPinyinDisplayFuzzyRules: [
+        {value: "dummy", name: "辞典"},
+      ],
+      customListedPinyinDisplayFuzzyRules: getLocalOption('custom-listed-pinyin-display-fuzzy-rules').split(';'),
       toneMarks6: [
         {value: "\u0303", name: '波浪符 ◌̃'},
         {value: "\u0306", name: '短音符 ◌̆'},
@@ -156,6 +178,8 @@ export default {
       let customDefaultPinyinDisplay = this.customDefaultPinyinDisplay.join(';');
       setLocalOption('custom-default-pinyin-display', customDefaultPinyinDisplay);
       setLocalOption('custom-default-pinyin-display-fuzzy-rule', this.customDefaultPinyinDisplayFuzzyRule);
+      let customListedPinyinDisplay = this.customListedPinyinDisplayFuzzyRules.join(';');
+      setLocalOption('custom-listed-pinyin-display-fuzzy-rules', customListedPinyinDisplay);
       setLocalOption('custom-tone-mark-6', this.customToneMark6);
       setLocalOption('custom-tone-mark-8', this.customToneMark8);
     },
@@ -166,6 +190,8 @@ export default {
     const customDefaultPinyinDisplay = getLocalOption('custom-default-pinyin-display');
     this.customDefaultPinyinDisplay = customDefaultPinyinDisplay.split(';');
     this.customDefaultPinyinDisplayFuzzyRule = getLocalOption('custom-default-pinyin-display-fuzzy-rule');
+    const customListedPinyinDisplayFuzzyRules = getLocalOption('custom-listed-pinyin-display-fuzzy-rules');
+    this.customListedPinyinDisplayFuzzyRules = customListedPinyinDisplayFuzzyRules.split(';');
     this.customToneMark6 = getLocalOption('custom-tone-mark-6');
     this.customToneMark8 = getLocalOption('custom-tone-mark-8');
     initFromDatabase().then(() => {
@@ -176,6 +202,13 @@ export default {
           value: key,
           name: rule.name,
         });
+        this.listedPinyinDisplayFuzzyRules.push({
+          value: key,
+          name: rule.name,
+        })
+      }
+      if (!customListedPinyinDisplayFuzzyRules || customListedPinyinDisplayFuzzyRules === '') {
+        this.customListedPinyinDisplayFuzzyRules = this.listedPinyinDisplayFuzzyRules.map(rule => rule.value);
       }
     });
   }
