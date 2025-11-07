@@ -42,6 +42,8 @@ export default defineUserConfig({
     ["link", {rel: "prefetch", href: '/data/pujbase/dist/accents.pb'}],
     ["link", {rel: "prefetch", href: '/data/pujbase/dist/entries.pb'}],
     ["link", {rel: "prefetch", href: '/data/pujbase/dist/phrases.pb'}],
+    ["link", {rel: "preconnect", href: "https://fonts.font.im"},],
+    ["link", {rel: "preconnect", href: "https://fonts.gstatic.font.im", crossorigin: ""},],
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
