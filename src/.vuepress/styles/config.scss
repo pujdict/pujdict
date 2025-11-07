@@ -56,11 +56,12 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-style: normal;
 }
 
+@import url('https://fonts.font.im/css?family=Noto+Sans+SC');
 @font-face {
   font-display: swap;
   font-family: SourceHanSans;
-  src: local('Source Han Sans'), local('Noto Sans SC'), local('NotoSansSC-Regular'), local('Noto Sans CJK SC'),
-    url("@public/assets/fonts/NotoSansSC-Regular.woff2");
+  src: local('Source Han Sans'), local('Noto Sans SC'), local('NotoSansSC-Regular'), local('Noto Sans CJK SC');
+    //url("@public/assets/fonts/NotoSansSC-Regular.woff2");
     //这玩意镜像下下来是一个 light 的字体。。。
     //url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff2') format('woff2'), /* Super Modern Browsers */
     //url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff') format('woff'), /* Modern Browsers */
