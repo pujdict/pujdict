@@ -85,7 +85,8 @@ class PUJDictDatabase {
   // 输入汉字，映射到这个汉字的 entry 列表（如果一简对多繁则表数量大于1）
   entriesCharMap: Map<string, Set<number/*char entry index*/>>;
   accents: pujpb.IAccent[];
-  fuzzyRulesAction: Map<pujpb.FuzzyRule, (pron: pujpb.IPronunciation) => void>;
+  fuzzyRuleDescriptors: pujpb.IFuzzyRuleDescriptor[];
+  fuzzyRulesAction: Array<(pron: pujpb.IPronunciation) => void>;
   private accentResults: Map<string/*accent*/,  Map<string/*pronunciation*/, string/*fuzzy result*/>>;
   private accentPossibleResults: Map<string/*pronunciation*/, Set<string>/*fuzzyResults*/>;
   phrases: pujpb.IPhrase[];
@@ -112,7 +113,7 @@ class PUJDictDatabase {
 
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
     this.accents = accentsData.accents;
-    this.fuzzyRulesAction = new Map();
+    this.fuzzyRulesAction = [];
     this.accentResults = new Map();
     for (const accent of this.accents) {
       this.accentResults.set(accent.id, new Map());
@@ -120,8 +121,9 @@ class PUJDictDatabase {
     this.accentPossibleResults = new Map();
 
     const fuzzyRuleDescriptors = accentsData.fuzzyRuleDescriptors;
+    this.fuzzyRuleDescriptors = fuzzyRuleDescriptors;
     for (const fuzzyRuleDescriptor of fuzzyRuleDescriptors) {
-      const fuzzyRuleId: pujpb.FuzzyRule = fuzzyRuleDescriptor.id;
+      // const fuzzyRuleId: string = fuzzyRuleDescriptor.id;
       const fuzzyFunctions = [];
       for (const action of fuzzyRuleDescriptor.actions) {
         let fuzzyFunction = null;
@@ -155,7 +157,7 @@ class PUJDictDatabase {
         }
         fuzzyFunctions.push(fuzzyFunction);
       }
-      this.fuzzyRulesAction.set(fuzzyRuleId, (pron: pujpb.IPronunciation) => {
+      this.fuzzyRulesAction.push((pron: pujpb.IPronunciation) => {
         fuzzyFunctions.forEach(fuzzyFunction => { fuzzyFunction(pron); });
       });
     }
@@ -323,11 +325,11 @@ const getAccentsRules = function () {
       const id = accent.id;
       const area = accent.area;
       const subarea = accent.subarea;
-      const rulesIds = accent.rules;
+      const rulesIndices = accent.rules;
       const accentTones = accent.tones;
       let rules = [];
-      for (const ruleId of rulesIds) {
-        rules.push(db.fuzzyRulesAction.get(ruleId));
+      for (const ruleIndex of rulesIndices) {
+        rules.push(db.fuzzyRulesAction[ruleIndex]);
       }
       fuzzyRules[id] = new FuzzyRulesGroup(`${area}${subarea}`, accentTones, rules);
     }
