@@ -21,6 +21,7 @@ import {pujpb} from "./SPujPb";
 import {
   setLocalOption,
   getLocalOption,
+  getLocalOptionList,
   setUrlQueryParameter,
   resetUrlQueryParameter,
   isChineseChar,
@@ -335,30 +336,28 @@ const getAccentsRules = function () {
     }
     // TODO: 这里自定义应该改成允许用户选择单条模糊音规则
     const custom = {
-      name: '自定',
+      name: '定制口音',
       fuzzy: function (original) {
-        const customFuzzyQueryRule = getLocalOption('custom-puj-fuzzy-rule');
+        const customFuzzyQueryRule = new Set(getLocalOptionList('custom-accent-1-rules'));
         if (customFuzzyQueryRule !== this._fuzzy_str) {
           this._fuzzy_str = customFuzzyQueryRule;
+          this._fuzzy_action_indices = [];
           try {
-            this._fuzzy_function = eval(customFuzzyQueryRule);
-          } catch (e) {
-            console.error(e);
-            this._fuzzy_function = null;
-          }
-        }
-        if (typeof this._fuzzy_function === 'function') {
-          try {
-            return this._fuzzy_function(new Pronunciation(original.initial, original.final, original.tone));
+            for (let fuzzyRuleDescriptor of db.fuzzyRuleDescriptors)
+              if (customFuzzyQueryRule.has(fuzzyRuleDescriptor.id))
+                this._fuzzy_action_indices.push(fuzzyRuleDescriptor.index);
           } catch (e) {
             console.error(e);
           }
         }
+        for (const index of this._fuzzy_action_indices)
+          db.fuzzyRulesAction[index](original);
         return original;
       },
-      _fuzzy_function: null,
       _fuzzy_str: null,
+      _fuzzy_action_indices: [],
     };
+    fuzzyRules['custom-1'] = custom;
     return fuzzyRules;
   };
 }();

@@ -9,6 +9,15 @@ function setLocalOption(optionName, optionValue) {
   }
 }
 
+function setLocalOptionList(optionName, optionList) {
+  if (typeof document === 'undefined') return;
+  try {
+    localStorage.setItem(`pujdict-${optionName}`, optionList.length === 0 ? '' : optionList.join(';'));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 const DefaultLocalOptions = {
   'fuzzy-query': 'dummy',
   'q-pron-default-pinyin': 'puj',
@@ -18,6 +27,8 @@ const DefaultLocalOptions = {
   'custom-default-pinyin-display': "PUJ;DP",
   'custom-listed-pinyin-display-fuzzy-rules': "",
   'custom-default-pinyin-display-fuzzy-rule': "dummy",
+  'custom-accent-1-name': "定制口音1",
+  'custom-accent-1-rules': "",
 };
 
 function getLocalOption(optionName, $default = '') {
@@ -30,6 +41,12 @@ function getLocalOption(optionName, $default = '') {
     console.error(e);
     return $default;
   }
+}
+
+function getLocalOptionList(optionName, $default = []) {
+  const str = getLocalOption(optionName);
+  if (!str || str === '') return $default;
+  return str.split(';');
 }
 
 function setUrlQueryParameter(key, value) {
@@ -71,7 +88,9 @@ export {
   setUrlQueryParameter,
   resetUrlQueryParameter,
   getLocalOption,
+  getLocalOptionList,
   setLocalOption,
+  setLocalOptionList,
   ChineseCharRegex,
   ChineseCharRegexGlobal,
   isChineseChar,

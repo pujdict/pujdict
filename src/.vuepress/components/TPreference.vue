@@ -97,6 +97,22 @@
           </div>
         </fieldset>
 
+        <fieldset class="form-group">
+          <legend class="col-form-label"><b>定制口音</b></legend>
+          <div class="form-check" v-for="rule in availableFuzzyRules">
+            <div>
+              <input class="form-check-input"
+                     type="checkbox"
+                     :id="`custom-accent-1-${rule.id}`"
+                     :value="rule.id"
+                     v-model="customAccent1Rules"
+                     @change="onFormChanged"/>
+              <label class="form-check-label" :for="`custom-accent-1-${rule.id}`" v-html="rule.desc">
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
         <div class="btn-toolbar">
           <div class="btn-group">
             <input id="query-button" class="btn btn-outline-primary" type="submit" value="保存"
@@ -109,21 +125,27 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {darkThemeString} from "./QDarkTheme.vue";
 import TDarkTheme from "./TDarkTheme.vue";
 import {withBase} from "vuepress/client";
 </script>
 
-<script>
+<script lang="ts">
 import {
   setLoading,
-  setLocalOption,
-  getLocalOption,
   initFromDatabase,
   getAccentsRules,
+  db,
 } from "./QCommon.vue";
-import {DefaultLocalOptions} from "./SUtils";
+import {
+  setLocalOption,
+  setLocalOptionList,
+  getLocalOption,
+  getLocalOptionList,
+} from "./SUtils.js";
+import {createVNode, render} from "vue";
+import TPopupPuj from "./TPopupPuj.vue";
 
 export default {
   data() {
@@ -136,7 +158,7 @@ export default {
         {value: "DP", name: "潮拼"},
         {value: "IPA", name: "国际音标"},
       ],
-      customDefaultPinyinDisplay: getLocalOption('custom-default-pinyin-display').split(';'),
+      customDefaultPinyinDisplay: getLocalOptionList('custom-default-pinyin-display'),
       defaultPinyinDisplayFuzzyRules: [
         {value: "dummy", name: "辞典"},
       ],
@@ -144,7 +166,7 @@ export default {
       listedPinyinDisplayFuzzyRules: [
         {value: "dummy", name: "辞典"},
       ],
-      customListedPinyinDisplayFuzzyRules: getLocalOption('custom-listed-pinyin-display-fuzzy-rules').split(';'),
+      customListedPinyinDisplayFuzzyRules: getLocalOptionList('custom-listed-pinyin-display-fuzzy-rules'),
       toneMarks6: [
         {value: "\u0303", name: '波浪符 ◌̃'},
         {value: "\u0306", name: '短音符 ◌̆'},
@@ -157,9 +179,38 @@ export default {
         {value: "\u0302", name: '扬抑符 ◌̂'},
       ],
       customToneMark8: getLocalOption('custom-tone-mark-8'),
+      availableAccentRules: [
+        // {value: "rule1", name: "规则1"},
+      ],
+      customAccent1Rules: getLocalOptionList('custom-accent-1-rules'),
     }
   },
   methods: {
+    makeFuzzyRuleDesc(desc: string, examples: string[]) {
+      if (!desc) return '';
+      let result = desc;
+      // regex find all text of {text}
+      const matcher = /\{([^\}]+)\}/g;
+      const matches = desc.matchAll(matcher);
+      for (const match of matches) {
+        const fullMatch = match[0];
+        const content = match[1] + '0';
+        const replacement = `<span data-fuzzy-desc-puj="${content}"></span>`;
+        result = result.replace(fullMatch, replacement);
+      }
+      const examplesHtml = `<span>[例: ${examples.join(', ')}] </span>`
+      return examplesHtml + result;
+    },
+    renderFuzzyRuleDesc() {
+      const elements = document.querySelectorAll('[data-fuzzy-desc-puj]');
+      for (const element of elements) {
+        const content = element.getAttribute('data-fuzzy-desc-puj');
+        const vNode = createVNode(TPopupPuj, {puj: content, noAccent: true});
+        const span = document.createElement('span');
+        render(vNode, span);
+        element.replaceWith(span);
+      }
+    },
     isCustomDefaultPinyinDisplayValid() {
       return this.customDefaultPinyinDisplay.length > 0;
     },
@@ -175,13 +226,12 @@ export default {
       this.formChanged = false;
       // let customPujFuzzyRules = this.customPUJFuzzyRules.join(';');
       // setLocalOption('custom-puj-fuzzy-rules', customPujFuzzyRules);
-      let customDefaultPinyinDisplay = this.customDefaultPinyinDisplay.join(';');
-      setLocalOption('custom-default-pinyin-display', customDefaultPinyinDisplay);
+      setLocalOptionList('custom-default-pinyin-display', this.customDefaultPinyinDisplay);
       setLocalOption('custom-default-pinyin-display-fuzzy-rule', this.customDefaultPinyinDisplayFuzzyRule);
-      let customListedPinyinDisplay = this.customListedPinyinDisplayFuzzyRules.join(';');
-      setLocalOption('custom-listed-pinyin-display-fuzzy-rules', customListedPinyinDisplay);
+      setLocalOptionList('custom-listed-pinyin-display-fuzzy-rules', this.customListedPinyinDisplayFuzzyRules);
       setLocalOption('custom-tone-mark-6', this.customToneMark6);
       setLocalOption('custom-tone-mark-8', this.customToneMark8);
+      setLocalOptionList('custom-accent-1-rules', this.customAccent1Rules);
     },
   },
   mounted() {
@@ -195,6 +245,12 @@ export default {
     this.customToneMark6 = getLocalOption('custom-tone-mark-6');
     this.customToneMark8 = getLocalOption('custom-tone-mark-8');
     initFromDatabase().then(() => {
+      this.availableFuzzyRules = db.fuzzyRuleDescriptors.map(fuzzyRuleDescriptor => {
+        return {
+          id: fuzzyRuleDescriptor.id,
+          desc: this.makeFuzzyRuleDesc(fuzzyRuleDescriptor.desc, fuzzyRuleDescriptor.examples),
+        };
+      });
       setLoading(false);
       this.defaultPinyinDisplayFuzzyRules = [];
       this.listedPinyinDisplayFuzzyRules = [];
@@ -212,6 +268,9 @@ export default {
         this.customListedPinyinDisplayFuzzyRules = this.listedPinyinDisplayFuzzyRules.map(rule => rule.value);
       }
     });
+  },
+  updated() {
+    this.renderFuzzyRuleDesc();
   }
 }
 </script>
