@@ -97,8 +97,18 @@
           </div>
         </fieldset>
 
-        <fieldset class="form-group">
+        <fieldset class="form-group mb-2">
           <legend class="col-form-label"><b>定制口音</b></legend>
+          <div class="d-flex align-items-center">
+            <label class="col-sm-auto">导入口音预设：</label>
+            <select class="form-select form-select-sm" style="width: auto;" v-model="customAccentProto" @change="onCustomAccentProtoChanged">
+              <template v-for="availableAccent in availableProtoAccents">
+                <option :id="availableAccent.value" :value="availableAccent.value">
+                  {{ availableAccent.name }}
+                </option>
+              </template>
+            </select>
+          </div>
           <div class="form-check" v-for="rule in availableFuzzyRules">
             <div>
               <input class="form-check-input"
@@ -112,6 +122,8 @@
             </div>
           </div>
         </fieldset>
+
+        <hr/>
 
         <div class="btn-toolbar">
           <div class="btn-group">
@@ -179,6 +191,10 @@ export default {
         {value: "\u0302", name: '扬抑符 ◌̂'},
       ],
       customToneMark8: getLocalOption('custom-tone-mark-8'),
+      customAccentProto: 'dummy',
+      availableProtoAccents: [
+        {value: "dummy", name: "辞典"},
+      ],
       availableAccentRules: [
         // {value: "rule1", name: "规则1"},
       ],
@@ -222,6 +238,16 @@ export default {
     onFormChanged() {
       this.formChanged = true;
     },
+    onCustomAccentProtoChanged() {
+      for (let accent of db.accents) {
+        if (accent.id === this.customAccentProto) {
+          this.customAccent1Rules = [];
+          for (let ruleIndex of accent.rules) {
+            this.customAccent1Rules.push(db.fuzzyRuleDescriptors[ruleIndex].id);
+          }
+        }
+      }
+    },
     saveAction() {
       this.formChanged = false;
       // let customPujFuzzyRules = this.customPUJFuzzyRules.join(';');
@@ -254,7 +280,13 @@ export default {
       setLoading(false);
       this.defaultPinyinDisplayFuzzyRules = [];
       this.listedPinyinDisplayFuzzyRules = [];
+      this.availableProtoAccents = [];
       for (const [key, rule] of Object.entries(getAccentsRules())) {
+        if (!key.startsWith('custom'))
+          this.availableProtoAccents.push({
+            value: key,
+            name: rule.name,
+          });
         this.defaultPinyinDisplayFuzzyRules.push({
           value: key,
           name: rule.name,
