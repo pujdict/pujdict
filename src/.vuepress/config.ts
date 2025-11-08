@@ -44,6 +44,7 @@ export default defineUserConfig({
     ["link", {rel: "prefetch", href: '/data/pujbase/dist/phrases.pb'}],
     ["link", {rel: "preconnect", href: "https://fonts.font.im"},],
     ["link", {rel: "preconnect", href: "https://fonts.gstatic.font.im", crossorigin: ""},],
+    ["link", {href: "https://fonts.font.im/css?family=Noto+Sans+SC:wght@400;700&display=swap"},],
     // ["link", {rel: "preconnect", href: "https://fonts.googleapis.com/",},],
     // ["link", {rel: "preconnect", href: "https://fonts.gstatic.com/",},],
     // fonts:
