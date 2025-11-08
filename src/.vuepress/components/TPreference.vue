@@ -239,6 +239,10 @@ export default {
       this.formChanged = true;
     },
     onCustomAccentProtoChanged() {
+      if (this.customAccentProto === 'dummy') {
+        this.customAccent1Rules = [];
+        return;
+      }
       for (let accent of db.accents) {
         if (accent.id === this.customAccentProto) {
           this.customAccent1Rules = [];
