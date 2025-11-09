@@ -116,7 +116,7 @@
                      :id="`custom-accent-1-${rule.id}`"
                      :value="rule.id"
                      v-model="customAccent1Rules"
-                     @change="onFormChanged"/>
+                     @change="onAvailableFuzzyRuleChanged"/>
               <label class="form-check-label" :for="`custom-accent-1-${rule.id}`" v-html="rule.desc">
               </label>
             </div>
@@ -193,7 +193,7 @@ export default {
       customToneMark8: getLocalOption('custom-tone-mark-8'),
       customAccentProto: 'dummy',
       availableProtoAccents: [
-        {value: "dummy", name: "辞典"},
+        {value: "", name: ""},
       ],
       availableAccentRules: [
         // {value: "rule1", name: "规则1"},
@@ -234,6 +234,10 @@ export default {
       return this.formChanged
           && this.isCustomDefaultPinyinDisplayValid()
           ;
+    },
+    onAvailableFuzzyRuleChanged() {
+      this.onFormChanged();
+      this.customAccentProto = '';
     },
     onFormChanged() {
       this.formChanged = true;
@@ -284,7 +288,9 @@ export default {
       setLoading(false);
       this.defaultPinyinDisplayFuzzyRules = [];
       this.listedPinyinDisplayFuzzyRules = [];
-      this.availableProtoAccents = [];
+      this.availableProtoAccents = [
+        {value: "", name: ""},
+      ];
       for (const [key, rule] of Object.entries(getAccentsRules())) {
         if (!key.startsWith('custom'))
           this.availableProtoAccents.push({
