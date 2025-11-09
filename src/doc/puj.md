@@ -203,16 +203,16 @@ flowchart
 
 潮州话的阳声韵、入声韵、鼻化韵，通过添加以下后缀表示：
 
-| 白话字       | 潮拼   | 国际音标 | 例字                                  |                                      |
-|-----------|------|------|-------------------------------------|--------------------------------------|
-| m         | m    | m    | 甘 <TPopupPuj noAccent puj="kam1"/>  | 纤 <TPopupPuj noAccent puj="siam1"/>  |
-| n^1^      | (ng) | n    | 干 <TPopupPuj noAccent puj="kan1"/>  | 仙 <TPopupPuj noAccent puj="sian1"/>  |
-| ng        | ng   | ŋ    | 刚 <TPopupPuj noAccent puj="kang1"/> | 相 <TPopupPuj noAccent puj="siang1"/> |
-| nn/ⁿ ^23^ | n    | ◌̃   | 柑 <TPopupPuj noAccent puj="kann1"/> | 声 <TPopupPuj noAccent puj="siann1"/> |
-| p         | b    | p̚   | 蛤 <TPopupPuj noAccent puj="kap4"/>  | 涩 <TPopupPuj noAccent puj="siap4"/>  |
-| t         | (g)  | t̚   | 结 <TPopupPuj noAccent puj="kat4"/>  | 设 <TPopupPuj noAccent puj="siat4"/>  |
-| k         | g    | k̚   | 角 <TPopupPuj noAccent puj="kak4"/>  | 削 <TPopupPuj noAccent puj="siak4"/>  |
-| h^4^      | h    | ʔ    | 甲 <TPopupPuj noAccent puj="kah4"/>  | 锡 <TPopupPuj noAccent puj="siah4"/>  |
+| 白话字       | 潮拼 | 国际音标 | 例字                                  |                                      |
+|-----------|----|------|-------------------------------------|--------------------------------------|
+| m         | m  | m    | 甘 <TPopupPuj noAccent puj="kam1"/>  | 纤 <TPopupPuj noAccent puj="siam1"/>  |
+| n^1^      | nd | n    | 干 <TPopupPuj noAccent puj="kan1"/>  | 仙 <TPopupPuj noAccent puj="sian1"/>  |
+| ng        | ng | ŋ    | 刚 <TPopupPuj noAccent puj="kang1"/> | 相 <TPopupPuj noAccent puj="siang1"/> |
+| nn/ⁿ ^23^ | n  | ◌̃   | 柑 <TPopupPuj noAccent puj="kann1"/> | 声 <TPopupPuj noAccent puj="siann1"/> |
+| p         | b  | p̚   | 蛤 <TPopupPuj noAccent puj="kap4"/>  | 涩 <TPopupPuj noAccent puj="siap4"/>  |
+| t         | d  | t̚   | 结 <TPopupPuj noAccent puj="kat4"/>  | 设 <TPopupPuj noAccent puj="siat4"/>  |
+| k         | g  | k̚   | 角 <TPopupPuj noAccent puj="kak4"/>  | 削 <TPopupPuj noAccent puj="siak4"/>  |
+| h^4^      | h  | ʔ    | 甲 <TPopupPuj noAccent puj="kah4"/>  | 锡 <TPopupPuj noAccent puj="siah4"/>  |
 
 ::: note
 
@@ -266,7 +266,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 在白话字中，八个声调分别使用不同的调号进行标记。
 各地不同声调的调值有所不同，但所属声调是一致的。
 <!-- 具体调值将在转读规则中给出。 -->
-下面以白话字拼音 <TPopupPuj noAccent puj="hun0"/> <TPopupPuj noAccent puj="hut0"/> 为例，说明标记方法：
+下面以 [hun]/[hut̚ ] 一组发音为例，说明标记方法：
 
 | 调序 | 调类        | 白话字调符          | 例字 | 白话字    | 潮拼    |
 |----|-----------|----------------|----|--------|-------|
