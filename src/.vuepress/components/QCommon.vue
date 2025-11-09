@@ -318,9 +318,10 @@ async function initFromDatabase() {
 
 // 口音规则
 const getAccentsRules = function () {
-  const fuzzyRules = {};
+  let fuzzyRules = null;
   return function () {
-    if (fuzzyRules.length) return fuzzyRules;
+    if (fuzzyRules) return fuzzyRules;
+    fuzzyRules = {};
     fuzzyRules['dummy'] = new FuzzyRulesGroup_Dummy();
     for (const accent of db.accents) {
       const id = accent.id;

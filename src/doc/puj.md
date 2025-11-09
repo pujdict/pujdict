@@ -4,11 +4,8 @@ order: 4
 ---
 
 <script setup>
-import TPuj from '@components/TPuj.vue';
 import TToneLetter from '@components/TToneLetter.vue';
-</script>
-<script>
-import TPopupPuj from '@components/TPopupPuj.vue';
+import TPopupPujNoAccent from '@components/TPopupPujNoAccent.vue';
 </script>
 
 ## 关于辞典的标准音
@@ -97,17 +94,17 @@ flowchart
 ::: note
 
 1. 在汕头、潮阳、普宁、惠来、陆丰等地（主要是西南部一些地区），近年来出现了声母 p, ph, m, b, h 在接元音 u
-   时，读为唇齿音 [p̪f], [p̪fʰ], [ɱ], [b̪v]/[v], [ɸ]/[f] 的现象，例如：飞 <TPopupPuj noAccent puj="pfue1"/>，梅 <TPopupPuj noAccent puj="bvue5"/>，
-   皮 <TPopupPuj noAccent puj="pfhue5"/>，糜 <TPopupPuj noAccent puj="mvue5"/>，化 <TPopupPuj noAccent puj="fue3"/>。
+   时，读为唇齿音 [p̪f], [p̪fʰ], [ɱ], [b̪v]/[v], [ɸ]/[f] 的现象，例如：飞 <TPopupPujNoAccent puj="pfue1"/>，梅 <TPopupPujNoAccent puj="bvue5"/>，
+   皮 <TPopupPujNoAccent puj="pfhue5"/>，糜 <TPopupPujNoAccent puj="mvue5"/>，化 <TPopupPujNoAccent puj="fue3"/>。
    但唇齿音目前还在扩散过程中，仅在 u 元音之前作为声母的自由变体，并没有产生音位对立，因此本辞典拼音中不予区分，依然记为 p,
    ph, m, b, h。
 
 2. 与其他闽南语方言类似，潮州话中的浊塞音 [b], [ɡ] 实际上音值接近于 [ᵐb], [ᵑɡ]，即鼻冠音，是来源于 [m], [ŋ] 的塞化，并非来源于中古全浊塞音。
 3. 现代潮州话中，n, l 声母接 -m 韵尾的阳声韵时，在部分地区依然区分 n, l，而部分地区则 n, l
    声母混淆。虽然说话人惯用的声母可以用于区分地区口音，但随着各地沟通交流的深入，听话人很难预设说话人的口音，n, l
-   声母在这些情况下已经基本无法用于辨义，例如：林 <TPopupPuj noAccent puj="lim5"/> = <TPopupPuj noAccent puj="nim5"/>，
-   念 <TPopupPuj noAccent puj="niam7"/> = <TPopupPuj noAccent puj="liam7"/>，男 <TPopupPuj noAccent puj="nam5"/> = <TPopupPuj noAccent puj="lam5"/>，
-   蓝 <TPopupPuj noAccent puj="lam5"/> = <TPopupPuj noAccent puj="nam5"/>
+   声母在这些情况下已经基本无法用于辨义，例如：林 <TPopupPujNoAccent puj="lim5"/> = <TPopupPujNoAccent puj="nim5"/>，
+   念 <TPopupPujNoAccent puj="niam7"/> = <TPopupPujNoAccent puj="liam7"/>，男 <TPopupPujNoAccent puj="nam5"/> = <TPopupPujNoAccent puj="lam5"/>，
+   蓝 <TPopupPujNoAccent puj="lam5"/> = <TPopupPujNoAccent puj="nam5"/>
    ——“蓝色”等于“男色”。本辞典记录时，这些字的声母依然以中古泥（娘）、来母作为记录依据（简单来说，与普通话中对应声母相同）。
 4. 齿头音 ts, tsh, s, j 在接介音 i 时可以发生腭化读作 [tɕ], [tɕʰ], [ɕ], [dʑ]
    ，同样是自由变体，不产生音位对立。(不过在潮剧戏腔中，要求字正腔圆，不允许腭化）。
@@ -135,15 +132,15 @@ flowchart
 ::: note
 
 1. 上述表中的国际音标是一种“宽式”的记法。
-   a 的实际发音可以是 [a]/[ᴀ]/[ɐ]，特别地，在 <TPopupPuj noAccent puj="-iam0"/> <TPopupPuj noAccent puj="-iap0"/> <TPopupPuj noAccent puj="-ian0"/> <TPopupPuj noAccent puj="-iat0"/> 一组韵母中，受到介音和韵尾的双重影响发生高化，从而实际发音更接近于 [ɛ]/[ɜ]，辞典标准音为了音系的系统性仍将主元音记为 <TPopupPuj noAccent puj="a"/>，各保留该韵母的地区口音则记为 <TPopupPuj noAccent puj="e"/>；
+   a 的实际发音可以是 [a]/[ᴀ]/[ɐ]，特别地，在 <TPopupPujNoAccent puj="-iam0"/> <TPopupPujNoAccent puj="-iap0"/> <TPopupPujNoAccent puj="-ian0"/> <TPopupPujNoAccent puj="-iat0"/> 一组韵母中，受到介音和韵尾的双重影响发生高化，从而实际发音更接近于 [ɛ]/[ɜ]，辞典标准音为了音系的系统性仍将主元音记为 <TPopupPujNoAccent puj="a"/>，各保留该韵母的地区口音则记为 <TPopupPujNoAccent puj="e"/>；
    e 的实际发音可以是 [e]/[ɛ] 等，特别地，揭阳地区在接 -ng/-k 韵尾时 e 与 i 相混，可一并读同 [ɪ]；
-   在多数不保留 <TPopupPuj noAccent puj="or0"/> 韵母的地区，<TPopupPuj noAccent puj="ur0"/> 的实际发音可以是 [ɯ]/[ɤ]/[ə]，特别地，在 ts/tsh/s/j 一组声母中，可读为舌尖元音 [ɿ]，这可能是受到普通话的影响。
-2. 韵母 <TPopupPuj noAccent puj="ur0"/> 在潮阳等地并入 <TPopupPuj noAccent puj="u0"/>。在泉漳片闽南语，包括台湾强势腔中也多并入 u 或 i，因此该韵母在台罗中也没有明确标准。泉漳潮各地的闽南语白话字拼音方案中有许多不同写法，包括但不限于
+   在多数不保留 <TPopupPujNoAccent puj="or0"/> 韵母的地区，<TPopupPujNoAccent puj="ur0"/> 的实际发音可以是 [ɯ]/[ɤ]/[ə]，特别地，在 ts/tsh/s/j 一组声母中，可读为舌尖元音 [ɿ]，这可能是受到普通话的影响。
+2. 韵母 <TPopupPujNoAccent puj="ur0"/> 在潮阳等地并入 <TPopupPujNoAccent puj="u0"/>。在泉漳片闽南语，包括台湾强势腔中也多并入 u 或 i，因此该韵母在台罗中也没有明确标准。泉漳潮各地的闽南语白话字拼音方案中有许多不同写法，包括但不限于
    ṳ/ü/ɨ/ᵻ/ur/ir 等等。杜嘉德《厦英大辞典》中记为 u 上加两点，即 ü，但考虑到在字母上方标记声调时比较拥挤，本辞典采用卓威廉词典中的写法，即字母
    u 下加两点。输入不方便时，建议用 ur 或其他变体写法代替。
-3. 韵母 <TPopupPuj noAccent puj="or"/> 大多数地区已丢失。该韵母属于白读音，对应于泉州话中的科韵，例如：袋 <TPopupPuj noAccent puj="tor7"/>、块 <TPopupPuj noAccent puj="kor3"/>
-   、胎 <TPopupPuj noAccent puj="thor1"/>、
-   罪 <TPopupPuj noAccent puj="tsor6"/>、坐 <TPopupPuj noAccent puj="tsor6"/>、夺 <TPopupPuj noAccent puj="torh8"/>。
+3. 韵母 <TPopupPujNoAccent puj="or"/> 大多数地区已丢失。该韵母属于白读音，对应于泉州话中的科韵，例如：袋 <TPopupPujNoAccent puj="tor7"/>、块 <TPopupPujNoAccent puj="kor3"/>
+   、胎 <TPopupPujNoAccent puj="thor1"/>、
+   罪 <TPopupPujNoAccent puj="tsor6"/>、坐 <TPopupPujNoAccent puj="tsor6"/>、夺 <TPopupPujNoAccent puj="torh8"/>。
    今天的泉州话依然保留该韵母，潮汕片闽南语则大多将其并入 [o]，仅潮安金石等极少数地区仍然保留 [ə] 音，在陆丰、漳州、厦门、台湾强势腔中该韵母并入 [e]。
    泉州话白话字中将其记为 o 上加两点，即 ö，本辞典中，白话字记法与 ṳ 保持一致记为下加两点即 o̤，输入不方便时，建议用 or/er 或其他变体写法代替；该韵母潮拼记法遵循借用普通话拼音的原则，记为 er。
    值得一提的是，晚清时期的潮州话中仍存在该韵母——高德《汉英潮州方言字典》（1883）的序言中提到：
@@ -185,15 +182,15 @@ flowchart
 
 1. “欧”韵母白话字写作 au，潮拼则遵循借用普通话拼音的原则写作 ao，iau 和 iao 同理。除此之外的其他音节，白话字和潮拼的记法是一一对应的，参见单元音表。
 
-2. 韵母 <TPopupPuj noAccent puj="-eu" /> 在大多数地区转读为 <TPopupPuj noAccent puj="-iu" />，仅在潮安凤凰等极少数地区保留，出现于若干鱼韵字中：
-   初 <TPopupPuj noAccent puj="tsheu1"/>、
-   黍 <TPopupPuj noAccent puj="seu3"/>、
-   梳 <TPopupPuj noAccent puj="seu1"/>、
-   疏 <TPopupPuj noAccent puj="seu1"/>、
-   须 <TPopupPuj noAccent puj="tsheu1"/>、
-   絮 <TPopupPuj noAccent puj="tsheu3"/>、
-   苧 <TPopupPuj noAccent puj="teu6"/>、
-   贮 <TPopupPuj noAccent puj="teu2"/>。
+2. 韵母 <TPopupPujNoAccent puj="-eu" /> 在大多数地区转读为 <TPopupPujNoAccent puj="-iu" />，仅在潮安凤凰等极少数地区保留，出现于若干鱼韵字中：
+   初 <TPopupPujNoAccent puj="tsheu1"/>、
+   黍 <TPopupPujNoAccent puj="seu3"/>、
+   梳 <TPopupPujNoAccent puj="seu1"/>、
+   疏 <TPopupPujNoAccent puj="seu1"/>、
+   须 <TPopupPujNoAccent puj="tsheu1"/>、
+   絮 <TPopupPujNoAccent puj="tsheu3"/>、
+   苧 <TPopupPujNoAccent puj="teu6"/>、
+   贮 <TPopupPujNoAccent puj="teu2"/>。
 
 3. “妖”“腰”等字音具有口音差异，具体规则将在后文讨论。
 
@@ -205,26 +202,26 @@ flowchart
 
 | 白话字       | 潮拼 | 国际音标 | 例字                                  |                                      |
 |-----------|----|------|-------------------------------------|--------------------------------------|
-| m         | m  | m    | 甘 <TPopupPuj noAccent puj="kam1"/>  | 纤 <TPopupPuj noAccent puj="siam1"/>  |
-| n^1^      | nd | n    | 干 <TPopupPuj noAccent puj="kan1"/>  | 仙 <TPopupPuj noAccent puj="sian1"/>  |
-| ng        | ng | ŋ    | 刚 <TPopupPuj noAccent puj="kang1"/> | 相 <TPopupPuj noAccent puj="siang1"/> |
-| nn/ⁿ ^23^ | n  | ◌̃   | 柑 <TPopupPuj noAccent puj="kann1"/> | 声 <TPopupPuj noAccent puj="siann1"/> |
-| p         | b  | p̚   | 蛤 <TPopupPuj noAccent puj="kap4"/>  | 涩 <TPopupPuj noAccent puj="siap4"/>  |
-| t         | d  | t̚   | 结 <TPopupPuj noAccent puj="kat4"/>  | 设 <TPopupPuj noAccent puj="siat4"/>  |
-| k         | g  | k̚   | 角 <TPopupPuj noAccent puj="kak4"/>  | 削 <TPopupPuj noAccent puj="siak4"/>  |
-| h^4^      | h  | ʔ    | 甲 <TPopupPuj noAccent puj="kah4"/>  | 锡 <TPopupPuj noAccent puj="siah4"/>  |
+| m         | m  | m    | 甘 <TPopupPujNoAccent puj="kam1"/>  | 纤 <TPopupPujNoAccent puj="siam1"/>  |
+| n^1^      | nd | n    | 干 <TPopupPujNoAccent puj="kan1"/>  | 仙 <TPopupPujNoAccent puj="sian1"/>  |
+| ng        | ng | ŋ    | 刚 <TPopupPujNoAccent puj="kang1"/> | 相 <TPopupPujNoAccent puj="siang1"/> |
+| nn/ⁿ ^23^ | n  | ◌̃   | 柑 <TPopupPujNoAccent puj="kann1"/> | 声 <TPopupPujNoAccent puj="siann1"/> |
+| p         | b  | p̚   | 蛤 <TPopupPujNoAccent puj="kap4"/>  | 涩 <TPopupPujNoAccent puj="siap4"/>  |
+| t         | d  | t̚   | 结 <TPopupPujNoAccent puj="kat4"/>  | 设 <TPopupPujNoAccent puj="siat4"/>  |
+| k         | g  | k̚   | 角 <TPopupPujNoAccent puj="kak4"/>  | 削 <TPopupPujNoAccent puj="siak4"/>  |
+| h^4^      | h  | ʔ    | 甲 <TPopupPujNoAccent puj="kah4"/>  | 锡 <TPopupPujNoAccent puj="siah4"/>  |
 
 ::: note
 
-1. 包括潮汕三市市区在内的多数地区已经丢失舌尖韵尾 -n/-t，并入舌根韵尾 -ng/-k，但在少数地区仍有保留，特别是潮安凤凰、丰顺𨻧隍保留了完整的六个韵尾 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-urn />, <TPopupPuj noAccent puj=-un />, <TPopupPuj noAccent puj=-ian />, <TPopupPuj noAccent puj=-uan />，在饶平三饶、揭东西部、揭西东部、普宁西部也不同程度地保留了 <TPopupPuj noAccent puj=-an />, <TPopupPuj noAccent puj=-uan />, <TPopupPuj noAccent puj=-in />, <TPopupPuj noAccent puj=-un /> 等韵母（见【吴芳2009】）。本辞典的标准音仍保留舌尖韵尾。
+1. 包括潮汕三市市区在内的多数地区已经丢失舌尖韵尾 -n/-t，并入舌根韵尾 -ng/-k，但在少数地区仍有保留，特别是潮安凤凰、丰顺𨻧隍保留了完整的六个韵尾 <TPopupPujNoAccent puj=-an />, <TPopupPujNoAccent puj=-in />, <TPopupPujNoAccent puj=-urn />, <TPopupPujNoAccent puj=-un />, <TPopupPujNoAccent puj=-ian />, <TPopupPujNoAccent puj=-uan />，在饶平三饶、揭东西部、揭西东部、普宁西部也不同程度地保留了 <TPopupPujNoAccent puj=-an />, <TPopupPujNoAccent puj=-uan />, <TPopupPujNoAccent puj=-in />, <TPopupPujNoAccent puj=-un /> 等韵母（见【吴芳2009】）。本辞典的标准音仍保留舌尖韵尾。
    因潮拼方案中 -n 已经被用于记录鼻化韵，本辞典的潮拼记法将这一对韵尾记为 -nd/-d。
 
 2. 潮州话中，跟在鼻辅音声母 m, n, ng 之后的韵母元音都读为鼻化元音，阴声韵与来自阳声韵的鼻化韵已经完全混同。但是否标记为鼻化
-   则需要考虑韵母来源，源于阳声韵的标记为鼻化，例如：年 <TPopupPuj noAccent puj="ninn5"/>——尼 <TPopupPuj noAccent puj="ni5"/>，鳗 <TPopupPuj noAccent puj="muann5"/>——
-   麻 <TPopupPuj noAccent puj="mua5"/>，尽管二者在读音上已经完全无法区分。鼻声母后的元音一律鼻化也是“潮普”口音的一大特点。
+   则需要考虑韵母来源，源于阳声韵的标记为鼻化，例如：年 <TPopupPujNoAccent puj="ninn5"/>——尼 <TPopupPujNoAccent puj="ni5"/>，鳗 <TPopupPujNoAccent puj="muann5"/>——
+   麻 <TPopupPujNoAccent puj="mua5"/>，尽管二者在读音上已经完全无法区分。鼻声母后的元音一律鼻化也是“潮普”口音的一大特点。
    本辞典中，为方便使用，各地口音的声韵检索时，鼻辅音声母后的元音可以用鼻化和非鼻化两种变体互查。
 3. 在传统的白话字方案中，鼻化韵也常以上标的 n 即 ◌ⁿ 来记录，为了排版工整和输入方便，辞典采用和台罗方案一致的 -nn 来记录鼻化韵。
-4. 鼻化韵和喉塞韵同时出现时，先写鼻化再写喉塞，例如：夗 <TPopupPuj noAccent puj="innh8"/>（睡觉）。
+4. 鼻化韵和喉塞韵同时出现时，先写鼻化再写喉塞，例如：夗 <TPopupPujNoAccent puj="innh8"/>（睡觉）。
 
 :::
 
@@ -237,23 +234,23 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 | 白话字               | 潮拼   | 国际音标     | 例字                                 |
 |-------------------|------|----------|------------------------------------|
-| m                 | m    | m̍       | 姆 <TPopupPuj noAccent puj="m2"/>   |
-| ng^1^             | ng   | ŋ̍/ɯ̃    | 黄 <TPopupPuj noAccent puj="ng5"/>  |
-| hng               | hng  | ŋ̊ŋ̍/hɯ̃ | 园 <TPopupPuj noAccent puj="hng5"/> |
-| (唇音声母)-ng/-ṳng^2^ | -ung | ŋ̍/ɯŋ/uŋ | 饭 <TPopupPuj noAccent puj="png7"/> |
-| (其他声母)-ng/-ṳng^3^ | -eng | ŋ̍/ɯŋ    | 酸 <TPopupPuj noAccent puj="sng1"/> |
+| m                 | m    | m̍       | 姆 <TPopupPujNoAccent puj="m2"/>   |
+| ng^1^             | ng   | ŋ̍/ɯ̃    | 黄 <TPopupPujNoAccent puj="ng5"/>  |
+| hng               | hng  | ŋ̊ŋ̍/hɯ̃ | 园 <TPopupPujNoAccent puj="hng5"/> |
+| (唇音声母)-ng/-ṳng^2^ | -ung | ŋ̍/ɯŋ/uŋ | 饭 <TPopupPujNoAccent puj="png7"/> |
+| (其他声母)-ng/-ṳng^3^ | -eng | ŋ̍/ɯŋ    | 酸 <TPopupPujNoAccent puj="sng1"/> |
 
 ::: note
 
-1. ng 单独成字或接在 h 之后时，可读作 <TPopupPuj noAccent puj="ng"/> [ŋ̍] 或 <TPopupPuj noAccent puj="urnn"/> [ɯ̃]。
+1. ng 单独成字或接在 h 之后时，可读作 <TPopupPujNoAccent puj="ng"/> [ŋ̍] 或 <TPopupPujNoAccent puj="urnn"/> [ɯ̃]。
 
-2. ng 接在唇音声母后时，在潮阳、普宁、惠来等地多直接读为 <TPopupPuj noAccent puj="ng"/> [ŋ̍] 或 <TPopupPuj noAccent puj="urng"/> [ɯŋ]。而在潮州、汕头等地口语中，唇音声母后接 <TPopupPuj noAccent puj="ng"/> 时并入了 <TPopupPuj noAccent puj="ung"/>，例如“饭”“问”“本”的白读音：饭 <TPopupPuj noAccent puj="png7"/> [pŋ̍] > <TPopupPuj noAccent puj="pung7"/> [puŋ]，
-   问 <TPopupPuj noAccent puj="mng7"/> [mŋ̍] > <TPopupPuj noAccent puj="mung7"/> [muŋ]，本 <TPopupPuj noAccent puj="png2"/> [pŋ̍] > <TPopupPuj noAccent puj="pung2"/> [puŋ]。
+2. ng 接在唇音声母后时，在潮阳、普宁、惠来等地多直接读为 <TPopupPujNoAccent puj="ng"/> [ŋ̍] 或 <TPopupPujNoAccent puj="urng"/> [ɯŋ]。而在潮州、汕头等地口语中，唇音声母后接 <TPopupPujNoAccent puj="ng"/> 时并入了 <TPopupPujNoAccent puj="ung"/>，例如“饭”“问”“本”的白读音：饭 <TPopupPujNoAccent puj="png7"/> [pŋ̍] > <TPopupPujNoAccent puj="pung7"/> [puŋ]，
+   问 <TPopupPujNoAccent puj="mng7"/> [mŋ̍] > <TPopupPujNoAccent puj="mung7"/> [muŋ]，本 <TPopupPujNoAccent puj="png2"/> [pŋ̍] > <TPopupPujNoAccent puj="pung2"/> [puŋ]。
    巧合的是，“本”字的文读音为 pún，在舌尖韵尾并入舌根韵尾后，“本”字的文读音和白读音合流了。
 3. ng 也可以接在其他辅音声母后，发音同样为 [ŋ̍] 或 [ɯŋ]，例如：
-   酸 <TPopupPuj noAccent puj="sng1"/>，卷 <TPopupPuj noAccent puj="kng2"/>，卵 <TPopupPuj noAccent puj="nng6"/>。
-   实际上，潮汕多数地区该韵母中都有一个比较明显的 [ɯ] 音。本辞典中标准音仍记为 <TPopupPuj noAccent puj="-ng"/>，各地口音则为了方便查询，转为 <TPopupPuj noAccent puj="-urng"/>。
-   需要注意 <TPopupPuj noAccent puj=-ng /> 区分于 <TPopupPuj noAccent puj=-urn />，例如：根 <TPopupPuj noAccent puj="kurn1"/>——缸 <TPopupPuj noAccent puj="kng1"/>，这两者在许多地区由于前后鼻音不分已经相混。
+   酸 <TPopupPujNoAccent puj="sng1"/>，卷 <TPopupPujNoAccent puj="kng2"/>，卵 <TPopupPujNoAccent puj="nng6"/>。
+   实际上，潮汕多数地区该韵母中都有一个比较明显的 [ɯ] 音。本辞典中标准音仍记为 <TPopupPujNoAccent puj="-ng"/>，各地口音则为了方便查询，转为 <TPopupPujNoAccent puj="-urng"/>。
+   需要注意 <TPopupPujNoAccent puj=-ng /> 区分于 <TPopupPujNoAccent puj=-urn />，例如：根 <TPopupPujNoAccent puj="kurn1"/>——缸 <TPopupPujNoAccent puj="kng1"/>，这两者在许多地区由于前后鼻音不分已经相混。
 
 :::
 
@@ -319,457 +316,457 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                                                  |
 |---------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                                       |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                                                      |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                                                      |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    |                                                                                                      |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                                                      |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                                                    |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                                      |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> | <TPopupPuj noAccent puj=-ie0 />, <TPopupPuj noAccent puj=-ienn0 />, <TPopupPuj noAccent puj=-ieh0 /> |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  | <TPopupPuj noAccent puj=-ieu0 />, <TPopupPuj noAccent puj=-ieh0 />                                   |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                                      |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hng0 />                                                                      |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />                                    |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   | <TPopupPuj noAccent puj=-iem0 />, <TPopupPuj noAccent puj=-iep0 />                                   |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-ieng0 /> , <TPopupPuj noAccent puj=-iek0 />                                 |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                                      |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-ueng0 />, <TPopupPuj noAccent puj=-uek0 />                                  |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                      |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                                      |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                                                |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                                       |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                                                      |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                                                      |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    |                                                                                                      |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                                                      |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                                                    |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                                      |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> | <TPopupPujNoAccent puj=-ie0 />, <TPopupPujNoAccent puj=-ienn0 />, <TPopupPujNoAccent puj=-ieh0 /> |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  | <TPopupPujNoAccent puj=-ieu0 />, <TPopupPujNoAccent puj=-ieh0 />                                   |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                                      |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                                                      |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                                      |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                    |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hng0 />                                                                      |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />                                  |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />                                    |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                                      |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />                                    |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   | <TPopupPujNoAccent puj=-iem0 />, <TPopupPujNoAccent puj=-iep0 />                                   |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-ieng0 /> , <TPopupPujNoAccent puj=-iek0 />                                 |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                                      |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-ueng0 />, <TPopupPujNoAccent puj=-uek0 />                                  |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                                                      |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                                                      |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPujNoAccent puj=-ung0 />                                                                |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                                       |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=l- />                                                                        |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                                        |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
 
 @tab 戏腔^8^
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                                                  |
 |---------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                                       |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                                                      |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                                                      |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    |                                                                                                      |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                                                      |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                                                    |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                                      |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> | <TPopupPuj noAccent puj=-ie0 />, <TPopupPuj noAccent puj=-ienn0 />, <TPopupPuj noAccent puj=-ieh0 /> |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  | <TPopupPuj noAccent puj=-iou0 />, <TPopupPuj noAccent puj=-iouh0 />                                  |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                                      |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | (<TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />)                                  |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | (<TPopupPuj noAccent puj=-urng0 />)                                                                  |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | (<TPopupPuj noAccent puj=hurng0 />)                                                                  |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | (<TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />)                                |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | (<TPopupPuj noAccent puj=-ung0 />,-uk)                                                               |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | (<TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />)                                  |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                                                      |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | (<TPopupPuj noAccent puj=-iang0 />, -iak)                                                            |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                                      |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | (-uang, -uak)                                                                                        |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                      |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                                      |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                      |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                                       |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                                                      |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                                                      |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    |                                                                                                      |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                                                      |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                                                    |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                                      |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> | <TPopupPujNoAccent puj=-ie0 />, <TPopupPujNoAccent puj=-ienn0 />, <TPopupPujNoAccent puj=-ieh0 /> |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  | <TPopupPujNoAccent puj=-iou0 />, <TPopupPujNoAccent puj=-iouh0 />                                  |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                                      |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                                                      |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                                      |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | (<TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />)                                  |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | (<TPopupPujNoAccent puj=-urng0 />)                                                                  |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | (<TPopupPujNoAccent puj=hurng0 />)                                                                  |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | (<TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />)                                |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | (<TPopupPujNoAccent puj=-ung0 />,-uk)                                                               |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                                      |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | (<TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />)                                  |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                                                      |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | (<TPopupPujNoAccent puj=-iang0 />, -iak)                                                            |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                                      |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | (-uang, -uak)                                                                                        |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                                                      |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                                                      |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                                       |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=l- />                                                                        |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                                        |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
 
 @tab 潮安
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                            |
 |---------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                 |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      |                                                                                |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      | (双唇音)<TPopupPuj noAccent puj=-ue0 />, (其他音)<TPopupPuj noAccent puj=-oi0 />     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | (双唇音)<TPopupPuj noAccent puj=-uenn0 />, (其他音)<TPopupPuj noAccent puj=-oinn0 /> |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     | (双唇音)<TPopupPuj noAccent puj=-ueh0 />, (其他音)<TPopupPuj noAccent puj=-oih0 />   |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                              |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                                |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                                |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     |                                                                                |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urn0 />                                               |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurn0 />                                               |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     |                                                                                |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     |                                                                                |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                                |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-ien0 />, <TPopupPuj noAccent puj=-iet0 />             |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   |                                                                                |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                 |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                  |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                  |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                 |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      |                                                                                |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      | (双唇音)<TPopupPujNoAccent puj=-ue0 />, (其他音)<TPopupPujNoAccent puj=-oi0 />     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | (双唇音)<TPopupPujNoAccent puj=-uenn0 />, (其他音)<TPopupPujNoAccent puj=-oinn0 /> |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     | (双唇音)<TPopupPujNoAccent puj=-ueh0 />, (其他音)<TPopupPujNoAccent puj=-oih0 />   |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                              |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                                |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                                |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                                |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     |                                                                                |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urn0 />                                               |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurn0 />                                               |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   |                                                                                |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     |                                                                                |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     |                                                                                |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                                |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-ien0 />, <TPopupPujNoAccent puj=-iet0 />             |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   |                                                                                |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                                |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                                |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                                |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />         |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                 |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=l- />                                                  |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                  |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                |
 
 @tab 丰顺
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                                                  |
 |---------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                                       |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                                                      |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                                                      |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    |                                                                                                      |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                                                      |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                                                    |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                                      |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> | <TPopupPuj noAccent puj=-ie0 />, <TPopupPuj noAccent puj=-ienn0 />, <TPopupPuj noAccent puj=-ieh0 /> |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  | <TPopupPuj noAccent puj=-ieu0 />, <TPopupPuj noAccent puj=-ieh0 />                                   |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                                      |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    | <TPopupPuj noAccent puj=-en0 />, <TPopupPuj noAccent puj=-et0 />                                     |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                      |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     |                                                                                                      |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urn0 />                                                                     |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurn0 />                                                                     |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   |                                                                                                      |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     |                                                                                                      |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                      |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     |                                                                                                      |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   | <TPopupPuj noAccent puj=-iem0 />, <TPopupPuj noAccent puj=-iep0 />                                   |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-ien0 />, <TPopupPuj noAccent puj=-iet0 />                                   |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                                      |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | -uen, <TPopupPuj noAccent puj=-uet0 />                                                               |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | <TPopupPuj noAccent puj=-uen0 />                                                                     |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uet0 />                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                      |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                                        |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                                       |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                                                      |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                                                      |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    |                                                                                                      |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                                                      |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                                                    |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                                      |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> | <TPopupPujNoAccent puj=-ie0 />, <TPopupPujNoAccent puj=-ienn0 />, <TPopupPujNoAccent puj=-ieh0 /> |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  | <TPopupPujNoAccent puj=-ieu0 />, <TPopupPujNoAccent puj=-ieh0 />                                   |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                                      |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    | <TPopupPujNoAccent puj=-en0 />, <TPopupPujNoAccent puj=-et0 />                                     |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                                      |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     |                                                                                                      |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urn0 />                                                                     |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurn0 />                                                                     |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   |                                                                                                      |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     |                                                                                                      |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                                      |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     |                                                                                                      |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   | <TPopupPujNoAccent puj=-iem0 />, <TPopupPujNoAccent puj=-iep0 />                                   |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-ien0 />, <TPopupPujNoAccent puj=-iet0 />                                   |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                                      |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | -uen, <TPopupPujNoAccent puj=-uet0 />                                                               |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    | <TPopupPujNoAccent puj=-uen0 />                                                                     |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     | <TPopupPujNoAccent puj=-uet0 />                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                                                      |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                                       |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=l- />                                                                        |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                                        |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                      |
 
 @tab 饶平
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                            |
 |---------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                 |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      |                                                                                |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      | (双唇音)<TPopupPuj noAccent puj=-ue0 />, (其他音)<TPopupPuj noAccent puj=-oi0 />     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | (双唇音)<TPopupPuj noAccent puj=-uenn0 />, (其他音)<TPopupPuj noAccent puj=-oinn0 /> |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     | (双唇音)<TPopupPuj noAccent puj=-ueh0 />, (其他音)<TPopupPuj noAccent puj=-oih0 />   |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                              |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                                |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                                |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />              |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                              |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                              |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />            |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />              |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />              |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                                |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 />            |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 />            |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                                |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />         |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=mu- />(阳声韵)                                            |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  |                                                                                |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=l- />                                                  |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                  |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                 |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      |                                                                                |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      | (双唇音)<TPopupPujNoAccent puj=-ue0 />, (其他音)<TPopupPujNoAccent puj=-oi0 />     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | (双唇音)<TPopupPujNoAccent puj=-uenn0 />, (其他音)<TPopupPujNoAccent puj=-oinn0 /> |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     | (双唇音)<TPopupPujNoAccent puj=-ueh0 />, (其他音)<TPopupPujNoAccent puj=-oih0 />   |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                              |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                                |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                                |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                                |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />              |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                              |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurng0 />                                              |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />            |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />              |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />              |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                                |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 />            |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 />            |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                                |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                                |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                                |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />         |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=mu- />(阳声韵)                                            |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  |                                                                                |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=l- />                                                  |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                  |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                |
 
 @tab 澄海
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                                                  |
 |---------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                                       |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                                                      |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                                                      |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    |                                                                                                      |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                                                      |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                                                    |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                                                      |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> | <TPopupPuj noAccent puj=-ie0 />, <TPopupPuj noAccent puj=-ienn0 />, <TPopupPuj noAccent puj=-ieh0 /> |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  | <TPopupPuj noAccent puj=-iou0 />, <TPopupPuj noAccent puj=-iouh0 />                                  |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                                                      |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                                                      |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />                                    |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                                                    |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />                                  |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />                                    |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />                                    |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 />                                  |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 />                                  |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 />                                  |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 />                                  |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPuj noAccent puj=-eng0 />, (其他音)<TPopupPuj noAccent puj=-uang0 />                        |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uak0 />                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                                                |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />                               |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                       |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                      |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                                        |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               | <TPopupPuj noAccent puj=n- />                                                                        |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                                       |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                                                      |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                                                      |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    |                                                                                                      |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                                                      |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                                                    |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                                                      |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> | <TPopupPujNoAccent puj=-ie0 />, <TPopupPujNoAccent puj=-ienn0 />, <TPopupPujNoAccent puj=-ieh0 /> |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  | <TPopupPujNoAccent puj=-iou0 />, <TPopupPujNoAccent puj=-iouh0 />                                  |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                                                      |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                                                      |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                    |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                    |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurng0 />                                                                    |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />                                  |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />                                    |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />                                    |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />                                    |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 />                                  |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 />                                  |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 />                                  |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 />                                  |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPujNoAccent puj=-eng0 />, (其他音)<TPopupPujNoAccent puj=-uang0 />                        |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     | <TPopupPujNoAccent puj=-uak0 />                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPujNoAccent puj=-ung0 />                                                                |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                               |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                                      |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                                       |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                      |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                                        |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               | <TPopupPujNoAccent puj=n- />                                                                        |
 
 @tab 汕头
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                           |
 |---------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                               |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                                |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                               |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                               |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    |                                                                               |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                               |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uinn0 />                                             |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                               |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                               |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  | <TPopupPuj noAccent puj=-iou0 />, <TPopupPuj noAccent puj=-iouh0 />           |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                               |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                               |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                               |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />             |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                             |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                             |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />  <TPopupPuj noAccent puj=-urk0 />           |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />             |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                               |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />             |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                               |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 />           |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 />           |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 />           |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPuj noAccent puj=-eng0 />, (其他音)<TPopupPuj noAccent puj=-uang0 /> |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-uak0 />                                              |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPuj noAccent puj=-ung0 />                                         |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | (齿龈音)<TPopupPuj noAccent puj=-ong0 />, <TPopupPuj noAccent puj=-ok0 />        |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                               |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                               |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                                 |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                               |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                               |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                                |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                               |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                               |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    |                                                                               |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                               |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uinn0 />                                             |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                               |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                               |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  | <TPopupPujNoAccent puj=-iou0 />, <TPopupPujNoAccent puj=-iouh0 />           |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                               |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                               |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                               |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />             |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                             |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurng0 />                                             |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />           |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />             |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                               |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />             |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                               |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 />           |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 />           |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 />           |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    | (零声母)<TPopupPujNoAccent puj=-eng0 />, (其他音)<TPopupPujNoAccent puj=-uang0 /> |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     | <TPopupPujNoAccent puj=-uak0 />                                              |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 | (双唇音)<TPopupPujNoAccent puj=-ung0 />                                         |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />        |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                               |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                               |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                                 |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                               |
 
 @tab 揭阳
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                 |
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                     |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                      |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                     |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | <TPopupPuj noAccent puj=-ainn0 />                                   |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                     |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uainn0 />                                  |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                     |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                     |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                     |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                     |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />   |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-eng0 />                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=heng0 />                                    |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />   |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                     |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 /> |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                     |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 /> |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPuj noAccent puj=l- />                                       |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                     |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                      |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                     |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | <TPopupPujNoAccent puj=-ainn0 />                                   |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                     |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uainn0 />                                  |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                     |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                     |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                     |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                     |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                     |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                     |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-eng0 />                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=heng0 />                                    |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />   |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                     |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />   |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                     |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 /> |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                     |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 /> |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                     |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                      |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           | <TPopupPujNoAccent puj=l- />                                       |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
 
 @tab 潮阳
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                 |
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      | <TPopupPuj noAccent puj=-u0 />                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                      |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                     |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | <TPopupPuj noAccent puj=-ainn0 />                                   |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                     |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uainn0 />                                  |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                     |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                     |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                     |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                     |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                     |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 /> |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                     |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 /> |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      | <TPopupPujNoAccent puj=-u0 />                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                      |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                     |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | <TPopupPujNoAccent puj=-ainn0 />                                   |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                     |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uainn0 />                                  |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                     |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                     |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                     |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                     |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                     |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                     |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                     |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />   |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                     |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 /> |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                     |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 /> |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                     |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                      |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
 
 @tab 普宁
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                 |
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      |                                                                     |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                      |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                     |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | <TPopupPuj noAccent puj=-ainn0 />                                   |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                     |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uainn0 />                                  |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                     |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                     |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                     |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                     |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                     |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 /> |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                     |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 /> |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  |                                                                     |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      |                                                                     |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                      |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                     |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | <TPopupPujNoAccent puj=-ainn0 />                                   |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                     |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uainn0 />                                  |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                     |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                     |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                     |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                     |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                     |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                     |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                     |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />   |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                     |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 /> |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                     |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 /> |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                     |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  |                                                                     |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
 
 @tab 惠来
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                 |
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      | <TPopupPuj noAccent puj=-u0 />                                      |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-o0 />                                      |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                     |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                     |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | <TPopupPuj noAccent puj=-ainn0 />                                   |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                     |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uainn0 />                                  |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      |                                                                     |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                     |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                     |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> |                                                                     |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    |                                                                     |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                     |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-ing0 />                                    |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hing0 />                                    |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ik0 />   |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uk0 />   |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                     |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ak0 />   |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                     |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iak0 /> |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                     |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uak0 /> |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                     |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     |                                                                     |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                     |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             |                                                                     |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                      |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      | <TPopupPujNoAccent puj=-u0 />                                      |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-o0 />                                      |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                     |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                     |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | <TPopupPujNoAccent puj=-ainn0 />                                   |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                     |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uainn0 />                                  |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      |                                                                     |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                     |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                     |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> |                                                                     |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    |                                                                     |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                     |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                    |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hing0 />                                    |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                     |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />   |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                     |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iak0 /> |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                     |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uak0 /> |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                     |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     |                                                                     |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                     |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             |                                                                     |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                     |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                      |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                     |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                     |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                     |
 
 @tab 陆丰
 
 | 例字      | 辞典标准音                                                                                                | 转读音                                                                                                     |
 |---------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| 余       | <TPopupPuj noAccent puj=-ur0 />                                                                      | <TPopupPuj noAccent puj=-u0 />                                                                          |
-| 退^1^    | <TPopupPuj noAccent puj=-or0 />                                                                      | <TPopupPuj noAccent puj=-e0 />                                                                          |
-| 梳       | <TPopupPuj noAccent puj=-eu0 />                                                                      | <TPopupPuj noAccent puj=-iu0 />                                                                         |
-| 买鞋^2^   | <TPopupPuj noAccent puj=-oi0 />                                                                      |                                                                                                         |
-| 反间      | <TPopupPuj noAccent puj=-oinn0 />                                                                    | <TPopupPuj noAccent puj=-ainn0 />                                                                       |
-| 八狭      | <TPopupPuj noAccent puj=-oih0 />                                                                     |                                                                                                         |
-| 县悬^3^   | <TPopupPuj noAccent puj=-uoinn0 />                                                                   | <TPopupPuj noAccent puj=-uainn0 />                                                                      |
-| 乌       | <TPopupPuj noAccent puj=-ou0 />                                                                      | <TPopupPuj noAccent puj=-au0 />                                                                         |
-| 腰阳药     | <TPopupPuj noAccent puj=-io0 />, <TPopupPuj noAccent puj=-ionn0 />, <TPopupPuj noAccent puj=-ioh0 /> |                                                                                                         |
-| 妖跃^4^   | <TPopupPuj noAccent puj=-iau0 />, <TPopupPuj noAccent puj=-iauh0 />                                  |                                                                                                         |
-| 话关划     | <TPopupPuj noAccent puj=-ue0 />, <TPopupPuj noAccent puj=-uenn0 />, <TPopupPuj noAccent puj=-ueh0 /> | <TPopupPuj noAccent puj=-uei0 />, <TPopupPuj noAccent puj=-ueinn0 />, <TPopupPuj noAccent puj=-ueih0 /> |
-| 英易^5^   | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-ek0 />                                    | <TPopupPuj noAccent puj=-eng0 />, <TPopupPuj noAccent puj=-eh0 />                                       |
-| 音邑      | <TPopupPuj noAccent puj=-im0 />, <TPopupPuj noAccent puj=-ip0 />                                     |                                                                                                         |
-| 因乙      | <TPopupPuj noAccent puj=-in0 />, <TPopupPuj noAccent puj=-it0 />                                     | <TPopupPuj noAccent puj=-ing0 />, <TPopupPuj noAccent puj=-ih0 />                                       |
-| 恩很^6^   | <TPopupPuj noAccent puj=-orn0 />                                                                     | <TPopupPuj noAccent puj=-urng0 />                                                                       |
-| 欣勋      | <TPopupPuj noAccent puj=hurn0 />                                                                     | <TPopupPuj noAccent puj=hurng0 />                                                                       |
-| 隐乞      | <TPopupPuj noAccent puj=-urn0 />, <TPopupPuj noAccent puj=-urt0 />                                   | <TPopupPuj noAccent puj=-urng0 />, <TPopupPuj noAccent puj=-urh0 />                                     |
-| 温熨      | <TPopupPuj noAccent puj=-un0 />, <TPopupPuj noAccent puj=-ut0 />                                     | <TPopupPuj noAccent puj=-ung0 />, <TPopupPuj noAccent puj=-uh0 />                                       |
-| 庵盒      | <TPopupPuj noAccent puj=-am0 />, <TPopupPuj noAccent puj=-ap0 />                                     |                                                                                                         |
-| 安抑      | <TPopupPuj noAccent puj=-an0 />, <TPopupPuj noAccent puj=-at0 />                                     | <TPopupPuj noAccent puj=-ang0 />, <TPopupPuj noAccent puj=-ah0 />                                       |
-| 奄压      | <TPopupPuj noAccent puj=-iam0 />, <TPopupPuj noAccent puj=-iap0 />                                   |                                                                                                         |
-| 嫣设      | <TPopupPuj noAccent puj=-ian0 />, <TPopupPuj noAccent puj=-iat0 />                                   | <TPopupPuj noAccent puj=-iang0 />, <TPopupPuj noAccent puj=-iah0 />                                     |
-| 凡法      | <TPopupPuj noAccent puj=-uam0 />, <TPopupPuj noAccent puj=-uap0 />                                   |                                                                                                         |
-| 弯阅      | <TPopupPuj noAccent puj=-uan0 />, <TPopupPuj noAccent puj=-uat0 />                                   | <TPopupPuj noAccent puj=-uang0 />, <TPopupPuj noAccent puj=-uah0 />                                     |
-| 莹衡      | <TPopupPuj noAccent puj=-ueng0 />                                                                    |                                                                                                         |
-| 获       | <TPopupPuj noAccent puj=-uek0 />                                                                     | <TPopupPuj noAccent puj=-ueh0 />                                                                        |
-| 饭问      | (双唇音)<TPopupPuj noAccent puj=-ng0 />                                                                 |                                                                                                         |
-| 中筑茸辱^7^ | (齿龈音)<TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-iok0 />                             | <TPopupPuj noAccent puj=-iong0 />, <TPopupPuj noAccent puj=-ioh0 />                                     |
-| 万亡文^8^  | <TPopupPuj noAccent puj=bu- />(阳声韵)                                                                  |                                                                                                         |
-| 漫闷      | <TPopupPuj noAccent puj=mu- />(阳声韵)                                                                  | <TPopupPuj noAccent puj=bu- />                                                                          |
-| 男念      | <TPopupPuj noAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                         |
-| 难能      | <TPopupPuj noAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                                                         |
-| 蓝林帘     | <TPopupPuj noAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                         |
+| 余       | <TPopupPujNoAccent puj=-ur0 />                                                                      | <TPopupPujNoAccent puj=-u0 />                                                                          |
+| 退^1^    | <TPopupPujNoAccent puj=-or0 />                                                                      | <TPopupPujNoAccent puj=-e0 />                                                                          |
+| 梳       | <TPopupPujNoAccent puj=-eu0 />                                                                      | <TPopupPujNoAccent puj=-iu0 />                                                                         |
+| 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                      |                                                                                                         |
+| 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                    | <TPopupPujNoAccent puj=-ainn0 />                                                                       |
+| 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                     |                                                                                                         |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                   | <TPopupPujNoAccent puj=-uainn0 />                                                                      |
+| 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                      | <TPopupPujNoAccent puj=-au0 />                                                                         |
+| 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                                                         |
+| 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                  |                                                                                                         |
+| 话关划     | <TPopupPujNoAccent puj=-ue0 />, <TPopupPujNoAccent puj=-uenn0 />, <TPopupPujNoAccent puj=-ueh0 /> | <TPopupPujNoAccent puj=-uei0 />, <TPopupPujNoAccent puj=-ueinn0 />, <TPopupPujNoAccent puj=-ueih0 /> |
+| 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                    | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-eh0 />                                       |
+| 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                     |                                                                                                         |
+| 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                     | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ih0 />                                       |
+| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                                                       |
+| 欣勋      | <TPopupPujNoAccent puj=hurn0 />                                                                     | <TPopupPujNoAccent puj=hurng0 />                                                                       |
+| 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                   | <TPopupPujNoAccent puj=-urng0 />, <TPopupPujNoAccent puj=-urh0 />                                     |
+| 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                     | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uh0 />                                       |
+| 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                     |                                                                                                         |
+| 安抑      | <TPopupPujNoAccent puj=-an0 />, <TPopupPujNoAccent puj=-at0 />                                     | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ah0 />                                       |
+| 奄压      | <TPopupPujNoAccent puj=-iam0 />, <TPopupPujNoAccent puj=-iap0 />                                   |                                                                                                         |
+| 嫣设      | <TPopupPujNoAccent puj=-ian0 />, <TPopupPujNoAccent puj=-iat0 />                                   | <TPopupPujNoAccent puj=-iang0 />, <TPopupPujNoAccent puj=-iah0 />                                     |
+| 凡法      | <TPopupPujNoAccent puj=-uam0 />, <TPopupPujNoAccent puj=-uap0 />                                   |                                                                                                         |
+| 弯阅      | <TPopupPujNoAccent puj=-uan0 />, <TPopupPujNoAccent puj=-uat0 />                                   | <TPopupPujNoAccent puj=-uang0 />, <TPopupPujNoAccent puj=-uah0 />                                     |
+| 莹衡      | <TPopupPujNoAccent puj=-ueng0 />                                                                    |                                                                                                         |
+| 获       | <TPopupPujNoAccent puj=-uek0 />                                                                     | <TPopupPujNoAccent puj=-ueh0 />                                                                        |
+| 饭问      | (双唇音)<TPopupPujNoAccent puj=-ng0 />                                                                 |                                                                                                         |
+| 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                             | <TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-ioh0 />                                     |
+| 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                  |                                                                                                         |
+| 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                  | <TPopupPujNoAccent puj=bu- />                                                                          |
+| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                               |                                                                                                         |
+| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                           |                                                                                                         |
+| 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                               |                                                                                                         |
 
 :::
 
@@ -778,44 +775,44 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 1. 该韵母在今天潮州话中仅有少数地区保留，详见[单元音](#单元音)一节的讨论。
 
 2. 为了音系的系统性，本辞典将蟹、山、咸摄二、四等字白读层这些对应韵母的元音部分都记为
-   oi，即 <TPopupPuj noAccent puj=-oi /> <TPopupPuj noAccent puj=-oinn /> <TPopupPuj noAccent puj=-oih />。需要注意的是，阳声韵鼻化后的 <TPopupPuj noAccent puj=-oinn /> 和 <TPopupPuj noAccent puj=-ainn /> 各地是一一对应的，但是，由于潮州话出现一些阴声韵鼻化的现象，-oi,
-   -ai 的鼻化后，元音依然保持不变，例如：爱 <TPopupPuj noAccent puj="ainn3"/>，各地均读为 <TPopupPuj noAccent puj="ainn3"/>；
-   睇 <TPopupPuj noAccent puj="thoinn2"/>，各地均读为 <TPopupPuj noAccent puj="thoinn2"/>，并不需要转读。
+   oi，即 <TPopupPujNoAccent puj=-oi /> <TPopupPujNoAccent puj=-oinn /> <TPopupPujNoAccent puj=-oih />。需要注意的是，阳声韵鼻化后的 <TPopupPujNoAccent puj=-oinn /> 和 <TPopupPujNoAccent puj=-ainn /> 各地是一一对应的，但是，由于潮州话出现一些阴声韵鼻化的现象，-oi,
+   -ai 的鼻化后，元音依然保持不变，例如：爱 <TPopupPujNoAccent puj="ainn3"/>，各地均读为 <TPopupPujNoAccent puj="ainn3"/>；
+   睇 <TPopupPujNoAccent puj="thoinn2"/>，各地均读为 <TPopupPujNoAccent puj="thoinn2"/>，并不需要转读。
 3. 该韵母有且仅有三个辖字：
-   县 <TPopupPuj noAccent puj="kuoinn7"/>、
-   悬 <TPopupPuj noAccent puj="kuoinn5"/>（形容词，高）、悬 <TPopupPuj noAccent puj="huoinn5"/>（动词，挂）、惯 <TPopupPuj noAccent puj="kuoinn3"/>（用于“惯势”一词，习惯），
-   在西南部多转读为 <TPopupPuj noAccent puj=-uainn />，在东北部多转读为 <TPopupPuj noAccent puj=-uinn />。
-   该韵母来自山摄合口字白读层，为了音系的系统性，与开口字的 <TPopupPuj noAccent puj=-oinn /> 一组相对应，本辞典中记为 <TPopupPuj noAccent puj=-uoinn />。
-4. 在 <TPopupPuj noAccent puj=-iau /> <TPopupPuj noAccent puj=-iauh0 /> <TPopupPuj noAccent puj=-iam /> <TPopupPuj noAccent puj=-iap0 /> <TPopupPuj noAccent puj=-ian /> <TPopupPuj noAccent puj=-iat0 /> 等韵母中，元音 a 受韵尾的影响，各地发生不同程度的变化。
-   例如 <TPopupPuj noAccent puj=-iam /> 中的 a 在潮州等地的高化为 [ɜ]/[ɤ]，
-   在 <TPopupPuj noAccent puj=-ian /> 中又进一步前化为 [e]；
-   而 <TPopupPuj noAccent puj=-iau /> 中的 a 在澄海等地则进一步圆唇化为 [o]。
-5. 韵母 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 来自曾、梗摄文读音，
-   泉漳片闽南语各地基本读为 <TPopupPuj noAccent puj=-ing /> <TPopupPuj noAccent puj=-ik0 />，
-   丰顺（𨻧隍）地区读为 <TPopupPuj noAccent puj=-en /> <TPopupPuj noAccent puj=-et0 /> 有可能是受客语音系的影响，有待进一步考究。
-   潮州话中该韵母的开口度更大，因而大部分地区在 -n/-t 韵尾混入 -ng/-k 后，会形成 <TPopupPuj noAccent puj=-ing /> <TPopupPuj noAccent puj=-ik0 /> 和 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 的对立。
-   因此，本辞典中不选择与泉漳片一样将 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 韵母记为 <TPopupPuj noAccent puj=-ing /> <TPopupPuj noAccent puj=-ik0 />。
-   不过，在唱戏、讲古等创作中，<TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 和 <TPopupPuj noAccent puj=-in /> <TPopupPuj noAccent puj=-it0 /> 韵母的韵腹也可以都读为 [ɪ] 并进行押韵。
-   揭阳地区的 <TPopupPuj noAccent puj=-in /> <TPopupPuj noAccent puj=-it0 /> 转为 <TPopupPuj noAccent puj=-eng /> <TPopupPuj noAccent puj=-ek0 /> 实际上音质也接近于 [ɪ] 音。
-6. 臻摄开口一等痕韵、三等欣韵，在多数地区没有区别，例如汕头同读 <TPopupPuj noAccent puj=urng0 />，揭阳同读 <TPopupPuj noAccent puj=eng0 />。
-   但是，在潮州府城，声母 h 之后痕韵读 <TPopupPuj noAccent puj=hurng0 />，欣韵读 <TPopupPuj noAccent puj=hng0 />。
-   标准音分别以 <TPopupPuj noAccent puj=orn0 /> 和 <TPopupPuj noAccent puj=urn0 /> 记录痕韵和欣韵，实际上，元音的开口大小在今天各地均不形成对立，该记法仅为区分 <TPopupPuj noAccent puj=horn0 /> 和 <TPopupPuj noAccent puj=hurn0 /> 两个音节在潮州的不同音变规则。
-   记录时区分方式并不复杂，简单而言，普通话中读 en [ɤn] 且潮州话读 [ɯn]/[ən] 的，为痕韵 <TPopupPuj noAccent puj=orn0 />；普通话中读 in [in] 且潮州话读 [ɯn]/[ən] 的，为欣韵 <TPopupPuj noAccent puj=urn0 />。
-   各地的口音中，为了方便起见，统一将 <TPopupPuj noAccent puj=orn0 /> 转读为 <TPopupPuj noAccent puj=urn0 />。
-7. 通摄三等字文读音韵母为 <TPopupPuj noAccent puj=-iong />, <TPopupPuj noAccent puj=-iok0 />，当接在齿龈音后时，
-   包括三市市中心在内的东北部多数地区都读为 <TPopupPuj noAccent puj=-ong />, <TPopupPuj noAccent puj=-ok />，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i——这是潮普小片或练江腔的标志性读音。
-   例如：中 <TPopupPuj noAccent puj="tiong1"/>，宠 <TPopupPuj noAccent puj="thiong2"/>，龙 <TPopupPuj noAccent puj="liong5"/>，终 <TPopupPuj noAccent puj="tsiong1"/>，
-   从 <TPopupPuj noAccent puj="tshiong5"/>，松 <TPopupPuj noAccent puj="siong1"/>，茸 <TPopupPuj noAccent puj="jiong5"/>，
-   筑 <TPopupPuj noAccent puj="tiok4"/>，六 <TPopupPuj noAccent puj="liok8"/>，属 <TPopupPuj noAccent puj="siok8"/>，辱 <TPopupPuj noAccent puj="jiok8"/>。
-   但有且仅有一组例外：<TPopupPuj noAccent puj="thiok"/> 的辖字（“畜”“蓄”“慉”“搐”等）在东北部地区依然保留介音 i。  
-   另外值得一提的是，近年来在潮州湘桥、澄海盐鸿等老派依然保留闭口韵尾的地区，出现了一种丢失闭口韵尾的新派读法 <TPopupPuj noAccent puj="-iam"/> > <TPopupPuj noAccent puj="-iorm"/> > <TPopupPuj noAccent puj="-iong"/>, <TPopupPuj noAccent puj="-iap0"/> > <TPopupPuj noAccent puj="-iorp0"/> > <TPopupPuj noAccent puj="-iok0"/>，因 [a] 元音在介音和韵尾双重影响下实际音值接近 [ə]，而丢失闭口韵后不稳定的中央元音 [ə] 与现有音系中的 [o] 合流，因此，出现了 <TPopupPuj noAccent puj=-iong />, <TPopupPuj noAccent puj=-iok0 /> 的新音节，例如：
-   严 <TPopupPuj noAccent puj="ngiam5"/> > <TPopupPuj noAccent puj="ngiong5"/>，
-   点 <TPopupPuj noAccent puj="tiam2"/> > <TPopupPuj noAccent puj="tiong2"/>，
-   粒 <TPopupPuj noAccent puj="liap8"/> > <TPopupPuj noAccent puj="liok8"/>，
-   森 <TPopupPuj noAccent puj="siam1"/> > <TPopupPuj noAccent puj="siong1"/>，
-   尖 <TPopupPuj noAccent puj="tsiam1"/> > <TPopupPuj noAccent puj="tsiong1"/>，
+   县 <TPopupPujNoAccent puj="kuoinn7"/>、
+   悬 <TPopupPujNoAccent puj="kuoinn5"/>（形容词，高）、悬 <TPopupPujNoAccent puj="huoinn5"/>（动词，挂）、惯 <TPopupPujNoAccent puj="kuoinn3"/>（用于“惯势”一词，习惯），
+   在西南部多转读为 <TPopupPujNoAccent puj=-uainn />，在东北部多转读为 <TPopupPujNoAccent puj=-uinn />。
+   该韵母来自山摄合口字白读层，为了音系的系统性，与开口字的 <TPopupPujNoAccent puj=-oinn /> 一组相对应，本辞典中记为 <TPopupPujNoAccent puj=-uoinn />。
+4. 在 <TPopupPujNoAccent puj=-iau /> <TPopupPujNoAccent puj=-iauh0 /> <TPopupPujNoAccent puj=-iam /> <TPopupPujNoAccent puj=-iap0 /> <TPopupPujNoAccent puj=-ian /> <TPopupPujNoAccent puj=-iat0 /> 等韵母中，元音 a 受韵尾的影响，各地发生不同程度的变化。
+   例如 <TPopupPujNoAccent puj=-iam /> 中的 a 在潮州等地的高化为 [ɜ]/[ɤ]，
+   在 <TPopupPujNoAccent puj=-ian /> 中又进一步前化为 [e]；
+   而 <TPopupPujNoAccent puj=-iau /> 中的 a 在澄海等地则进一步圆唇化为 [o]。
+5. 韵母 <TPopupPujNoAccent puj=-eng /> <TPopupPujNoAccent puj=-ek0 /> 来自曾、梗摄文读音，
+   泉漳片闽南语各地基本读为 <TPopupPujNoAccent puj=-ing /> <TPopupPujNoAccent puj=-ik0 />，
+   丰顺（𨻧隍）地区读为 <TPopupPujNoAccent puj=-en /> <TPopupPujNoAccent puj=-et0 /> 有可能是受客语音系的影响，有待进一步考究。
+   潮州话中该韵母的开口度更大，因而大部分地区在 -n/-t 韵尾混入 -ng/-k 后，会形成 <TPopupPujNoAccent puj=-ing /> <TPopupPujNoAccent puj=-ik0 /> 和 <TPopupPujNoAccent puj=-eng /> <TPopupPujNoAccent puj=-ek0 /> 的对立。
+   因此，本辞典中不选择与泉漳片一样将 <TPopupPujNoAccent puj=-eng /> <TPopupPujNoAccent puj=-ek0 /> 韵母记为 <TPopupPujNoAccent puj=-ing /> <TPopupPujNoAccent puj=-ik0 />。
+   不过，在唱戏、讲古等创作中，<TPopupPujNoAccent puj=-eng /> <TPopupPujNoAccent puj=-ek0 /> 和 <TPopupPujNoAccent puj=-in /> <TPopupPujNoAccent puj=-it0 /> 韵母的韵腹也可以都读为 [ɪ] 并进行押韵。
+   揭阳地区的 <TPopupPujNoAccent puj=-in /> <TPopupPujNoAccent puj=-it0 /> 转为 <TPopupPujNoAccent puj=-eng /> <TPopupPujNoAccent puj=-ek0 /> 实际上音质也接近于 [ɪ] 音。
+6. 臻摄开口一等痕韵、三等欣韵，在多数地区没有区别，例如汕头同读 <TPopupPujNoAccent puj=urng0 />，揭阳同读 <TPopupPujNoAccent puj=eng0 />。
+   但是，在潮州府城，声母 h 之后痕韵读 <TPopupPujNoAccent puj=hurng0 />，欣韵读 <TPopupPujNoAccent puj=hng0 />。
+   标准音分别以 <TPopupPujNoAccent puj=orn0 /> 和 <TPopupPujNoAccent puj=urn0 /> 记录痕韵和欣韵，实际上，元音的开口大小在今天各地均不形成对立，该记法仅为区分 <TPopupPujNoAccent puj=horn0 /> 和 <TPopupPujNoAccent puj=hurn0 /> 两个音节在潮州的不同音变规则。
+   记录时区分方式并不复杂，简单而言，普通话中读 en [ɤn] 且潮州话读 [ɯn]/[ən] 的，为痕韵 <TPopupPujNoAccent puj=orn0 />；普通话中读 in [in] 且潮州话读 [ɯn]/[ən] 的，为欣韵 <TPopupPujNoAccent puj=urn0 />。
+   各地的口音中，为了方便起见，统一将 <TPopupPujNoAccent puj=orn0 /> 转读为 <TPopupPujNoAccent puj=urn0 />。
+7. 通摄三等字文读音韵母为 <TPopupPujNoAccent puj=-iong />, <TPopupPujNoAccent puj=-iok0 />，当接在齿龈音后时，
+   包括三市市中心在内的东北部多数地区都读为 <TPopupPujNoAccent puj=-ong />, <TPopupPujNoAccent puj=-ok />，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i——这是潮普小片或练江腔的标志性读音。
+   例如：中 <TPopupPujNoAccent puj="tiong1"/>，宠 <TPopupPujNoAccent puj="thiong2"/>，龙 <TPopupPujNoAccent puj="liong5"/>，终 <TPopupPujNoAccent puj="tsiong1"/>，
+   从 <TPopupPujNoAccent puj="tshiong5"/>，松 <TPopupPujNoAccent puj="siong1"/>，茸 <TPopupPujNoAccent puj="jiong5"/>，
+   筑 <TPopupPujNoAccent puj="tiok4"/>，六 <TPopupPujNoAccent puj="liok8"/>，属 <TPopupPujNoAccent puj="siok8"/>，辱 <TPopupPujNoAccent puj="jiok8"/>。
+   但有且仅有一组例外：<TPopupPujNoAccent puj="thiok"/> 的辖字（“畜”“蓄”“慉”“搐”等）在东北部地区依然保留介音 i。  
+   另外值得一提的是，近年来在潮州湘桥、澄海盐鸿等老派依然保留闭口韵尾的地区，出现了一种丢失闭口韵尾的新派读法 <TPopupPujNoAccent puj="-iam"/> > <TPopupPujNoAccent puj="-iorm"/> > <TPopupPujNoAccent puj="-iong"/>, <TPopupPujNoAccent puj="-iap0"/> > <TPopupPujNoAccent puj="-iorp0"/> > <TPopupPujNoAccent puj="-iok0"/>，因 [a] 元音在介音和韵尾双重影响下实际音值接近 [ə]，而丢失闭口韵后不稳定的中央元音 [ə] 与现有音系中的 [o] 合流，因此，出现了 <TPopupPujNoAccent puj=-iong />, <TPopupPujNoAccent puj=-iok0 /> 的新音节，例如：
+   严 <TPopupPujNoAccent puj="ngiam5"/> > <TPopupPujNoAccent puj="ngiong5"/>，
+   点 <TPopupPujNoAccent puj="tiam2"/> > <TPopupPujNoAccent puj="tiong2"/>，
+   粒 <TPopupPujNoAccent puj="liap8"/> > <TPopupPujNoAccent puj="liok8"/>，
+   森 <TPopupPujNoAccent puj="siam1"/> > <TPopupPujNoAccent puj="siong1"/>，
+   尖 <TPopupPujNoAccent puj="tsiam1"/> > <TPopupPujNoAccent puj="tsiong1"/>，
    这种模式下产生的介音 i，并非源于中古通摄三等字，不遵循在齿龈音后丢失介音的规则。
-8. 微母文读音接阳声韵时，在多数地区读 <TPopupPuj noAccent puj=bu- />，但在饶平（黄冈）一律读为 <TPopupPuj noAccent puj=mu- />，而阴声韵和入声韵则与其他地区相同。
+8. 微母文读音接阳声韵时，在多数地区读 <TPopupPujNoAccent puj=bu- />，但在饶平（黄冈）一律读为 <TPopupPujNoAccent puj=mu- />，而阴声韵和入声韵则与其他地区相同。
 9. 潮剧戏腔要求字正腔圆，整体发音接近于未丢失闭口韵的澄海口音，但偶尔会引入来自其他地区的一些口音进行艺术化处理。
    戏腔中，-n/-t 韵尾与 -ng/-k 韵尾一般不要求区分，是否保留 -n/-t
    取决于演员个人的发音习惯（例如方展荣老师的唱词就保留了 -n/-t），但 -m/-p 韵尾一定会保留。
