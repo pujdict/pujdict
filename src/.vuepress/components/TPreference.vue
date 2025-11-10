@@ -157,7 +157,7 @@ import {
   getLocalOptionList,
 } from "./SUtils.js";
 import {createVNode, render} from "vue";
-import TPopupPuj from "./TPopupPuj.vue";
+import TPopupPujNoAccent from "./TPopupPujNoAccent.vue";
 
 export default {
   data() {
@@ -221,7 +221,7 @@ export default {
       const elements = document.querySelectorAll('[data-fuzzy-desc-puj]');
       for (const element of elements) {
         const content = element.getAttribute('data-fuzzy-desc-puj');
-        const vNode = createVNode(TPopupPuj, {puj: content, noAccent: true});
+        const vNode = createVNode(TPopupPujNoAccent, {puj: content});
         const span = document.createElement('span');
         render(vNode, span);
         element.replaceWith(span);
