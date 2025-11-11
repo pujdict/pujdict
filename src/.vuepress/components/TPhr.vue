@@ -266,14 +266,14 @@ class PreprocessedPhraseUnitChars extends PreprocessedPhraseUnit {
     for (const charsList of possibleChars) {
       let i = curI;
       let thisI = 0;
-      let allMatched = true;
       for (; i < charsList.length && thisI < teochew.length; ++i, ++thisI) {
-        if (charsList[i] !== teochew[thisI]) {
-          allMatched = false;
-          break;
+        const teochewChar = teochew[thisI];
+        for (const entryIndex of db.entriesCharMap.get(teochewChar) ?? []) {
+          if (charsList[i] === db.entries[entryIndex].char || charsList[i] === db.entries[entryIndex].charSim) {
+            return true;
+          }
         }
       }
-      if (allMatched) return true;
     }
     return false;
   }
