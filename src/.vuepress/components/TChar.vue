@@ -28,7 +28,7 @@
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
-                <h4 class="mb-1 me-2">{{ result.entry.charSim }}</h4>
+                <h4 class="mb-1 me-2" style="font-weight: normal">{{ result.entry.charSim }}</h4>
                 <span class="text-muted me-2"
                       v-if="result.entry.charSim !== result.entry.char">({{ result.entry.char }})</span>
                 <span class="text-muted me-2" v-if="result.entry.charRef">[{{ result.entry.charRef }}]</span>

@@ -77,7 +77,7 @@
               <span class="query-result-entry" v-for="entry in toneItem">
                 <a target="_blank" :class="`query-result-entry-${entry.cat} list-group-item-action`"
                    :href="withBase('query/qchar.html?chars=' + entry.char)">
-                  <span>{{ entry.charSim }}</span>
+                  <span style="font-weight: normal">{{ entry.charSim }}</span>
                   <span v-if="entry.charSim !== entry.char" style="font-size: 0.85em">({{ entry.char }})</span>
                 </a>
               </span>
