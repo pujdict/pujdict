@@ -124,6 +124,7 @@ const $ = jquery;
 export default {
   data() {
     return {
+      queryParamListener: null,
       pinyinList: [
         {
           key: "puj",
@@ -280,7 +281,7 @@ export default {
         }
       }
     },
-    async initialSelectFromGetParameters() {
+    async initialSelectFromGetParameters(pushHistory: boolean = true) {
       // components using url components string
       let searchParams = new URLSearchParams(window.location.search);
       let queryFuzzy = searchParams.get("fuzzy");
@@ -315,12 +316,12 @@ export default {
             this.selectedTones.push(queryTones[i]);
           }
         }
-        await this.queryDatabase();
+        await this.queryDatabase(pushHistory);
       } else {
         this.initializeFuzzyRulesMap(this.selectedFuzzyQueryKey);
       }
     },
-    async queryDatabase() {
+    async queryDatabase(pushHistory: boolean) {
       if (db === null) {
         alert("数据库尚未加载完成，请稍后再试。");
         return;
@@ -330,7 +331,9 @@ export default {
       let resultEntries = [];
       let accentId = this.selectedFuzzyQueryKey;
 
-      this.setUrlQueryParameterPron(accentId, ...this.getQueryConditionList(false));
+      if (pushHistory) {
+        this.setUrlQueryParameterPron(accentId, ...this.getQueryConditionList(false));
+      }
       let [queryInitials, queryFinals, queryTones, queryAll] = this.getQueryConditionList(true);
       // append to url
       if (queryAll) { // quick components all
@@ -350,23 +353,24 @@ export default {
       this.showQueryResultList(resultEntries);
       setLoading(false);
     },
-    resetQuery() {
+    resetQuery(pushHistory: boolean = true) {
       this.selectedInitials = [];
       this.selectedFinals = [];
       this.selectedTones = [];
-      this.resetUrlQueryParameterPron();
+      if (pushHistory) {
+        this.resetUrlQueryParameterPron();
+      }
     },
     resetUrlQueryParameterPron() {
-      resetUrlQueryParameter("fuzzy");
-      resetUrlQueryParameter("initials");
-      resetUrlQueryParameter("finals");
-      resetUrlQueryParameter("tones");
+      resetUrlQueryParameter(["fuzzy", "initials", "finals", "tones"]);
     },
     setUrlQueryParameterPron(queryFuzzy, queryInitials, queryFinals, queryTones) {
-      setUrlQueryParameter("fuzzy", queryFuzzy);
-      setUrlQueryParameter("initials", [...queryInitials].sort().join(","));
-      setUrlQueryParameter("finals", [...queryFinals].sort().join(","));
-      setUrlQueryParameter("tones", [...queryTones].sort().join(","));
+      setUrlQueryParameter({
+        "fuzzy": queryFuzzy,
+        "initials": [...queryInitials].sort().join(","),
+        "finals": [...queryFinals].sort().join(","),
+        "tones": [...queryTones].sort().join(","),
+      });
     },
     showQueryResultList(resultEntries) {
       this.queryResultEmpty = resultEntries.length === 0;
@@ -434,11 +438,21 @@ export default {
     $("#query-button").click(function () {
       this.blur();
     });
-    initFromDatabase().then(() => {
-      setLoading(false);
-    })
+    initFromDatabase()
+        .then(() => setLoading(false))
         .then(this.initializeAccents)
-        .then(this.initialSelectFromGetParameters);
+        .then(this.initialSelectFromGetParameters)
+        .then(() => {
+          if (!this.queryParamListener) {
+            const pathname = window.location.pathname;
+            window.addEventListener("popstate", this.queryParamListener = () => {
+              if (window.location.pathname === pathname) {
+                this.resetQuery(false);
+                this.initialSelectFromGetParameters(false);
+              }
+            });
+          }
+        });
   }
 }
 </script>

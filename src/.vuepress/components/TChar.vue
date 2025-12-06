@@ -97,6 +97,7 @@ const $ = jquery;
 export default {
   data() {
     return {
+      queryParamListener: null,
       queryInput: '',
       queryResult: {},
       queryResultEmpty: undefined,
@@ -107,7 +108,7 @@ export default {
     // remove all non-Chinese characters
     queryInput(newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.queryInput = newVal.split('').filter(isChineseChar).join('');
+        this.queryInput = [...newVal].filter(isChineseChar).join('');
       }
     }
   },
@@ -161,7 +162,7 @@ export default {
       });
       return result;
     },
-    queryEntries() {
+    queryEntries(pushHistory: boolean = true) {
       let charsInput = this.queryInput;
       let chars = [...charsInput];
       // remove all non-Chinese characters
@@ -176,26 +177,39 @@ export default {
         //  $("#query-result").append(makeEntryArea(entry));
         //});
         setLoading(false);
-        setUrlQueryParameter("chars", charsInput);
+        if (pushHistory) {
+          setUrlQueryParameter({"chars": charsInput});
+        }
       }
     },
     resetQuery() {
       this.queryInput = '';
-      resetUrlQueryParameter("chars");
+      resetUrlQueryParameter(["chars"]);
     },
-    onInitFromDatabaseFinished() {
-      setLoading(false);
+    onInitFromDatabaseFinished(pushHistory: boolean = true) {
       // get the GET parameter in url
       let searchParams = new URLSearchParams(window.location.search);
       let query = searchParams.get("chars");
       if (query !== null) {
         this.queryInput = query;
-        this.queryEntries();
+        this.queryEntries(pushHistory);
       }
     },
   },
   mounted() {
-    initFromDatabase().then(this.onInitFromDatabaseFinished);
+    initFromDatabase()
+        .then(() => setLoading(false))
+        .then(this.onInitFromDatabaseFinished)
+        .then(() => {
+          if (!this.queryParamListener) {
+            const pathname = window.location.pathname;
+            window.addEventListener("popstate", this.queryParamListener = () => {
+              if (window.location.pathname === pathname) {
+                this.onInitFromDatabaseFinished(false);
+              }
+            });
+          }
+        });
 
     $("#reset-button").click(function () {
       this.blur();

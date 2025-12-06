@@ -22,8 +22,6 @@ import {
   setLocalOption,
   getLocalOption,
   getLocalOptionList,
-  setUrlQueryParameter,
-  resetUrlQueryParameter,
   isChineseChar,
 } from "./SUtils.js";
 
@@ -416,6 +414,35 @@ function setLoading(loading) {
     $("#reset-button")?.removeAttr("disabled");
     $("#query-button")?.removeAttr("disabled");
   }
+}
+
+function setUrlQueryParameter(kv: {}) {
+  let url = new URL(window.location.href);
+  for (const [key, value] of Object.entries(kv)) {
+    url.searchParams.set(key, value);
+  }
+  let newState = structuredClone(history.state);
+  let urlStr = newState.current;
+  if (urlStr) {
+    // replace the query parameter or add the new parameter
+    urlStr = url.pathname + url.search;
+    newState.current = urlStr;
+  }
+  history.pushState(newState, "", url);
+}
+
+function resetUrlQueryParameter(ks: string[]) {
+  let url = new URL(window.location.href);
+  for (const key of ks)
+    url.searchParams.delete(key);
+  let newState = structuredClone(history.state);
+  let urlStr = newState.current;
+  if (urlStr) {
+    // replace the query parameter or add the new parameter
+    urlStr = url.pathname + url.search;
+    newState.current = urlStr;
+  }
+  history.pushState(newState, "", url);
 }
 
 export {

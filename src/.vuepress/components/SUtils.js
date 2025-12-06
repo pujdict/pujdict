@@ -49,18 +49,6 @@ function getLocalOptionList(optionName, $default = []) {
   return str.split(';');
 }
 
-function setUrlQueryParameter(key, value) {
-  let url = new URL(window.location.href);
-  url.searchParams.set(key, value);
-  window.history.replaceState({}, "", url);
-}
-
-function resetUrlQueryParameter(key) {
-  let url = new URL(window.location.href);
-  url.searchParams.delete(key);
-  window.history.replaceState({}, "", url);
-}
-
 const ChineseCharRegex = /\p{Script=Han}/us;
 const ChineseCharRegexGlobal = /\p{Script=Han}/usg;
 function isChineseChar(c) {
@@ -85,8 +73,6 @@ function isChineseChar(c) {
 
 export {
   DefaultLocalOptions,
-  setUrlQueryParameter,
-  resetUrlQueryParameter,
   getLocalOption,
   getLocalOptionList,
   setLocalOption,
