@@ -188,8 +188,10 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
   // TODO
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
     let ipaPron = convertPUJPronunciationToIPAPronunciation(pron);
-    let accentTones;
-    let ipaTone = convertToneValueToToneLetters(fuzzyRule.accentTones, isSandhi, isNeutral);
+    let accentTones = fuzzyRule.accentTones.citation;
+    if (isSandhi)
+      accentTones = fuzzyRule.accentTones.sandhi;
+    let ipaTone = convertToneValueToToneLetters(accentTones[ipaPron.tone - 1], isSandhi, isNeutral);
     return `${ipaPron.initial}${ipaPron.final} ${ipaTone}`;
   });
 }
@@ -652,12 +654,14 @@ const PUJFinalToXSAMPAMap = {
   'a': 'a',
   'o': 'o',
   'ur': 'M',
+  'ir': 'M',
   'or': '@',
+  'er': '@',
   'e': 'e',
   'i': 'i',
   'u': 'u',
 
-  'nn': '~',
+  // 'nn': '~',
   'ng': 'N',
   'n': 'n',
   'm': 'm',
@@ -672,17 +676,29 @@ function convertPUJPronunciationToXSAMPAPronunciation(pronunciation) {
     pronunciation.initial.toLowerCase(), pronunciation.final.toLowerCase(), pronunciation.tone);
   result.initial = PUJInitialToXSAMPAMap[result.initial] ?? result.initial;
   result.final = result.final.replace("'", '');
+  const isNasalized = result.final.endsWith('nn');
+  result.final = result.final.replace('nn', '');
   for (const [key, value] of Object.entries(PUJFinalToXSAMPAMap)) {
     result.final = result.final.replace(key, value);
   }
-  result.tone = '__' + result.tone;
+  if (isNasalized) {
+    let final = '';
+    for (let i = 0; i < result.final.length; i++) {
+      let cur = result.final[i];
+      final += cur;
+      if (cur.match(/[aoM@eiu]/)) {
+        final += '~';
+      }
+    }
+    result.final = final;
+  }
   return result;
 }
 
 function convertXSAMPAToIPAWord(word) {
   for (const x_sampa of XSAMPAList) {
     const ipa = XSAMPAToIPAMap[x_sampa];
-    word = word.replace(x_sampa, ipa);
+    word = word.replaceAll(x_sampa, ipa);
   }
   return word;
 }
@@ -691,7 +707,6 @@ function convertXSAMPAPronunciationToIPAPronunciation(pronunciation) {
   const result = new Pronunciation(pronunciation.initial, pronunciation.final, pronunciation.tone);
   result.initial = convertXSAMPAToIPAWord(result.initial);
   result.final = convertXSAMPAToIPAWord(result.final);
-  result.tone = convertXSAMPAToIPAWord(result.tone);
   return result;
 }
 
@@ -741,7 +756,7 @@ export {
   convertPUJInitialOrFinalToDP,
   convertPlainPUJToPronunciationWord,
   convertPlainPUJSentenceToPUJSentence,
-  // convertPlainPUJSentenceToIPASentence, // TODO
+  convertPlainPUJSentenceToIPASentence, // TODO
   convertPlainPUJSentenceToDPSentence,
   convertPlainPUJSentenceToDisplayPUJInSentence,
   convertDPWordToPronunciation,

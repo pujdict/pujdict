@@ -7,6 +7,7 @@ import {
   forEachWordInSentence,
   convertPlainPUJSentenceToPUJSentence,
   convertPlainPUJSentenceToDPSentence,
+  convertPlainPUJSentenceToIPASentence,
   convertPlainPUJToPronunciationWord, getPronunciationCombination,
 } from "./SPuj.js";
 import {Pronunciation} from "./SCommon.js";
@@ -57,6 +58,7 @@ export default {
       result: '',
       display_puj: '',
       display_dp: '',
+      display_ipa: '',
       display: '',
       perAccentsResult: {},
     };
@@ -83,6 +85,9 @@ export default {
     showDP() {
       return this.customDefaultPinyinDisplay.includes('DP');
     },
+    showIPA() {
+      return this.customDefaultPinyinDisplay.includes('IPA');
+    }
   },
   methods: {
     updateDisplay() {
@@ -90,10 +95,12 @@ export default {
       if (defaultFuzzyRule === 'dummy' || this.noAccent) {
         this.display_puj = convertPlainPUJSentenceToPUJSentence(this.puj);
         this.display_dp = convertPlainPUJSentenceToDPSentence(this.puj);
+        this.display_ipa = convertPlainPUJSentenceToIPASentence(this.puj);
       } else {
         const result = this.generateAccentPronunciation(defaultFuzzyRule);
         this.display_puj = result.display_puj;
         this.display_dp = result.display_dp;
+        this.display_ipa = convertPlainPUJSentenceToIPASentence(this.puj);
       }
     },
     generatePerAccentsPronunciations() {

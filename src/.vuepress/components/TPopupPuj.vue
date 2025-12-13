@@ -9,6 +9,9 @@
       <template v-if="showPUJ">{{ display_puj }}<PinyinTag type="PUJ"/></template>
       <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
       <template v-if="showDP">{{ display_dp }}<PinyinTag type="DP"/></template>
+      <template v-if="showIPA">
+        [{{ display_ipa }}]
+      </template>
     </a>
 
     <!-- 模态框 -->
