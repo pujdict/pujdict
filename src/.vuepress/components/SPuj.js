@@ -125,7 +125,19 @@ class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
   constructor() {
     super('辞典', {
       citation: [33, 52, 212, 2, 55, 25, 22, 5],
-      sandhi: [33, 25, 52, 5, 22, 21, 22, 2],
+      sandhi: [23, 23, 32, 3, 22, 21, 22, 2],
+      neutral: [22, 212, 21, 2, 22, 21, 22, 2],
+      group: {
+        "2-2": "25-21",
+        "2-5": "25-55",
+        "2-8": "25-5",
+        "3-2": "52-21",
+        "3-5": "52-55",
+        "3-8": "52-5",
+        "4-2": "5-21",
+        "4-5": "5-55",
+        "4-8": "5-5",
+      },
     }, [
     ]);
   }
@@ -185,15 +197,118 @@ function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRul
 }
 
 function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
-  // TODO
-  return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
-    let ipaPron = convertPUJPronunciationToIPAPronunciation(pron);
-    let accentTones = fuzzyRule.accentTones.citation;
-    if (isSandhi)
-      accentTones = fuzzyRule.accentTones.sandhi;
-    let ipaTone = convertToneValueToToneLetters(accentTones[ipaPron.tone - 1], isSandhi, isNeutral);
-    return `${ipaPron.initial}${ipaPron.final} ${ipaTone}`;
-  });
+  const tokens = getTokensInSentence(sentence);
+  let i = 0;
+  let result = '';
+  // First pass: find out sandhi groups and the citation indices.
+  let sandhiGroupLastWordIndices = [];
+  let sandhiGroupCitationWordIndices = [];
+  let importantIndicesSet = new Set();
+  let wordIndices = [];
+  let sandhiGroupIndicesPairs = [];
+  let lastSandhiGroupLastWordIndex = -1;
+  while (i < tokens.length) {
+    const token = tokens[i];
+    const seek1 = tokens[i + 1];
+    if (token.category === EPUJTokenCategory.WORD) {
+      // If a PUJ word is not followed by '- ' '-' '-- ' '--', then we got the end of current sandhi group.
+      if (!seek1 ||
+          ![EPUJHyphenCategory.POST,
+            EPUJHyphenCategory.CONNECT,
+            EPUJHyphenCategory.DOUBLE_BREAK,
+            EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory)) {
+        sandhiGroupLastWordIndices.push(i);
+        sandhiGroupIndicesPairs.push([lastSandhiGroupLastWordIndex, i]);
+        lastSandhiGroupLastWordIndex = i;
+      }
+      // If a PUJ word is not followed by '-' '- ', or is followed by '--' '-- ' ' -', then we got the citation.
+      if (!seek1 ||
+          (seek1 &&
+              [EPUJHyphenCategory.PRE,
+               EPUJHyphenCategory.DOUBLE_BREAK,
+               EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory))) {
+        let lastCitationIndex = sandhiGroupCitationWordIndices[sandhiGroupCitationWordIndices.length - 1] || -1;
+        sandhiGroupCitationWordIndices.push(i);
+        let lastWordIndex = wordIndices[wordIndices.length - 1];
+        // The word before the citation is important.
+        if (lastWordIndex !== undefined) {
+          if (lastWordIndex !== lastCitationIndex) {
+            importantIndicesSet.add(lastWordIndex);
+          }
+        }
+      }
+      wordIndices.push(i);
+    }
+    ++i;
+  }
+  // Second pass: iterate over all tokens and generate IPA writing for all words
+  let sandhiGroupCitationWordIndicesSet = new Set(sandhiGroupCitationWordIndices);
+  for (const [beginIndexExc, endIndexInc] of sandhiGroupIndicesPairs) {
+    let ipaProns = [];
+    let ipaToneValues = [];
+    let citationIndex = Infinity; // The index of the tokens array
+    let citationIndexInGroup = Infinity; // The index in current sandhi group
+    // 1. generate general tone values
+    for (let j = beginIndexExc + 1, kWordIndexInGroup = 0; j <= endIndexInc; ++j) {
+      const token = tokens[j];
+      if (token.category !== EPUJTokenCategory.WORD)
+        continue;
+      let pron = token.spelling;
+      let ipaPron = convertPUJPronunciationToIPAPronunciation(convertPlainPUJToPronunciationWord(pron));
+      ipaProns.push(ipaPron);
+      let accentTones = fuzzyRule.accentTones;
+      let toneValue;
+      if (sandhiGroupCitationWordIndicesSet.has(j)) {
+        toneValue = accentTones.citation[ipaPron.tone - 1];
+        citationIndex = j;
+        citationIndexInGroup = kWordIndexInGroup;
+      } else if (j < citationIndex) {
+        toneValue = accentTones.sandhi[ipaPron.tone - 1];
+      } else if (j > citationIndex) {
+        toneValue = accentTones.neutral[ipaPron.tone - 1];
+      }
+      ipaToneValues.push(toneValue);
+      ++kWordIndexInGroup;
+    }
+    // 2. Handle special tones
+    if (citationIndexInGroup > 0) {
+      let importantIndexInGroup = citationIndexInGroup - 1;
+      let importantTone = ipaProns[importantIndexInGroup].tone;
+      let citationTone = ipaProns[citationIndexInGroup].tone;
+      let group = fuzzyRule.accentTones.group[`${importantTone}-${citationTone}`];
+      if (group) {
+        let [importantToneValue, citationToneValue] = group.split('-');
+        ipaToneValues[importantIndexInGroup] = parseInt(importantToneValue);
+        ipaToneValues[citationIndexInGroup] = parseInt(citationToneValue);
+      }
+    }
+    // 3. Generate displaying result
+    for (let j = beginIndexExc + 1, kWordIndexInGroup = 0; j <= endIndexInc; ++j) {
+      const token = tokens[j];
+      if (token.category !== EPUJTokenCategory.WORD) {
+        if (token.category === EPUJTokenCategory.OTHER) {
+          result += token.spelling;
+        } else if (token.category === EPUJTokenCategory.HYPHEN) {
+          // Dot in IPA is used like a word separator.
+          result += `·`;
+        }
+        continue;
+      }
+      let toneValue = ipaToneValues[kWordIndexInGroup];
+      let isSandhi = kWordIndexInGroup !== citationIndexInGroup;
+      let ipaPron = ipaProns[kWordIndexInGroup];
+      let ipaTone = convertToneValueToToneLetters(toneValue, isSandhi);
+      result += `${ipaPron.initial}${ipaPron.final}${ipaTone}`;
+      ++kWordIndexInGroup;
+    }
+  }
+  // Characters after the last sandhi group, maybe some punctuations.
+  if (sandhiGroupIndicesPairs.length) {
+    for (let j = sandhiGroupIndicesPairs[sandhiGroupIndicesPairs.length - 1][1] + 1; j < tokens.length; ++j) {
+      result += tokens[j].spelling;
+    }
+  }
+  return result;
 }
 
 function convertPlainPUJSentenceToDPSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
@@ -208,6 +323,89 @@ function convertPUJFromDisplaySentence(sentence) {
   sentence = sentence.replace(new RegExp(PUJSpecialVowels['ur'], 'g'), 'ur');
   sentence = sentence.replace(new RegExp(PUJSpecialVowels['ir'], 'g'), 'ir');
   return sentence;
+}
+
+const EPUJTokenCategory = {
+  NONE: 0,
+  WORD: 1,
+  HYPHEN: 2,
+  OTHER: 4,
+}
+
+const EPUJHyphenCategory = {
+  NONE: 0,
+  POST: 1,
+  PRE: 2,
+  CONNECT: 3,
+  DOUBLE_BREAK: 4,
+  DOUBLE_CONNECT: 5,
+}
+
+class PUJToken {
+  spelling = '';
+  category = EPUJTokenCategory.NONE;
+  hyphenCategory = EPUJHyphenCategory.NONE;
+  constructor(spelling, category, hyphenCategory) {
+    this.spelling = spelling;
+    this.category = category;
+    this.hyphenCategory = hyphenCategory;
+  }
+}
+
+function getTokensInSentence(sentence) {
+  sentence = sentence.normalize('NFD');
+  const regexp = new RegExp(`[a-zA-Z0-9']|̤|${getPUJToneMarks().filter(e => e.length).join('|')}`);
+  let i = 0;
+  let tokens = [];
+  while (i < sentence.length) {
+    let cur = "";
+    if (regexp.test(sentence[i])) {
+      while (i < sentence.length && regexp.test(sentence[i])) {
+        cur += sentence[i++];
+      }
+      tokens.push(new PUJToken(cur, EPUJTokenCategory.WORD, EPUJHyphenCategory.NONE));
+    } else {
+      // Try to find hyphens. There are 5 possible kinds of hyphens:
+      // 1. post-hyphen, written after one PUJ word, followed by a space. i.e. `xxx- `
+      // 2. pre-hyphen, written before the next PUJ word, preceded by a space. i.e. ` -xxx`
+      // 3. connecting-hyphen, written between two PUJ words with no additional spaces. i.e. `xxx-xxx`
+      // 4. breaking double-hyphen, written after one PUJ word, followed by a space. i.e. `xxx-- `
+      // 5. connecting double-hyphen, written between two PUJ words. i.e. `xxx--xxx`
+      while (i < sentence.length && !regexp.test(sentence[i])) {
+        cur += sentence[i++];
+      }
+      const seek1 = sentence[i];
+      switch (cur) {
+        case '':
+          break;
+        case '- ':
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.POST));
+          break;
+        case ' -':
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.PRE));
+          break;
+        case '-':
+          if (seek1 && regexp.test(seek1))
+            tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.CONNECT));
+          else
+            // A single hyphen may be followed by nothing. e.g. `mak8 siap4-kau3-`
+            tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.POST));
+          break;
+        case '-- ':
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.DOUBLE_BREAK));
+          break;
+        case '--':
+          if (!seek1)
+            console.error(`A double-hyphen is followed by nothing: ${sentence}`);
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.DOUBLE_CONNECT));
+          break;
+        default:
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.OTHER, EPUJHyphenCategory.NONE));
+          break;
+      }
+    }
+  }
+  return tokens;
 }
 
 function forEachWordInSentence(sentence, funcWord, funcNonWord) {
@@ -632,6 +830,7 @@ const PUJInitialToXSAMPAMap = {
   'mv': 'F',
   'b': 'b',
   'bv': 'b_d',
+  'v': 'v',
   't': 't',
   'th': 't_h',
   'n': 'n',
@@ -641,6 +840,7 @@ const PUJInitialToXSAMPAMap = {
   'ng': 'N',
   'g': 'g',
   'h': 'h',
+  'f': 'p\\',
   'ts': 'ts',
   'ch': 'tS',
   'tsh': 'ts_h',
@@ -674,6 +874,24 @@ const PUJFinalToXSAMPAMap = {
 function convertPUJPronunciationToXSAMPAPronunciation(pronunciation) {
   const result = new Pronunciation(
     pronunciation.initial.toLowerCase(), pronunciation.final.toLowerCase(), pronunciation.tone);
+  if (result.final.startsWith('ng')) {
+    if (result.initial === 'h' || result.initial === '') {
+      result.initial = result.initial === 'h' ? 'N_0' : '?';
+      if (result.final === 'ngh') {
+        result.final = 'N=?';
+      } else {
+        result.final = 'N=';
+      }
+      return result;
+    }
+  }
+  if (result.final === 'm') {
+    if (result.initial === 'h' || result.initial === '') {
+      result.initial = result.initial === 'h' ? 'N_0' : '?';
+      result.final = 'm=';
+      return result;
+    }
+  }
   result.initial = PUJInitialToXSAMPAMap[result.initial] ?? result.initial;
   result.final = result.final.replace("'", '');
   const isNasalized = result.final.endsWith('nn');
@@ -736,6 +954,10 @@ function convertToneValueToToneLetters(tone, isSandhi = false, isNeutral = false
       console.log("调值错误：" + tone);
       return '';
     }
+  }
+  if (result.length === 2 && result[0] === result[1]) {
+    // Don't know why Chrome does not merge two same letters. Make Chrome happy.
+    result = [result[0]];
   }
   return result.reverse().join('');
 }

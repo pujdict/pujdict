@@ -13,7 +13,6 @@
               <input class="form-check-input"
                      name="default-pinyin-display"
                      type="checkbox"
-                     :disabled="defaultPinyinDisplay.value === 'IPA'"
                      :id="`default-pinyin-display-${defaultPinyinDisplay.value}`"
                      :value="defaultPinyinDisplay.value"
                      v-model="customDefaultPinyinDisplay"
