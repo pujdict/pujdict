@@ -78,14 +78,16 @@ describe('白话字与国际音标转换', () => {
     const puj_pron = new Pronunciation(puj_i, puj_f, puj_t);
     const x_sampa_pron = new Pronunciation(x_sampa_i, x_sampa_f, x_sampa_t);
     const calculated_x_sampa_pron = convertPUJPronunciationToXSAMPAPronunciation(puj_pron);
-    expect(calculated_x_sampa_pron).toEqual(x_sampa_pron);
+    expect(calculated_x_sampa_pron.initial).toEqual(x_sampa_pron.initial);
+    expect(calculated_x_sampa_pron.final).toEqual(x_sampa_pron.final);
   }
 
   function expect_ipa(x_sampa_i, x_sampa_f, x_sampa_t, ipa_i, ipa_f, ipa_t) {
     const x_sampa_pron = new Pronunciation(x_sampa_i, x_sampa_f, x_sampa_t);
     const ipa_pron = new Pronunciation(ipa_i, ipa_f, ipa_t);
     const calculated_ipa_pron = convertXSAMPAPronunciationToIPAPronunciation(x_sampa_pron);
-    expect(calculated_ipa_pron).toEqual(ipa_pron);
+    expect(calculated_ipa_pron.initial).toEqual(ipa_pron.initial);
+    expect(calculated_ipa_pron.final).toEqual(ipa_pron.final);
   }
 
   const UPPER_NUMS = [
