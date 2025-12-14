@@ -11,8 +11,8 @@ import {
 } from "./SCommon";
 
 describe('白话字注音', () => {
-  function expect_puj(plain, display, optional) {
-    const calculated_display = addPUJToneMarkAndConvertToDisplayPUJSentence(plain, optional);
+  function expect_puj(plain, display) {
+    const calculated_display = addPUJToneMarkAndConvertToDisplayPUJSentence(plain);
     expect(calculated_display.normalize('NFD')).toBe(display.normalize('NFD'));
   }
 

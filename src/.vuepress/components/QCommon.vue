@@ -14,7 +14,7 @@ const $ = jquery;
 import {
   Entry,
   Pronunciation,
-} from "./SCommon.js";
+} from "./SCommon";
 
 import {pujpb} from "./SPujPb";
 
@@ -23,13 +23,13 @@ import {
   getLocalOption,
   getLocalOptionList,
   isChineseChar,
-} from "./SUtils.js";
+} from "./SUtils";
 
 import {
   AtomicFuzzyRule, convertPlainPUJToPronunciationWord,
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy, regexpWordOptional,
-} from "./SPuj.js";
+} from "./SPuj";
 
 function makeEntryFromJson(json) {
   let entry = new Entry(

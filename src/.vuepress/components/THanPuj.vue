@@ -64,7 +64,7 @@ import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
   addPUJToneMarkWord,
   convertPUJToDPSentence,
-} from "./SPuj.js";
+} from "./SPuj";
 import {
   Entry, Pronunciation,
   makeEntryFromJson, makeEntryFromSqlResult,
@@ -75,7 +75,7 @@ import {
 } from './QCommon.vue';
 
 import jquery from 'jquery';
-import {isChineseChar} from "./SUtils.js";
+import {isChineseChar} from "./SUtils";
 
 const $ = jquery;
 

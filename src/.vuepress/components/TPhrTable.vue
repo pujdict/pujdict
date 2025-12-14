@@ -78,7 +78,7 @@ import {darkThemeString} from "./QDarkTheme.vue";
 <script lang="ts">
 import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
-} from './SPuj.js';
+} from './SPuj';
 import {
   Entry, Pronunciation,
   getAccentsRules,

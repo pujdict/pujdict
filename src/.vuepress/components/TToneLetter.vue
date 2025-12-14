@@ -12,7 +12,7 @@
 </style>
 
 <script lang="ts">
-import {convertToneValueToToneLetters} from "./SPuj.js";
+import {convertToneValueToToneLetters} from "./SPuj";
 
 export default {
   name: "TToneLetter",

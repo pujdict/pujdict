@@ -115,7 +115,7 @@ import {
   convertPUJPronunciationToDPPronunciation,
   convertPlainPUJToPronunciationWord,
   convertPUJInitialOrFinalToDP,
-} from './SPuj.js';
+} from './SPuj';
 import jquery from 'jquery';
 import {pujpb} from "./SPujPb";
 

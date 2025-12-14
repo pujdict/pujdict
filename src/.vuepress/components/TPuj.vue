@@ -4,7 +4,7 @@
 <script>
 import {
   addPUJToneMarkAndConvertToDisplayPUJSentence
-} from "./SPuj.js";
+} from "./SPuj";
 
 export default {
   props: {

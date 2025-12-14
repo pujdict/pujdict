@@ -9,9 +9,9 @@ import {
   convertPlainPUJSentenceToDPSentence,
   convertPlainPUJSentenceToIPASentence,
   convertPlainPUJToPronunciationWord, getPronunciationCombination,
-} from "./SPuj.js";
-import {Pronunciation} from "./SCommon.js";
-import {getLocalOption} from "./SUtils.js";
+} from "./SPuj";
+import {Pronunciation} from "./SCommon";
+import {getLocalOption} from "./SUtils";
 import {pujpb} from "./SPujPb";
 import {h} from "vue";
 

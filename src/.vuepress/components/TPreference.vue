@@ -154,7 +154,7 @@ import {
   setLocalOptionList,
   getLocalOption,
   getLocalOptionList,
-} from "./SUtils.js";
+} from "./SUtils";
 import {createVNode, render} from "vue";
 import TPopupPujNoAccent from "./TPopupPujNoAccent.vue";
 

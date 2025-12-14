@@ -36,7 +36,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
-} from "./SPuj.js";
+} from "./SPuj";
 
 export default {
   data() {
