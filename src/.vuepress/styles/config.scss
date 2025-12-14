@@ -27,8 +27,8 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
   font-display: swap;
   font-family: SansSerifCJKExt2;
   src: local("Plangothic P2"), local("Plangothic"), url('@public/assets/fonts/PlangothicP2-Regular.woff2') format('woff2');
-  // CJK Ext G & H
-  unicode-range: U+30000-3134F, U+31350-323AF;
+  // CJK Ext G, H, I, J
+  unicode-range: U+30000-3134F, U+31350-323AF, U+31350-323AF, U+2EBF0-2EE5F;
 }
 
 @font-face {
@@ -41,8 +41,8 @@ $colors: #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50,
 @font-face {
   font-family: CJKExtSubset2;
   src: url("@public/assets/fonts/CJKExtSubset2.generated.woff2") format("woff2");
-  // CJK Ext G & H
-  unicode-range: U+30000-3134F, U+31350-323AF;
+  // CJK Ext G, H, I, J
+  unicode-range: U+30000-3134F, U+31350-323AF, U+31350-323AF, U+2EBF0-2EE5F;
 }
 
 @font-face {
