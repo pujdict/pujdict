@@ -224,7 +224,8 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
       // If a PUJ word is not followed by '-' '- ', or is followed by '--' '-- ' ' -', then we got the citation.
       if (!seek1 ||
           (seek1 &&
-              [EPUJHyphenCategory.PRE,
+              [EPUJHyphenCategory.NONE,
+               EPUJHyphenCategory.PRE,
                EPUJHyphenCategory.DOUBLE_BREAK,
                EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory))) {
         let lastCitationIndex = sandhiGroupCitationWordIndices[sandhiGroupCitationWordIndices.length - 1] || -1;
