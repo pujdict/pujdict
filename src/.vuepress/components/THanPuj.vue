@@ -66,8 +66,7 @@ import {
   convertPUJToDPSentence,
 } from "./SPuj";
 import {
-  Entry, Pronunciation,
-  makeEntryFromJson, makeEntryFromSqlResult,
+  Pronunciation,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   // $,

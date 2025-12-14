@@ -80,7 +80,7 @@ import TPopupPuj from "./TPopupPuj.vue";
 
 <script lang="ts">
 import {
-  Entry, Pronunciation,
+  Pronunciation,
   getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,

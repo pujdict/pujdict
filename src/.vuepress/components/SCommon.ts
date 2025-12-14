@@ -1,5 +1,8 @@
 class EntryDetailExample {
-  constructor(teochew, puj, mandarin) {
+  teochew: string;
+  puj: string;
+  mandarin: string;
+  constructor(teochew: string, puj: string, mandarin: string) {
     this.teochew = teochew;
     this.puj = puj;
     this.mandarin = mandarin;
@@ -7,13 +10,16 @@ class EntryDetailExample {
 }
 
 class EntryDetailMeaningExample {
-  constructor(meaning, examples) {
+  meaning: string;
+  examples: EntryDetailExample[];
+  constructor(meaning: string, examples: EntryDetailExample[]) {
     this.meaning = meaning;
     this.examples = examples;
   }
 }
 
 class EntryDetails {
+  meanings: EntryDetailMeaningExample[];
   constructor(details) {
     // List of EntryDetailMeaningExample
     this.meanings = [];
@@ -39,25 +45,12 @@ class EntryDetails {
   }
 }
 
-class Entry {
-  constructor(entry_index, char, char_sim, initial, final, tone, sp_nasal, cat, freq, char_ref, details) {
-    this.entry_index = entry_index;
-    this.char = char;
-    this.char_sim = char_sim;
-    this.initial = initial;
-    this.final = final;
-    this.combination = initial + final + tone;
-    this.tone = parseInt(tone);
-    this.sp_nasal = parseInt(sp_nasal);
-    this.cat = parseInt(cat);
-    this.freq = parseInt(freq);
-    this.char_ref = char_ref;
-    this.details = new EntryDetails(details);
-  }
-}
-
 class Pronunciation {
-  constructor(initial, final, tone) {
+  initial: string;
+  final: string;
+  tone: number;
+
+  constructor(initial: string, final: string, tone: number) {
     this.initial = initial;
     this.final = final;
     this.tone = tone;
@@ -73,6 +66,5 @@ class Pronunciation {
 }
 
 export {
-  Entry,
   Pronunciation,
 }

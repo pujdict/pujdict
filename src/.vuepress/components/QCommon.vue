@@ -12,7 +12,6 @@ import jquery from "jquery";
 const $ = jquery;
 
 import {
-  Entry,
   Pronunciation,
 } from "./SCommon";
 
@@ -30,26 +29,6 @@ import {
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy, regexpWordOptional,
 } from "./SPuj";
-
-function makeEntryFromJson(json) {
-  let entry = new Entry(
-      json.entry_index,
-      json.char,
-      json.char_sim,
-      json.initial,
-      json.final,
-      json.tone,
-      json.cat
-  );
-  return entry;
-}
-
-function makeEntryFromSqlResult(sqlResult) {
-  let entry = new Entry(
-      ...sqlResult
-  );
-  return entry;
-}
 
 class PhraseSyllable {
   charsMap: Map<number, string[][]>;
@@ -446,10 +425,9 @@ function resetUrlQueryParameter(ks: string[]) {
 }
 
 export {
-  Entry, Pronunciation,
+  Pronunciation,
   PhraseSyllable,
   getAccentsRules,
-  makeEntryFromJson, makeEntryFromSqlResult,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,

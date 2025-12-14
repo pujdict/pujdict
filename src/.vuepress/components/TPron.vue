@@ -97,8 +97,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 
 <script lang="ts">
 import {
-  Entry, Pronunciation,
-  makeEntryFromJson, makeEntryFromSqlResult,
+  Pronunciation,
   getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,

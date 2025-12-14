@@ -168,7 +168,7 @@ import {getPronunciationCombination} from "./SPuj";
 import TPopupPuj from "./TPopupPuj.vue";
 import {createVNode, render} from 'vue';
 import {
-  Entry, Pronunciation,
+  Pronunciation,
   getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,

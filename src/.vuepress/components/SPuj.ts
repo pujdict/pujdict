@@ -34,7 +34,7 @@ function getPUJToneMarks() {
 /**
  * 这个函数照顾到 6、8 两个声调自定义的情况，也照顾到形状相同但 Unicode 编码有不同的情况（例如第二声的锐音符，Unicode 中有 U+0301 U+0341 两个外观基本相同的符号）
  */
-function getToneFromPUJDisplay(word) {
+function getToneFromPUJDisplay(word): [number, string] {
   let tone = 0;
   let toneMark = '';
   if (word[word.length - 1].match(/\d/)) {
@@ -51,7 +51,7 @@ function getToneFromPUJDisplay(word) {
     for (const curTone in possibleToneMarks) {
       for (const possibleToneMark in possibleToneMarks[curTone]) {
         if (word.includes(possibleToneMark)) {
-          tone = curTone;
+          tone = parseInt(curTone);
           toneMark = possibleToneMark;
           break;
         }
@@ -107,7 +107,12 @@ const AtomicFuzzyRule = {
 }
 
 class FuzzyRulesGroup extends FuzzyRuleBase {
-  constructor(name, accentTones, rules) {
+  name: string;
+  accentTones: { citation: number[]; sandhi: number[]; neutral: number[]; group: any };
+  rules: Array<any>;
+  constructor(name: string,
+              accentTones: {citation: number[], sandhi: number[], neutral: number[], group: any},
+              rules: Array<any>) {
     super();
     this.name = name;
     this.accentTones = accentTones;
@@ -454,7 +459,7 @@ function addPUJToneMarkSentence(sentence) {
 /**
  * 为单个字添加音调符号
  */
-function addPUJToneMarkWord(word, tone) {
+function addPUJToneMarkWord(word: string, tone = 0): string {
   if (tone === 0 || tone === 1 || tone === 4) {
     return word;
   }

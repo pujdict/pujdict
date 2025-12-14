@@ -80,7 +80,7 @@ import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
 } from './SPuj';
 import {
-  Entry, Pronunciation,
+  Pronunciation,
   getAccentsRules,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
