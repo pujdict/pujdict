@@ -292,7 +292,7 @@ copyright: false
 
 **开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助勘误补正。**
 
-网站源码：[Gitee](https://gitee.com/pujdict/pujdict) [Github](https://github.com/pujdict/pujdict)
+网站源码：[Gitee](https://gitee.com/pujdict/pujdict) [Github](https://github.com/pujdict/pujdict)  
 数据仓库：[Gitee](https://gitee.com/pujdict/pujbase) [Github](https://github.com/pujdict/pujbase)
 
 本辞典宗旨是：
