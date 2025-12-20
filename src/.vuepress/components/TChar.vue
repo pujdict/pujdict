@@ -24,7 +24,7 @@
       <hr/>
       <div v-if="queryResultEmpty" class="alert alert-info">没有找到符合条件的结果。</div>
       <div v-else class="row g-3">
-        <div class="col-12" v-for="result in queryResult">
+        <div class="col-sm-10" v-for="result in queryResult">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
@@ -33,17 +33,19 @@
                       v-if="result.entry.charSim !== result.entry.char">({{ result.entry.char }})</span>
                 <span class="text-muted me-2" v-if="result.entry.charRef">[{{ result.entry.charRef }}]</span>
                 <TPopupPuj :puj="result.puj" :charsList="[[result.entry.char]]" :key="result.puj"/>
-                <span class="badge bg-primary me-2" v-if="result.entry.cat === 1">白</span>
-                <span class="badge bg-primary me-2" v-if="result.entry.cat === 2">文</span>
-                <span class="badge bg-primary me-2" v-if="result.entry.cat === 3">俗</span>
-                <div class="ms-auto">
-                  <span class="badge bg-primary text-light" v-if="result.entry.freq === 0">★★★</span>
-                  <span class="badge bg-primary text-light" v-if="result.entry.freq === 1">★★☆</span>
-                  <span class="badge bg-primary text-light" v-if="result.entry.freq === 2">★☆☆</span>
-                  <span class="badge bg-primary text-light" v-if="result.entry.freq === 3">☆☆☆</span>
+                <div class="ms-2" v-if="result.entry.cat">
+                  <span class="badge border border-success text-success" v-if="result.entry.cat === 1">白</span>
+                  <span class="badge border border-primary text-primary" v-if="result.entry.cat === 2">文</span>
+                  <span class="badge border border-secondary text-secondary" v-if="result.entry.cat === 3">俗</span>
+                </div>
+                <div class="ms-2">
+                  <span class="badge border border-primary text-primary" v-if="result.entry.freq === 0">首选</span>
+                  <span class="badge border border-success text-success" v-if="result.entry.freq === 1">常用</span>
+                  <span class="badge border border-warning text-warning" v-if="result.entry.freq === 2">少用</span>
+                  <span class="badge border border-danger text-danger" v-if="result.entry.freq === 3">罕用</span>
                 </div>
               </div>
-              <div class="card-body" style="padding: 10px 0" v-if="result.details.length">
+              <div class="card-body" style="padding: 5px 0" v-if="result.details.length">
                 <div class="card-text">
                   <template v-for="(details, i) in result.details">
                     <div v-if="i > 0" class="border-top my-2"></div>
@@ -52,13 +54,11 @@
                       <span v-if="details.meaning.length && details.examples.length">：</span>
                       <template v-for="(example, j) in details.examples">
                         <span v-if="j > 0">；</span>
-                        <span v-if="example.teochew">{{ example.teochew }}</span>
+                        <span class="me-1" v-if="example.teochew">{{ example.teochew }}</span>
                         <span v-if="example.puj">
                           <TPopupPuj :puj="example.puj" :key="example.puj" :charsList="[[...example.teochew]]"/>
                         </span>
-                        <span v-if="example.mandarin">
-                          <span> ({{ example.mandarin }})</span>
-                        </span>
+                        <span class="ms-1" v-if="example.mandarin">({{ example.mandarin }})</span>
                       </template>
                     </div>
                   </template>

@@ -63,13 +63,13 @@
     <div v-if="queryResultEmpty !== undefined" id="query-result" class="mt-3">
       <hr/>
       <div class="row g-1" v-if="queryCharsResult.length">
-        <div class="col-sm-3" v-for="result in queryCharsResult">
+        <div class="col-sm-4" v-for="result in queryCharsResult">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
                 <div style="display: flex; flex-wrap: wrap; align-items: center;">
                   <div class="col-12">
-                    <h4>{{ result.charInput }}</h4>
+                    <h4 style="font-weight: normal">{{ result.charInput }}</h4>
                     <div class="col" v-for="entry of result.entries" :key="entry.index">
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 1">白</span>
                       <span class="badge border border-primary text-primary" v-if="entry.cat === 2">文</span>
@@ -89,12 +89,12 @@
 
       <div v-if="queryResultEmpty" class="alert alert-info">没有找到词汇。</div>
       <div v-else class="row g-3">
-        <div class="col-12" v-for="result in queryResult">
+        <div class="col-10" v-for="result in queryResult">
           <div class="card shadow-sm">
             <div class="card-header bg-transparent">
               <div class="d-flex align-items-center">
                 <div style="display: flex; flex-wrap: wrap; align-items: center;">
-                  <h4 class="mb-1 me-2" style="margin-top: 0.3em">
+                  <h4 class="mb-1 me-2" style="margin-top: 0.3em; font-weight: normal">
                     <template v-for="(char, i) in result.teochew">
                       <template v-if="i <= 4 || result.__isExpanded">
                         <span v-if="i" class="text-muted">; </span>{{ char }}
@@ -107,9 +107,6 @@
                       [*<template v-for="(char, i) in result.informal"><span v-if="i" class="text-muted">; </span>{{ char }}</template>]
                     </template>
                   </h4>
-                  <span class="me-1" v-for="(p, i) in result.puj">
-                    <span v-if="i" class="text-muted">; </span><TPopupPuj :puj="p" :key="p" :charsList="[...result.teochew, ...result.informal]"/>
-                  </span>
                   <span class="text-muted me-1">
                     <template v-for="(cmn, i) in result.cmn">
                       <span v-if="i" class="text-muted">; </span>{{ cmn }}
@@ -128,6 +125,9 @@
                     </span>
                   </template>
                 </div>
+              </div>
+              <div class="me-1" v-for="(p, i) in result.puj">
+                <TPopupPuj :puj="p" :key="p" :charsList="[...result.teochew, ...result.informal]"/>
               </div>
               <div class="card-body" style="padding: 0.2em 0" v-if="result.hasDetails">
                 <div class="card-text">
