@@ -39,6 +39,7 @@
                   <span class="badge border border-secondary text-secondary" v-if="result.entry.cat === 3">俗</span>
                 </div>
                 <div class="ms-2">
+                  <span class="badge border border-primary text-primary" v-if="result.entry.freq === -1">可选 (口音差)</span>
                   <span class="badge border border-primary text-primary" v-if="result.entry.freq === 0">首选</span>
                   <span class="badge border border-success text-success" v-if="result.entry.freq === 1">常用</span>
                   <span class="badge border border-warning text-warning" v-if="result.entry.freq === 2">少用</span>
