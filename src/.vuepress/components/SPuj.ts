@@ -1,6 +1,7 @@
 import {getLocalOption} from "./SUtils";
 import {Pronunciation} from "./SCommon";
 import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa";
+import {isCustomFuzzyRule} from "./QCommon.vue";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -129,8 +130,9 @@ class FuzzyRulesGroup extends FuzzyRuleBase {
 class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
   constructor() {
     super('辞典', {
+      // 默认音以潮剧调为标准
       citation: [33, 52, 212, 2, 55, 25, 22, 5],
-      sandhi: [23, 23, 32, 3, 22, 21, 22, 2],
+      sandhi: [33, 23, 32, 3, 212, 21, 221, 2],
       neutral: [22, 212, 21, 2, 22, 21, 22, 2],
       group: {
         "2-2": "25-21",
@@ -212,27 +214,19 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
   let wordIndices = [];
   let sandhiGroupIndicesPairs = [];
   let lastSandhiGroupLastWordIndex = -1;
+  let foundCurrentCitation = false;
   while (i < tokens.length) {
     const token = tokens[i];
     const seek1 = tokens[i + 1];
     if (token.category === EPUJTokenCategory.WORD) {
-      // If a PUJ word is not followed by '- ' '-' '-- ' '--', then we got the end of current sandhi group.
-      if (!seek1 ||
-          ![EPUJHyphenCategory.POST,
-            EPUJHyphenCategory.CONNECT,
-            EPUJHyphenCategory.DOUBLE_BREAK,
-            EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory)) {
-        sandhiGroupLastWordIndices.push(i);
-        sandhiGroupIndicesPairs.push([lastSandhiGroupLastWordIndex, i]);
-        lastSandhiGroupLastWordIndex = i;
-      }
       // If a PUJ word is not followed by '-' '- ', or is followed by '--' '-- ' ' -', then we got the citation.
-      if (!seek1 ||
-          (seek1 &&
-              [EPUJHyphenCategory.NONE,
-               EPUJHyphenCategory.PRE,
-               EPUJHyphenCategory.DOUBLE_BREAK,
-               EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory))) {
+      if (!foundCurrentCitation && (!seek1 || (seek1 && [
+        EPUJHyphenCategory.NONE,
+        EPUJHyphenCategory.PRE,
+        EPUJHyphenCategory.DOUBLE_BREAK,
+        EPUJHyphenCategory.DOUBLE_CONNECT,
+      ].includes(seek1.hyphenCategory)))) {
+        foundCurrentCitation = true;
         let lastCitationIndex = sandhiGroupCitationWordIndices[sandhiGroupCitationWordIndices.length - 1] || -1;
         sandhiGroupCitationWordIndices.push(i);
         let lastWordIndex = wordIndices[wordIndices.length - 1];
@@ -243,9 +237,25 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
           }
         }
       }
+      // If a PUJ word is not followed by '- ' '-' '-- ' '--', then we got the end of current sandhi group.
+      if (!seek1 ||
+        ![EPUJHyphenCategory.POST,
+          EPUJHyphenCategory.CONNECT,
+          EPUJHyphenCategory.DOUBLE_BREAK,
+          EPUJHyphenCategory.DOUBLE_CONNECT].includes(seek1.hyphenCategory)) {
+        sandhiGroupLastWordIndices.push(i);
+        sandhiGroupIndicesPairs.push([lastSandhiGroupLastWordIndex, i]);
+        lastSandhiGroupLastWordIndex = i;
+        foundCurrentCitation = false;
+      }
       wordIndices.push(i);
     }
     ++i;
+  }
+  if (wordIndices.length && wordIndices[wordIndices.length - 1] !== lastSandhiGroupLastWordIndex) {
+    // The last word has not ended yet.
+    sandhiGroupIndicesPairs.push([lastSandhiGroupLastWordIndex, i - 1]);
+    lastSandhiGroupLastWordIndex = i - 1;
   }
   // Second pass: iterate over all tokens and generate IPA writing for all words
   let sandhiGroupCitationWordIndicesSet = new Set(sandhiGroupCitationWordIndices);
@@ -262,7 +272,8 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
       let pron = token.spelling;
       let ipaPron = convertPUJPronunciationToIPAPronunciation(convertPlainPUJToPronunciationWord(pron));
       ipaProns.push(ipaPron);
-      let accentTones = fuzzyRule.accentTones;
+      // TODO: 支持自定义调值
+      let accentTones = isCustomFuzzyRule(fuzzyRule) ? new FuzzyRulesGroup_Dummy().accentTones : fuzzyRule.accentTones;
       let toneValue;
       if (sandhiGroupCitationWordIndicesSet.has(j)) {
         toneValue = accentTones.citation[ipaPron.tone - 1];
@@ -277,7 +288,7 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
       ++kWordIndexInGroup;
     }
     // 2. Handle special tones
-    if (citationIndexInGroup > 0) {
+    if (citationIndexInGroup !== Infinity && citationIndexInGroup > 0) {
       let importantIndexInGroup = citationIndexInGroup - 1;
       let importantTone = ipaProns[importantIndexInGroup].tone;
       let citationTone = ipaProns[citationIndexInGroup].tone;
@@ -899,7 +910,8 @@ function convertPUJPronunciationToXSAMPAPronunciation(pronunciation) {
     }
   }
   result.initial = PUJInitialToXSAMPAMap[result.initial] ?? result.initial;
-  result.final = result.final.replace("'", '');
+  // We don't mark optionally-nasalized finals.
+  result.final = result.final.replace("nn'", '');
   const isNasalized = result.final.endsWith('nn');
   result.final = result.final.replace('nn', '');
   for (const [key, value] of Object.entries(PUJFinalToXSAMPAMap)) {

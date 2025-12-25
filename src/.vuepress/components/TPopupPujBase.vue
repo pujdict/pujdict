@@ -1,7 +1,7 @@
 <script lang="ts">
 import {
   getAccentsRules, getFuzzyPronunciation,
-  getCharEntryOfPronunciation,
+  getCharEntryOfPronunciation, isCustomFuzzyRule,
 } from "./QCommon.vue";
 import {
   forEachWordInSentence,
@@ -100,7 +100,7 @@ export default {
         const result = this.generateAccentPronunciation(defaultFuzzyRule);
         this.display_puj = result.display_puj;
         this.display_dp = result.display_dp;
-        this.display_ipa = convertPlainPUJSentenceToIPASentence(this.puj);
+        this.display_ipa = result.display_ipa;
       }
     },
     generatePerAccentsPronunciations() {
@@ -118,6 +118,9 @@ export default {
       if (!accentRule) console.error(`Accent rule ${accentKey} not found`)
       let display_puj = '';
       let display_dp = '';
+      // TODO: 支持自定义口音
+      let display_ipa = isCustomFuzzyRule(accentRule)
+          ? '' : convertPlainPUJSentenceToIPASentence(this.puj, accentRule);
       let iWord = 0;
       forEachWordInSentence(this.puj, (word: string) => {
         let pron: Pronunciation = convertPlainPUJToPronunciationWord(word);
@@ -183,6 +186,7 @@ export default {
         name: accentRule.name,
         display_puj: display_puj,
         display_dp: display_dp,
+        display_ipa: display_ipa,
       };
     },
   },

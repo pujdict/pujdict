@@ -312,7 +312,7 @@ const getAccentsRules = function () {
       }
       fuzzyRules[id] = new FuzzyRulesGroup(`${area}${subarea}`, accentTones, rules);
     }
-    // TODO: 这里自定义应该改成允许用户选择单条模糊音规则
+    // TODO: 支持自定义声调调值
     const custom = {
       name: '定制口音',
       fuzzy: function (original) {
@@ -334,11 +334,16 @@ const getAccentsRules = function () {
       },
       _fuzzy_str: null,
       _fuzzy_action_indices: [],
+      _is_custom: true,
     };
     fuzzyRules['custom-1'] = custom;
     return fuzzyRules;
   };
 }();
+
+function isCustomFuzzyRule(fuzzyRule): boolean {
+  return fuzzyRule._is_custom ?? false;
+}
 
 function getFuzzyPronunciation(accentId, entry) {
   let accent = null;
@@ -428,6 +433,7 @@ export {
   Pronunciation,
   PhraseSyllable,
   getAccentsRules,
+  isCustomFuzzyRule,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,

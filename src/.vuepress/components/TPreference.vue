@@ -167,7 +167,7 @@ export default {
       defaultPinyinDisplays: [
         {value: "PUJ", name: "白话字"},
         {value: "DP", name: "潮拼"},
-        {value: "IPA", name: "国际音标"},
+        {value: "IPA", name: "国际音标 (Beta)"},
       ],
       customDefaultPinyinDisplay: getLocalOptionList('custom-default-pinyin-display'),
       defaultPinyinDisplayFuzzyRules: [

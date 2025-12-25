@@ -6,10 +6,10 @@
        style="text-decoration: none;"
        :style="additionalStyle"
     >
-      <template v-if="showPUJ">{{ display_puj }}<PinyinTag type="PUJ"/></template>
+      <template v-if="showPUJ">{{ display_puj }}<PinyinTag v-if="showDP && showPUJ" type="PUJ"/></template>
       <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
-      <template v-if="showDP">{{ display_dp }}<PinyinTag type="DP"/></template>
-      <template v-if="showIPA">
+      <template v-if="showDP">{{ display_dp }}<PinyinTag v-if="showDP && showPUJ" type="DP"/></template>
+      <template v-if="showIPA && display_ipa !== ''">
         [{{ display_ipa }}]
       </template>
     </a>
@@ -29,6 +29,7 @@
                 <div class="d-flex flex-column">
                   <span>{{ pronunciation.display_puj }}</span>
                   <span>{{ pronunciation.display_dp }}</span>
+                  <span v-if="pronunciation.display_ipa !== ''">[{{ pronunciation.display_ipa }}]</span>
                 </div>
               </div>
             </template>
