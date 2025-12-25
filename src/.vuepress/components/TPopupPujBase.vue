@@ -1,7 +1,7 @@
 <script lang="ts">
 import {
   getAccentsRules, getFuzzyPronunciation,
-  getCharEntryOfPronunciation, isCustomFuzzyRule,
+  getCharEntryOfPronunciation,
 } from "./QCommon.vue";
 import {
   forEachWordInSentence,
@@ -119,7 +119,7 @@ export default {
       let display_puj = '';
       let display_dp = '';
       // TODO: 支持自定义口音
-      let display_ipa = isCustomFuzzyRule(accentRule)
+      let display_ipa = accentRule.isCustom
           ? '' : convertPlainPUJSentenceToIPASentence(this.puj, accentRule);
       let iWord = 0;
       forEachWordInSentence(this.puj, (word: string) => {

@@ -1,7 +1,6 @@
 import {getLocalOption} from "./SUtils";
 import {Pronunciation} from "./SCommon";
 import {XSAMPAList, XSAMPAToIPAMap} from "./SXSampaIpa";
-import {isCustomFuzzyRule} from "./QCommon.vue";
 
 const PUJToneMarks = [
   /*0:*/ "",
@@ -108,6 +107,7 @@ const AtomicFuzzyRule = {
 }
 
 class FuzzyRulesGroup extends FuzzyRuleBase {
+  isCustom: boolean;
   name: string;
   accentTones: { citation: number[]; sandhi: number[]; neutral: number[]; group: any };
   rules: Array<any>;
@@ -273,7 +273,7 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
       let ipaPron = convertPUJPronunciationToIPAPronunciation(convertPlainPUJToPronunciationWord(pron));
       ipaProns.push(ipaPron);
       // TODO: 支持自定义调值
-      let accentTones = isCustomFuzzyRule(fuzzyRule) ? new FuzzyRulesGroup_Dummy().accentTones : fuzzyRule.accentTones;
+      let accentTones = fuzzyRule.isCustom ? new FuzzyRulesGroup_Dummy().accentTones : fuzzyRule.accentTones;
       let toneValue;
       if (sandhiGroupCitationWordIndicesSet.has(j)) {
         toneValue = accentTones.citation[ipaPron.tone - 1];

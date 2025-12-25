@@ -334,16 +334,12 @@ const getAccentsRules = function () {
       },
       _fuzzy_str: null,
       _fuzzy_action_indices: [],
-      _is_custom: true,
+      isCustom: true,
     };
     fuzzyRules['custom-1'] = custom;
     return fuzzyRules;
   };
 }();
-
-function isCustomFuzzyRule(fuzzyRule): boolean {
-  return fuzzyRule._is_custom ?? false;
-}
 
 function getFuzzyPronunciation(accentId, entry) {
   let accent = null;
@@ -433,7 +429,6 @@ export {
   Pronunciation,
   PhraseSyllable,
   getAccentsRules,
-  isCustomFuzzyRule,
   initFromDatabase,
   setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
   getFuzzyPronunciation,
