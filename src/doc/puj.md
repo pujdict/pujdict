@@ -7,6 +7,11 @@ order: 4
 import TToneLetter from '@components/TToneLetter.vue';
 import TPopupPujNoAccent from '@components/TPopupPujNoAccent.vue';
 </script>
+<style>
+li > ol > li {
+  list-style: lower-roman;
+}
+</style>
 
 ## 关于辞典的标准音
 
@@ -281,7 +286,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 1. 较主流的声调归类中，认为 2 声、6 声分别是阴上、阳上，3 声、7 声分别是阴去、阳去。但在较晚近层次的文读音中，全清、次清、次浊上声都归入了
    2 声，全浊上声归入了 6 声，浊去声则分别归入 6 声、7 声，且归入 6 声的字更多，保留 7 声多是偏口语化的字。
    如果以传统声调归类方式，难以解释潮州话文读音中与“全浊上归去”截然相反的全浊去归阳上的现象。
-   学界对此有不同看法。值得一提的是，在高德字典、斐尔德字典、林雄成《汕头方言手册》等文献中，都将这几个声调记为一个上声和三个去声。
+   学界对此有不同看法。值得一提的是，在高德字典、斐尔德字典、林雄成《汕头方言手册》、汲约翰《潮正两音字集》等文献中，都将这几个声调记为一个上声和三个去声。
    国外传教士对声调的归类方法肯定是习自本土的教师或学者，多位编者不约而同地这样分类，可能意味着这在当时是受到认可的。
    这里采纳【戴黎刚2019】提出的观点，认为晚近层次中 6、7 声均为阳去声。
    由于全浊上归去，多数全浊上、浊去文读音归入了相同的阳去声 6 声，另外少部分浊去字仍然保留 7 声，次浊上则归入了唯一的上声即 2 声。
@@ -774,10 +779,9 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 1. 该韵母在今天潮州话中仅有少数地区保留，详见[单元音](#单元音)一节的讨论。
 
-2. 为了音系的系统性，本辞典将蟹、山、咸摄二、四等字白读层这些对应韵母的元音部分都记为
-   oi，即 <TPopupPujNoAccent puj=-oi /> <TPopupPujNoAccent puj=-oinn /> <TPopupPujNoAccent puj=-oih />。需要注意的是，阳声韵鼻化后的 <TPopupPujNoAccent puj=-oinn /> 和 <TPopupPujNoAccent puj=-ainn /> 各地是一一对应的，但是，由于潮州话出现一些阴声韵鼻化的现象，-oi,
-   -ai 的鼻化后，元音依然保持不变，例如：爱 <TPopupPujNoAccent puj="ainn3"/>，各地均读为 <TPopupPujNoAccent puj="ainn3"/>；
-   睇 <TPopupPujNoAccent puj="thoinn2"/>，各地均读为 <TPopupPujNoAccent puj="thoinn2"/>，并不需要转读。
+2. 为了音系的系统性，本辞典将蟹、山、咸摄二、四等字白读层韵母的元音部分都记为
+   oi，即 <TPopupPujNoAccent puj=-oi /> <TPopupPujNoAccent puj=-oinn /> <TPopupPujNoAccent puj=-oih />。
+   需要注意的是，阴声韵增生而来的鼻化韵 <TPopupPujNoAccent puj=-ainn /> 各地均读为 <TPopupPujNoAccent puj="ainn3"/>。
 3. 该韵母有且仅有三个辖字：
    县 <TPopupPujNoAccent puj="kuoinn7"/>、
    悬 <TPopupPujNoAccent puj="kuoinn5"/>（形容词，高）、悬 <TPopupPujNoAccent puj="huoinn5"/>（动词，挂）、惯 <TPopupPujNoAccent puj="kuoinn3"/>（用于“惯势”一词，习惯），
@@ -828,9 +832,11 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 潮汕各地的声调，大致可总结为几种类型：
 
-- Ⅰ 型（主流调型）——包括潮汕三市市中心在内大多数地区的调型。这一类型按照前变调的形式也可以进一步细分——汕头、饶平音变调非常“规矩”，每个字只有一套前变调，后字声调不会随前字调整；潮州、潮安、揭阳、澄海音前变调有丰富的变化，第 2、3、4 声根据后字声调的高低，会相应地调整前字的变调，甚至后字的声调也会随之调整，听感上显得更加“连绵”，整体语音语调的起伏变化更小。
-- Ⅱ 型（南北部调型）——分布于潮安北部、饶平北部、普宁、惠来的调型，与 Ⅰ 型类似，不同之处主要在于：第 1 声的单字调末尾相较于 Ⅰ 型带上了一个升调；第 2 声的前变调是一个低曲折调，而非 Ⅰ 型的升调。
-- Ⅲ 型（潮阳调型）——潮阳、潮南、达濠等地的调型，相较于其他各地，最显著的特征是大量的降调（不论是单字调还是变调），使其听起来“充满力量感”。
+1. 主流调型，包括潮汕三市市中心在内大多数地区的调型。这一类型按照前变调的形式也可以进一步细分：
+   1. 汕头、饶平音，变调较为“规矩”，通常每个字只有一套前变调，后字声调不会随前字调整；
+   2. 潮州、潮安、揭阳、澄海音，前变调有丰富的变化，第 2、3、4 声根据后字声调的高低，会相应地调整前字的变调，甚至后字的声调也会随之调整，听感上显得更加“连绵”，整体语音语调的起伏变化更小；
+   3. 南北两端——潮安北部、饶平北部、普宁流沙、惠来惠城等地的调型，不同与上述两种之处在于：第 1 声前变调为平调，反而单字调末尾带上了升调；第 2 声的前变调是一个低曲折调，而非主流的升调。
+2. 潮阳调型，潮阳、潮南、达濠、普宁、惠来等地的调型，即传统意义上的“练江腔”或“潮普小片”，相较于其他各地，最显著的特征是大量的降调。
 
 [//]: # (TODO：使用程序生成声调表)
 以下声调调值采用五度标记法。
@@ -856,13 +862,13 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 
 | 例字 | 声调 | 单字调（本调）                                              | 连读变调（前变调）                                                         | 轻声调                              |
 |----|----|------------------------------------------------------|-------------------------------------------------------------------|----------------------------------|
-| 分  | 1  | 33 <TToneLetter v=33 /> (332 <TToneLetter v=332 />)  | 33 <TToneLetter sandhi v=33 />                                    | 21 <TToneLetter sandhi v=21 />   |
+| 分  | 1  | 33 <TToneLetter v=33 /> (332 <TToneLetter v=332 />)  | 33 <TToneLetter sandhi v=33 /> (23 <TToneLetter sandhi v=23 />)   | 21 <TToneLetter sandhi v=21 />   |
 | 粉  | 2  | 52 <TToneLetter v=52 />, 21 <TToneLetter v=21 />     | 25 <TToneLetter sandhi v=25 />, 23 <TToneLetter sandhi v=23 />    | 212 <TToneLetter sandhi v=212 /> |
 | 奋  | 3  | 212 <TToneLetter v=212 />                            | 52 <TToneLetter sandhi v=52 />, 32 <TToneLetter sandhi v=32 />    | 21 <TToneLetter sandhi v=21 />   |
 | 忽  | 4  | 2 <TToneLetter v=2 />                                | 5 <TToneLetter sandhi v=5 />, 3 <TToneLetter sandhi v=3 />        | 2 <TToneLetter sandhi v=2 />     |
 | 云  | 5  | 55 <TToneLetter v=55 /> (554, <TToneLetter v=554 />) | 22 <TToneLetter sandhi v=22 /> (212 <TToneLetter sandhi v=212 />) | 21 <TToneLetter sandhi v=21 />   |
 | 混  | 6  | 25 <TToneLetter v=25 /> (254, <TToneLetter v=254 />) | 21 <TToneLetter sandhi v=21 />                                    | 21 <TToneLetter sandhi v=21 />   |
-| 份  | 7  | 22 <TToneLetter v=22 />                              | 22 <TToneLetter sandhi v=22 /> (21 <TToneLetter sandhi v=21 /> )  | 22 <TToneLetter sandhi v=22 />   |
+| 份  | 7  | 22 <TToneLetter v=22 />                              | 22 <TToneLetter sandhi v=22 /> (221 <TToneLetter sandhi v=221 />) | 22 <TToneLetter sandhi v=22 />   |
 | 佛  | 8  | 5 <TToneLetter v=5 /> (54 <TToneLetter v=54 />)      | 2 <TToneLetter sandhi v=2 />                                      | 2 <TToneLetter sandhi v=2 />     |
 
 @tab 潮安
@@ -1025,8 +1031,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
       例如：
       奋起 <TToneLetter sandhi v=52 /> <TToneLetter v=21 /> 或 <TToneLetter sandhi v=25 /> <TToneLetter v=21 />。
 
-2. 潮剧戏腔要求字正腔圆，1 声的前变调在任何情况下都必须保持平声，不能稍有上抬；5 声和 7
-   声前变调限制较为宽松，在念白语速较快时可以带上曲折，但语速较慢时必须保持平声。此外，1、5、6、8 声在念单字拖长音时，出于艺术化处理的考虑，有可能带上一个降调。
+2. 潮剧戏腔要求字正腔圆，1 声的前变调通常保持平声，但语速较快时可能带上曲折；5 声和 7
+   声前变调语速较慢时必须保持平声，在念白语速较快时可以带上曲折。此外，1、5、6、8 声在念单字拖长音时，出于艺术化处理的考虑，有可能带上一个降调。
 3. 潮阳新派已经将 3、6 声两个单字调混同，但在变调中依然可区分。
 4. 惠来已将 3、7 声两个单字调混同，但在变调中依然可区分。
 
