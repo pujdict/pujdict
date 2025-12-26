@@ -270,7 +270,8 @@ function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRul
       if (token.category !== EPUJTokenCategory.WORD)
         continue;
       let pron = token.spelling;
-      let ipaPron = convertPUJPronunciationToIPAPronunciation(convertPlainPUJToPronunciationWord(pron));
+      let fuzzyPron = fuzzyRule.fuzzy(convertPlainPUJToPronunciationWord(pron));
+      let ipaPron = convertPUJPronunciationToIPAPronunciation(fuzzyPron);
       ipaProns.push(ipaPron);
       // TODO: 支持自定义调值
       let accentTones = fuzzyRule.isCustom ? new FuzzyRulesGroup_Dummy().accentTones : fuzzyRule.accentTones;
