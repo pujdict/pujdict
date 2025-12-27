@@ -1,7 +1,7 @@
 ---
 title: 变调规则和连字符
 order: 10
-date: 2025-10-2
+date: 2025-10-02
 ---
 
 <script setup>

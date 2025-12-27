@@ -1,7 +1,7 @@
 ---
 title: 潮汕方言音系
 order: 4
-date: 2024-1-18
+date: 2024-01-18
 ---
 
 <script setup>

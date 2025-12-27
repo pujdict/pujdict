@@ -1,7 +1,7 @@
 ---
 title: 参考文献
 order: 10000
-date: 2024-1-18
+date: 2024-01-18
 #hide: [toc, navigation]
 ---
 
