@@ -20,7 +20,7 @@ export default defineUserConfig({
   // @ts-ignore
   base: process.env.VUE_APP_BASEURL || "/",
   lang: "zh-CN",
-  title: "潮汕方言白话字辞典",
+  title: "潮汕方言白话字辞典 (Beta)",
   description: "开源的轻量级潮汕方言辞典，兼容各地语音，支持潮拼与白话字两种拼音方案，查询响应迅速。",
   alias: {
     '@src': path.resolve(__dirname, ".."),
