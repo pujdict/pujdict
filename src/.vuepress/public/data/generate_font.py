@@ -62,7 +62,7 @@ def basic_subset():
 
 
 def subset(chars):
-    print(f'Subset: {chars}')
+    print(f'Subset: {",".join(chars)}')
     # write chars to a tmp file
     name = tempfile.mktemp(dir=TEMP_DIR)
     with open(name, 'w', encoding='utf-8') as f:
