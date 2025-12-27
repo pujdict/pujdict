@@ -81,12 +81,16 @@ class PUJDictDatabase {
   private phrasesFastIndexByCharPrime = 499;
 
   async load() {
-    const entriesPromise = fetch(withBase('/data/pujbase/dist/entries.pb'))
+    const fetchData = (filename: string) => 
+      fetch(withBase(`/data/pujbase/dist/${filename}.pb`), {method: 'GET', mode: 'no-cors', credentials: 'include',})
         .then(response => response.arrayBuffer());
-    const accentsDataPromise = fetch(withBase('/data/pujbase/dist/accents.pb'))
-        .then(response => response.arrayBuffer());
-    const phrasesPromise = fetch(withBase('/data/pujbase/dist/phrases.pb'))
-        .then(response => response.arrayBuffer());
+
+    // noinspection ES6MissingAwait
+    const [entriesPromise, accentsDataPromise, phrasesPromise] = [
+      fetchData('entries'),
+      fetchData('accents'),
+      fetchData('phrases')
+    ];
     const accentsDataResponse = await accentsDataPromise;
 
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
