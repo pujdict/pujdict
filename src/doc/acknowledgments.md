@@ -1,6 +1,7 @@
 ---
 title: 鸣谢
 order: 10001
+date: 2024-10-26
 #hide: [toc, navigation]
 ---
 
