@@ -207,10 +207,14 @@ function changeSentenceLetterCase(sentence: string, sentenceCase: ESentenceLette
       return sentence.toUpperCase();
     case ESentenceLetterCase.UPPER_FIRST_LETTER:
       let res = [...sentence];
+      let isCurrentSentenceFixed = false;
       for (let i = 0; i < res.length; ++i) {
-        if (/[a-z]/.test(res[i])) {
+        if (!isCurrentSentenceFixed && /[a-z]/.test(res[i])) {
           res[i] = res[i].toUpperCase();
-          break;
+          isCurrentSentenceFixed = true;
+        }
+        if (/[\?\!\.]/.test(res[i])) {
+          isCurrentSentenceFixed = false;
         }
       }
       return res.join('');
