@@ -66,6 +66,6 @@ import TPuj from '@components/TPuj.vue';
 - 明月几时有，把酒问青**天**。不知天上宫阙，今夕是何**年**。（苏轼《水调歌头》）  
   <TPopupPujNoAccent puj="Meng5-gueh8 ki2-si5 u6, pa2-tsiu2 mng7- tshenn1-thian1. Put4-tsai1 thinn1--tsionn7 keng1-khueh4, kim1-sek4 si6- ho5-nian5."/>
 - 一轮明月挂高空，万盏花灯照眼**红**。街上游人如潮涌，鱼灯队队赛游**龙**。（潮剧《陈三五娘/荔镜记》）  
-  <TPopupPujNoAccent puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2-- hong5. Koi1--tsionn7 iu5-jin5 ju5-tio5 iong3, hur5-teng1 tui7-tui7 sai3-iu5-liong5."/>
+  <TPopupPujNoAccent puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2-hong5. Koi1--tsionn7 iu5-jin5 ju5-tio5 iong3, hur5-teng1 tui7-tui7 sai3- iu5-liong5."/>
 - 奔腾起伏大巴**山**，林深好把天兵藏。嘉陵江水滔滔浪，正是游击健儿饮马**泉**。（潮剧《江姐》）
   <TPopupPujNoAccent puj="Phun1-theng5 khi2-hok8 tai6-pa1-san1, lim5 tshim1 ho2-pa2 thian1-piann5 tshang5. Kia1-leng5-kang1-tsui2 thau1-thau1 lang6, tsiann3-si6- iu5-khek4 kian6-ji5 im3-be2-tshuan5."/>

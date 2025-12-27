@@ -162,10 +162,67 @@ function convertPlainPUJSentenceToDisplayPUJInSentence(sentence) {
   return sentence;
 }
 
-function convertPlainPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy(), funcPlainPUJPronunciationToStr, funcNonWordStr = null) {
+enum ESentenceLetterCase {
+  NONE = 0,
+  LOWER = 1,
+  UPPER_FIRST_LETTER = 2,
+  UPPER = 3,
+}
+
+function determineSentenceLetterCase(sentence: string): ESentenceLetterCase {
+  let firstLetter = true;
+  let hasLower = false;
+  let hasUpper = false;
+  let lettersCnt = 0;
+  for (let i = 0; i < sentence.length; ++i) {
+    let char = sentence[i];
+    if (/[a-zA-Z]/.test(char)) {
+      ++lettersCnt;
+      if (/[a-z]/.test(char)) {
+        if (firstLetter) {
+          return ESentenceLetterCase.LOWER;
+        } else {
+          hasLower = true;
+        }
+      } else {
+        hasUpper = true;
+      }
+      firstLetter = false;
+    }
+  }
+  if (hasLower && hasUpper || hasUpper && lettersCnt === 1) {
+    return ESentenceLetterCase.UPPER_FIRST_LETTER;
+  }
+  if (hasUpper) {
+    return ESentenceLetterCase.UPPER;
+  }
+  return ESentenceLetterCase.NONE;
+}
+
+function changeSentenceLetterCase(sentence: string, sentenceCase: ESentenceLetterCase): string {
+  switch (sentenceCase) {
+    case ESentenceLetterCase.LOWER:
+      return sentence.toLowerCase();
+    case ESentenceLetterCase.UPPER:
+      return sentence.toUpperCase();
+    case ESentenceLetterCase.UPPER_FIRST_LETTER:
+      let res = [...sentence];
+      for (let i = 0; i < res.length; ++i) {
+        if (/[a-z]/.test(res[i])) {
+          res[i] = res[i].toUpperCase();
+          break;
+        }
+      }
+      return res.join('');
+  }
+  return sentence;
+}
+
+function convertPlainPUJSentence(sentence: string, fuzzyRule = new FuzzyRulesGroup_Dummy(), funcPlainPUJPronunciationToStr, funcNonWordStr = null) {
   let result = '';
   let isInNeutral = false;
-  forEachWordInSentence(sentence, (word, nextHyphenCount) => {
+  let sentenceLetterCase = determineSentenceLetterCase(sentence);
+  forEachWordInSentence(sentence.toLowerCase(), (word, nextHyphenCount) => {
     let isNeutral = isInNeutral;
     let isSandhi = false;
     switch (nextHyphenCount) {
@@ -188,7 +245,7 @@ function convertPlainPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy
   },  (word) => {
     result += funcNonWordStr ? funcNonWordStr(word) : word;
   });
-  return result;
+  return changeSentenceLetterCase(result, sentenceLetterCase);
 }
 
 function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
@@ -199,8 +256,8 @@ function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRul
   });
 }
 
-function convertPlainPUJSentenceToIPASentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
-  const tokens = getTokensInSentence(sentence);
+function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
+  const tokens = getTokensInSentence(sentence.toLowerCase());
   let i = 0;
   let result = '';
   // First pass: find out sandhi groups and the citation indices.
@@ -660,7 +717,7 @@ function convertPUJPronunciationToDPPronunciation(pronunciation) {
 
   const initialMap = PUJ_DP_INITIAL_MAP;
 
-  result.initial = initialMap[result.initial] ?? result.initial;
+  result.initial = initialMap[result.initial.toLowerCase()] ?? result.initial;
 
   // 特殊韵母
   result.final = result.final.replace('e', 'ê');
