@@ -94,6 +94,7 @@ export default defineUserConfig({
         "puj.md",
         "pinyin.md",
         "latin_written.md",
+        "lit.md",
         "bib.md",
         "acknowledgments.md",
       ],
@@ -135,6 +136,7 @@ export default defineUserConfig({
           "puj.md",
           "pinyin.md",
           "latin_written.md",
+          "lit.md",
           "bib.md",
           "acknowledgments.md",
         ]
