@@ -195,11 +195,7 @@ function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRul
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
     return addPUJToneMarkWord(convertPlainPUJSentenceToDisplayPUJInSentence(getPronunciationCombination(pron)), null);
   }, (nonWord) => {
-    if (nonWord === '--') {
-      return '·';
-    } else {
-      return nonWord;
-    }
+    return nonWord;
   });
 }
 
@@ -464,7 +460,7 @@ function addPUJToneMarkSentence(sentence) {
       result += cur;
     });
   // 为了美观轻声调用点表示
-  result = result.replace(/(?<=\S)--(?=\S)/g, '·');
+  // result = result.replace(/(?<=\S)--(?=\S)/g, '·');
   return result;
 }
 
