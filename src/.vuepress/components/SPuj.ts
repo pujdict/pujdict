@@ -193,7 +193,7 @@ function convertPlainPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy
 
 function convertPlainPUJSentenceToPUJSentence(sentence, fuzzyRule = new FuzzyRulesGroup_Dummy()) {
   return convertPlainPUJSentence(sentence, fuzzyRule, (pron, isSandhi, isNeutral) => {
-    return addPUJToneMarkWord(convertPlainPUJSentenceToDisplayPUJInSentence(getPronunciationCombination(pron)));
+    return addPUJToneMarkWord(convertPlainPUJSentenceToDisplayPUJInSentence(getPronunciationCombination(pron)), null);
   }, (nonWord) => {
     if (nonWord === '--') {
       return '·';

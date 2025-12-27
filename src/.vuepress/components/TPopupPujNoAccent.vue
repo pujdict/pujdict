@@ -2,9 +2,9 @@
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString" class="d-inline-block" :id="'popup_puj_' + puj">
     <span :style="additionalStyle">
-      <template v-if="showPUJ">{{ display_puj }}<PinyinTag type="PUJ"/></template>
+      <template v-if="showPUJ">{{ display_puj }}<PinyinTag v-if="showDP && showPUJ" type="PUJ"/></template>
       <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
-      <template v-if="showDP">{{ display_dp }}<PinyinTag type="DP"/></template>
+      <template v-if="showDP">{{ display_dp }}<PinyinTag v-if="showDP && showPUJ" type="DP"/></template>
     </span>
   </div>
 </template>
