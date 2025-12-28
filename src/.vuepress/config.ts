@@ -93,7 +93,7 @@ export default defineUserConfig({
       '/doc/': [
         "puj.md",
         "pinyin.md",
-        "latin_written.md",
+        "hyphens.md",
         "lit.md",
         "bib.md",
         "acknowledgments.md",
@@ -135,7 +135,7 @@ export default defineUserConfig({
         children: [
           "puj.md",
           "pinyin.md",
-          "latin_written.md",
+          "hyphens.md",
           "lit.md",
           "bib.md",
           "acknowledgments.md",
