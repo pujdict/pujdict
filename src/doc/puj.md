@@ -873,7 +873,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 忽  | 4  | 2 <TToneLetter v=2 />                                | 5 <TToneLetter sandhi v=5 />, 3 <TToneLetter sandhi v=3 />        | 2 <TToneLetter sandhi v=2 />     |
 | 云  | 5  | 55 <TToneLetter v=55 /> (554, <TToneLetter v=554 />) | 22 <TToneLetter sandhi v=22 /> (212 <TToneLetter sandhi v=212 />) | 21 <TToneLetter sandhi v=21 />   |
 | 混  | 6  | 25 <TToneLetter v=25 /> (254, <TToneLetter v=254 />) | 21 <TToneLetter sandhi v=21 />                                    | 21 <TToneLetter sandhi v=21 />   |
-| 份  | 7  | 22 <TToneLetter v=22 />                              | 22 <TToneLetter sandhi v=22 /> (221 <TToneLetter sandhi v=221 />) | 22 <TToneLetter sandhi v=22 />   |
+| 份  | 7  | 22 <TToneLetter v=22 />                              | 21 <TToneLetter sandhi v=22 />                                    | 22 <TToneLetter sandhi v=22 />   |
 | 佛  | 8  | 5 <TToneLetter v=5 /> (54 <TToneLetter v=54 />)      | 2 <TToneLetter sandhi v=2 />                                      | 2 <TToneLetter sandhi v=2 />     |
 
 @tab 潮安
@@ -1036,8 +1036,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
       例如：
       奋起 <TToneLetter sandhi v=52 /> <TToneLetter v=21 /> 或 <TToneLetter sandhi v=25 /> <TToneLetter v=21 />。
 
-2. 潮剧戏腔要求字正腔圆，1 声的前变调通常保持平声，但语速较快时可能带上曲折；5 声和 7
-   声前变调语速较慢时必须保持平声，在念白语速较快时可以带上曲折。此外，1、5、6、8 声在念单字拖长音时，出于艺术化处理的考虑，有可能带上一个降调。
+2. 潮剧戏腔要求字正腔圆，1 声的前变调通常保持平声，但语速较快时可能带上曲折；5 声
+   前变调语速较慢时必须保持平声，在念白语速较快时可以带上曲折。此外，1、5、6、8 声在念单字拖长音时，出于艺术化处理的考虑，有可能带上一个降调。
 3. 潮阳新派已经将 3、6 声两个单字调混同，但在变调中依然可区分。
 4. 惠来已将 3、7 声两个单字调混同，但在变调中依然可区分。
 

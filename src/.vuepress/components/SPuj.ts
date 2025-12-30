@@ -132,7 +132,7 @@ class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
     super('辞典', {
       // 默认音以潮剧调为标准
       citation: [33, 52, 212, 2, 55, 25, 22, 5],
-      sandhi: [33, 23, 32, 3, 212, 21, 221, 2],
+      sandhi: [33, 23, 32, 3, 212, 21, 21, 2],
       neutral: [22, 212, 21, 2, 22, 21, 22, 2],
       group: {
         "2-2": "25-21",
