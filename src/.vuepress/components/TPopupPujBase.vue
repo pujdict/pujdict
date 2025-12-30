@@ -51,6 +51,11 @@ export default {
       required: false,
       default: {},
     },
+    linebreak: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
   },
   data() {
     return {

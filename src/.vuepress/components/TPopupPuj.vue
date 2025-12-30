@@ -7,10 +7,14 @@
        :style="additionalStyle"
     >
       <template v-if="showPUJ">{{ display_puj }}<PinyinTag v-if="showDP && showPUJ" type="PUJ"/></template>
-      <span v-if="showDP && showPUJ" style="opacity: 60%">/</span>
+      <span v-if="showDP && showPUJ" style="opacity: 60%">
+        <template v-if="linebreak"><br/></template><template v-else>/</template>
+      </span>
       <template v-if="showDP">{{ display_dp }}<PinyinTag v-if="showDP && showPUJ" type="DP"/></template>
       <template v-if="showIPA && display_ipa !== ''">
+        <template v-if="linebreak"><br/>
         [{{ display_ipa }}]
+        </template>
       </template>
     </a>
 
