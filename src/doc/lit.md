@@ -21,7 +21,7 @@ import TPuj from '@components/TPuj.vue';
 试辨析：
 - 绞（绞花）<TPopupPujNoAccent puj="ka2"/>  
   狡（狡猾）<TPopupPujNoAccent puj="kau2"/>  
-  饺（水饺） <TPopupPujNoAccent puj="kiau2"/>
+  饺（水饺）<TPopupPujNoAccent puj="kiau2"/>
 - 胡（姓氏）<TPopupPujNoAccent puj="ou5"/>  
   胡（胡蝇）<TPopupPujNoAccent puj="hou5"/>  
   胡（二胡）<TPopupPujNoAccent puj="hu5"/>
@@ -72,7 +72,7 @@ import TPuj from '@components/TPuj.vue';
 - 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。**惟愿**慈悲随**接**引，恭迎**圣驾降**祯祥。（梵呗《道场偈》）  
   <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li7 tsu1-sur1 sek4- khi2-theng5. Ui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- tseng1-siang5."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祗万**倍**功。（梵呗《宝聚山王》）  
-  <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3 seng1-ti2 buan7-pui6-kong1."/>
+  <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-ti2 buan7-pui6-kong1."/>
 
 对于古诗词、潮剧唱词、方言歌仔等，一般而言，仅在韵脚以及一些比较少用的书面词汇中，变用文读音，其他字音通常都采用口语常用音。
 例如：
@@ -83,10 +83,10 @@ import TPuj from '@components/TPuj.vue';
   <TPopupPujNoAccent linebreak puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2 hong5. Koi1--tsionn7 iu5-jin5 ju5-tio5 iong3, hur5-teng1 tui7-tui7 sai3- iu5-liong5."/>
 - 摘取蟠桃献华堂，长生哪得安期**枣**。昔日昆仑不纪年，天恩雨露知多**少**。（潮剧《十仙庆寿》）  
   <TPopupPujNoAccent linebreak puj="Tiah4-tshu2 phuan5-tho5 hian3- hua5-thang5, tshiang5-seng1 na2-tit4 an1-khi5-tsau2. Tsa2--jit8 khun1-lun5 put4- ki2-nian5, thian1-orn1 hou6-lou7 tsai1-to1-sau2."/>
-- 奔腾起伏大巴**山**，林深好把天兵藏。嘉陵江水滔滔浪，正是游击健儿饮马**泉**。（潮剧《江姐》）
-  <TPopupPujNoAccent linebreak puj="Phun1-theng5 khi2-hok8 tai6-pa1-san1, lim5 tshim1 ho2-pa2 thian1-piann1 tshang5. Kia1-leng5-kang1-tsui2 thau1-thau1 lang6, tsiann3-si6- iu5-khek4 kian6-ji5 im3-be2-tshuan5."/>
+- 盼亲人，谁不想相见在眼**前**…雾锁渝州方壮别，春雨如烟已一**年**。革命伴侣多离会，如今又相见在战**场**。（潮剧《江姐》）
+  <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsiang3-tshiang5."/>
 - 六十余里垒岩石，筑就东海一长**城**。水旱风潮已制伏，春苗夏禾竞争**荣**。昔日泪痕今何在，惟闻江头欢笑**声**。（余锡渠《治水歌》）  
-  <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2-ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8-tshiang5-seng5. Tsui2-uann6 huang1-tio5 inn'2-tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
+  <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2- ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8- tshiang5-seng5. Tsui2-uann6 huang1-tio5 inn'2- tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
 
 需要说明的是，韵脚变读后的文读音，即使在口语中含义不同于白读音
 （如“行” <TPopupPujNoAccent puj="kiann5"/> 变读为 <TPopupPujNoAccent puj="heng5"/>，“知” <TPopupPujNoAccent puj="tsai1"/> 变读为 <TPopupPujNoAccent puj="ti1"/> 等），
