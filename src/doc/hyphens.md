@@ -95,9 +95,12 @@ import TPuj from '@components/TPuj.vue';
 但在书写汉字时，轻声调可能是比较难以直接通过文字判断的。
 在排版方便的时候，建议在可能出现歧义的轻声调中，在轻声调的单词使用着重号 ◌̣ 或者粗体、斜体等不同字体来做区分。
 
-- 你烦恼？<TPopupPujNoAccent puj="Lur2 huan5-lo2?"/>（你操心什么？）——**你***烦恼*？<TPopupPujNoAccent puj="Lur2-- huan5-lo2?"/>（要你来操心？）
-- 后日。<TPopupPujNoAccent puj="Au6-jit8."/>（以后，之后的某一天）——**后***日*。<TPopupPujNoAccent puj="Au6--jit8."/>（后天，专指明天的明天）
-- 记者。<TPopupPujNoAccent puj="Ki3-tsia2."/>（新闻记者）——**记***者*。<TPopupPujNoAccent puj="Ki3--tsia2."/>（文言，做记录的人）
+- 你烦恼？<TPopupPujNoAccent puj="Lur2 huan5-lo2?"/>（你操心什么？）  
+  **你***烦恼*？<TPopupPujNoAccent puj="Lur2-- huan5-lo2?"/>（要你来操心？）
+- 后日。<TPopupPujNoAccent puj="Au6-jit8."/>（以后，之后的某一天）  
+  **后***日*。<TPopupPujNoAccent puj="Au6--jit8."/>（后天，专指明天的明天）
+- 记者。<TPopupPujNoAccent puj="Ki3-tsia2."/>（新闻记者）  
+  **记***者*。<TPopupPujNoAccent puj="Ki3--tsia2."/>（文言，做记录的人）
 
 另外，字母 i 出现在句首需要使用大写 I 的时候，为避免与字母 L 的小写 l 相混，可转写为 Y。
 
@@ -105,15 +108,15 @@ import TPuj from '@components/TPuj.vue';
 
 ## 成句书写范例
 
-<b>苦恋 <TPuj puj="Khou2-luan3"/> </b>  
+<b>苦恋 <TPopupPujNoAccent puj="Khou2-luan3"/> </b>  
 （作词：陈小奇 作曲：宋书华 主唱：宋亦乐）
 
-一片痴情是苦恋<br/><TPopupPujNoAccent puj="Tsek8-phian3- tshi1-tsheng5 si6- khou2-luan3"/>  
-十字路边把你呼喊<br/><TPopupPujNoAccent puj="Tsap8-ji7-lou7-pinn1 pa2- lur2 hu1-ham3"/>  
-当初咱山盟海誓<br/><TPopupPujNoAccent puj="Tng1-tsho1 nan2 suann1-meng5 -hai2-si7"/>  
-为何如今对影只一人<br/><TPopupPujNoAccent puj="Ui5-ho5- ju5-kim1 tui3-iann2 tsi2- tsek8-nang5"/>  
-心头千般相思意<br/><TPopupPujNoAccent puj="Sim1-thau5 tshoinn1-puann1 siang1-sur1-i3"/>  
-夜夜梦中泪不干<br/><TPopupPujNoAccent puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
-情痴痴 我痴痴等<br/><TPopupPujNoAccent puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
-多少风雨多少无奈<br/><TPopupPujNoAccent puj="To1-tsio2- huang1-hou6 to1-tsio2- bo5-nai6"/>  
-你可明白这地老天荒<br/><TPopupPujNoAccent puj="Lur2 kho2- meng5-peh8- tse2- ti7-lau2 -thian1-huang1"/>
+一片痴情是苦恋<br/><TPopupPujNoAccent linebreak puj="Tsek8-phian3- tshi1-tsheng5 si6- khou2-luan3"/>  
+十字路边把你呼喊<br/><TPopupPujNoAccent linebreak puj="Tsap8-ji7-lou7-pinn1 pa2- lur2 hu1-ham3"/>  
+当初咱山盟海誓<br/><TPopupPujNoAccent linebreak puj="Tng1-tsho1 nan2 suann1-meng5 -hai2-si7"/>  
+为何如今对影只一人<br/><TPopupPujNoAccent linebreak puj="Ui5-ho5- ju5-kim1 tui3-iann2 tsi2- tsek8-nang5"/>  
+心头千般相思意<br/><TPopupPujNoAccent linebreak puj="Sim1-thau5 tshoinn1-puann1 siang1-sur1-i3"/>  
+夜夜梦中泪不干<br/><TPopupPujNoAccent linebreak puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
+情痴痴 我痴痴等<br/><TPopupPujNoAccent linebreak puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
+多少风雨多少无奈<br/><TPopupPujNoAccent linebreak puj="To1-tsio2- huang1-hou6 to1-tsio2- bo5-nai6"/>  
+你可明白这地老天荒<br/><TPopupPujNoAccent linebreak puj="Lur2 kho2- meng5-peh8- tse2- ti7-lau2 -thian1-huang1"/>
