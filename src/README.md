@@ -7,7 +7,7 @@ title: 主页
 #bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: 潮汕方言白话字辞典
+heroText: 潮汕方言白话字辞典 (Beta)
 tagline: |
   开源的轻量级潮汕方言辞典，兼容各地语音。
 actions:
