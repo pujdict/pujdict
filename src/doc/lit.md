@@ -69,10 +69,12 @@ import TPuj from '@components/TPuj.vue';
 
 全文文读，今天只在类似于宗教经文吟诵等场景使用，这些往往是需要神秘主义色彩的场景，不希望听众能直观理解所吟诵的文义。例如：
 
-- 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。**惟愿**慈悲随**接**引，恭迎**圣驾降**祯祥。（梵呗《道场偈》）  
-  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li7 tsu1-sur1 sek4- khi2-theng5. Ui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- tseng1-siang5."/>
+- 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。惟**愿**慈悲随**接**引，恭迎**圣驾降**祯祥。（梵呗《道场偈》）  
+  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li7 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- tseng1-siang5."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祗万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-ti2 buan7-pui6-kong1."/>
+[//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
+[//]: # (   <TPopupPujNoAccent linebreak puj="Ma2 tap8 tshe1 siang1 tshiang5 iap4 sin1-heng5 sui3; kui2 khek4 lui5 hong1 tsur6-bun2 hian5-liang5 i3; sui2-ho2 un5-phiau1 hu2 ngiau2 se5 siang1 lui6; kiu2-heng5 ku1-hun5 lai5-siu6- kam1-lu7-bui7."/>)
 
 对于古诗词、潮剧唱词、方言歌仔等，一般而言，仅在韵脚以及一些比较少用的书面词汇中，变用文读音，其他字音通常都采用口语常用音。
 例如：
