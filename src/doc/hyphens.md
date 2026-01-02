@@ -71,20 +71,36 @@ import TPuj from '@components/TPuj.vue';
 
 ## 连字符和成句书写规则
 
-使用拼音书写句子时，分割单词和短语，并用连字符 - 连起来，声调一律标记原调。
-传统的连字符书写规则，例如各传教士的辞典，以及台罗方案，皆以单词为单位分割，单词内部用连字符连接，
-但这种写法针对三个字以上的词句时，无法准确记录变调情况。
-本辞典中，为了记录和体现变调情况，连字符采取以下方式记录（注意连调单位和单词不同，二者不一定有包含关系）：
+连字符的初衷，就是在书写拼音时，记录并提示读者注意声调的变化。传教士卓威廉在《英汉汕头方言口语词典》的序言中对连字符的描述如下：
+
+> The general idea involved in the use of hyphens is to link together those syllables
+> which are so closely connected that the tones of certain of them are affected by the connexion.
+> This principle, however, is not carried out to the full extent,
+> because in many cases the words thus influencing one another would be too numerous to link together in this manner...
+> The use of hyphens, though most essential, is yet difficult to regulate by any stringent law,
+> and much must be left to discretion.
+> 
+> 使用连字符的总体思路，是将某些音节连接起来——这些音节之间彼此紧密关联，并使得它们当中的某些字的声调因此产生变化。
+> 然而，这个原则并没有得到很彻底的实施，因为很多情况下，相互影响的字词实在太多，难以用这种方式连接…
+> 连字符的使用虽然非常重要，但目前仍然难以通过严格的法则加以规范，很大程度上还是需要依赖个人判断。
+
+总地来说，使用拼音书写句子时，一般规则是将单词和短语分割，声调一律标记原调，并用连字符 - 连起来以提示其中的声调变化。
+由于缺少对变调进行深入的研究，各传教士的辞典，以及台罗方案中的传统连字符规则，皆以单词为单位分割，单词内部用连字符连接，
+单词之间则是空格。
+这种写法在若干单词组合在一起时，就无法准确记录变调情况，使得实际声调还是需要读者依据经验自行判断。
+此外，还有一些特殊的单词，连调断在了单词的内部，这种记法无法记录。
+
+本辞典中，为了严格记录和体现变调情况，连字符采取以下改进的方案（注意连调单位和单词不同，二者不一定有包含关系）：
 
 1. 在一个连调单位内部，如果一个字发生前变调，或在轻声调中不是最后一个字，那么紧挨这个字的拼音之后必须添加连字符。
    此写法用于方便地判定一个拼音的变调情况。
    在此规则下，连字符有可能出现在单词或句子的最后。
    例如，“好吃到…”记为 <TPuj puj="ho2-tsiah8-kau3-..."/>。
 2. 在一个单词内部，除非是第一个字，否则必须在紧挨这个字的拼音之前添加连字符。
-   此规则用于判定一个拼音是否和前一个拼音属于同一个单词。
+   此规则用于判定一个拼音是否和前一个拼音属于同一个单词，并且支持连调在一个单词的内部断开。
    例如“咸煎饼” <TPuj puj="ham5-tsin5 -peng6"/>。
 3. 同时满足上述两条规则的，则紧挨前后两个拼音的连字符合成一个。
-   以往的一般单词的连字符记法，由这条规则兼容。
+   传统的一般单词的连字符记法，由这条规则兼容。
    例如“潮州”<TPuj puj="tio5- -tsiu1"/> = <TPuj puj="tio5-tsiu1"/>。
 
 对于汉字的书写，鉴于中文的书写和阅读习惯，就不在书写的时候特意隔开每个单词了。例如：
