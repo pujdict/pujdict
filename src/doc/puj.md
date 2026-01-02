@@ -36,6 +36,7 @@ li > ol > li {
 
 下面是这套标准音映射到各地口音的一些例子。
 
+[//]: # (潮州有些人有 ueng，有些人转读成了 uang，因此暂取揭阳)
 ```mermaid
 flowchart
     subgraph "“老潮音”"
@@ -47,7 +48,7 @@ flowchart
     huan1[huan]
     hueng1[hueŋ]
     huan0 -->|潮安| huan1;
-    hueng0 -->|汕头| huang1; hueng0 -->|潮州潮安| hueng1;
+    hueng0 -->|汕头| huang1; hueng0 -->|揭阳| hueng1;
     huan0 -->|汕头| huang1; huan0 -->|潮州| hueng1;
     huang0 -->|*| huang1;
 ```
