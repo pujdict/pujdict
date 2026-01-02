@@ -209,7 +209,7 @@ function changeSentenceLetterCase(sentence: string, sentenceCase: ESentenceLette
       let res = [...sentence];
       let isCurrentSentenceFixed = false;
       for (let i = 0; i < res.length; ++i) {
-        if (!isCurrentSentenceFixed && /[a-z]/.test(res[i])) {
+        if (!isCurrentSentenceFixed && /[a-zê]/.test(res[i])) {
           res[i] = res[i].toUpperCase();
           isCurrentSentenceFixed = true;
         }
