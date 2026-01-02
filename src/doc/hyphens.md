@@ -21,7 +21,7 @@ import TPuj from '@components/TPuj.vue';
 可以看到，单词边界与连调单位并不相同。
 
 - 掠 老**鼠**，**我** / 是 大明**星**，尽**忠** / 职**守** / **日** / 续**夜**。  
-  2- 25-**21**, **52** 21- 212-212-**33**, 21-**33** 5-**21** **5** 52-**55**.
+  2- 25-**21**, **52** 21- 212-212-**33**, 21-**33** -5-**21** **5** 52-**55**.
 - 老**鼠** / **胆**/敢 来 捣**乱**，**我** / 即**时** / 叫 伊 回老**家**。  
   25-**21** **52** -23- 212- 23-**25**, **52** 5-**55** 32- 23- 212-21-**33**.
 - 啲咊**猫**，勿 拉**贬**，**我** / 个 工**课** / 还 未曾 **展**。  
@@ -124,7 +124,21 @@ import TPuj from '@components/TPuj.vue';
 
 ## 成句书写范例
 
-<b>苦恋 <TPopupPujNoAccent puj="Khou2-luan3"/> </b>  
+<b>啲咊猫佮灵精仔</b>  
+<b><TPopupPujNoAccent puj="Ti1-tann'5-ngiau1 kah4- leng5-tseng1-kiann2"/></b>
+
+掠老鼠，我是大明星，尽忠职守日续夜。<br/><TPopupPujNoAccent linebreak puj="Liah8- ngiau2-tshur2, ua2 si6- tua7-meng5-tshenn1, tsin6-tiong1 -tseh4-siu2 jit8 sua3-menn5."/>  
+老鼠胆敢来捣乱，我即时叫伊回老家。<br/><TPopupPujNoAccent linebreak puj="Ngiau2-tshur2 tann2 -kann2- lai5- tau2-luan6, ua2 tsiat4-si5 kio3-i1- hue5-lau6-ke1."/>  
+啲咊猫，勿拉贬，我个工课还未曾展。<br/><TPopupPujNoAccent linebreak puj="Ti1-tann'5-ngiau1, mai3- la1-phian2, ua2 kai5- khang1-khue3 huann1- bue7-tseng5- tian2."/>  
+只爱我略施小技，管叫你肉疼兼失脸。<br/><TPopupPujNoAccent linebreak puj="Tsi2-ainn'3-ua2 liat8-si1 siau2-ki6, kuan2- kio3-lur2- nek8--thiann3 kiam1- sit4-liam2."/>  
+灵精仔，勿假𠢕，鸡卵敢来碰石头。<br/><TPopupPujNoAccent linebreak puj="Leng5-tseng1-kiann2, mai3- ke2-gau5, koi1-nng6 kann2-lai5- phong3-tsioh8-thau5."/>  
+啲咊猫，你个涎湫勿散呸，咱难兄难弟和为贵。<br/><TPopupPujNoAccent linebreak puj="Ti1-tann'5-ngiau1, lur2 kai5- nuann6-tshiu1 mai3- suann3-phui3, nan2 nan5-hiann1 -nan5-ti6 hua5 ui5-kui3."/>  
+有了我，主人才养你，无了我，你也大驳悸。<br/><TPopupPujNoAccent linebreak puj="U6-liau2-ua2, tsu2-jin5 tshai5- iang2-lur2, bo5-liau2-ua2, lur2-ia7- tua7-poh4-khui3."/>  
+诶，伊呾话虽然唔合听，是呾道理也有几成。<br/><TPopupPujNoAccent linebreak puj="E6, i1- tann3-ue7 sui1-jian5- m7- hah8-thiann1, si6-tann3- tau6-li2 ia7-u6-- kui2-siann5."/>
+
+---
+
+<b>苦恋</b> <b><TPopupPujNoAccent puj="Khou2-luan3"/></b>  
 （作词：陈小奇 作曲：宋书华 主唱：宋亦乐）
 
 一片痴情是苦恋<br/><TPopupPujNoAccent linebreak puj="Tsek8-phian3- tshi1-tsheng5 si6- khou2-luan3"/>  
