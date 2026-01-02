@@ -252,7 +252,7 @@ export default {
           //   allPossibleProns.push(nasalizedPron);
           // }
           for (const pronAka of entry.pronAka) {
-            if (pronAka.accentId === accentId) {
+            if (accentId.startsWith(pronAka.accentId)) {
               if (pronAka.replace)
                 allPossibleProns = [];
               for (const pron of pronAka.prons)

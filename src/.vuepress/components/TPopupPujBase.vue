@@ -155,7 +155,7 @@ export default {
                     curDp += `(${convertPlainPUJSentenceToDPSentence(getPronunciationCombination(nasalizedPron))})`;
                   }
                   for (const pronAka of entry.pronAka) {
-                    if (pronAka.accentId === accentKey) {
+                    if (accentKey.startsWith(pronAka.accentId)) {
                       let akaPuj = [];
                       let akaDp = [];
                       for (const pron of pronAka.prons) {
@@ -168,10 +168,12 @@ export default {
                         akaPuj.shift();
                         akaDp.shift();
                       }
-                      let akaPujStr = akaPuj.join('/');
-                      let akaDpStr = akaDp.join('/');
-                      curPuj += `(${akaPujStr})`;
-                      curDp += `(${akaDpStr})`;
+                      if (akaPuj.length) {
+                        let akaPujStr = akaPuj.join('/');
+                        let akaDpStr = akaDp.join('/');
+                        curPuj += `(${akaPujStr})`;
+                        curDp += `(${akaDpStr})`;
+                      }
                       break L_trySearchForAka;
                     }
                   }
