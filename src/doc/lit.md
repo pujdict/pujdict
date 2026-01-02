@@ -10,11 +10,14 @@ import TPuj from '@components/TPuj.vue';
 </script>
 
 文白异读是许多汉语方言都存在的一种特殊现象，一般意义上“白”指本地方言的口语读音，“文”指模仿官话发音产生的与“白”读音相异的读书音。
-相对而言，白读音属于较早的历史层次，而文读音属于较晚的历史层次。
 
 但是闽南方言中，读音往往不是文白二分这么简单，因为闽南方言混杂多个不同历史层次。
-潮汕方言混杂百越、秦汉、魏晋南北朝、唐宋、明清等众多层次的成分（比泉、漳等地多出了明清时期官话的成分），是闽南语方言中文白异读最混乱的一种。
-在普通话或中古音中，声、韵、调都完全相同的一个字，在潮州话里的常用音却是来自不同的历史层次的情况非常多，
+潮汕方言混杂秦汉、魏晋南北朝、唐宋、明清等众多层次的成分（比泉、漳等地多出了明清时期官话的成分），是闽南语方言中层次最混乱的一种。
+“文”“白”之分是相对而言的，
+白读音属于较早的历史层次，而文读音属于较晚的历史层次。
+对于有多个读音的汉字而言，那么处于中间的层次，相对于更早的一层，就是文读音，但如果是相对于更晚的一层，则是白读音
+（尽管如此，本地人对于哪个音是“文”，哪个音是“白”，还是有一套主观的不成文的判定标准）。
+实际上，在普通话或中古音中，声、韵、调都完全相同的字，在潮州话里的口语音却是来自不同的历史层次的情况并不少见，
 有时一个字可能有三四个读音，分别来自多个不同历史层次，口语中代表不同含义。
 这种“屎山代码”也使得非母语者难以根据普通话或其他方言直观地推导潮州话读音，
 某种程度上造就了“潮汕方言属于最难学方言之一”的都市传说。
@@ -27,9 +30,10 @@ import TPuj from '@components/TPuj.vue';
   胡（二胡）<TPopupPujNoAccent puj="hu5"/>
 
 文读音，潮汕的老一辈人也称之为“孔子正”。
-古时的文人读书吟诗，会采用贴近官话语音的读书音。
+尽管古时潮汕的文人模仿官话，会产生成系统的文读音，各个历史时期也不断地有新的文读音渗入口语，
+但是，潮汕人的读书音并没有脱离口语。
 泉、漳等地在吟诵诗书时，有全文采用文读音的习惯。
-但潮汕地区不同于泉、漳等地，即使在旧时采用方言教学的学堂中，读书时也没有全文采用文读音的习惯。
+而潮汕地区不同于泉、漳等地，即使在旧时采用方言教学的学堂中，读书时也没有全文采用文读音的习惯。
 一般的文言文、古诗词以及其他书面文章，朗读时都是采用口语惯用读音。
 晚清时期传教士高德在《汉英潮州方言字典》序言中，对此有过论述：
 
@@ -73,6 +77,8 @@ import TPuj from '@components/TPuj.vue';
   <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li7 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- tseng1-siang5."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祗万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-ti2 buan7-pui6-kong1."/>
+- 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
+  <TPopupPujNoAccent linebreak puj="Huam6-huap4 tsau1-heng5 lau5-ngiok8 tshiang5-iu1-hi6; hu6-meng6 mou5-tshai5 tsai3-tsu2 ian1-kia1-lui6; ok4-tsit8 thian1-tsai1 tong3-sur2 ki1-buang5-pui3; siok4-li5- huang5-tshuan5 lai5-siu6- kam1-lu7-bui7."/> 
 [//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
 [//]: # (   <TPopupPujNoAccent linebreak puj="Ma2 tap8 tshe1 siang1 tshiang5 iap4 sin1-heng5 sui3; kui2 khek4 lui5 hong1 tsur6-bun2 hian5-liang5 i3; sui2-ho2 un5-phiau1 hu2 ngiau2 se5 siang1 lui6; kiu2-heng5 ku1-hun5 lai5-siu6- kam1-lu7-bui7."/>)
 
@@ -86,7 +92,7 @@ import TPuj from '@components/TPuj.vue';
 - 摘取蟠桃献华堂，长生哪得安期**枣**。昔日昆仑不纪年，天恩雨露知多**少**。（潮剧《十仙庆寿》）  
   <TPopupPujNoAccent linebreak puj="Tiah4-tshu2 phuan5-tho5 hian3- hua5-thang5, tshiang5-seng1 na2-tit4 an1-khi5-tsau2. Tsa2--jit8 khun1-lun5 put4- ki2-nian5, thian1-orn1 hou6-lou7 tsai1-to1-sau2."/>
 - 盼亲人，谁不想相见在眼**前**…雾锁渝州方壮别，春雨如烟已一**年**。革命伴侣多离会，如今又相见在战**场**。（潮剧《江姐》）
-  <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsiang3-tshiang5."/>
+  <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsian3-tshiang5."/>
 - 六十余里垒岩石，筑就东海一长**城**。水旱风潮已制伏，春苗夏禾竞争**荣**。昔日泪痕今何在，惟闻江头欢笑**声**。（余锡渠《治水歌》）  
   <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2- ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8- tshiang5-seng5. Tsui2-uann6 huang1-tio5 inn'2- tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
 
