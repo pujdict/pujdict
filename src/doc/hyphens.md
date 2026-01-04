@@ -30,7 +30,7 @@ import TPuj from '@components/TPuj.vue';
   23-52-**21** 2-**33** 23-**25**, 23- 32-23 **5**--*21* 23- 5-**21**.
 - 灵精**仔**，勿 假**𠢕**，鸡**卵** / 敢 来 碰 石**头**。  
   212-23-**52**, 32- 25-**55**, 23-**25** 23- 212- 32- 2-**55**.
-- 啲咊**猫**，**你** / 个 涎**湫** / 勿 散**呸**，**咱** / 难**兄** / 难**弟** / **和** / 为**贵**。  
+- 啲咊**猫**，**你** / 个 涎**湫** / 勿 散**呸**，**咱** / 难**兄**/难**弟** / **和** / 为**贵**。  
   23-212-**33**, **52** 212- 21-**33** 32- 32-**212**, **52** 212-**33** 212-**25** **55** 212-**212**.
 - 有了**我**，主**人** / 才 养**你**，无了**我**，你 也 大驳**悸**。  
   21-25-**21**, 25-**55** 212- 25-**21**, 212-25-**21**, 23- 212- 212-3-**212**.
@@ -95,13 +95,13 @@ import TPuj from '@components/TPuj.vue';
 1. 在一个连调单位内部，如果一个字发生前变调，或在轻声调中不是最后一个字，那么紧挨这个字的拼音之后必须添加连字符。
    此写法用于方便地判定一个拼音的变调情况。
    在此规则下，连字符有可能出现在单词或句子的最后。
-   例如，“好吃到…”记为 <TPuj puj="ho2-tsiah8-kau3-..."/>。
+   例如，“好食到…”记为 <TPopupPujNoAccent puj="ho2-tsiah8-kau3-..."/>。
 2. 在一个单词内部，除非是第一个字，否则必须在紧挨这个字的拼音之前添加连字符。
    此规则用于判定一个拼音是否和前一个拼音属于同一个单词，并且支持连调在一个单词的内部断开。
-   例如“咸煎饼” <TPuj puj="ham5-tsin5 -peng6"/>。
+   例如“咸煎饼” <TPopupPujNoAccent puj="ham5-tsin5 -peng6"/>。
 3. 同时满足上述两条规则的，则紧挨前后两个拼音的连字符合成一个。
-   传统的一般单词的连字符记法，由这条规则兼容。
-   例如“潮州”<TPuj puj="tio5- -tsiu1"/> = <TPuj puj="tio5-tsiu1"/>。
+   传统白话字的连字符记法，由这条规则兼容。
+   例如“潮州”<TPopupPujNoAccent puj="tio5- -tsiu1"/> = <TPopupPujNoAccent puj="tio5-tsiu1"/>。
 
 对于汉字的书写，鉴于中文的书写和阅读习惯，就不在书写的时候特意隔开每个单词了。例如：
 
@@ -130,7 +130,7 @@ import TPuj from '@components/TPuj.vue';
 掠老鼠，我是大明星，尽忠职守日续夜。<br/><TPopupPujNoAccent linebreak puj="Liah8- ngiau2-tshur2, ua2 si6- tua7-meng5-tshenn1, tsin6-tiong1 -tseh4-siu2 jit8 sua3-menn5."/>  
 老鼠胆敢来捣乱，我即时叫伊回老家。<br/><TPopupPujNoAccent linebreak puj="Ngiau2-tshur2 tann2 -kann2- lai5- tau2-luan6, ua2 tsiat4-si5 kio3-i1- hue5-lau6-ke1."/>  
 啲咊猫，勿拉贬，我个工课还未曾展。<br/><TPopupPujNoAccent linebreak puj="Ti1-tann'5-ngiau1, mai3- la1-phian2, ua2 kai5- khang1-khue3 huann1- bue7-tseng5- tian2."/>  
-只爱我略施小技，管叫你肉疼兼失脸。<br/><TPopupPujNoAccent linebreak puj="Tsi2-ainn'3-ua2 liat8-si1 siau2-ki6, kuan2- kio3-lur2- nek8--thiann3 kiam1- sit4-liam2."/>  
+只爱我略施小技，管叫你肉疼兼失脸。<br/><TPopupPujNoAccent linebreak puj="Tsi2-ainn'3-ua2 liak8-si1 siau2-ki6, kuan2- kio3-lur2- nek8--thiann3 kiam1- sit4-liam2."/>  
 灵精仔，勿假𠢕，鸡卵敢来碰石头。<br/><TPopupPujNoAccent linebreak puj="Leng5-tseng1-kiann2, mai3- ke2-gau5, koi1-nng6 kann2-lai5- phong3-tsioh8-thau5."/>  
 啲咊猫，你个涎湫勿散呸，咱难兄难弟和为贵。<br/><TPopupPujNoAccent linebreak puj="Ti1-tann'5-ngiau1, lur2 kai5- nuann6-tshiu1 mai3- suann3-phui3, nan2 nan5-hiann1 -nan5-ti6 hua5 ui5-kui3."/>  
 有了我，主人才养你，无了我，你也大驳悸。<br/><TPopupPujNoAccent linebreak puj="U6-liau2-ua2, tsu2-jin5 tshai5- iang2-lur2, bo5-liau2-ua2, lur2-ia7- tua7-poh4-khui3."/>  
