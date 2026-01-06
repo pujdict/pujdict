@@ -276,7 +276,7 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
     const token = tokens[i];
     const seek1 = tokens[i + 1];
     if (token.category === EPUJTokenCategory.WORD) {
-      // If a PUJ word is not followed by '-' '- ', or is followed by '--' '-- ' ' -', then we got the citation.
+      // If a PUJ word is not followed by '-' '- ', or is followed by '--' ' --' ' -', then we got the citation.
       if (!foundCurrentCitation && (!seek1 || (seek1 && [
         EPUJHyphenCategory.NONE,
         EPUJHyphenCategory.PRE,
@@ -469,6 +469,10 @@ function getTokensInSentence(sentence) {
             tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.POST));
           break;
         case '-- ':
+          console.error("Double-hyphen must not break before other words.");
+          tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.DOUBLE_BREAK));
+          break;
+        case ' --':
           tokens.push(new PUJToken(cur, EPUJTokenCategory.HYPHEN, EPUJHyphenCategory.DOUBLE_BREAK));
           break;
         case '--':

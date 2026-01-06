@@ -1,5 +1,5 @@
 ---
-title: 变调规则和连字符
+title: 连调规则和连字符
 order: 10
 date: 2025-10-02
 ---
@@ -8,6 +8,8 @@ date: 2025-10-02
 import TPopupPujNoAccent from '@components/TPopupPujNoAccent.vue';
 import TPuj from '@components/TPuj.vue';
 </script>
+
+注：本文所引用“连调单位”“声调地位”等相关概念，源于施其生老师《汕头方言连读变调的动态运行》一文。
 
 ## 连读变调规则
 
@@ -35,12 +37,12 @@ import TPuj from '@components/TPuj.vue';
 - 有了**我**，主**人** / 才 养**你**，无了**我**，你 也 大驳**悸**。  
   21-25-**21**, 25-**55** 212- 25-**21**, 212-25-**21**, 23- 212- 212-3-**212**.
 - **诶**，伊 呾**话** / 虽然 唔 合**听**，是呾 道**理** / 也 **有** _几成_。  
-  **25**, 23- 32-**22** 23-212- 212- 2-**33**, 21-32- 21-**52** 212- **25**-- *212-22*.
+  **25**, 23- 32-**22** 23-212- 212- 2-**33**, 21-32- 21-**52** 212- **25** --*212-22*.
 
 不难注意到以下变调规则：
-1. 一个变调单位内部有且只有一个读单字调（“本调”）的字，不妨记这个字为 Ｘ。
-2. 位于 Ｘ 之前的所有字，均读前变调，不妨记读前变调的字为 Ｙ。
-3. 位于 Ｘ 之后的所有字，均读轻声调，不妨记读轻声调的字为 Ｚ。
+1. 一个变调单位内部至多有且只有一个读单字调（“本调”）的字，不妨记这个字为 Ｘ（可以没有，即全轻声调句，见后文示例），其声调地位为“本调地位”。
+2. 位于 Ｘ 之前的所有字，均读前变调，不妨记读前变调的字为 Ｙ，其声调地位为“前变调地位”。
+3. 位于 Ｘ 之后的所有字，均读轻声调，不妨记读轻声调的字为 Ｚ，其声调地位为“后变调地位”。
 4. 特别地，当且仅当 Ｘ 能与其前面至少一个字组成双音节或多音节词时，记 Ｘ 的前一个字为 Ｗ。
 5. 在潮州、澄海、揭阳等地，ＷＸ 遵循一般二字词组的变调规则（详见[各地声调调值表](./puj.md#各地声调调值表)的注释部分），即：  
    若 Ｗ 为 2、3、4 声且 Ｘ 为 2、5、8 声，则 Ｗ 为高变调，否则 Ｗ 为低变调；  
@@ -51,7 +53,7 @@ import TPuj from '@components/TPuj.vue';
 
 - 伊呾 **你** / 呾**来** / 也是 **有** *几成 道理*。  
   ＹＹ **Ｘ** / Ｗ**Ｘ** / ＹＹ **Ｘ** *ＺＺ ＺＺ*。  
-  23-32- 52 52-55 212-32- 25-- 212-22- 21-212.
+  23-32- 52 52-55 212-32- 25 --212-22- 21-212.
 
 确定调值步骤如下：
 
@@ -99,9 +101,12 @@ import TPuj from '@components/TPuj.vue';
 2. 在一个单词内部，除非是第一个字，否则必须在紧挨这个字的拼音之前添加连字符。
    此规则用于判定一个拼音是否和前一个拼音属于同一个单词，并且支持连调在一个单词的内部断开。
    例如“咸煎饼” <TPopupPujNoAccent puj="ham5-tsin5 -peng6"/>。
-3. 同时满足上述两条规则的，则紧挨前后两个拼音的连字符合成一个。
+3. 紧挨轻声调开始的第一个字的拼音之前，添加双连字符。双连字符有可能出现在一句话的最开始。
+   例如“拄着无钱使就来我块挈” <TPopupPujNoAccent puj="--Tu2-tioh4- bo5-tsinn5-sai2- tsu6- lai5- ua2- kor3- khioh8"/>。
+4. 同时满足上述规则的，则紧挨前后两个拼音的连字符合成一个。
    传统白话字的连字符记法，由这条规则兼容。
-   例如“潮州”<TPopupPujNoAccent puj="tio5- -tsiu1"/> = <TPopupPujNoAccent puj="tio5-tsiu1"/>。
+   例如“潮州”<TPopupPujNoAccent puj="tio5- -tsiu1"/> = <TPopupPujNoAccent puj="tio5-tsiu1"/>；
+   “肉疼”<TPopupPujNoAccent puj="nek8- --thiann3"/> = <TPopupPujNoAccent puj="nek8--thiann3"/>。
 
 对于汉字的书写，鉴于中文的书写和阅读习惯，就不在书写的时候特意隔开每个单词了。例如：
 
@@ -112,7 +117,7 @@ import TPuj from '@components/TPuj.vue';
 在排版方便的时候，建议在可能出现歧义的轻声调中，在轻声调的单词使用着重号 ◌̣ 或者粗体、斜体等不同字体来做区分。
 
 - 你烦恼？<TPopupPujNoAccent puj="Lur2 huan5-lo2?"/>（你操心什么？）  
-  **你***烦恼*？<TPopupPujNoAccent puj="Lur2-- huan5-lo2?"/>（要你来操心？）
+  **你***烦恼*？<TPopupPujNoAccent puj="Lur2 --huan5-lo2?"/>（要你来操心？）
 - 后日。<TPopupPujNoAccent puj="Au6-jit8."/>（以后，之后的某一天）  
   **后***日*。<TPopupPujNoAccent puj="Au6--jit8."/>（后天，专指明天的明天）
 - 记者。<TPopupPujNoAccent puj="Ki3-tsia2."/>（新闻记者）  
@@ -134,7 +139,7 @@ import TPuj from '@components/TPuj.vue';
 灵精仔，勿假𠢕，鸡卵敢来碰石头。<br/><TPopupPujNoAccent linebreak puj="Leng5-tseng1-kiann2, mai3- ke2-gau5, koi1-nng6 kann2-lai5- phong3-tsioh8-thau5."/>  
 啲咊猫，你个涎湫勿散呸，咱难兄难弟和为贵。<br/><TPopupPujNoAccent linebreak puj="Ti1-tann'5-ngiau1, lur2 kai5- nuann6-tshiu1 mai3- suann3-phui3, nan2 nan5-hiann1 -nan5-ti6 hua5 ui5-kui3."/>  
 有了我，主人才养你，无了我，你也大驳悸。<br/><TPopupPujNoAccent linebreak puj="U6-liau2-ua2, tsu2-jin5 tshai5- iang2-lur2, bo5-liau2-ua2, lur2-ia7- tua7-poh4-khui3."/>  
-诶，伊呾话虽然唔合听，是呾道理也有几成。<br/><TPopupPujNoAccent linebreak puj="E6, i1- tann3-ue7 sui1-jian5- m7- hah8-thiann1, si6-tann3- tau6-li2 ia7-u6-- kui2-siann5."/>
+诶，伊呾话虽然唔合听，是呾道理也有几成。<br/><TPopupPujNoAccent linebreak puj="E6, i1- tann3-ue7 sui1-jian5- m7- hah8-thiann1, si6-tann3- tau6-li2 ia7-u6 --kui2-siann5."/>
 
 ---
 
