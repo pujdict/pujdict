@@ -346,7 +346,9 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
       ++kWordIndexInGroup;
     }
     // 2. Handle special tones
-    if (citationIndexInGroup !== Infinity && citationIndexInGroup > 0) {
+    if (citationIndexInGroup !== Infinity && citationIndexInGroup > 0
+        // The citation must be preceded by exactly '-' to make its previous tone 'important'.
+        && tokens[citationIndex - 1].spelling === '-') {
       let importantIndexInGroup = citationIndexInGroup - 1;
       let importantTone = ipaProns[importantIndexInGroup].tone;
       let citationTone = ipaProns[citationIndexInGroup].tone;
