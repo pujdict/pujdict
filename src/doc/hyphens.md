@@ -43,7 +43,7 @@ import TPuj from '@components/TPuj.vue';
 1. 一个变调单位内部至多有且只有一个读单字调（“本调”）的字，不妨记这个字为 Ｘ（可以没有，即全轻声调句，见后文示例），其声调地位为“本调地位”。
 2. 位于 Ｘ 之前的所有字，均读前变调，不妨记读前变调的字为 Ｙ，其声调地位为“前变调地位”。
 3. 位于 Ｘ 之后的所有字，均读轻声调，不妨记读轻声调的字为 Ｚ，其声调地位为“后变调地位”。
-4. 特别地，当且仅当 Ｘ 能与其前面至少一个字组成双音节或多音节词时，记 Ｘ 的前一个字为 Ｗ。
+4. 特别地，当且仅当 Ｘ 能与其前面至少一个字组成双音节或多音节词时，记 Ｘ 的前一个字为 Ｗ，称其为“重读前变调”。
 5. 在潮州、澄海、揭阳等地，ＷＸ 遵循一般二字词组的变调规则（详见[各地声调调值表](./puj.md#各地声调调值表)的注释部分），即：  
    若 Ｗ 为 2、3、4 声且 Ｘ 为 2、5、8 声，则 Ｗ 为高变调，否则 Ｗ 为低变调；  
    若 ＷＸ 为 3 声 + 2 声的组合，那么 Ｗ 为高变调，Ｘ 发生后变调，变为低降；  
@@ -94,19 +94,20 @@ import TPuj from '@components/TPuj.vue';
 
 本辞典中，为了严格记录和体现变调情况，连字符采取以下改进的方案（注意连调单位和单词不同，二者不一定有包含关系）：
 
-1. 在一个连调单位内部，如果一个字发生前变调，或在轻声调中不是最后一个字，那么紧挨这个字的拼音之后必须添加连字符。
+1. 在一个连调单位内部，如果一个字发生前变调，或在轻声调中不是最后一个字，那么紧挨这个字的拼音之后必须添加单连字符。
+   换言之，紧挨读单字调的字之后添加空格。
    此写法用于方便地判定一个拼音的变调情况。
    在此规则下，连字符有可能出现在单词或句子的最后。
    例如，“好食到…”记为 <TPopupPujNoAccent puj="ho2-tsiah8-kau3-..."/>。
-2. 在一个单词内部，除非是第一个字，否则必须在紧挨这个字的拼音之前添加连字符。
-   此规则用于判定一个拼音是否和前一个拼音属于同一个单词，并且支持连调在一个单词的内部断开。
+2. 在一个单词内部，除非是第一个字，否则必须在紧挨这个字的拼音之前添加单连字符。
+   此规则用于支持连调在一个单词的内部断开。
    例如“咸煎饼” <TPopupPujNoAccent puj="ham5-tsin5 -peng6"/>。
-3. 紧挨轻声调开始的第一个字的拼音之前，添加双连字符。双连字符有可能出现在一句话的最开始。
-   例如“拄着无钱使就来我块挈” <TPopupPujNoAccent puj="--Tu2-tioh4- bo5-tsinn5-sai2- tsu6- lai5- ua2- kor3- khioh8"/>。
-4. 同时满足上述规则的，则紧挨前后两个拼音的连字符合成一个。
+3. 同时满足上述规则的，则紧挨前后两个拼音的连字符合成一个。
    传统白话字的连字符记法，由这条规则兼容。
-   例如“潮州”<TPopupPujNoAccent puj="tio5- -tsiu1"/> = <TPopupPujNoAccent puj="tio5-tsiu1"/>；
-   “肉疼”<TPopupPujNoAccent puj="nek8- --thiann3"/> = <TPopupPujNoAccent puj="nek8--thiann3"/>。
+   例如“潮州”<TPopupPujNoAccent puj="tio5- -tsiu1"/> = <TPopupPujNoAccent puj="tio5-tsiu1"/>。
+4. 紧挨轻声调开始的第一个字的拼音之前，添加双连字符。如果第一个读轻声调的字与前字（即读单字调的字）组成了词组，则去掉前字后的空格。
+   例如“肉疼”<TPopupPujNoAccent puj="nek8- --thiann3"/> = <TPopupPujNoAccent puj="nek8--thiann3"/>。
+   双连字符有可能出现在一句话的最开始。例如“拄着无钱使就来我块挈” <TPopupPujNoAccent puj="--Tu2-tioh4- bo5-tsinn5-sai2- tsu6- lai5- ua2- kor3- khioh8"/>。
 
 对于汉字的书写，鉴于中文的书写和阅读习惯，就不在书写的时候特意隔开每个单词了。例如：
 
@@ -149,7 +150,7 @@ import TPuj from '@components/TPuj.vue';
 一片痴情是苦恋<br/><TPopupPujNoAccent linebreak puj="Tsek8-phian3- tshi1-tsheng5 si6- khou2-luan3"/>  
 十字路边把你呼喊<br/><TPopupPujNoAccent linebreak puj="Tsap8-ji7-lou7-pinn1 pa2- lur2 hu1-ham3"/>  
 当初咱山盟海誓<br/><TPopupPujNoAccent linebreak puj="Tng1-tsho1 nan2 suann1-meng5 -hai2-si7"/>  
-为何如今对影只一人<br/><TPopupPujNoAccent linebreak puj="Ui5-ho5- ju5-kim1 tui3-iann2 tsi2- tsek8-nang5"/>  
+为何如今对影只一人<br/><TPopupPujNoAccent linebreak puj="Ui5-ho5- ju5-kim1 tui3- iann2 tsi2- tsek8-nang5"/>  
 心头千般相思意<br/><TPopupPujNoAccent linebreak puj="Sim1-thau5 tshoinn1-puann1 siang1-sur1-i3"/>  
 夜夜梦中泪不干<br/><TPopupPujNoAccent linebreak puj="Menn5-menn5 mang7-tang1 lui6 put4-kan1"/>  
 情痴痴 我痴痴等<br/><TPopupPujNoAccent linebreak puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  

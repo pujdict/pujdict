@@ -13,10 +13,10 @@ import TPuj from '@components/TPuj.vue';
 
 但是闽南方言中，读音往往不是文白二分这么简单，因为闽南方言混杂多个不同历史层次。
 潮汕方言混杂秦汉、魏晋南北朝、唐宋、明清等众多层次的成分（比泉、漳等地多出了明清时期官话的成分），是闽南语方言中层次最混乱的一种。
+
 “文”“白”之分是相对而言的，
 白读音属于较早的历史层次，而文读音属于较晚的历史层次。
-对于有多个读音的汉字而言，那么处于中间的层次，相对于更早的一层，就是文读音，但如果是相对于更晚的一层，则是白读音
-（尽管如此，本地人对于哪个音是“文”，哪个音是“白”，还是有一套主观的不成文的判定标准）。
+对于有多个读音的汉字而言，那么处于中间的层次，相对于更早的一层，就是文读音，但如果是相对于更晚的一层，则是白读音。
 实际上，在普通话或中古音中，声、韵、调都完全相同的字，在潮州话里的口语音却是来自不同的历史层次的情况并不少见，
 有时一个字可能有三四个读音，分别来自多个不同历史层次，口语中代表不同含义。
 这种“屎山代码”也使得非母语者难以根据普通话或其他方言直观地推导潮州话读音，
@@ -65,8 +65,8 @@ import TPuj from '@components/TPuj.vue';
 第二种是所谓“孔子正”，全文采用文读音，现在已基本不用：
 
 - 子**曰**：**学**而**时**习之，不**亦**悦乎？**有朋**自远**方**来，不**亦乐**乎？（论语）  
-  一般读法：<br/><TPopupPujNoAccent linebreak puj="Tsur2-uat4: Hak8 jur5- si5- sip8-- tsur1, put4-ia7- juat8-- hu1? U6- pheng5 tsur6- ian2-hng1 lai5, put4-ia7- lak8-- hu1?"/>  
-  “孔子正”：<br/><TPopupPujNoAccent linebreak puj="Tsur2-iat4: Hiok8 jur5- sur5- sip8-- tsur1, put4-ek8- juat8-- hu1? Iu2- phong5 tsur6- ian2-huang1 lai5, put4-ek8- lok8-- hu1?"/>  
+  一般读法：<br/><TPopupPujNoAccent linebreak puj="Tsur2 --uat4: Hak8 jur5- si5- sip8 --tsur1, put4-ia7- juat8 --hu1? U6- pheng5 tsur6- ian2-hng1 lai5, put4-ia7- lak8 --hu1?"/>  
+  “孔子正”：<br/><TPopupPujNoAccent linebreak puj="Tsur2 --iat4: Hiok8 jur5- sur5- sip8 --tsur1, put4-ek8- juat8 --hu1? Iu2- phong5 tsur6- ian2-huang1 lai5, put4-ek8- lok8 --hu1?"/>  
 - **人**之**初**，**性本**善。（三字经）  
   一般读法：<br/><TPopupPujNoAccent linebreak puj="Nang5 tsur1- tsho1, senn3 png2 sian6."/>  
   “孔子正”：<br/><TPopupPujNoAccent linebreak puj="Jin5 tsur1- tshu1, seng3 pun2 sian6."/>
@@ -75,8 +75,8 @@ import TPuj from '@components/TPuj.vue';
 
 - 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。惟**愿**慈悲随**接**引，恭迎**圣驾降**祥祯。（梵呗《道场偈》）  
   <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
-- **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祗万**倍**功。（梵呗《宝聚山王》）  
-  <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-ti2 buan7-pui6-kong1."/>
+- **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祇万**倍**功。（梵呗《宝聚山王》）  
+  <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-khi5 buan7-pui6-kong1."/>
 - 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
   <TPopupPujNoAccent linebreak puj="Huam6-huap4 tsau1-heng5 lau5-ngiok8 tshiang5-iu1-hi6; hu6-meng6 mou5-tshai5 tsai3-tsu2 ian1-kia1-lui6; ok4-tsit8 thian1-tsai1 tong3-sur2 ki1-buang5-pui3; siok4-li5- huang5-tshuan5 lai5-siu6- kam1-lu7-bui7."/> 
 [//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
