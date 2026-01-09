@@ -815,6 +815,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    因为实际上在各地的口音中，均无 [ɯn]/[ən]（或 [ɯŋ]/[əŋ]）这样仅在元音开口度有区分的对立阳声韵，辞典统一将各地口音的 <TPopupPujNoAccent puj=orn0 /> 转为 <TPopupPujNoAccent puj=urn0 />。
 7. 通摄三等字文读音韵母为 <TPopupPujNoAccent puj=-iong />, <TPopupPujNoAccent puj=-iok0 />，当接在齿龈音后时，
    包括三市市中心在内的东北部多数地区都读为 <TPopupPujNoAccent puj=-ong />, <TPopupPujNoAccent puj=-ok />，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i——这是潮普小片或练江腔的标志性读音。
+   不过，近年来受普通话以及潮汕三市市中心的强势影响，许多年轻人的发音也已倾向于丢失 i 介音，i 介音保留与否成为了自由变体，本辞典中相关地区口音仍保留该介音。
    例如：中 <TPopupPujNoAccent puj="tiong1"/>，宠 <TPopupPujNoAccent puj="thiong2"/>，龙 <TPopupPujNoAccent puj="liong5"/>，终 <TPopupPujNoAccent puj="tsiong1"/>，
    从 <TPopupPujNoAccent puj="tshiong5"/>，松 <TPopupPujNoAccent puj="siong1"/>，茸 <TPopupPujNoAccent puj="jiong5"/>，
    筑 <TPopupPujNoAccent puj="tiok4"/>，六 <TPopupPujNoAccent puj="liok8"/>，属 <TPopupPujNoAccent puj="siok8"/>，辱 <TPopupPujNoAccent puj="jiok8"/>。
