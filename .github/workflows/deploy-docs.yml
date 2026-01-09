@@ -6,6 +6,9 @@ on:
     branches:
       - master
       - main
+  schedule:
+    # 4AM in GMT+8, everyday
+    - cron: "0 20 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
