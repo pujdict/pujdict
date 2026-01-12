@@ -159,4 +159,8 @@ export default {
 
 <style scoped lang="scss">
 @import "bootstrap/scss/bootstrap";
+
+.page-link {
+  touch-action: manipulation;
+}
 </style>
