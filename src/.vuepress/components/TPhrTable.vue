@@ -1,28 +1,32 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item" :class="{ disabled: currentPage === 1 }">
-          <button class="page-link" @click="prevPage" :disabled="currentPage === 1">上一页</button>
-        </li>
-        <li class="page-item disabled">
-          <span class="page-link">{{ currentPage }} 页 / {{ totalPages }} 页</span>
-        </li>
-        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-          <button class="page-link" @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
-        </li>
-      </ul>
-      <div class="d-flex gap-3 mt-3">
-        <select class="form-select" style="width: 150px;" v-model="itemsPerPage" @change="changeItemsPerPage(parseInt($event.target.value))">
-          <option v-for="option in itemsPerPageOptions" :value="option">{{ option }} 条/页</option>
-        </select>
-        <div data-mdb-input-init class="input-group form-outline" style="width: 150px;">
-          <input id="page-number" type="number" class="form-control" v-model="jumpToPage" min="1" :max="totalPages" placeholder="页码">
-          <button class="btn btn-outline-secondary" type="button" @click="jumpToPageHandler">跳转</button>
-        </div>
+    <div class="d-flex align-items-center gap-1">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" :class="{ disabled: currentPage === 1 }">
+            <button class="page-link" @click="prevPage" :disabled="currentPage === 1">上一页</button>
+          </li>
+          <li class="page-item disabled">
+            <span class="page-link">{{ currentPage }} 页 / {{ totalPages }} 页</span>
+          </li>
+          <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+            <button class="page-link" @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="d-flex gap-3">
+      <select class="form-select" style="width: 150px;" v-model="itemsPerPage" @change="changeItemsPerPage(parseInt($event.target.value))">
+        <option v-for="option in itemsPerPageOptions" :value="option">{{ option }} 条/页</option>
+      </select>
+      <div data-mdb-input-init class="input-group form-outline" style="width: 150px;">
+        <input id="page-number" type="number" class="form-control" v-model="jumpToPage" min="1" :max="totalPages" placeholder="页码">
+        <button class="btn btn-outline-secondary" type="button" @click="jumpToPageHandler">跳转</button>
       </div>
-    </nav>
+      <img id="loading" :src="withBase('/loading.svg')" height="35" width="35" alt="加载中"/>
+    </div>
+
     <table class="table table-striped table-bordered" style="table-layout: fixed;">
       <thead class="thead-dark">
       <tr>
@@ -73,6 +77,7 @@
 <script setup lang="ts">
 import TDarkTheme from "./TDarkTheme.vue";
 import {darkThemeString} from "./QDarkTheme.vue";
+import {withBase} from "vuepress/client";
 </script>
 
 <script lang="ts">
@@ -122,8 +127,10 @@ export default {
     },
   },
   mounted() {
+    setLoading(true);
     initFromDatabase().then(() => {
       this.items = db.phrases;
+      setLoading(false);
     });
   },
   methods: {
