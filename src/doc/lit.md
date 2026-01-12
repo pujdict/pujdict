@@ -74,7 +74,7 @@ import TPuj from '@components/TPuj.vue';
 全文文读，今天只在类似于宗教经文吟诵等场景使用，这些往往是需要神秘主义色彩的场景，不希望听众能直观理解所吟诵的文义。例如：
 
 - 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。惟**愿**慈悲随**接**引，恭迎**圣驾降**祥祯。（梵呗《道场偈》）  
-  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur1-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
+  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur5-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祇万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-khi5 buan7-pui6-kong1."/>
 - 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
