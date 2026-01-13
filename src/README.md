@@ -278,7 +278,7 @@ actions:
 #        details: 让你的网站更像一个 APP
 #        link: https://theme-hope.vuejs.press/zh/guide/advanced/pwa.html
 
-copyright: false
+#copyright: false
 #footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-present Mr.Hope
 ---
 
@@ -290,7 +290,7 @@ copyright: false
 [//]: # ()
 [//]: # (配置项的相关说明详见 [项目主页配置]&#40;https://theme-hope.vuejs.press/zh/guide/layout/home/&#41;。)
 
-**开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助勘误补正。**
+**开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助补正。**
 
 网站源码：[Gitee](https://gitee.com/pujdict/pujdict) [Github](https://github.com/pujdict/pujdict)  
 数据仓库：[Gitee](https://gitee.com/pujdict/pujbase) [Github](https://github.com/pujdict/pujbase)

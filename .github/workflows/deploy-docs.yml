@@ -64,6 +64,9 @@ jobs:
       - name: Prepare files
         run: |-
           bash prepare_files.sh
+      - name: Prepare versions
+        run: |-
+          bash prepare_versions.sh
       - name: Unit tests
         run: |
           pnpm run test

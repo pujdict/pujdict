@@ -15,6 +15,11 @@ const __dirname = getDirname(import.meta.url); // .vuepress
 dotenv.config();
 
 const isDev = process.env.NODE_ENV === 'development';
+const curYear = new Date().getFullYear();
+const gitHashSite = process.env.GIT_HASH_SITE || "";
+const gitDateSite = process.env.GIT_DATE_SITE || "";
+const gitHashData = process.env.GIT_HASH_DATA || "";
+const gitDateData = process.env.GIT_DATE_DATA || "";
 
 export default defineUserConfig({
   // @ts-ignore
@@ -69,6 +74,12 @@ export default defineUserConfig({
   // },
 
   theme: hopeTheme({
+    footer: `
+    <div>内容纠错、功能建议，或有其他问题，可<a target="_blank" href="https://v.wjx.cn/vm/YuSAWo9.aspx">填写匿名反馈</a>，或<a href="mailto:brangpd@outlook.com">邮件联系</a>站长。</div>
+    <div>数据版本：${gitDateData}@${gitHashData}</div> <div>网站版本：${gitDateSite}@${gitHashSite}</div>
+    `,
+    copyright: `© 2024-${curYear} 潮汕方言白话字辞典`,
+    displayFooter: true,
     darkmode: "switch",
     favicon: "book-bookmark-solid.svg",
     iconAssets: "fontawesome-with-brands",
