@@ -75,10 +75,12 @@ export default defineUserConfig({
 
   theme: hopeTheme({
     footer: `
-    <div>内容纠错、功能建议，或有其他问题，可<a target="_blank" href="https://v.wjx.cn/vm/YuSAWo9.aspx">填写匿名反馈</a>，或<a href="mailto:brangpd@outlook.com">邮件联系</a>站长。</div>
     <div>数据版本：${gitDateData}@${gitHashData}</div> <div>网站版本：${gitDateSite}@${gitHashSite}</div>
     `,
-    copyright: `© 2024-${curYear} 潮汕方言白话字辞典`,
+    copyright: `
+    <div>© 2024-${curYear} 潮汕方言白话字辞典</div>
+    <a target="_blank" href="https://v.wjx.cn/vm/YuSAWo9.aspx">提交反馈</a>　<a href="mailto:brangpd@outlook.com">联系站长</a>
+    `,
     displayFooter: true,
     darkmode: "switch",
     favicon: "book-bookmark-solid.svg",

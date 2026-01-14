@@ -3,163 +3,71 @@ home: true
 icon: home
 title: 主页
 #heroImage: https://theme-hope-assets.vuejs.press/logo.svg
-#bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
-#bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
+bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
+bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
-  background-attachment: fixed
+   background-attachment: fixed
+#   background-repeat: repeat
+#   background-size: initial
 heroText: 潮汕方言白话字辞典 (Beta)
-tagline: |
-  开源的轻量级潮汕方言辞典，兼容各地语音。
-actions:
-  - text: 声韵索引
-    icon: search
-    link: ./query/qpron
-    type: primary
-  - text: 字音查询
-    icon: search
-    link: ./query/qchar
-    type: primary
-  - text: 字词高级查询 (Alpha)
-    icon: search
-    link: ./query/qphr
-    type: primary
+tagline: 开源的轻量级潮汕方言辞典，兼容各地语音。
+#actions:
+#  - text: 声韵索引
+#    icon: search
+#    link: ./query/qpron
+#    type: primary
+#  - text: 字音查询
+#    icon: search
+#    link: ./query/qchar
+#    type: primary
+#  - text: 字词高级查询 (Alpha)
+#    icon: search
+#    link: ./query/qphr
+#    type: primary
 
 #  - text: 文档
 #    link: ./doc/
 
-#highlights:
-#  - header: 易于安装
-#    image: /assets/image/box.svg
-#    bgImage: https://theme-hope-assets.vuejs.press/bg/3-light.svg
-#    bgImageDark: https://theme-hope-assets.vuejs.press/bg/3-dark.svg
-#    highlights:
-#      - title: 运行 <code>pnpm create vuepress-theme-hope hope-project</code> 以创建一个新的主题项目。
-#      - title: 在已有项目根目录下运行 <code>pnpm create vuepress-theme-hope add .</code> 以在项目中添加主题。
-#
-#  - header: 在 Markdown 中添加你想要的内容
-#    description: 我们扩展了标准的 CommonMark 规范，为你添加了成吨功能。
-#    image: /assets/image/markdown.svg
-#    bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
-#    bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
-#    bgImageStyle:
-#      background-repeat: repeat
-#      background-size: initial
-#    features:
-#      - title: 链接检查
-#        icon: clipboard-check
-#        details: 检查 Markdown 链接
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/others.html#link-check
-#
-#      - title: 提示容器支持
-#        icon: box-archive
-#        details: 用样式装饰 Markdown 内容
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/hint.html
-#
-#      - title: GFM 警告
-#        icon: bell
-#        details: GFM 风格的警告容器
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/alert.html
-#
-#      - title: 选项卡
-#        icon: table-columns
-#        details: 使用选项卡对相似内容进行分组
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/tabs.html
-#
-#      - title: 代码组
-#        icon: code
-#        details: 使用选项卡对相似代码进行分组
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/code-tabs.html
-#
-#      - title: 自定义对齐支持
-#        icon: align-center
-#        details: 让你在 Markdown 中对段落进行对齐
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/align.html
-#
-#      - title: 自定义属性支持
-#        icon: code
-#        details: 让你为 Markdown 元素添加属性
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/attrs.html
-#
-#      - title: 上下角标支持
-#        icon: superscript
-#        details: 你的 Markdown 现在将支持上下角标
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/sup-sub.html
-#
-#      - title: 脚注
-#        icon: quote-left
-#        details: 你的 Markdown 现在将支持脚注
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/footnote.html
-#
-#      - title: 标记支持
-#        icon: highlighter
-#        details: 让你在 Markdown 中对词句进行标记
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/mark.html
-#
-#      - title: 任务列表
-#        icon: square-check
-#        details: 在 Markdown 中使用任务列表
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/tasklist.html
-#
-#      - title: 图片语法
-#        icon: image
-#        details: 使用改进的语法指定图片大小与颜色模式
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/image.html
-#
-#      - title: 组件支持
-#        icon: puzzle-piece
-#        details: 在 Markdown 中轻松插入组件
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/component.html
-#
-#      - title: 图表支持
-#        icon: chart-simple
-#        details: 在 Markdown 中展示图表
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/chartjs.html
-#
-#      - title: 流程图支持
-#        icon: route
-#        details: 可以在 Markdown 中直接写出流程图
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/flowchart.html
-#
-#      - title: Mermaid 支持
-#        icon: chart-pie
-#        details: 可以在 Markdown 中添加 Mermaid 图例
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/mermaid.html
-#
-#      - title: Tex 支持
-#        icon: square-root-variable
-#        details: Markdown 现在也可以支持 Tex 语法以显示公式
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/tex.html
-#
-#      - title: 导入文件支持
-#        icon: fab fa-markdown
-#        details: 将你的文档分段，并在 Markdown 中导入
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/include.html
-#
-#      - title: 交互演示支持
-#        icon: code
-#        details: 你可以在 Markdown 中添加交互演示
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/playground.html
-#
-#      - title: Vue 交互演示支持
-#        icon: fab fa-vuejs
-#        details: 在交互演示中展示 Vue 组件
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/vue-playground.html
-#
-#      - title: Sandpack 交互演示支持
-#        icon: code
-#        details: Sandpack 驱动的实时的编码环境
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/sandpack.html
-#
-#      - title: 代码案例支持
-#        icon: laptop-code
-#        details: 你可以很方便的插入代码案例
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/demo.html
-#
-#      - title: 幻灯片支持
-#        icon: person-chalkboard
-#        details: 通过 Reveal.js 在 Markdown 中插入幻灯片
-#        link: https://theme-hope.vuejs.press/zh/guide/markdown/revealjs.html
-#
+highlights:
+  - header: 快速开始
+    description: "" # 开源的轻量级潮汕方言辞典，兼容各地语音
+    # image: /assets/image/markdown.svg
+    bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
+    bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
+    bgImageStyle:
+      background-attachment: fixed
+      # background-repeat: repeat
+      # background-size: initial
+    features:
+      - title: 声韵索引
+        icon: search
+        details: 通过拼音条件索引同音字表
+        link: ./query/qpron
+
+      - title: 字音查询
+        icon: search
+        details: 查询汉字的发音
+        link: ./query/qchar
+
+      - title: 字词高级查询 (Alpha)
+        icon: search
+        details: 字、词、音混合查询
+        link: ./query/qphr
+
+      - title: 词汇总表
+        icon: table
+        # details: 词库
+        link: ./query/qphrtable
+  - header: 参与完善
+    description: |
+      网站与数据均开源，如有余力，欢迎参与。
+    # image: /assets/image/box.svg
+    bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
+    bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
+    highlights:
+    - title: 网站源码：<a target="_blank" href="https://gitee.com/pujdict/pujdict">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujdict">Github</a>
+    - title: 数据仓库：<a target="_blank" href="https://gitee.com/pujdict/pujbase">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujbase">Github</a>
+    - title: 内容纠错、功能建议，或有其他问题，欢迎<a target="_blank" href="https://v.wjx.cn/vm/YuSAWo9.aspx">提交反馈</a>。
 #  - header: 布局
 #    description: 一个带有完整无障碍支持的响应式布局。
 #    image: /assets/image/layout.svg
@@ -279,7 +187,7 @@ actions:
 #        link: https://theme-hope.vuejs.press/zh/guide/advanced/pwa.html
 
 #copyright: false
-#footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-present Mr.Hope
+footer: ""
 ---
 
 [//]: # (这是项目主页的案例。你可以在这里放置你的主体内容。)
@@ -290,13 +198,19 @@ actions:
 [//]: # ()
 [//]: # (配置项的相关说明详见 [项目主页配置]&#40;https://theme-hope.vuejs.press/zh/guide/layout/home/&#41;。)
 
-**开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助补正。**
+[//]: # (**开发中，内容、查询接口随时可能发生变化，数据持续完善中，欢迎协助补正。**)
 
-网站源码：[Gitee](https://gitee.com/pujdict/pujdict) [Github](https://github.com/pujdict/pujdict)  
-数据仓库：[Gitee](https://gitee.com/pujdict/pujbase) [Github](https://github.com/pujdict/pujbase)
+[//]: # ()
+[//]: # (网站源码：[Gitee]&#40;https://gitee.com/pujdict/pujdict&#41; [Github]&#40;https://github.com/pujdict/pujdict&#41;  )
 
-本辞典宗旨是：
-1. 收录方言字词，包含各位学者考证的所谓“正字”/“本字”、民间俗写、互联网社交媒体上的非正式写法，有音无字者也同样收录；
-2. 收录罕用字音，包括市面现有方言字典不收录的大量文读音，便于学习、起名、诗歌戏曲创作之用；
-3. 兼容各地口音，不以潮州或汕头口音为标准，内部采用一套能直接映射各地口音的标准音进行数据的记录；
+[//]: # (数据仓库：[Gitee]&#40;https://gitee.com/pujdict/pujbase&#41; [Github]&#40;https://github.com/pujdict/pujbase&#41;)
+
+[//]: # ()
+[//]: # (本辞典宗旨是：)
+
+[//]: # (1. 收录方言字词，包含各位学者考证的所谓“正字”/“本字”、民间俗写、互联网社交媒体上的非正式写法，有音无字者也同样收录；)
+
+[//]: # (2. 收录罕用字音，包括市面现有方言字典不收录的大量文读音，便于学习、起名、诗歌戏曲创作之用；)
+
+[//]: # (3. 兼容各地口音，不以潮州或汕头口音为标准，内部采用一套能直接映射各地口音的标准音进行数据的记录；)
 
