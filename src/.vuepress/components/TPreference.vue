@@ -190,7 +190,7 @@ export default {
         {value: "\u0302", name: '扬抑符 ◌̂'},
       ],
       customToneMark8: getLocalOption('custom-tone-mark-8'),
-      customAccentProto: 'dummy',
+      customAccentProto: '',
       availableProtoAccents: [
         {value: "", name: ""},
       ],
