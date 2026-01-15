@@ -94,7 +94,7 @@ const regexpWordOptional = /^(?<initial>(p|ph|m|b|pf|pfh|mv(?=u)|bv(?=u)|f|t|th|
 const regexpWordDp = /(?<initial>(b|p|m|bh|d|t|n|l|g|k|ng|gh|h|z|c|s|r|0))?(?<final>(?<medial>(i|u)(?=[aeoiu]))?(?<nucleus>a|e|ê|ê|ee|o|i|u|v|or|er|ng|m)(?<coda>(i|u)?(m|nd|ng|n'?|b|d|g|h)*))(?<tone>\d)?$/i;
 
 class FuzzyRuleBase {
-  fuzzy(result) { return result; }
+  fuzzy(result) { return new Pronunciation(result.initial, result.final, result.tone); }
 }
 
 const AtomicFuzzyRule = {

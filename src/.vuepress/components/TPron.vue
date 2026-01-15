@@ -229,9 +229,10 @@ export default {
 
       for (const [accentId, accentRule] of Object.entries(getAccentsRules())) {
         let accentEntries = this.accentEntriesMap[accentId] = [];
-        for (const entry: pujpb.Entry of db.entries) {
+        for (const entry of db.entries) {
           let allPossibleProns = [];
-          const fuzzyPron = accentRule.fuzzy(entry.pron);
+          let pron = new Pronunciation(entry.pron.initial, entry.pron.final, entry.pron.tone);
+          const fuzzyPron = accentRule.fuzzy(pron);
           if (accentId !== 'dummy' && fuzzyPron.final.endsWith("nn'")) {
             let nasalizedPron = new Pronunciation(fuzzyPron.initial, fuzzyPron.final.replace("nn'", 'nn'), fuzzyPron.tone);
             // 潮普小片 oinn -> ainn，例如“第”，但反之不成立，潮汕小片 ainn -/> oinn，例如“爱”

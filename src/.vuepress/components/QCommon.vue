@@ -298,7 +298,7 @@ async function initFromDatabase() {
 }
 
 // 口音规则
-const getAccentsRules = function () {
+const getAccentsRules = function (): () => {string: FuzzyRulesGroup} {
   let fuzzyRules = null;
   return function () {
     if (fuzzyRules) return fuzzyRules;
