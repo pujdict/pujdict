@@ -126,7 +126,7 @@
 
         <div class="btn-toolbar">
           <div class="btn-group">
-            <input id="query-button" class="btn btn-outline-primary" type="submit" value="保存"
+            <input id="save-button" class="btn btn-outline-primary" type="submit" value="保存"
                    :disabled="!canSave()"/>
           </div>
           <img id="loading" :src="withBase('/loading.svg')" height="35" width="35" alt="加载中"/>
