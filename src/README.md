@@ -40,22 +40,22 @@ highlights:
       # background-size: initial
     features:
       - title: 声韵索引
-        icon: search
+        icon: /assets/image/fa-search.svg
         details: 通过拼音条件索引同音字表
         link: ./query/qpron
 
       - title: 字音查询
-        icon: search
+        icon: /assets/image/fa-search.svg
         details: 查询汉字的发音
         link: ./query/qchar
 
       - title: 字词高级查询 (Alpha)
-        icon: search
+        icon: /assets/image/fa-search.svg
         details: 字、词、音混合查询
         link: ./query/qphr
 
       - title: 词汇总表
-        icon: table
+        icon: /assets/image/fa-table.svg
         # details: 词库
         link: ./query/qphrtable
   - header: 参与完善
