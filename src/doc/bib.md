@@ -18,6 +18,8 @@ date: 2024-01-18
    <https://www.mogher.com>
 1. 潮州音字典
    <http://www.czyzd.com>
+1. 明清潮州方言文献数据库
+   <https://www.chaoshanwenxian.cn>
 1. 台湾闽南语常用词辞典
    <https://sutian.moe.edu.tw/zh-hant>
 1. 海墘闽语论坛
