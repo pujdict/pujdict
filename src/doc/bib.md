@@ -38,6 +38,8 @@ date: 2024-01-18
    [MaigoAkisame/MCPDict](https://github.com/MaigoAkisame/MCPDict)
 1. 汉字音典
    [osfans/MCPDict](https://github.com/osfans/MCPDict)
+1. 字统网
+   <https://zi.tools>
 
 ## 书籍与论文
 
