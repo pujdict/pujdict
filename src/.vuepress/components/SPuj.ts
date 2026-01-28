@@ -327,6 +327,15 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
       if (token.category !== EPUJTokenCategory.WORD)
         continue;
       let pron = token.spelling;
+      // TODO: Currently we simply drop all free variations as it's too complex to handle them.
+      //       It may be nice to put variations inside parentheses.
+      // Nasalizations are combining diacritical marks in IPA and cannot be simply marked with something like an
+      // apostrophe. For now, just treat all of those finals as nasalized.
+      // pron = pron.replace("nn'", "nn");
+      // Drop the n-l free variations.
+      // pron = pron.replace("l'", "l");
+      // pron = pron.replace("n'", "n");
+      pron = pron.replace("'", "");
       let fuzzyPron = fuzzyRule.fuzzy(convertPlainPUJToPronunciationWord(pron));
       let ipaPron = convertPUJPronunciationToIPAPronunciation(fuzzyPron);
       ipaProns.push(ipaPron);
