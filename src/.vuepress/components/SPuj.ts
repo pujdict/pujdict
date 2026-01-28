@@ -318,7 +318,8 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
   let sandhiGroupCitationWordIndicesSet = new Set(sandhiGroupCitationWordIndices);
   for (const [beginIndexExc, endIndexInc] of sandhiGroupIndicesPairs) {
     let ipaProns = [];
-    let ipaToneValues = [];
+    let ipaCitationToneValues = [];
+    let ipaRealToneValues = [];
     let citationIndex = Infinity; // The index of the tokens array
     let citationIndexInGroup = Infinity; // The index in current sandhi group
     // 1. generate general tone values
@@ -341,17 +342,18 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
       ipaProns.push(ipaPron);
       // TODO: 支持自定义调值
       let accentTones = fuzzyRule.isCustom ? new FuzzyRulesGroup_Dummy().accentTones : fuzzyRule.accentTones;
-      let toneValue;
+      let realToneValue;
       if (sandhiGroupCitationWordIndicesSet.has(j)) {
-        toneValue = accentTones.citation[ipaPron.tone - 1];
+        realToneValue = accentTones.citation[ipaPron.tone - 1];
         citationIndex = j;
         citationIndexInGroup = kWordIndexInGroup;
       } else if (j < citationIndex) {
-        toneValue = accentTones.sandhi[ipaPron.tone - 1];
+        realToneValue = accentTones.sandhi[ipaPron.tone - 1];
       } else if (j > citationIndex) {
-        toneValue = accentTones.neutral[ipaPron.tone - 1];
+        realToneValue = accentTones.neutral[ipaPron.tone - 1];
       }
-      ipaToneValues.push(toneValue);
+      ipaRealToneValues.push(realToneValue);
+      ipaCitationToneValues.push(accentTones.citation[ipaPron.tone - 1]);
       ++kWordIndexInGroup;
     }
     // 2. Handle special tones
@@ -364,8 +366,8 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
       let group = fuzzyRule.accentTones.group[`${importantTone}-${citationTone}`];
       if (group) {
         let [importantToneValue, citationToneValue] = group.split('-');
-        ipaToneValues[importantIndexInGroup] = parseInt(importantToneValue);
-        ipaToneValues[citationIndexInGroup] = parseInt(citationToneValue);
+        ipaRealToneValues[importantIndexInGroup] = parseInt(importantToneValue);
+        ipaRealToneValues[citationIndexInGroup] = parseInt(citationToneValue);
       }
     }
     // 3. Generate displaying result
@@ -380,10 +382,15 @@ function convertPlainPUJSentenceToIPASentence(sentence: string, fuzzyRule = new 
         }
         continue;
       }
-      let toneValue = ipaToneValues[kWordIndexInGroup];
+      let realToneValue = ipaRealToneValues[kWordIndexInGroup];
+      let citationToneValue = ipaCitationToneValues[kWordIndexInGroup];
       let isSandhi = kWordIndexInGroup !== citationIndexInGroup;
       let ipaPron = ipaProns[kWordIndexInGroup];
-      let ipaTone = convertToneValueToToneLetters(toneValue, isSandhi);
+      let ipaTone = convertToneValueToToneLetters(realToneValue, isSandhi);
+      // Displaying together the citation mark and the real tone mark looks too crowded.
+      // let ipaTone = convertToneValueToToneLetters(citationToneValue, false);
+      // if (isSandhi)
+      //   ipaTone += convertToneValueToToneLetters(realToneValue, true);
       result += `${ipaPron.initial}${ipaPron.final}${ipaTone}`;
       ++kWordIndexInGroup;
     }
