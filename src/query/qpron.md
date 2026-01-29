@@ -1,5 +1,7 @@
 ---
 title: 声韵索引
+pageInfo: false
+lastUpdated: false
 icon: search
 order: 10
 gitInclude:

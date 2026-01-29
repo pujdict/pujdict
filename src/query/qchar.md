@@ -1,5 +1,7 @@
 ---
 title: 字音查询
+pageInfo: false
+lastUpdated: false
 icon: search
 order: 10
 gitInclude:

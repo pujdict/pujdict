@@ -1,5 +1,7 @@
 ---
 title: 字词高级查询 (Alpha)
+pageInfo: false
+lastUpdated: false
 icon: search
 order: 10
 gitInclude:

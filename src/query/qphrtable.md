@@ -1,5 +1,7 @@
 ---
 title: 词汇总表
+pageInfo: false
+lastUpdated: false
 icon: search
 order: 20
 gitInclude:
