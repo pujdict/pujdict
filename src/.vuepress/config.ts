@@ -105,6 +105,7 @@ export default defineUserConfig({
       ],
       '/doc/': [
         "puj.md",
+        "accents.md",
         "pinyin.md",
         "hyphens.md",
         "lit.md",
@@ -147,6 +148,7 @@ export default defineUserConfig({
         icon: "file-lines",
         children: [
           "puj.md",
+          "accents.md",
           "pinyin.md",
           "hyphens.md",
           "lit.md",
