@@ -1,24 +1,36 @@
 <template>
-  <template v-for="(rule, ruleIndex) in rules">
-    <h3 :id="rule.id" tabindex="-1">
-      <a class="header-anchor" :href="'#' + rule.id">
-        <span>模式{{ ruleIndex + 1 }}：{{ rule.title }}</span>
-      </a>
-    </h3>
-    <p v-if="rule.note">
-      {{ rule.note }}<br/>
-    </p>
-    代码标识符：<code>{{ rule.id }}</code>
-    <br/>
-    典型例字：<template v-for="(eg, egIndex) in rule.examples"><template v-if="egIndex">、</template>{{ eg }}</template>
-    <br/>
-    变换运算：
-    <ul>
-      <template v-for="act in rule.actions">
-        <li><code>{{ act.action }}/{{ act.pattern }}/{{ act.replacementDollar }}/</code></li>
-      </template>
-    </ul>
-  </template>
+  <table class="table table-striped table-bordered" style="table-layout: fixed;">
+    <thead>
+    <tr>
+      <th style="width: 1em;">#</th>
+      <th style="width: 20em;">规则</th>
+      <th style="width: 5em;">典型例字</th>
+      <!--        <th>变换运算</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(rule, ruleIndex) in rules" :key="rule.id">
+      <td>{{ ruleIndex + 1 }}</td>
+      <td>
+        <strong>{{ rule.title }}</strong>
+        <br/>
+        标识符：<code>{{ rule.id }}</code>
+        <br/>
+        <template v-if="rule.note">{{ rule.note }}</template>
+      </td>
+      <td>
+        <template v-for="(eg, egIndex) in rule.examples">{{ eg }}</template>
+      </td>
+      <!--        <td>-->
+      <!--          <ul>-->
+      <!--            <template v-for="act in rule.actions">-->
+      <!--              <li><code>{{ act.action }}/{{ act.pattern }}/{{ act.replacementDollar }}/</code></li>-->
+      <!--            </template>-->
+      <!--          </ul>-->
+      <!--        </td>-->
+    </tr>
+    </tbody>
+  </table>
 </template>
 
 <script setup lang="ts">
@@ -46,5 +58,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  //margin: 1rem 0;
+}
 </style>
