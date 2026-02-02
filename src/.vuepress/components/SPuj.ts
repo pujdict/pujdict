@@ -109,10 +109,10 @@ const AtomicFuzzyRule = {
 class FuzzyRulesGroup extends FuzzyRuleBase {
   isCustom: boolean;
   name: string;
-  accentTones: { citation: number[]; sandhi: number[]; neutral: number[]; group: any };
+  accentTones: { citation: number[]; sandhi: number[]; sandhiEm: number[]; neutral: number[]; group: any };
   rules: Array<any>;
   constructor(name: string,
-              accentTones: {citation: number[], sandhi: number[], neutral: number[], group: any},
+              accentTones: {citation: number[], sandhi: number[], sandhiEm: number[], neutral: number[], group: any},
               rules: Array<any>) {
     super();
     this.name = name;
@@ -133,6 +133,7 @@ class FuzzyRulesGroup_Dummy extends FuzzyRulesGroup {
       // 默认音以潮剧调为标准
       citation: [33, 52, 212, 2, 55, 25, 22, 5],
       sandhi: [33, 23, 32, 3, 212, 21, 21, 2],
+      sandhiEm: [33, 25, 52, 5, 212, 21, 21, 2],
       neutral: [22, 212, 21, 2, 22, 21, 22, 2],
       group: {
         "2-2": "25-21",

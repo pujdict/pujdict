@@ -199,7 +199,7 @@ export default {
       this.tonesList = fuzzyTones.map(item => {
         const citationToneValue = accentRule.accentTones.citation[item - 1];
         const citationLetters = convertToneValueToToneLetters(citationToneValue, false, false);
-        const sandhiToneValue = accentRule.accentTones.sandhi[item - 1];
+        const sandhiToneValue = accentRule.accentTones.sandhiEm[item - 1];
         const sandhiLetters = convertToneValueToToneLetters(sandhiToneValue, true, false);
         return {key: item, display: `${item} ${citationLetters}${sandhiLetters}`};
       });
