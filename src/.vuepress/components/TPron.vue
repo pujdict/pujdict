@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="mb-auto" v-if="initialsList">
-        <div class="form-label"><b>声母</b></div>
+        <div class="form-label"><b>声母条件</b></div>
         <div id="initials-list" class="query-filter-list">
           <div class="form-check form-check-inline" v-for="initial in initialsList">
             <input class="form-check-input" type="checkbox"
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="mb-auto" v-if="finalsList">
-        <div class="form-label"><b>韵母</b></div>
+        <div class="form-label"><b>韵母条件</b></div>
         <div id="finals-list" class="query-filter-list">
           <div class="form-check form-check-inline" v-for="final in finalsList">
             <input class="form-check-input" type="checkbox"
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="mb-auto" v-if="tonesList">
-        <div class="form-label"><b>声调</b></div>
+        <div class="form-label"><b>声调条件</b></div>
         <div id="tones-list" class="query-filter-list">
           <div class="form-check form-check-inline" id="tones-list-proto" v-for="tone in tonesList">
             <input class="form-check-input" type="checkbox"
@@ -114,6 +114,7 @@ import {
   convertPUJPronunciationToDPPronunciation,
   convertPlainPUJToPronunciationWord,
   convertPUJInitialOrFinalToDP,
+  convertToneValueToToneLetters,
 } from './SPuj';
 import jquery from 'jquery';
 import {pujpb} from "./SPujPb";
@@ -195,6 +196,13 @@ export default {
       // 所以依然视为独立的声调。用户分不清的时候可以手动选择合并（例如惠来口音，同时选中 3、7 两个声调）。
       fuzzyTones = [1, 2, 3, 4, 5, 6, 7, 8];
 
+      this.tonesList = fuzzyTones.map(item => {
+        const citationToneValue = accentRule.accentTones.citation[item - 1];
+        const citationLetters = convertToneValueToToneLetters(citationToneValue, false, false);
+        const sandhiToneValue = accentRule.accentTones.sandhi[item - 1];
+        const sandhiLetters = convertToneValueToToneLetters(sandhiToneValue, true, false);
+        return {key: item, display: `${item} ${citationLetters}${sandhiLetters}`};
+      });
       if (this.selectedPinyin === 'dp') {
         this.initialsList = fuzzyInitials.map(item => {
           return {key: item, display: item === '' ? '0' : convertPUJInitialOrFinalToDP(item)};
@@ -202,18 +210,12 @@ export default {
         this.finalsList = fuzzyFinals.map(item => {
           return {key: item, display: convertPUJInitialOrFinalToDP(item)};
         });
-        this.tonesList = fuzzyTones.map(item => {
-          return {key: item, display: item};
-        });
       } else {
         this.initialsList = fuzzyInitials.map(item => {
           return {key: item, display: item === '' ? '0' : item};
         });
         this.finalsList = fuzzyFinals.map(item => {
           return {key: item, display: convertPlainPUJSentenceToDisplayPUJInSentence(item)};
-        });
-        this.tonesList = fuzzyTones.map(item => {
-          return {key: item, display: item};
         });
       }
       // 重新设置选项 cookie
