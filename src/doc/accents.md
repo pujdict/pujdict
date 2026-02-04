@@ -8,6 +8,7 @@ date: 2025-01-27
 import TToneLetter from '@components/TToneLetter.vue';
 import TPopupPujNoAccent from '@components/TPopupPujNoAccent.vue';
 import TDocAccentFuzzyRules from '@components/TDocAccentFuzzyRules.vue';
+import TDocAccentExpectedTable from '@components/TDocAccentExpectedTable.vue';
 </script>
 <style>
 li > ol > li {
@@ -33,4 +34,6 @@ li > ol > li {
 
 [//]: # (## 常见自由变体)
 
-[//]: # (## 典型例字表)
+## 典型口音与例字表
+
+<TDocAccentExpectedTable />
