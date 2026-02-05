@@ -338,8 +338,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                  |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ng0 />                                                                    |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                  |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-ng0 />                                                                    |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />                                 |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />                                   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                                                   |
@@ -376,8 +376,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | (<TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />)                                 |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | (<TPopupPujNoAccent puj=-urng0 />)                                                                |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | (<TPopupPujNoAccent puj=-urng0 />)                                                                |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | (<TPopupPujNoAccent puj=-urng0 />)                                                                |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | (<TPopupPujNoAccent puj=-urng0 />)                                                                |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | (<TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />)                               |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | (<TPopupPujNoAccent puj=-ung0 />,-uk)                                                             |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                                                   |
@@ -414,8 +414,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                              |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                              |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    |                                                                              |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                              |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   |                                                                              |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                              |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     |                                                                              |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  |                                                                              |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    |                                                                              |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                              |
@@ -452,8 +452,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   | <TPopupPujNoAccent puj=-en0 />, <TPopupPujNoAccent puj=-et0 />                                    |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    |                                                                                                   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                                                   |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   |                                                                                                   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                                                   |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     |                                                                                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  |                                                                                                   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    |                                                                                                   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                                                   |
@@ -490,8 +490,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                              |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                              |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />              |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                             |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                             |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                             |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                             |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />            |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />              |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                              |
@@ -528,8 +528,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />                                   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                  |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                  |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                  |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                                                  |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />                                 |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />                                   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    | <TPopupPujNoAccent puj=-ang0 />, <TPopupPujNoAccent puj=-ak0 />                                   |
@@ -566,8 +566,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                             |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                             |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />             |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                            |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                            |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                            |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                            |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-urng0 />  <TPopupPujNoAccent puj=-urk0 />           |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />             |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                             |
@@ -604,8 +604,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-eng0 />                                   |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-eng0 />                                   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-eng0 />                                   |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-eng0 />                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                   |
@@ -642,8 +642,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                   |
@@ -680,8 +680,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                   |
@@ -718,8 +718,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   |                                                                   |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-ing0 />                                   |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-ing0 />                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ik0 />   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uk0 />   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                   |
@@ -756,8 +756,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 英易^5^   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-ek0 />                                   | <TPopupPujNoAccent puj=-eng0 />, <TPopupPujNoAccent puj=-eh0 />                                      |
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                                                      |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    | <TPopupPujNoAccent puj=-ing0 />, <TPopupPujNoAccent puj=-ih0 />                                      |
-| 恩很^6^   | <TPopupPujNoAccent puj=-orn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                     |
-| 欣尹      | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                     |
+| 恩很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urng0 />                                                                     |
+| 欣尹      | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urng0 />                                                                     |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  | <TPopupPujNoAccent puj=-urng0 />, <TPopupPujNoAccent puj=-urh0 />                                    |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    | <TPopupPujNoAccent puj=-ung0 />, <TPopupPujNoAccent puj=-uh0 />                                      |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                                                      |
@@ -805,11 +805,11 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
    但是，在潮州府城，声母 h 之后一等字读 <TPopupPujNoAccent puj=hurng0 />（如“痕”“很”“恩”等），三等字读 <TPopupPujNoAccent puj=hng0 />（如“欣”“勋”“殷”等），形成对立；
    并且三等欣韵在影母、以母之后亦形成对立：隐 <TPopupPujNoAccent puj=urng2 />，尹 <TPopupPujNoAccent puj=ng2 />。
    这意味着在潮州话中，这对韵母可能曾有过开口度大小之别。
-   辞典标准音分别以 <TPopupPujNoAccent puj=orn0 /> 和 <TPopupPujNoAccent puj=urn0 /> 进行记录，以适配两个音节在潮州的不同音变规则。
+   辞典标准音分别以 <TPopupPujNoAccent puj=urn0 /> 和 <TPopupPujNoAccent puj=n0 /> 记录，以适配两个音节在潮州的不同音变规则。
    记录时区分方式并不复杂，对于声母为 h 或零声母的字：
-   韵母在普通话中读 en [ɤn] 而潮州话可能读 [ɯn]/[ən] 的，记为 <TPopupPujNoAccent puj=orn0 />；
-   韵母在普通话中读 in [in] 或 ün [yn] 而潮州话可能读 [ɯn]/[ən] 的，记为 <TPopupPujNoAccent puj=urn0 />。
-   因为实际上在各地的口音中，均无 [ɯn]/[ən]（或 [ɯŋ]/[əŋ]）这样仅在元音开口度有区分的对立阳声韵，辞典统一将各地口音的 <TPopupPujNoAccent puj=orn0 /> 转为 <TPopupPujNoAccent puj=urn0 />。
+   韵母在普通话中读 en [ɤn] 而潮州话可能读 [ɯn]/[ən] 的，记为 <TPopupPujNoAccent puj=urn0 />；
+   韵母在普通话中读 in [in] 或 ün [yn] 而潮州话可能读 [ɯn]/[ən] 的，记为 <TPopupPujNoAccent puj=n0 />。
+   因为实际上在各地的口音中，均无 [ɯn]/[ən]（或 [ɯŋ]/[əŋ]）这样仅在元音开口度有区分的对立阳声韵。
 7. 通摄三等字文读音韵母为 <TPopupPujNoAccent puj=-iong />, <TPopupPujNoAccent puj=-iok0 />，当接在齿龈音后时，
    包括三市市中心在内的东北部多数地区都读为 <TPopupPujNoAccent puj=-ong />, <TPopupPujNoAccent puj=-ok />，西南部潮阳、普宁、惠来、陆丰等地则保留介音 i——这是潮普小片或练江腔的标志性读音。
    不过，近年来受普通话以及潮汕三市市中心的强势影响，许多年轻人的发音也已倾向于丢失 i 介音，i 介音保留与否成为了自由变体，本辞典中相关地区口音仍保留该介音。

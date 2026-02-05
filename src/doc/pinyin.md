@@ -86,8 +86,8 @@ date: 2025-10-02
 | (荣) | ueng/uek   | ueng/ueg | ueŋ/uek̚ |
 | 温   | un/ut      | und/ud   | un/ut̚   |
 | 秧   | ng         | ng/eng   | ŋ        |
-| 恩   | o̤ n/o̤ t  | ernd/erd | ən/ət̚   |
-| 隐   | ṳn/ṳt      | end/ed   | ɯn/ɯt̚   |
+| 恩   | ṳn/ṳt      | ernd/erd | ən/ət̚   |
+| 隐   | n          | nd       | ɯn/ɯt̚   |
 | (森) | om         | om       | om       |
 | 嗳   | aⁿ         | an       | ã       |
 | 闲   | oiⁿ        | oin      | õĩ     |

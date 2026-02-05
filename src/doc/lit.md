@@ -74,7 +74,7 @@ import TPuj from '@components/TPuj.vue';
 全文文读，今天只在类似于宗教经文吟诵等场景使用，这些往往是需要神秘主义色彩的场景，不希望听众能直观理解所吟诵的文义。例如：
 
 - 真**言一**道殷勤**请**，符吏诸**司**悉启**程**。惟**愿**慈悲随**接**引，恭迎**圣驾降**祥祯。（梵呗《道场偈》）  
-  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hurn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur5-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
+  <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur5-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祇万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-khi5 buan7-pui6-kong1."/>
 - 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
@@ -90,7 +90,7 @@ import TPuj from '@components/TPuj.vue';
 - 一轮明月挂高空，万盏花灯照眼**红**。街上游人如潮涌，鱼灯队队赛游**龙**。（潮剧《陈三五娘/荔镜记》）  
   <TPopupPujNoAccent linebreak puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2 hong5. Koi1--tsionn7 iu5-jin5 ju5-tio5 iong3, hur5-teng1 tui7-tui7 sai3- iu5-liong5."/>
 - 摘取蟠桃献华堂，长生哪得安期**枣**。昔日昆仑不纪年，天恩雨露知多**少**。（潮剧《十仙庆寿》）  
-  <TPopupPujNoAccent linebreak puj="Tiah4-tshu2 phuan5-tho5 hian3- hua5-thang5, tshiang5-seng1 na2-tit4 an1-khi5-tsau2. Tsa2--jit8 khun1-lun5 put4- ki2-nian5, thian1-orn1 hou6-lou7 tsai1-to1-sau2."/>
+  <TPopupPujNoAccent linebreak puj="Tiah4-tshu2 phuan5-tho5 hian3- hua5-thang5, tshiang5-senn1 na2-tit4 an1-khi5-tsau2. Tsa2--jit8 khun1-lun5 put4- ki2-nian5, thian1-urn1 hou6-lou7 tsai1-to1-sau2."/>
 - 盼亲人，谁不想相见在眼**前**…雾锁渝州方壮别，春雨如烟已一**年**。革命伴侣多离会，如今又相见在战**场**。（潮剧《江姐》）
   <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsian3-tshiang5."/>
 - 六十余里垒岩石，筑就东海一长**城**。水旱风潮已制伏，春苗夏禾竞争**荣**。昔日泪痕今何在，惟闻江头欢笑**声**。（余锡渠《治水歌》）  
