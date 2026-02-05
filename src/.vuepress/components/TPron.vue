@@ -113,7 +113,8 @@ import {
   convertPUJToDPSentence,
   convertPUJPronunciationToDPPronunciation,
   convertPlainPUJToPronunciationWord,
-  convertPUJInitialOrFinalToDP,
+  convertPUJInitialToDP,
+  convertPUJFinalToDP,
   convertToneValueToToneLetters,
 } from './SPuj';
 import jquery from 'jquery';
@@ -208,10 +209,10 @@ export default {
       });
       if (this.selectedPinyin === 'dp') {
         this.initialsList = fuzzyInitials.map(item => {
-          return {key: item, display: item === '' ? '0' : convertPUJInitialOrFinalToDP(item)};
+          return {key: item, display: item === '' ? '0' : convertPUJInitialToDP(item)};
         });
         this.finalsList = fuzzyFinals.map(item => {
-          return {key: item, display: convertPUJInitialOrFinalToDP(item)};
+          return {key: item, display: convertPUJFinalToDP(item)};
         });
       } else {
         this.initialsList = fuzzyInitials.map(item => {

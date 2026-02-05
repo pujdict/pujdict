@@ -681,12 +681,15 @@ const DP_PUJ_INITIAL_MAP = {
   'r': 'j',
 }
 
-function convertPUJInitialOrFinalToDP(part) {
+function convertPUJInitialToDP(part) {
   let try_to_map_initial = PUJ_DP_INITIAL_MAP[part];
   if (try_to_map_initial) {
     return try_to_map_initial;
   }
+  return part;
+}
 
+function convertPUJFinalToDP(part) {
   // 特殊韵母
   part = part.replace('e', 'ê');
   part = part.replace('ur', 'e');
@@ -1074,7 +1077,8 @@ export {
   FuzzyRulesGroup,
   FuzzyRulesGroup_Dummy,
   forEachWordInSentence,
-  convertPUJInitialOrFinalToDP,
+  convertPUJInitialToDP,
+  convertPUJFinalToDP,
   convertPlainPUJToPronunciationWord,
   convertPlainPUJSentenceToPUJSentence,
   convertPlainPUJSentenceToIPASentence, // TODO
