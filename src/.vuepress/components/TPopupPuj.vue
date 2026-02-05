@@ -23,13 +23,13 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content detail-card fade-in">
           <div class="modal-header">
-            <h5 class="modal-title">读音详细</h5>
+            <h5 class="modal-title">读音详情</h5>
             <button type="button" class="btn-close" @click="showModal = false"></button>
           </div>
           <div class="modal-body">
             <template v-for="(pronunciation, key) in generatePerAccentsPronunciations()" :key="key">
-              <div class="d-flex align-items-baseline my-2">
-                <span class="badge border border-primary text-primary me-2">{{ pronunciation.name }}</span>
+              <div class="d-flex align-items-baseline my-2 pronunciation-row">
+                <span class="badge border border-primary text-primary pronunciation-badge">{{ pronunciation.name }}</span>
                 <div class="d-flex flex-column">
                   <span>{{ pronunciation.display_puj }}</span>
                   <span>{{ pronunciation.display_dp }}</span>
@@ -80,5 +80,16 @@ export default {
 }
 .card-popup-text:hover {
   opacity: 0.7;
+}
+.pronunciation-row {
+  min-width: 100%;
+}
+.pronunciation-badge {
+  min-width: 6em;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 0.5em;
 }
 </style>
