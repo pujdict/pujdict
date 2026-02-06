@@ -83,13 +83,15 @@ table {
 }
 
 td, th {
-  width: 7em;
+  width: 140px;
   height: 30px;
+  padding: 5px;
 }
 
 td:first-child, th:first-child {
-  width: 4em;
+  width: 4.5em;
   padding: 5px;
+  text-align: center;
 }
 
 th {
