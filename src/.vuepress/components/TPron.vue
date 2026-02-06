@@ -3,7 +3,9 @@
   <div v-bind:data-bs-theme="darkThemeString">
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
-        <div class="form-label"><b>口音偏好</b></div>
+        <div class="form-label fw-bold d-flex align-items-center mb-2">
+          口音偏好
+        </div>
         <div id="fuzzy-query" class="query-filter-list">
           <div class="form-check form-check-inline offset-sm-0" v-for="fuzzyQuery in fuzzyQueryList">
             <input class="form-check-input" type="radio"
@@ -15,7 +17,9 @@
         </div>
       </div>
       <div class="mb-auto">
-        <div class="form-label"><b>拼音方案</b></div>
+        <div class="form-label fw-bold d-flex align-items-center mb-2">
+          拼音方案
+        </div>
         <div id="pinyin" class="query-filter-list">
           <div class="form-check form-check-inline offset-sm-0" v-for="py in pinyinList">
             <input class="form-check-input" type="radio"
@@ -27,7 +31,9 @@
         </div>
       </div>
       <div class="mb-auto" v-if="initialsList">
-        <div class="form-label"><b>声母条件</b></div>
+        <div class="form-label fw-bold d-flex align-items-center mb-2">
+          声母条件
+        </div>
         <div id="initials-list" class="query-filter-list">
           <div class="form-check form-check-inline" v-for="initial in initialsList">
             <input class="form-check-input" type="checkbox"
@@ -37,7 +43,9 @@
         </div>
       </div>
       <div class="mb-auto" v-if="finalsList">
-        <div class="form-label"><b>韵母条件</b></div>
+        <div class="form-label fw-bold d-flex align-items-center mb-2">
+          韵母条件
+        </div>
         <div id="finals-list" class="query-filter-list">
           <div class="form-check form-check-inline" v-for="final in finalsList">
             <input class="form-check-input" type="checkbox"
@@ -47,7 +55,10 @@
         </div>
       </div>
       <div class="mb-auto" v-if="tonesList">
-        <div class="form-label"><b>声调条件</b></div>
+        <div class="form-label fw-bold d-flex align-items-center mb-2">
+          声调条件
+          <TQuestionMarkTip title="调序后的符号为（当前口音）单字调和前变调的实际调值。<br/>8声调例字：<br/>分粉奋忽云混份佛<br/>低抵帝滴池弟地碟<br/>诗死四薛时是示蚀" />
+        </div>
         <div id="tones-list" class="query-filter-list">
           <div class="form-check form-check-inline" id="tones-list-proto" v-for="tone in tonesList">
             <input class="form-check-input" type="checkbox"
@@ -93,6 +104,7 @@
 import {withBase} from "vuepress/client";
 import {darkThemeString} from "./QDarkTheme.vue";
 import TDarkTheme from "./TDarkTheme.vue";
+import TQuestionMarkTip from "./TQuestionMarkTip.vue";
 </script>
 
 <script lang="ts">
