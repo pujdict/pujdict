@@ -3,12 +3,12 @@ home: true
 icon: home
 title: 主页
 #heroImage: https://theme-hope-assets.vuejs.press/logo.svg
-bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
-bgImageDark: https://theme-hope-assets.vuejs.press/bg/7-dark.svg
+bgImage: /assets/image/bg/light/dalmatian-spots.svg
+bgImageDark: /assets/image/bg/dark/dalmatian-spots.svg
 bgImageStyle:
    background-attachment: fixed
-#   background-repeat: repeat
-#   background-size: initial
+   background-repeat: repeat
+   background-size: initial
 heroText: 潮汕方言白话字辞典 (Beta)
 tagline: 开源的轻量级潮汕方言辞典，兼容各地语音。
 #actions:
@@ -32,12 +32,12 @@ highlights:
   - header: 快速开始
     description: "" # 开源的轻量级潮汕方言辞典，兼容各地语音
     # image: /assets/image/markdown.svg
-    bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
-    bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
+    bgImage: /assets/image/bg/light/alternating-arrowhead.svg
+    bgImageDark: /assets/image/bg/dark/alternating-arrowhead.svg
     bgImageStyle:
-      background-attachment: fixed
-      # background-repeat: repeat
-      # background-size: initial
+      # background-attachment: fixed
+      background-repeat: repeat
+      background-size: initial
     features:
       - title: 声韵索引
         icon: search
@@ -62,8 +62,12 @@ highlights:
     description: |
       网站与数据均开源，如有余力，欢迎参与。
     # image: /assets/image/box.svg
-    bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
-    bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
+    bgImage: /assets/image/bg/light/dalmatian-spots.svg
+    bgImageDark: /assets/image/bg/dark/dalmatian-spots.svg
+    bgImageStyle:
+      background-attachment: fixed
+      background-repeat: repeat
+      background-size: initial
     highlights:
     - title: 网站源码：<a target="_blank" href="https://gitee.com/pujdict/pujdict">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujdict">Github</a>
     - title: 数据仓库：<a target="_blank" href="https://gitee.com/pujdict/pujbase">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujbase">Github</a>
