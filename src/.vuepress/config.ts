@@ -178,6 +178,11 @@ export default defineUserConfig({
       "/options/",
     ],
     plugins: {
+      components: {
+        components: [
+          "VPCard",
+        ]
+      },
       git: {
         createdTime: true,
         updatedTime: true,

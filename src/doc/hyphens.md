@@ -16,6 +16,14 @@ import TPuj from '@components/TPuj.vue';
 潮汕方言和其他闽南语次方言相同，存在丰富的连读变调和轻声调。
 一般一个句子会根据语法成分被划分出若干连调组。
 
+<center>
+<VPCard
+title="潮语版《猫和老鼠》片头曲"
+desc="https://v.douyin.com/jnHwHPiUniI/"
+link="https://v.douyin.com/jnHwHPiUniI/"
+/>
+</center>
+
 下面以澄海口音声调调值为例，用一篇例文（出自潮汕方言版《猫和老鼠》片头曲），直观展示分词和变调情况。
 每个句子下的数值为五度标记法记录的调值，
 其中**粗体字**表示读单字调或“本调”（第二声的后变调变体，即低降调，也视为单字调），*斜体字*表示读轻声调，其余字均读前变调。
@@ -156,3 +164,11 @@ import TPuj from '@components/TPuj.vue';
 情痴痴 我痴痴等<br/><TPopupPujNoAccent linebreak puj="Tsheng5 tshi1-tshi1 Ua2 tshi1-tshi1 tan2"/>  
 多少风雨多少无奈<br/><TPopupPujNoAccent linebreak puj="To1-tsio2- huang1-hou6 to1-tsio2- bo5-nai6"/>  
 你可明白这地老天荒<br/><TPopupPujNoAccent linebreak puj="Lur2 kho2- meng5-peh8- tse2- ti7-lau2 -thian1-huang1"/>
+
+<center>
+<VPCard
+title="宋亦乐《苦恋》"
+desc="https://v.douyin.com/zNQTYu7Q4KA/"
+link="https://v.douyin.com/zNQTYu7Q4KA/"
+/>
+</center>

@@ -82,6 +82,14 @@ import TPuj from '@components/TPuj.vue';
 [//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
 [//]: # (   <TPopupPujNoAccent linebreak puj="Ma2 tap8 tshe1 siang1 tshiang5 iap4 sin1-heng5 sui3; kui2 khek4 lui5 hong1 tsur6-bun2 hian5-liang5 i3; sui2-ho2 un5-phiau1 hu2 ngiau2 se5 siang1 lui6; kiu2-heng5 ku1-hun5 lai5-siu6- kam1-lu7-bui7."/>)
 
+<center>
+<VPCard
+title="梵呗《刀兵偈》"
+desc="https://v.douyin.com/x3f7xbQaeqg/"
+link="https://v.douyin.com/x3f7xbQaeqg/"
+/>
+</center>
+
 对于古诗词、潮剧唱词、方言歌仔等，一般而言，仅在韵脚以及一些比较少用的书面词汇中，变用文读音，其他字音通常都采用口语常用音。
 例如：
 
@@ -95,6 +103,14 @@ import TPuj from '@components/TPuj.vue';
   <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsian3-tshiang5."/>
 - 六十余里垒岩石，筑就东海一长**城**。水旱风潮已制伏，春苗夏禾竞争**荣**。昔日泪痕今何在，惟闻江头欢笑**声**。（余锡渠《治水歌》）  
   <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2- ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8- tshiang5-seng5. Tsui2-uann6 huang1-tio5 inn'2- tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
+
+<center>
+<VPCard
+title="潮剧《江姐》选段《盼亲人》"
+desc="https://v.douyin.com/P7X0-8qUCE8/"
+link="https://v.douyin.com/P7X0-8qUCE8/"
+/>
+</center>
 
 需要说明的是，韵脚变读后的文读音，即使在口语中含义不同于白读音
 （如“行” <TPopupPujNoAccent puj="kiann5"/> 变读为 <TPopupPujNoAccent puj="heng5"/>，“知” <TPopupPujNoAccent puj="tsai1"/> 变读为 <TPopupPujNoAccent puj="ti1"/> 等），
