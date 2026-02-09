@@ -354,8 +354,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                              |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=l- />                                                                      |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       | <TPopupPujNoAccent puj=l- />                                                                      |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                                                   |
 
 @tab 戏腔^8^
@@ -392,8 +392,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                              |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=l- />                                                                      |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       | <TPopupPujNoAccent puj=l- />                                                                      |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                                                   |
 
 @tab 潮安
@@ -430,8 +430,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />         |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                              |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=l- />                                                 |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                 |
+| 男念      | n- (m 尾阳声韵)                                                                                       | <TPopupPujNoAccent puj=l- />                                                 |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                 |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                              |
 
 @tab 丰顺
@@ -468,8 +468,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                              |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=l- />                                                                      |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       | <TPopupPujNoAccent puj=l- />                                                                      |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                                                   |
 
 @tab 饶平
@@ -506,8 +506,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />         |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=mu- />(阳声韵)                                           |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                |                                                                              |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=l- />                                                 |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                 |
+| 男念      | n- (m 尾阳声韵)                                                                                       | <TPopupPujNoAccent puj=l- />                                                 |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                 |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                              |
 
 @tab 澄海
@@ -544,8 +544,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />                              |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                                                   |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                                                   |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             | <TPopupPujNoAccent puj=n- />                                                                      |
 
 @tab 汕头
@@ -582,8 +582,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | (齿龈音)<TPopupPujNoAccent puj=-ong0 />, <TPopupPujNoAccent puj=-ok0 />        |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                             |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                               |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                             |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                                |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                             |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                                |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                             |
 
 @tab 揭阳
@@ -620,8 +620,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            |                                                                   |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                   |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         | <TPopupPujNoAccent puj=l- />                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                   |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   | <TPopupPujNoAccent puj=l- />                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                   |
 
 @tab 潮阳
@@ -658,8 +658,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            |                                                                   |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                   |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         |                                                                   |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                   |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   |                                                                   |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                   |
 
 @tab 普宁
@@ -696,8 +696,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            |                                                                   |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                |                                                                   |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                   |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         |                                                                   |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                   |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   |                                                                   |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                   |
 
 @tab 惠来
@@ -734,8 +734,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            |                                                                   |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                   |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                     |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                   |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         |                                                                   |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                   |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   |                                                                   |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                   |
 
 @tab 陆丰
@@ -772,8 +772,8 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 中筑茸辱^7^ | (齿龈音)<TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-iok0 />                            | <TPopupPujNoAccent puj=-iong0 />, <TPopupPujNoAccent puj=-ioh0 />                                    |
 | 万亡文^8^  | <TPopupPujNoAccent puj=bu- />(阳声韵)                                                                |                                                                                                      |
 | 漫闷      | <TPopupPujNoAccent puj=mu- />(阳声韵)                                                                | <TPopupPujNoAccent puj=bu- />                                                                        |
-| 男念      | <TPopupPujNoAccent puj=n- /> (m 尾阳声韵)                                                             |                                                                                                      |
-| 难能      | <TPopupPujNoAccent puj=n- /> (n, ng 尾阳声韵)                                                         |                                                                                                      |
+| 男念      | n- (m 尾阳声韵)                                                                                       |                                                                                                      |
+| 难能      | n- (n, ng 尾阳声韵)                                                                                   |                                                                                                      |
 | 蓝林帘     | <TPopupPujNoAccent puj=l- /> (m 尾阳声韵)                                                             |                                                                                                      |
 
 :::
