@@ -27,9 +27,14 @@ export default {
         }
       },
       render() {
+        let display = '';
+        switch (this.type) {
+          case 'PUJ': display = 'PUJ'; break;
+          case 'DP': display = 'DP'; break;
+        }
         return h('sup', {
-          style: 'color: steelblue; font-size: 0.5em; user-select: none;',
-        }, this.type);
+          style: 'color: steelblue; font-size: 0.6em; user-select: none;',
+        }, display);
       },
     }
   },

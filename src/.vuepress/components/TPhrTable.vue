@@ -32,8 +32,8 @@
       <tr>
         <th style="width: 5em;">潮州话</th>
         <th style="width: 10em;">拼音</th>
-        <th style="width: 5em;">普通话</th>
-        <th style="width: 12em;">释义</th>
+        <th style="width: 8em;">普通话</th>
+        <th style="width: 8em;">释义</th>
         <th style="width: 4em;">词性</th>
         <th style="width: 6em;">标签</th>
       </tr>
