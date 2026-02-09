@@ -635,6 +635,7 @@ const PUJ_DP_INITIAL_MAP = {
   'b': 'bh',
   'pf': 'bf',
   'phf': 'pf',
+  'pfh': 'pf',
   'mv': 'mv',
   'bv': 'bhv',
   'f': 'f',
