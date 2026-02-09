@@ -1,6 +1,7 @@
 <template>
-  <span class="ms-2 query-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" :title="title">
-    <img :src="src" alt="" class="svg-icon" style="cursor:help;"/>
+  <span class="ms-2 query-tooltip svg-icon" data-bs-toggle="tooltip"
+        data-bs-placement="bottom" :title="title">
+    <TSvgIcon :svg="src"/>
   </span>
   <div id="bs-tooltips-template">
     <!-- Vue 会自动填充 data-v-xxx tag -->
@@ -9,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import TSvgIcon from "./TSvgIcon.vue";
 </script>
 
 <script lang="ts">
