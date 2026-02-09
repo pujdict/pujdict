@@ -280,6 +280,8 @@ export default {
             }
           }
           // 如果声母为 m n ng，韵母鼻化韵可与阴声韵互查，方便使用。辞典原数据的发音则不加这个优化
+          // TODO: 暂时去掉这个优化。比较合适的做法应该是 minn 能查出 mi，而不是将 mi 和 minn 的辖字互相穿插。
+          /*
           if (accentId !== 'dummy') {
             if (fuzzyPron.initial === 'm' || fuzzyPron.initial === 'n' || fuzzyPron.initial === 'ng') {
               if (fuzzyPron.final.endsWith('nn')) {
@@ -293,6 +295,7 @@ export default {
               }
             }
           }
+          */
           for (const pron of allPossibleProns) {
             accentEntries.push([entry, pron]);
           }
