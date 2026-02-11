@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th style="width: 1em;">#</th>
-      <th style="width: 20em;">规则</th>
+      <th style="width: 25em;">规则</th>
       <th style="width: 5em;">典型例字</th>
       <!--        <th>变换运算</th>-->
     </tr>
@@ -13,6 +13,8 @@
       <td>{{ ruleIndex + 1 }}</td>
       <td>
         <strong>{{ rule.title }}</strong>
+        <br/>
+        演变：{{ rule.ipa }}
         <br/>
         标识符：<code>{{ rule.id }}</code>
         <br/>
