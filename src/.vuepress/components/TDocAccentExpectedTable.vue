@@ -83,7 +83,7 @@ table {
 }
 
 td, th {
-  width: 140px;
+  width: 150px;
   height: 30px;
   padding: 5px;
 }
