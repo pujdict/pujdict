@@ -95,7 +95,7 @@ date: 2024-01-18
 1. 周长楫《新加坡闽南话词典》
    - 周长楫, 周清海. 新加坡闽南话词典[M]. 中国社会科学出版社, 2002.
 1. 《台湾闽南语罗马字拼音方案使用手册》
-   - 中国台湾省教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2024. <https://language.moe.gov.tw/files/people_files/tshiutsheh_1131025.pdf>.
+   - 中国台湾省教育主管部门. 台湾闽南语罗马字拼音方案使用手册[EB/OL]. 2024. <https://language.moe.gov.tw/uploads/files/17579930721182.pdf>.
 1. 《新编台湾闽南语用字汇编》
    - 吴昭新. 新编台湾闽南语用字汇编[EB/OL]. 2013. <https://xiaoxue.iis.sinica.edu.tw/download/files/WSL_TPS_Huibian.pdf>.
 1. 【罗杰瑞1973】
