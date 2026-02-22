@@ -69,8 +69,8 @@ highlights:
       background-repeat: repeat
       background-size: initial
     highlights:
-    - title: 网站源码：<a target="_blank" href="https://gitee.com/pujdict/pujdict">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujdict">Github</a>
-    - title: 数据仓库：<a target="_blank" href="https://gitee.com/pujdict/pujbase">Gitee</a> <a target="_blank" href="https://github.com/pujdict/pujbase">Github</a>
+    - title: 项目主仓：<a target="_blank" href="https://github.com/pujdict/pujdict">Github</a> （国内镜像：<a target="_blank" href="https://gitee.com/pujdict/pujdict">Gitee</a>）
+    - title: 数据仓库：<a target="_blank" href="https://github.com/pujdict/pujbase">Github</a> （国内镜像：<a target="_blank" href="https://gitee.com/pujdict/pujbase">Gitee</a>）
     - title: 内容纠错、功能建议，或有其他问题，欢迎<a target="_blank" href="https://v.wjx.cn/vm/YuSAWo9.aspx">提交反馈</a>。
 #  - header: 布局
 #    description: 一个带有完整无障碍支持的响应式布局。
