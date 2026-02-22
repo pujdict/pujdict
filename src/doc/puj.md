@@ -596,7 +596,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 买鞋^2^   | <TPopupPujNoAccent puj=-oi0 />                                                                    |                                                                   |
 | 反间      | <TPopupPujNoAccent puj=-oinn0 />                                                                  | <TPopupPujNoAccent puj=-ainn0 />                                  |
 | 八狭      | <TPopupPujNoAccent puj=-oih0 />                                                                   |                                                                   |
-| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                 | <TPopupPujNoAccent puj=-uainn0 />                                 |
+| 县悬^3^   | <TPopupPujNoAccent puj=-uoinn0 />                                                                 | <TPopupPujNoAccent puj=-uinn0 />                                  |
 | 乌       | <TPopupPujNoAccent puj=-ou0 />                                                                    |                                                                   |
 | 腰阳药     | <TPopupPujNoAccent puj=-io0 />, <TPopupPujNoAccent puj=-ionn0 />, <TPopupPujNoAccent puj=-ioh0 /> |                                                                   |
 | 妖跃^4^   | <TPopupPujNoAccent puj=-iau0 />, <TPopupPujNoAccent puj=-iauh0 />                                 |                                                                   |
