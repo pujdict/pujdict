@@ -198,7 +198,7 @@ flowchart
 
 2. 韵母 <TPopupPujNoAccent puj="-eu" /> 在大多数地区转读为 <TPopupPujNoAccent puj="-iu" />，仅在潮安凤凰等极少数地区保留，出现于若干鱼韵字中：
    初 <TPopupPujNoAccent puj="tsheu1"/>、
-   黍 <TPopupPujNoAccent puj="seu3"/>、
+   黍 <TPopupPujNoAccent puj="seu2"/>、
    梳 <TPopupPujNoAccent puj="seu1"/>、
    疏 <TPopupPujNoAccent puj="seu1"/>、
    须 <TPopupPujNoAccent puj="tsheu1"/>、
