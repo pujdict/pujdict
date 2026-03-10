@@ -61,7 +61,7 @@ date: 2024-01-18
    - Lim H. A Handbook of the Swatow Vernacular[M]. Koh Yew Hean Press, 1886.
    - Wikisource. Handbook of the Swatow Vernacular[EB/OL]. 2023. <https://en.wikisource.org/wiki/Handbook_of_the_Swatow_Vernacular>.
 1. 汲约翰《潮正两音字集》
-   - Gibson J C. The Swatow Syllabary with Mandarin Pronunciation[M]. English Presbyterian Mission Press, 1909.
+   - Steele J. The Swatow Syllabary with Mandarin Pronunciation[M]. English Presbyterian Mission Press, 1909.
 1. 姚慕韩&姚愈豪《潮音大众字典》
    - 姚慕韩, 姚愈豪. 潮音大众字典[M]. 榕涛出版社, 1937.
 1. 翁辉东《潮汕方言》
