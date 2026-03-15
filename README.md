@@ -5,6 +5,10 @@
 开发中，欢迎参与提议和订正。
 字典条目及使用方式参见[此文档](./src/.vuepress/public/data/README.md)。
 
+辞典地址：
+- <https://pujdict.sourceforge.io/>：托管于 SourceForge，每日随本仓库 Action 更新最新数据。
+- <https://pujdict.com/>：镜像网站，速度可能较快，但数据更新有延迟。
+
 ## 项目现状
 
 - 功能方面：已基本完成字查音、音查字、词汇搜索，兼容多地口音，支持白话字和潮拼两种拼音方案。
