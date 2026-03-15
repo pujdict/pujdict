@@ -64,7 +64,7 @@ date: 2025-10-02
 | 呀   | ia         | ia       | ia       |
 | 腰   | io         | io       | io       |
 | 忧   | iu         | iu       | iu       |
-| 妖   | iau(iou)   | iao(iou) | iau      |
+| 妖   | iau(iou)   | iao(iou) | iau(iou) |
 | 娃   | ua         | ua       | ua       |
 | 锅   | ue         | uê       | ue       |
 | 威   | ui         | ui       | ui       |
@@ -86,10 +86,10 @@ date: 2025-10-02
 | (荣) | ueng/uek   | ueng/ueg | ueŋ/uek̚ |
 | 温   | un/ut      | und/ud   | un/ut̚   |
 | 秧   | ng         | ng/eng   | ŋ        |
-| 恩   | ṳn/ṳt      | ernd/erd | ən/ət̚   |
-| 隐   | n          | nd       | ɯn/ɯt̚   |
+| 恩   | ṳn/ṳt      | end/ed   | ɯn/ɯt̚   |
+| (尹) | n          | nd       | n        |
 | 姆   | m          | m        | m        |
-| (森) | iṳm        | ierm     | iɯm      |
+| (森) | iṳm        | iem      | iɯm      |
 | 嗳   | aⁿ         | an       | ã       |
 | 闲   | oiⁿ        | oin      | õĩ     |
 | 楹   | eⁿ         | ên       | ẽ       |
