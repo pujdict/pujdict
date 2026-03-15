@@ -201,7 +201,6 @@ flowchart
    黍 <TPopupPujNoAccent puj="seu2"/>、
    梳 <TPopupPujNoAccent puj="seu1"/>、
    疏 <TPopupPujNoAccent puj="seu1"/>、
-   须 <TPopupPujNoAccent puj="tsheu1"/>、
    絮 <TPopupPujNoAccent puj="tsheu3"/>、
    苧 <TPopupPujNoAccent puj="teu6"/>、
    贮 <TPopupPujNoAccent puj="teu2"/>。
