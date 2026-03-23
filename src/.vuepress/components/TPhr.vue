@@ -108,7 +108,10 @@
                     </template>
                   </h4>
                   <span class="text-muted me-1">
-                    <template v-for="(cmn, i) in result.cmn">
+                    <template v-if="result.cmnParen.length" v-for="(cmn, i) in result.cmnParen">
+                      <span v-if="i" class="text-muted">; </span>{{ cmn }}
+                    </template>
+                    <template v-else v-for="(cmn, i) in result.cmn">
                       <span v-if="i" class="text-muted">; </span>{{ cmn }}
                     </template>
                   </span>
@@ -758,6 +761,7 @@ export default {
           teochew: phrase.teochew,
           puj: phrase.puj,
           cmn: phrase.cmn,
+          cmnParen: phrase.cmnParen,
           desc: desc,
           examples: phrase.examples,
           informal: phrase.informal,

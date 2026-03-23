@@ -51,7 +51,10 @@
           </template>
         </td>
         <td>
-          <template v-for="(cmn, i) of items[phraseIndex].cmn">
+          <template v-if="items[phraseIndex].cmnParen.length" v-for="(cmn, i) of items[phraseIndex].cmnParen">
+            <template v-if="i"><br/></template>{{ cmn }}
+          </template>
+          <template v-else v-for="(cmn, i) of items[phraseIndex].cmn">
             <template v-if="i"><br/></template>{{ cmn }}
           </template>
         </td>
