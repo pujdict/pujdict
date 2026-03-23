@@ -10,10 +10,10 @@ else
   git clone --depth 1 ${origin%/*}/pujbase.git || exit 1
 fi
 
-python3 generate_font.py < /dev/null
-
 pushd pujbase
 bash build_dist.sh
 popd
 
 bash generate_protobuf.sh
+
+python3 generate_font.py < /dev/null

@@ -9,7 +9,7 @@ import yaml
 from fontname import main as fontname
 from fontTools.subset import main as pyftsubset
 from fontTools.ttLib.woff2 import compress as woff2_compress
-from puj import *
+from pujbase.libpuj.pujpb import Entries, Phrases
 
 FONTS_DIR = '../assets/fonts'
 DOWNLOAD_TEMP_DIR = '../assets/fonts/.tmp'
@@ -95,35 +95,29 @@ def post_process():
 
 
 def get_chars():
-    # TODO: Use released dist
-    with open('pujbase/data/entries.yml', 'r', encoding='utf-8') as f:
-        yaml_entries = yaml.load(f, yaml.Loader)
-    entries = []
-    for yaml_ent in yaml_entries:
-        entries.append(yaml_ent[0].split(','))
-
     # CJK B~I
     result = set()
-    for char, char_sim in entries:
-        if not is_cjk_basic(char):
-            result.add(char)
-        if char == char_sim:
-            continue
-        if not is_cjk_basic(char_sim):
-            result.add(char_sim)
+    with open('pujbase/dist/entries.pb', 'rb') as f:
+        entries_pb = Entries()
+        entries_pb.ParseFromString(f.read())
+        for ent in entries_pb.entries:
+            char = ent.char
+            char_sim = ent.char_sim
+            if not is_cjk_basic(char):
+                result.add(char)
+            if char == char_sim:
+                continue
+            if not is_cjk_basic(char_sim):
+                result.add(char_sim)
 
-    with open('pujbase/data/phrases.yml', 'r', encoding='utf-8') as f:
-        yaml_phrases = yaml.load(f, yaml.Loader)
-
-    phrases = []
-    for i, yaml_phrase in enumerate(yaml_phrases):
-        k, v = next(iter(yaml_phrase.items()))
-        teochew_list, puj_list, cmn_list, word_class_list, tag_list = k.split('|')
-        teochew_list = teochew_list.split('/')
-        for teochew in teochew_list:
-            for char in teochew:
-                if not is_cjk_basic(char):
-                    result.add(char)
+    with open('pujbase/dist/phrases.pb', 'rb') as f:
+        phrases_pb = Phrases()
+        phrases_pb.ParseFromString(f.read())
+        for phrase in phrases_pb.phrases:
+            for teochew in phrase.teochew:
+                for char in list(teochew):
+                    if not is_cjk_basic(char):
+                        result.add(char)
 
     return result
 
