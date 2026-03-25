@@ -78,7 +78,7 @@ import TPuj from '@components/TPuj.vue';
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祇万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-khi5 buan7-pui6-kong1."/>
 - 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
-  <TPopupPujNoAccent linebreak puj="Huam6-huap4 tsau1-heng5 lau5-ngiok8 tshiang5-iu1-hi6; hu6-meng6 mou5-tshai5 tsai3-tsu2 ian1-kia1-lui6; ok4-tsit8 thian1-tsai1 tong3-sur2 ki1-buang5-pui3; siok4-li5- huang5-tshuan5 lai5-siu6- kam1-lu7-bui7."/> 
+  <TPopupPujNoAccent linebreak puj="Huam6-huap4 tsau1-heng5 lau5-ngiok8 tshiang5-iu1-hi6; hu6-meng6 mou5-tshai5 tsai3-tsu2 ian1-kia1-lui6; ok4-tsit8 thian1-tsai1 tong3-sur2 ki1-buang5-pui3; sok4-li5- huang5-tshuan5 lai5-siu6- kam1-lu7-bui7."/> 
 [//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
 [//]: # (   <TPopupPujNoAccent linebreak puj="Ma2 tap8 tshe1 siang1 tshiang5 iap4 sin1-heng5 sui3; kui2 khek4 lui5 hong1 tsur6-bun2 hian5-liang5 i3; sui2-ho2 un5-phiau1 hu2 ngiau2 se5 siang1 lui6; kiu2-heng5 ku1-hun5 lai5-siu6- kam1-lu7-bui7."/>)
 
