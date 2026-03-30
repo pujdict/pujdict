@@ -347,7 +347,6 @@ export default {
         alert("数据库尚未加载完成，请稍后再试。");
         return;
       }
-      setLoading(true);
 
       let resultEntries = [];
       let accentId = this.selectedFuzzyQueryKey;
@@ -372,7 +371,6 @@ export default {
         }
       }
       this.showQueryResultList(resultEntries);
-      setLoading(false);
     },
     resetQuery(pushHistory: boolean = true) {
       this.selectedInitials = [];

@@ -169,7 +169,6 @@ export default {
       // remove all non-Chinese characters
       // query = query.replace(/[^\u4e00-\u9fa5]/g, "");
       if (chars.length !== 0) {
-        setLoading(true);
         let result = this.queryChars(chars);
         this.queryResult = result;
         this.queryResultEmpty = result.length === 0;
@@ -177,7 +176,6 @@ export default {
         //result.forEach(entry => {
         //  $("#query-result").append(makeEntryArea(entry));
         //});
-        setLoading(false);
         if (pushHistory) {
           setUrlQueryParameter({"chars": charsInput});
         }
