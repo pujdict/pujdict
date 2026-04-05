@@ -59,7 +59,7 @@
                         <span v-if="example.puj">
                           <TPopupPuj :puj="example.puj" :key="example.puj" :charsList="[[...example.teochew]]"/>
                         </span>
-                        <span class="ms-1" v-if="example.mandarin">({{ example.mandarin }})</span>
+                        <span class="ms-1" v-if="example.mandarin">{{ example.mandarin }}</span>
                       </template>
                     </div>
                   </template>
