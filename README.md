@@ -3,7 +3,7 @@
 **潮汕方言白话字辞典/Péh-Uē-Jī dictionary of the Teochew-Swatow dialect**
 
 开发中，欢迎参与提议和订正。
-辞典数据见 [pujdict/pujdict-data](https://github.com/pujdict/pujbase) 仓库。
+辞典数据见 [pujdict/pujbase](https://github.com/pujdict/pujbase) 仓库。
 
 辞典地址：
 - <https://pujdict.sourceforge.io/>：托管于 SourceForge，每日随本仓库 Action 更新最新数据。
