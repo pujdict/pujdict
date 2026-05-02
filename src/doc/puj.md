@@ -15,7 +15,7 @@ li > ol > li {
 </style>
 
 注：本文将详细介绍辞典内部所使用的标准音的设计和规范，涉及较多音韵学术语，可能不是一篇很通俗的科普文章。  
-若希望快速熟悉辞典使用的拼音方案“白话字”或“潮拼”，参见[潮汕方言拼音方案简表](./pinyin.md)。
+若希望快速熟悉辞典使用的拼音方案“白话字（Péh-Uē-Jī, PUJ）”或“潮拼（Dio5-Pêng1/Diê5-Pêng1, DP）”，参见[潮汕方言拼音方案简表](./pinyin.md)。
 
 ## 关于辞典的标准音
 
@@ -147,17 +147,19 @@ flowchart
    泉漳潮各地白话字中有许多不同写法，包括但不限于
    ṳ/ü/ɨ/ᵻ/ur/ir 等等。杜嘉德《厦英大辞典》中记为 u 上加两点，即 ü，但考虑到在字母上方标记声调时比较拥挤，本辞典采用卓威廉、林雄成等人的写法，即
    u 下加两点 ṳ。输入不方便时，建议用 ur/ir 代替。
-3. 韵母 <TPopupPujNoAccent puj="or"/> 潮汕大多数地区已丢失，例如：袋 <TPopupPujNoAccent puj="tor7"/>、块 <TPopupPujNoAccent puj="kor3"/>
-   、胎 <TPopupPujNoAccent puj="thor1"/>、
+3. 韵母 <TPopupPujNoAccent puj="or"/> 潮汕大多数地区已丢失，例如：
+   袋 <TPopupPujNoAccent puj="tor7"/>、块 <TPopupPujNoAccent puj="kor3"/>、胎 <TPopupPujNoAccent puj="thor1"/>、
    罪 <TPopupPujNoAccent puj="tsor6"/>、坐 <TPopupPujNoAccent puj="tsor6"/>、夺 <TPopupPujNoAccent puj="torh8"/>。
    今天潮汕各地多将该韵母读为 [o]，陆丰三甲则读为 [e]，仅潮安金石、沙溪等极少数地区仍然保留 [ə] 音。
    金石民间流传有以下一段歌谣（粗体字为 <TPopupPujNoAccent puj="or"/> 韵母）：
-   > 田**螺**、庵**螺**、布**袋**，担**短短**，担去金石宫**块退**，**退**了买屐**桃**。
+
+   > 田**螺**、庵**螺**、布**袋**，打**短短**，担去金石宫**块退**，**退**了买屐**桃**。
 
    杜嘉德将该韵母记为 ö，本辞典中，白话字与 ṳ 保持一致，记为下加两点即 o̤，输入不方便时，建议用 or/er 代替；
    该韵母潮拼记法遵循借用普通话拼音的原则，记为 er。
 
    值得一提的是，晚清时期的潮州话中仍存在该韵母——高德《汉英潮州方言字典》（1883）的序言中提到：
+
    > The ù in such words as 汝, 去, lù, kù is sometimes pronounced u; as lu, ku. Also ù in such words as 代, 塊 tù kù is often pronounced ò; as tò, kò; and it may be remarked that when the ù
    sound
    is given in this class of words it is a more open sound than when it occurs in the class just before mentioned; the
