@@ -423,7 +423,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                              |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    |                                                                              |
 | 痕很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                              |
-| 欣勋^6^   | <TPopupPujNoAccent puj=-n0 />                                                                     |                                                                              |
+| 欣勋^6^   | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urn0 />                                              |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  |                                                                              |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    |                                                                              |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                              |
@@ -461,7 +461,7 @@ ng 接在其他声母后的发音可以读同单独成字的声化韵，也可�
 | 音邑      | <TPopupPujNoAccent puj=-im0 />, <TPopupPujNoAccent puj=-ip0 />                                    |                                                                                                   |
 | 因乙      | <TPopupPujNoAccent puj=-in0 />, <TPopupPujNoAccent puj=-it0 />                                    |                                                                                                   |
 | 痕很^6^   | <TPopupPujNoAccent puj=-urn0 />                                                                   | <TPopupPujNoAccent puj=-urn0 />                                                                   |
-| 欣勋^6^   | <TPopupPujNoAccent puj=-n0 />                                                                     |                                                                                                   |
+| 欣勋^6^   | <TPopupPujNoAccent puj=-n0 />                                                                     | <TPopupPujNoAccent puj=-urn0 />                                                                   |
 | 隐乞      | <TPopupPujNoAccent puj=-urn0 />, <TPopupPujNoAccent puj=-urt0 />                                  |                                                                                                   |
 | 温熨      | <TPopupPujNoAccent puj=-un0 />, <TPopupPujNoAccent puj=-ut0 />                                    |                                                                                                   |
 | 庵盒      | <TPopupPujNoAccent puj=-am0 />, <TPopupPujNoAccent puj=-ap0 />                                    |                                                                                                   |
