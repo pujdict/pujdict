@@ -26,7 +26,8 @@ NOTO_SANS_SC_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'NotoSansSC-Regular.otf')
 BASIC_SUBSET_FONT_NAME_OTF = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generated.otf')
 BASIC_SUBSET_FONT_NAME_WOFF2 = os.path.join(TEMP_DIR, 'NotoSansSC-Regular.generated.woff2')
 
-PLANGOTHIC_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'Plangothic.ttc')
+PLANGOTHIC1_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'PlangothicP1-Regular.ttf')
+PLANGOTHIC2_PATH = os.path.join(DOWNLOAD_TEMP_DIR, 'PlangothicP2-Regular.ttf')
 SUBSET_FONT_NAME1 = 'CJKExtSubset1'
 SUBSET_FONT_NAME2 = 'CJKExtSubset2'
 SUBSET_FONT_NAME_TTF1 = os.path.join(TEMP_DIR, 'CJKExtSubset1.generated.ttf')
@@ -42,9 +43,12 @@ def ensure_noto_sans_sc():
 
 
 def ensure_plangothic():
-    if not os.path.exists(PLANGOTHIC_PATH):
-        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project/raw/main/fonts/otf/Plangothic.ttc'
-        urllib.request.urlretrieve(url, PLANGOTHIC_PATH)
+    if not os.path.exists(PLANGOTHIC1_PATH):
+        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project/releases/latest/download/PlangothicP1-Regular.ttf'
+        urllib.request.urlretrieve(url, PLANGOTHIC1_PATH)
+    if not os.path.exists(PLANGOTHIC2_PATH):
+        url = 'https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project/releases/latest/download/PlangothicP2-Regular.ttf'
+        urllib.request.urlretrieve(url, PLANGOTHIC2_PATH)
 
 
 def basic_subset():
@@ -68,16 +72,14 @@ def subset(chars):
     with open(name, 'w', encoding='utf-8') as f:
         f.write(''.join(chars))
     pyftsubset([
-        PLANGOTHIC_PATH,
+        PLANGOTHIC1_PATH,
         f'--text-file={name}',
         f'--output-file={SUBSET_FONT_NAME_TTF1}',
-        f'--font-number=0',
     ])
     pyftsubset([
-        PLANGOTHIC_PATH,
+        PLANGOTHIC2_PATH,
         f'--text-file={name}',
         f'--output-file={SUBSET_FONT_NAME_TTF2}',
-        f'--font-number=1',
     ])
     fontname([SUBSET_FONT_NAME1, SUBSET_FONT_NAME_TTF1])
     fontname([SUBSET_FONT_NAME2, SUBSET_FONT_NAME_TTF2])
