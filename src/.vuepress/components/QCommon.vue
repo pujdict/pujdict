@@ -94,7 +94,30 @@ class PUJDictDatabase {
     const accentsDataResponse = await accentsDataPromise;
 
     const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
-    this.accents = accentsData.accents;
+    this.accents = [];
+    const supportedAccentsSet = new Set([
+      'ChaoZhou_FuCheng',
+      'XiQiang',
+      'ChaoAn_FengHuang',
+      'ChaoAn_WenCi',
+      'ChaoAn_JinShi',
+      'FengShun_LiuHuang',
+      'RaoPing_SanRao',
+      'RaoPing_HuangGang',
+      'ChengHai_ChengCheng',
+      'ChengHai_WaiSha',
+      'ShanTou_ShiQu',
+      'JieYang_RongCheng',
+      'ChaoYang_MianCheng',
+      'ChaoYang_DaHao',
+      'PuNing_LiuSha',
+      'HuiLai_HuiCheng',
+      'LuFeng_SanJia',
+    ]);
+    for (const accent of accentsData.accents) {
+      if (supportedAccentsSet.has(accent.id))
+        this.accents.push(accent);
+    }
     this.fuzzyRulesAction = [];
     this.accentResults = new Map();
     for (const accent of this.accents) {
