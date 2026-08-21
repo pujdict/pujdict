@@ -58,6 +58,29 @@ class PhraseSyllable {
   }
 }
 
+// 下载 .gz 数据文件并用浏览器原生 gzip 解压，返回解压后的原始字节（ArrayBuffer）。
+async function fetchGzArrayBuffer(url: string): Promise<ArrayBuffer> {
+  const response = await fetch(url, {method: 'GET', credentials: 'include'});
+  if (!response.ok || !response.body) {
+    throw new Error(`下载失败: ${url} (${response.status})`);
+  }
+  const data = await response.arrayBuffer();
+
+  // 部分服务器会对 .gz 文件自动加 `Content-Encoding: gzip`，
+  // 浏览器 fetch 层已透明解压，此时 data 直接就是 .pb 原始字节，不能再解压。
+  // 判断方法：gzip 文件以魔数 0x1f 0x8b 开头；若没有该魔数说明已被服务端解压，直接返回。
+  const isGzip = data.byteLength >= 2 && new Uint8Array(data, 0, 2)[0] === 0x1f && new Uint8Array(data, 0, 2)[1] === 0x8b;
+  if (!isGzip) {
+    return data;
+  }
+
+  // 手动解压 gzip。DecompressionStream('gzip') 在主流浏览器中原生支持，无需额外依赖。
+  const decompressed = await new Response(
+    new Blob([data]).stream().pipeThrough(new DecompressionStream('gzip'))
+  ).arrayBuffer();
+  return decompressed;
+}
+
 class PUJDictDatabase {
   entries: pujpb.IEntry[];
   // 输入汉字，映射到这个汉字的 entry 列表（如果一简对多繁则表数量大于1）
@@ -81,9 +104,9 @@ class PUJDictDatabase {
   private phrasesFastIndexByCharPrime = 499;
 
   async load() {
-    const fetchData = (filename: string) => 
-      fetch(withBase(`/data/pujbase/dist/${filename}.pb`), {method: 'GET', mode: 'no-cors', credentials: 'include',})
-        .then(response => response.arrayBuffer());
+    // 数据以 .gz 形式存储，先并行下载并解压，减少 SourceForge 带宽受限时的传输量。
+    const fetchData = (filename: string) =>
+      fetchGzArrayBuffer(withBase(`/data/pujbase/dist/${filename}.pb.gz`));
 
     // noinspection ES6MissingAwait
     const [entriesPromise, accentsDataPromise, phrasesPromise] = [
