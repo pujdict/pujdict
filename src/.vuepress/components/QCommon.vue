@@ -58,6 +58,59 @@ class PhraseSyllable {
   }
 }
 
+// 从 `Content-Range` 响应头（形如 "bytes 0-99/360000"）解析文件总大小；解析失败返回 null。
+function parseTotalSize(contentRange: string | null): number | null {
+  if (!contentRange) return null;
+  const match = contentRange.match(/\/\s*(\d+)\s*$/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
+/**
+ * 并行分段下载一个文件（HTTP Range）。
+ *
+ * 若服务器不支持 Range（返回 200 全文而非 206），则自动退化为单次整包下载，保证可用。
+ *
+ * @param url        文件完整 URL（需为可读响应；同源请求即可）
+ * @param chunkCount 分段数。浏览器对同一 HTTP/1.1 域名默认约 6 个并发连接，建议 <=6。
+ */
+async function fetchInParallel(url: string, chunkCount = 4): Promise<ArrayBuffer> {
+  const probe = await fetch(url, {
+    method: 'GET',
+    headers: {'Range': 'bytes=0-0'},
+  });
+
+  const totalSize = parseTotalSize(probe.headers.get('content-range'));
+  const supportsRange = probe.status === 206 && totalSize != null;
+
+  // 服务器不支持 Range：退化为整包下载。
+  if (!supportsRange || totalSize === null) {
+    const full = await fetch(url, {method: 'GET'});
+    return full.arrayBuffer();
+  }
+
+  const nChunk = Math.min(chunkCount, totalSize);
+  const chunkSize = Math.ceil(totalSize / nChunk);
+  const chunks = await Promise.all(
+    Array.from({length: nChunk}, (_, i) => {
+      const start = i * chunkSize;
+      const end = Math.min(totalSize - 1, (i + 1) * chunkSize - 1);
+      return fetch(url, {
+        method: 'GET',
+        headers: {'Range': `bytes=${start}-${end}`},
+      }).then((res) => res.arrayBuffer());
+    })
+  );
+
+  // 按顺序拼接回完整文件。
+  const merged = new Uint8Array(totalSize);
+  let offset = 0;
+  for (const chunk of chunks) {
+    merged.set(new Uint8Array(chunk), offset);
+    offset += chunk.byteLength;
+  }
+  return merged.buffer;
+}
+
 class PUJDictDatabase {
   entries: pujpb.IEntry[];
   // 输入汉字，映射到这个汉字的 entry 列表（如果一简对多繁则表数量大于1）
@@ -81,19 +134,20 @@ class PUJDictDatabase {
   private phrasesFastIndexByCharPrime = 499;
 
   async load() {
-    const fetchData = (filename: string) => 
-      fetch(withBase(`/data/pujbase/dist/${filename}.pb`), {method: 'GET', mode: 'no-cors', credentials: 'include',})
-        .then(response => response.arrayBuffer());
+    const url = (filename: string) => withBase(`/data/pujbase/dist/${filename}.pb`);
 
-    // noinspection ES6MissingAwait
-    const [entriesPromise, accentsDataPromise, phrasesPromise] = [
-      fetchData('entries'),
-      fetchData('accents'),
-      fetchData('phrases')
-    ];
-    const accentsDataResponse = await accentsDataPromise;
+    // 三个文件并行下载 + 处理，互相重叠，避免顺序等待。
+    // 对较大的文件做 Range 分段并发下载。
+    // entries(360K)/phrases(163K) 分段，accents(19K) 单段即可。
+    await Promise.all([
+      this.loadAccents(fetchInParallel(url('accents'), 1)),
+      this.loadEntries(fetchInParallel(url('entries'), 8)),
+      this.loadPhrases(fetchInParallel(url('phrases'), 6)),
+    ]);
+  }
 
-    const accentsData = pujpb.Accents.decode(new Uint8Array(accentsDataResponse));
+  private async loadAccents(accentsResponse: Promise<ArrayBuffer>) {
+    const accentsData = pujpb.Accents.decode(new Uint8Array(await accentsResponse));
     this.accents = [];
     const supportedAccentsSet = new Set([
       'ChaoZhou_FuCheng',
@@ -166,9 +220,10 @@ class PUJDictDatabase {
         fuzzyFunctions.forEach(fuzzyFunction => { fuzzyFunction(pron); });
       });
     }
+  }
 
-    const entriesResponse = await entriesPromise;
-    const database: pujpb.IEntries = pujpb.Entries.decode(new Uint8Array(entriesResponse));
+  private async loadEntries(entriesResponse: Promise<ArrayBuffer>) {
+    const database: pujpb.IEntries = pujpb.Entries.decode(new Uint8Array(await entriesResponse));
     this.entries = database.entries;
     this.entriesCharMap = new Map();
     const pushEntryMap = (c: string, entry: pujpb.IEntry) => {
@@ -181,9 +236,10 @@ class PUJDictDatabase {
       pushEntryMap(char, entry);
       pushEntryMap(charSim, entry);
     }
+  }
 
-    const phrasesResponse = await phrasesPromise;
-    const phrasesData = pujpb.Phrases.decode(new Uint8Array(phrasesResponse));
+  private async loadPhrases(phrasesResponse: Promise<ArrayBuffer>) {
+    const phrasesData = pujpb.Phrases.decode(new Uint8Array(await phrasesResponse));
     this.phrases = phrasesData.phrases;
     this.phrasesTeochewMap = new Map();
     this.phrasesInformalMap = new Map();
@@ -205,7 +261,7 @@ class PUJDictDatabase {
       }
       if (hasFusion) {
         for (const teochew of phrase.teochew) {
-          pushEntryMap(this.phrasesFusionMap, teochew, phrase);
+          pushPhraseMap(this.phrasesFusionMap, teochew, phrase);
         }
       }
       for (const informal of phrase.informal) {
