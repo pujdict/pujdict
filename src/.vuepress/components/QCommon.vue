@@ -205,7 +205,7 @@ class PUJDictDatabase {
       }
       if (hasFusion) {
         for (const teochew of phrase.teochew) {
-          pushEntryMap(this.phrasesFusionMap, teochew, phrase);
+          pushPhraseMap(this.phrasesFusionMap, teochew, phrase);
         }
       }
       for (const informal of phrase.informal) {
