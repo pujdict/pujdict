@@ -1,6 +1,7 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
+    <TMirror/>
     <div class="d-flex align-items-center gap-1">
       <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -81,6 +82,7 @@
 import TDarkTheme from "./TDarkTheme.vue";
 import {darkThemeString} from "./QDarkTheme.vue";
 import {withBase} from "vuepress/client";
+import TMirror from "./TMirror.vue";
 </script>
 
 <script lang="ts">

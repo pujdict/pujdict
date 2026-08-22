@@ -1,6 +1,7 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString">
+    <TMirror/>
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
         <div class="form-label fw-bold d-flex align-items-center mb-2">
@@ -105,6 +106,7 @@ import {withBase} from "vuepress/client";
 import {darkThemeString} from "./QDarkTheme.vue";
 import TDarkTheme from "./TDarkTheme.vue";
 import TQuestionMarkTip from "./TQuestionMarkTip.vue";
+import TMirror from "./TMirror.vue";
 </script>
 
 <script lang="ts">

@@ -1,6 +1,7 @@
 <template>
   <TDarkTheme/>
   <div v-bind:data-bs-theme="darkThemeString" class="container py-1">
+    <TMirror/>
     <form class="row g-3" onsubmit="return false;">
       <div class="query-input-area col-md-8">
         <div class="input-group">
@@ -77,6 +78,7 @@
 import {withBase} from "vuepress/client";
 import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
+import TMirror from "./TMirror.vue";
 </script>
 
 <script lang="ts">

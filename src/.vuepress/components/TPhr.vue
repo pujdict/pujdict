@@ -1,6 +1,7 @@
 <template>
   <TDarkTheme/>
-  <div v-bind:data-bs-theme="darkThemeString" class="container">
+  <div v-bind:data-bs-theme="darkThemeString">
+    <TMirror/>
     <form class="row g-3 mb-0" onsubmit="return false;">
       <div class="query-input-area col-md-8">
         <div class="mb-3">
@@ -165,6 +166,7 @@ import TDarkTheme from "./TDarkTheme.vue";
 import TPopupPuj from "./TPopupPuj.vue";
 import TQuestionMarkTip from "./TQuestionMarkTip.vue";
 import {getPronunciationCombination} from "./SPuj";
+import TMirror from "./TMirror.vue";
 </script>
 
 <script lang="ts">
