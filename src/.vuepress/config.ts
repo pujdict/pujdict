@@ -89,6 +89,7 @@ export default defineUserConfig({
     docsBranch: "main",
     editLink: false,
     docsDir: "src",
+    // activeHeaderLinks: false,
     contributors: false,
     nextLink: false,
     prevLink: false,
@@ -96,28 +97,55 @@ export default defineUserConfig({
     // navbar: ["/doc/"],
     // sidebar: [],
     sidebarIcon: false,
-    sidebar: {
-      '/query/': [
-        "qpron.md",
-        "qchar.md",
-        "qphr.md",
-        "qphrtable.md",
-      ],
-      '/doc/': [
-        "puj.md",
-        "accents.md",
-        "pinyin.md",
-        "hyphens.md",
-        "lit.md",
-        "bib.md",
-        "acknowledgments.md",
-      ],
-      '/tool/': [
-        "puj_unify.md",
-        "puj_dp.md",
-        "han_puj.md",
-      ],
-    },
+    sidebar: [
+      {
+        text: "检索",
+        collapsible: true,
+        prefix: '/query/',
+        children: [
+          "qpron.md",
+          "qchar.md",
+          "qphr.md",
+          "qphrtable.md",
+        ],
+      },
+      {
+        text: "语法",
+        collapsible: true,
+        prefix: '/grammar/',
+        children: "structure",
+      },
+      {
+        text: "文档",
+        collapsible: true,
+        prefix: '/doc/',
+        children: [
+          "puj.md",
+          "accents.md",
+          "pinyin.md",
+          "hyphens.md",
+          "lit.md",
+          // {
+          //   text: "语法",
+          //   prefix: "grammar",
+          //   children: "structure",
+          //   collapsible: true,
+          // },
+          "bib.md",
+          "acknowledgments.md",
+        ]
+      },
+      {
+        text: "工具",
+        collapsible: true,
+        prefix: '/tool/',
+        children: [
+          "puj_unify.md",
+          "puj_dp.md",
+          "han_puj.md",
+        ],
+      },
+    ],
     navbar: [
       {
         text: "检索",
@@ -143,6 +171,11 @@ export default defineUserConfig({
         ]
       },
       {
+        text: "语法",
+        link: "/grammar/",
+        icon: "spell-check",
+      },
+      {
         text: "文档",
         prefix: "/doc/",
         icon: "file-lines",
@@ -152,6 +185,7 @@ export default defineUserConfig({
           "pinyin.md",
           "hyphens.md",
           "lit.md",
+          // "grammar/README.md",
           "bib.md",
           "acknowledgments.md",
         ]
