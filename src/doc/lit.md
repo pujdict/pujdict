@@ -29,8 +29,9 @@ import TPuj from '@components/TPuj.vue';
   胡（胡蝇）<TPopupPujNoAccent puj="hou5"/>  
   胡（二胡）<TPopupPujNoAccent puj="hu5"/>
 
-文读音，潮汕的老一辈人也称之为“孔子正”。
-尽管古时潮汕的文人模仿官话，会产生成系统的文读音，各个历史时期也不断地有新的文读音渗入口语，
+古时潮汕的文人模仿官话，会产生成系统的文读音，
+潮汕的老一辈人也称文读音为“孔子正”。
+在各个历史时期，不断地有新的文读音渗入口语。
 但是，潮汕人的读书音并没有脱离口语。
 泉、漳等地在吟诵诗书时，有全文采用文读音的习惯。
 而潮汕地区不同于泉、漳等地，即使在旧时采用方言教学的学堂中，读书时也没有全文采用文读音的习惯。
@@ -47,11 +48,11 @@ import TPuj from '@components/TPuj.vue';
 > The hearer is expected to understand the words as they are read, and whatever explanations are made are rather of the thought than of the words.
 >
 > 潮州话，和其他大多数方言类似，字音有文读音和白话音（惯用音）之分。
-> 不过白话音很大一部分和文读音相同，
+> 不过很大一部分白话音和文读音相同，
 > 也有大量的汉字文读音和白话音在读书和日常对话中被混着用。
 > 
-> 但除此之外的情况下，文读音仅用于诵读经典。
-> 不论是教书先生还是普通读者，在读一本日常书籍时，都不会考虑使用白话音以外的发音，同样地，听话人也不会期望听到白话音以外的发音。
+> 但除这些以外，文读音仅用于诵读经典。
+> 不论是教书先生还是普通读者，在读一般的书籍时，都不会考虑使用白话音以外的发音，同样地，听话人也不会期望听到白话音以外的发音。
 > 因此，和其他一些方言（文读音与口语音差异显著的，例如泉漳片闽南语）相比，潮州话的“朗读”行为与其他语言的“朗读”行为更加一致（即言文一致）。
 > 听话人会期望能按字面理解所朗读的词汇，即便需要解释，重点也在于文义的解释而不是逐字解释（音义）。
 
@@ -77,7 +78,7 @@ import TPuj from '@components/TPuj.vue';
   <TPopupPujNoAccent linebreak puj="Tsin1-ian5 it4-tau6 hn1-khurn5 tsheng2, hu5-li6 tsu1-sur1 sek4- khi2-theng5. Jui5-ian6 tshur5-pui1 sui5- tsiap4-in2, kiong1-ngeng5 seng3-kia3 kiang3- siang5-tseng1."/>
 - **宝**聚**山**王**算**莫**穷**，**还**如仰**箭射虚**空。**洞**明**四句超三**际，**绝**胜**僧**祇万**倍**功。（梵呗《宝聚山王》）  
   <TPopupPujNoAccent linebreak puj="Pau2-tsu6-san1-uang5 suan3- mok8-khiong5, huan5-ju5 ngiang2-tsian3 se3- hi1-khong1. Thong3-meng5 sur3-ki3 thiau1- sam1-tsi3, tsuat8-seng3- seng1-khi5 buan7-pui6-kong1."/>
-- 犯法遭刑**牢狱**长幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
+- 犯法遭刑**牢狱常**幽系；负**命**谋财**债**主**冤家类**；**恶**疾天灾**冻死**饥亡**辈**；速离**黄泉**来受甘**露味**。（梵呗《刀兵偈》）  
   <TPopupPujNoAccent linebreak puj="Huam6-huap4 tsau1-heng5 lau5-ngiok8 tshiang5-iu1-hi6; hu6-meng6 mou5-tshai5 tsai3-tsu2 ian1-kia1-lui6; ok4-tsit8 thian1-tsai1 tong3-sur2 ki1-buang5-pui3; sok4-li5- huang5-tshuan5 lai5-siu6- kam1-lu7-bui7."/> 
 [//]: # (- **马踏车伤墙**压身形**碎**；鬼击雷轰自刎悬**梁**缢；**水火**焚漂**虎咬蛇伤类**；**九横孤**魂来受甘**露味**。（梵呗《刀兵偈》）  )
 [//]: # (   <TPopupPujNoAccent linebreak puj="Ma2 tap8 tshe1 siang1 tshiang5 iap4 sin1-heng5 sui3; kui2 khek4 lui5 hong1 tsur6-bun2 hian5-liang5 i3; sui2-ho2 un5-phiau1 hu2 ngiau2 se5 siang1 lui6; kiu2-heng5 ku1-hun5 lai5-siu6- kam1-lu7-bui7."/>)
@@ -96,13 +97,13 @@ link="https://v.douyin.com/x3f7xbQaeqg/"
 - 明月几时有，把酒问青**天**。不知天上宫阙，今夕是何**年**。（苏轼《水调歌头》）  
   <TPopupPujNoAccent linebreak puj="Meng5-gueh8 ki2-si5 u6, pa2-tsiu2 mng7- tshenn1-thian1. Put4-tsai1 thinn1--tsionn7 keng1-khueh4, kim1-sek4 si6- ho5-nian5."/>
 - 一轮明月挂高空，万盏花灯照眼**红**。街上游人如潮涌，鱼灯队队赛游**龙**。（潮剧《陈三五娘/荔镜记》）  
-  <TPopupPujNoAccent linebreak puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2 hong5. Koi1--tsionn7 iu5-jin5 ju5-tio5 iong3, hur5-teng1 tui7-tui7 sai3- iu5-liong5."/>
+  <TPopupPujNoAccent linebreak puj="Tsek8-lun5- meng5-gueh8 khua3- kau1-khong, buan7-tsuann2- hue1-teng1 tsio3- ngan2 hong5. Koi1--tsionn7 iu5-jin5 ju5-tionn'5 iong3, hur5-teng1 tui7-tui7 sai3- iu5-liong5."/>
 - 摘取蟠桃献华堂，长生哪得安期**枣**。昔日昆仑不纪年，天恩雨露知多**少**。（潮剧《十仙庆寿》）  
   <TPopupPujNoAccent linebreak puj="Tiah4-tshu2 phuan5-tho5 hian3- hua5-thang5, tshiang5-senn1 na2-tit4 an1-khi5-tsau2. Tsa2--jit8 khun1-lun5 put4- ki2-nian5, thian1-urn1 hou6-lou7 tsai1-to1-sau2."/>
 - 盼亲人，谁不想相见在眼**前**…雾锁渝州方壮别，春雨如烟已一**年**。革命伴侣多离会，如今又相见在战**场**。（潮剧《江姐》）
   <TPopupPujNoAccent linebreak puj="Phan3- tshin1-nang5, sui5- put4-sionn6- siang1-kinn3 to6- ngan2-tshian5... Bu7 so2 ju5-tsiu1 huang1- tsang3-piat8, tshun1-hou6 ju5-in1 inn'2- tsek8-nian5. Kek4-meng6 phuann6-lur2 to1- li5-hue6, ju5-kim1 iu6- siang1-kinn3 to6- tsian3-tshiang5."/>
 - 六十余里垒岩石，筑就东海一长**城**。水旱风潮已制伏，春苗夏禾竞争**荣**。昔日泪痕今何在，惟闻江头欢笑**声**。（余锡渠《治水歌》）  
-  <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2- ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8- tshiang5-seng5. Tsui2-uann6 huang1-tio5 inn'2- tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
+  <TPopupPujNoAccent linebreak puj="Lak8-tsap8-ur5-li2 lui2- ngam5-tsioh8, tiok4-tsiu6- tang1-hai2 tsek8- tshiang5-seng5. Tsui2-uann6 huang1-tionn'5 inn'2- tsi3-hok8, tshun1-miau5 he7-ta5 keng6- tsenn1-ueng5. Tsa2-jit8 lui6-hun5 kim1 ho5-tsai6, jui6-bun5- kang1-thau5 huann1-tshio3-seng1."/>
 
 <center>
 <VPCard
