@@ -8,47 +8,100 @@
           <textarea class="form-control" id="convert-input" rows="3"
                     v-model="convertInput"></textarea>
         </div>
-        <div class="mb-3">
-           <span
-               v-for="(pinyinObj, index) in pinyinList"
-               :key="index"
-               class="pinyin-item">
-            <template v-if="pinyinObj.isPolyphonic">
-              <div class="dropdown d-inline-block">
-                <span
-                    class="text-primary dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    style="cursor: pointer;"
-                >
-                  {{ pinyinObj.currentPUJ }}
-                </span>
-                <ul class="dropdown-menu">
-                  <li
-                      v-for="(py, idx) in pinyinObj.possiblePUJs"
-                      :key="idx"
-                      @click="selectPinyin(index, idx)"
-                  >
-                    <a class="dropdown-item" href="#">{{ py }}</a>
-                  </li>
-                </ul>
-              </div>
-            </template>
-            <template v-else>
-              {{ pinyinObj.currentPUJ }}
-            </template>
-                 <!-- 添加空格分隔 -->
-            <template v-if="index < pinyinList.length - 1">&nbsp;</template>
-          </span>
-        </div>
-        <div class="form-group">
-          <label for="convert-result">转换结果：</label>
-          <textarea class="form-control" id="convert-result" rows="3" readonly
-                    v-model="finalPUJ"></textarea>
-        </div>
         <div class="btn-toolbar">
           <div class="btn-group">
             <input id="query-button" class="btn btn-outline-primary" type="submit" value="转换" @click="convertAction"/>
             <input id="reset-button" class="btn btn-outline-danger" type="button" value="重置" @click="resetAction"/>
+          </div>
+        </div>
+        <div class="form-group" v-if="lines.length">
+          <label>注音与连调标注：</label>
+          <div class="pu-lines">
+            <div class="pu-line" v-for="(line, lineIndex) in lines" :key="lineIndex">
+              <template v-for="(item, index) in line" :key="item.key">
+                <span v-if="!item.isHan" class="pu-literal"
+                      :class="item.isPunct ? 'pu-literal-punct' : ''"
+                      :title="item.isPunct ? '标点：自动分隔连调组' : ''">{{ item.char }}</span>
+                <div v-else class="pu-item">
+                  <div class="pu-char">
+                    <span class="pu-pos" :class="'pu-pos-' + (positionOf(line, index) || 'none')"
+                    >{{ positionOf(line, index) }}</span>
+                    <span>{{ item.char }}</span>
+                  </div>
+                  <div class="pu-pinyin">
+                    <div v-if="item.isPolyphonic" class="dropdown d-inline-block">
+                        <span class="text-primary dropdown-toggle pu-py-toggle" data-bs-toggle="dropdown"
+                              title="点击选择其他读音"
+                        >{{ displayPUJ(item) }}</span>
+                      <ul class="dropdown-menu">
+                        <li v-for="(cand, idx) in item.candidates" :key="idx">
+                          <a class="dropdown-item" href="#" @click.prevent="selectPinyin(lineIndex, index, idx)">
+                            {{ cand.puj }}
+                            <span v-if="catLabel(cand.cat)" class="pu-cat" :class="'pu-cat-' + cand.cat"
+                            >{{ catLabel(cand.cat) }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <span v-else-if="item.candidates.length">{{ displayPUJ(item) }}</span>
+                    <input v-else class="form-control form-control-sm pu-input" type="text"
+                           placeholder="?" title="字库中没有该字，请手工填写拼音"
+                           :value="item.currentPUJ"
+                           @input="setCustomPinyin(lineIndex, index, $event.target.value)"/>
+                  </div>
+                  <div class="form-check pu-check" title="勾选表示此字读本调（Ｘ）">
+                    <input class="form-check-input" type="checkbox" :checked="item.isX"
+                           @change="setX(lineIndex, index, $event.target.checked)"/>
+                    <label class="form-check-label pu-check-label">X</label>
+                  </div>
+                </div>
+                <div v-if="hasGapButtons(line, index)" class="pu-gap">
+                  <button type="button"
+                          class="btn btn-sm pu-gap-btn"
+                          :class="item.breakAfter ? 'btn-primary' : 'btn-outline-secondary'"
+                          title="添加／取消连调组边界 /"
+                          @click="toggleBreak(lineIndex, index)">/</button>
+                  <button type="button"
+                          class="btn btn-sm pu-gap-btn"
+                          :class="item.wordJoin ? 'btn-success' : 'btn-outline-secondary'"
+                          title="添加／取消分词边界 _"
+                          @click="toggleWord(lineIndex, index)">_</button>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div class="form-text pu-help">
+            点击两字之间的 <code>/</code> 按钮添加连调组边界（再点取消），添加时 <code>/</code> 之前的一个字自动勾选为本调 <b>Ｘ</b>。<br/>
+            每个字下方的复选框用于标记本调 <b>Ｘ</b>；连续勾选两个字时，后一个为 <b>Ｘ</b>，前一个为重读前变调 <b>Ｗ</b>。
+            标记后，同组内 Ｘ 之前的字自动为 <b>Ｙ</b>（前变调），之后的字自动为 <b>Ｚ</b>（后变调／轻声）。<br/>
+            点击两字之间的 <code>_</code> 按钮，可标记这两个字属于同一个词（再点取消）；已连写的两个拼音在导出时用 <code>_</code> 相连。<br/>
+            标点（含西文标点）自动分隔连调组，且标点之前的最后一个汉字自动勾选为 <b>Ｘ</b>；
+            若句中／句末没有收尾标点，则该行最后一个汉字也自动勾选为 <b>Ｘ</b>。<br/>
+            修改输入文字后再次点击「转换」，已标注的部分会尽量保留。
+          </div>
+        </div>
+        <div class="form-group" v-if="lines.length">
+          <label for="convert-result">转换结果：</label>
+          <textarea class="form-control" id="convert-result" rows="3" readonly
+                    v-model="finalPUJ"></textarea>
+          <div class="form-text">
+            <code>/</code> 为连调组边界，<code>*</code> 表示该字读本调（Ｘ），<code>_</code> 连接同一个词内部的两个音节。
+            中文标点导出时转为西文标点。
+          </div>
+          <div class="btn-toolbar mt-2">
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary" @click="copyAction">
+                {{ copied ? '已复制' : '复制' }}
+              </button>
+            </div>
+            <div class="form-check ms-3 d-flex align-items-center">
+              <input class="form-check-input" type="checkbox" id="output-as-plain" v-model="outputAsPlain"/>
+              <label class="form-check-label" for="output-as-plain">导出为数字调形式</label>
+            </div>
+            <div class="form-check ms-3 d-flex align-items-center">
+              <input class="form-check-input" type="checkbox" id="output-punct" v-model="outputPunct"/>
+              <label class="form-check-label" for="output-punct">导出标点符号</label>
+            </div>
           </div>
         </div>
       </div>
@@ -62,60 +115,255 @@ import TDarkTheme from "./TDarkTheme.vue";
 <script>
 import {
   addPUJToneMarkAndConvertToDisplayPUJSentence,
-  addPUJToneMarkWord,
-  convertPUJToDPSentence,
 } from "./SPuj";
 import {
-  Pronunciation,
   initFromDatabase,
-  setLoading, setLocalOption, getLocalOption, setUrlQueryParameter, resetUrlQueryParameter,
-  // $,
+  setLoading,
   db,
+  isChineseChar,
 } from './QCommon.vue';
 
 import jquery from 'jquery';
-import {isChineseChar} from "./SUtils";
 
 const $ = jquery;
 
-function getHanCharPUJ(han) {
-  let entriesResults = [];
-  let pujResults = [];
-  for (const entry of db.entries) {
-    if (entry.char === han || entry.charSim === han) {
-      entriesResults.push(entry);
+// 文白异读标记（EntryCategory）
+const CatLabels = {1: '白', 2: '文', 3: '俗'};
+
+const WordLikeRegex = /[\p{L}\p{N}']/u;
+
+// 中文标点 → 西文标点。导出时不输出中文标点。
+const PunctMap = Object.assign(Object.create(null), {
+  '，': ',', '、': ',', '；': ';', '：': ':', '。': '.', '？': '?', '！': '!',
+  '（': '(', '）': ')',
+  '【': '[', '】': ']', '〔': '[', '〕': ']',
+  '《': '<', '》': '>', '〈': '<', '〉': '>',
+  '「': '"', '」': '"', '『': '"', '』': '"',
+  '—': '-', '－': '-', '～': '~', '…': '...', '·': '.',
+});
+
+function toWesternPunct(token) {
+  let result = '';
+  for (const ch of token) {
+    result += PunctMap[ch] ?? ch;
+  }
+  return result;
+}
+
+let keyCounter = 0;
+
+// 将一行文字切成若干 token：汉字各自成 token，连续的西文/数字合并为一个 token，
+// 标点符号各自成 token（中文或西文标点均作为连调组边界）。
+function tokenizeLine(line) {
+  const tokens = [];
+  let buffer = '';
+  const flush = () => {
+    if (buffer) {
+      tokens.push(buffer);
+      buffer = '';
+    }
+  };
+  for (const ch of line) {
+    if (/\s/.test(ch)) {
+      flush();
+    } else if (isChineseChar(ch)) {
+      flush();
+      tokens.push(ch);
+    } else if (WordLikeRegex.test(ch)) {
+      buffer += ch;
+    } else {
+      // 标点单独成 token
+      flush();
+      tokens.push(ch);
     }
   }
-  entriesResults.sort((entry1, entry2) => {
-    if (entry1.freq !== entry2.freq)
-      return entry1.freq - entry2.freq;
-    if (entry1.cat !== entry2.cat)
-      return entry1.cat - entry2.cat;
-    return entry1.index - entry2.index;
+  flush();
+  return tokens;
+}
+
+// 查字库，返回该汉字全部读音（已去重，按 频率 → 文白 → 字序 排序）。
+function getHanCharPUJCandidates(han) {
+  const indices = db?.entriesCharMap?.get(han);
+  if (!indices) return [];
+  const entries = [...indices].map(i => db.entries[i]).filter(entry => entry && entry.pron);
+  entries.sort((entry1, entry2) => {
+    if ((entry1.freq || 0) !== (entry2.freq || 0))
+      return (entry1.freq || 0) - (entry2.freq || 0);
+    if ((entry1.cat || 0) !== (entry2.cat || 0))
+      return (entry1.cat || 0) - (entry2.cat || 0);
+    return (entry1.index || 0) - (entry2.index || 0);
   });
-  for (const entry of entriesResults) {
-    let pron = entry.pron;
-    let combination = `${pron.initial}${pron.final}${pron.tone}`;
-    pujResults.push(addPUJToneMarkAndConvertToDisplayPUJSentence(combination));
+  const seen = new Set();
+  const result = [];
+  for (const entry of entries) {
+    const plain = `${entry.pron.initial}${entry.pron.final}${entry.pron.tone}`;
+    if (seen.has(plain)) continue;
+    seen.add(plain);
+    result.push({
+      plain,
+      puj: addPUJToneMarkAndConvertToDisplayPUJSentence(plain),
+      cat: entry.cat || 0,
+      freq: entry.freq || 0,
+    });
   }
-  return pujResults;
+  return result;
+}
+
+function createItem(token) {
+  const isHan = isChineseChar(token);
+  const item = {
+    key: ++keyCounter,
+    char: token,
+    isHan,
+    isPunct: !WordLikeRegex.test(token),
+    candidates: [],
+    currentPUJ: '',
+    currentPlain: '',
+    isPolyphonic: false,
+    isX: false,
+    breakAfter: false,
+    // 与后一个字属于同一个词
+    wordJoin: false,
+  };
+  if (!isHan) {
+    item.currentPUJ = token;
+    item.currentPlain = token;
+    return item;
+  }
+  item.candidates = getHanCharPUJCandidates(token);
+  item.isPolyphonic = item.candidates.length > 1;
+  if (item.candidates.length) {
+    item.currentPUJ = item.candidates[0].puj;
+    item.currentPlain = item.candidates[0].plain;
+  }
+  return item;
 }
 
 export default {
   data() {
     return {
-      inputText: '',
       convertInput: '',
-      convertOutput: '',
-      pinyinList: [],
+      // 每行是一个 item 数组；item 对应一个汉字或一个非汉字 token（标点、西文等）。
+      lines: [],
+      outputAsPlain: false,
+      outputPunct: true,
+      copied: false,
     }
   },
   computed: {
     finalPUJ() {
-      return this.pinyinList.map(p => p.currentPUJ).join(' ');
+      return this.lines.map(line => this.exportLine(line)).join('\n');
     }
   },
   methods: {
+    catLabel(cat) {
+      return CatLabels[cat] ?? '';
+    },
+    displayPUJ(item) {
+      return this.outputAsPlain ? item.currentPlain : item.currentPUJ;
+    },
+    // 连调组：汉字序列，遇 / 边界或非汉字 token 即断开。
+    groupsOf(line) {
+      const groups = [];
+      let current = [];
+      line.forEach((item, index) => {
+        if (!item.isHan) {
+          if (current.length) {
+            groups.push(current);
+            current = [];
+          }
+          return;
+        }
+        current.push(index);
+        if (item.breakAfter) {
+          groups.push(current);
+          current = [];
+        }
+      });
+      if (current.length) groups.push(current);
+      return groups;
+    },
+    groupOf(line, index) {
+      return this.groupsOf(line).find(group => group.includes(index)) ?? [];
+    },
+    // 声调地位（见 src/doc/hyphens.md）：
+    // 勾选的字中最靠后的一个为本调 Ｘ；若 Ｘ 的前一个字也被勾选，则该字为重读前变调 Ｗ；
+    // Ｗ 之前（含未被勾选的前邻）为前变调 Ｙ，Ｘ 之后为后变调 Ｚ。
+    // 组内没有勾选 X 时视为尚未标注，返回空串。
+    positionOf(line, index) {
+      const item = line[index];
+      if (!item || !item.isHan) return '';
+      const group = this.groupOf(line, index);
+      const checked = group.filter(i => line[i].isX);
+      if (!checked.length) return '';
+      const xIndex = checked[checked.length - 1];
+      if (index === xIndex) return 'X';
+      if (index === xIndex - 1 && checked.includes(xIndex - 1)) return 'W';
+      return index < xIndex ? 'Y' : 'Z';
+    },
+    hasGapButtons(line, index) {
+      const next = line[index + 1];
+      return line[index].isHan && next !== undefined && next.isHan;
+    },
+    toggleBreak(lineIndex, index) {
+      const line = this.lines[lineIndex];
+      const item = line[index];
+      item.breakAfter = !item.breakAfter;
+      if (item.breakAfter) {
+        // 新添加的 / 之前的一个字默认为该连调组的本调 Ｘ。
+        for (const i of this.groupOf(line, index)) {
+          line[i].isX = (i === index);
+        }
+      }
+    },
+    toggleWord(lineIndex, index) {
+      const item = this.lines[lineIndex][index];
+      item.wordJoin = !item.wordJoin;
+    },
+    setX(lineIndex, index, isX) {
+      this.lines[lineIndex][index].isX = isX;
+    },
+    selectPinyin(lineIndex, index, candidateIndex) {
+      const item = this.lines[lineIndex][index];
+      const candidate = item.candidates[candidateIndex];
+      item.currentPUJ = candidate.puj;
+      item.currentPlain = candidate.plain;
+    },
+    setCustomPinyin(lineIndex, index, value) {
+      const item = this.lines[lineIndex][index];
+      item.currentPUJ = value;
+      item.currentPlain = value;
+    },
+    exportLine(line) {
+      let str = '';
+      let prevOut = null; // 上一个已输出的 token 类型：'word' | 'punct'
+      line.forEach((item, index) => {
+        if (item.isPunct) {
+          if (!this.outputPunct) return;
+          const mapped = toWesternPunct(item.char);
+          if (!mapped) return;
+          str += mapped;
+          prevOut = 'punct';
+          return;
+        }
+        let text = item.isHan
+            ? (this.outputAsPlain ? item.currentPlain : item.currentPUJ)
+            : item.char;
+        if (item.isHan && !text) text = '?';
+        if (item.isHan && item.isX) text += '*';
+        if (prevOut) {
+          const prev = line[index - 1];
+          if (prevOut === 'punct' || !prev.isHan) str += ' ';
+          // 同一个词内部的两个音节用 _ 相连；连调组边界写在之后
+          else if (prev.wordJoin) str += prev.breakAfter ? '_/ ' : '_';
+          else if (prev.breakAfter) str += ' / ';
+          else str += ' ';
+        }
+        str += text;
+        prevOut = 'word';
+      });
+      return str;
+    },
     convertAction() {
       try {
         this.convertToPinyin(this.convertInput);
@@ -125,23 +373,56 @@ export default {
     },
     resetAction() {
       this.convertInput = '';
+      this.lines = [];
+      this.copied = false;
+    },
+    copyAction() {
+      const text = this.finalPUJ;
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(text).then(() => {
+        this.copied = true;
+        setTimeout(() => {
+          this.copied = false;
+        }, 1500);
+      });
     },
     convertToPinyin(text) {
-      this.pinyinList = [...text].map(char => {
-        const pujs = getHanCharPUJ(char);
-        return {
-          char,
-          possiblePUJs: pujs,
-          currentPUJ: pujs.length ? pujs[0] : '',
-          isPolyphonic: pujs.length > 1
-        }
-      })
+      if (db === null) {
+        alert("数据库尚未加载完成，请稍后再试。");
+        return;
+      }
+      const oldLines = this.lines;
+      const textLines = text.replace(/\r\n?/g, '\n').split('\n');
+      // 逐行逐字比对，文字未变的部分沿用原有 item，以保留已做的标注。
+      this.lines = textLines.map((lineText, lineIndex) => {
+        const oldLine = oldLines[lineIndex] ?? [];
+        return tokenizeLine(lineText).map((token, index) => {
+          const old = oldLine[index];
+          if (old && old.char === token) return old;
+          return createItem(token);
+        });
+      });
+      for (const line of this.lines) this.applyPunctAutoX(line);
     },
-    selectPinyin(index, pinyinIndex) {
-      this.pinyinList[index].currentPUJ =
-          this.pinyinList[index].possiblePUJs[pinyinIndex]
-      this.$forceUpdate() // 确保视图更新
-    }
+    // 标点之前，以及没有标点收尾的行末，其最后一个汉字自动勾选为本调 Ｘ
+    // （仅在该连调组尚未标注时进行）。
+    applyPunctAutoX(line) {
+      line.forEach((item, index) => {
+        if (!item.isPunct) return;
+        this.markLastAsX(line, index);
+      });
+      const last = line[line.length - 1];
+      if (last && last.isHan) this.markLastAsX(line, line.length);
+    },
+    // 从 end 位置向前找到最近的汉字，若其所属连调组尚未标注，则勾选为 Ｘ。
+    markLastAsX(line, end) {
+      for (let i = end - 1; i >= 0; --i) {
+        if (!line[i].isHan) return;
+        if (this.groupOf(line, i).some(j => line[j].isX)) return;
+        line[i].isX = true;
+        return;
+      }
+    },
   },
   mounted() {
     if (typeof window !== 'undefined') {
@@ -161,4 +442,129 @@ export default {
 </script>
 <style scoped lang="scss">
 @import 'bootstrap/scss/bootstrap';
+
+.pu-lines {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.pu-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: .125rem;
+  row-gap: .5rem;
+}
+
+.pu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.5rem;
+}
+
+.pu-char {
+  font-size: .875rem;
+  color: var(--bs-secondary-color);
+  white-space: nowrap;
+}
+
+.pu-pos {
+  display: inline-block;
+  min-width: 1rem;
+  margin-right: .125rem;
+  font-size: .75rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pu-pos-X {
+  color: var(--bs-danger);
+}
+
+.pu-pos-W {
+  color: var(--bs-warning-text-emphasis, #997404);
+}
+
+.pu-pos-Y {
+  color: var(--bs-primary);
+}
+
+.pu-pos-Z {
+  color: var(--bs-secondary-color);
+  font-style: italic;
+}
+
+.pu-pinyin {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.pu-py-toggle {
+  cursor: pointer;
+}
+
+.pu-input {
+  width: 4rem;
+  text-align: center;
+  padding: 0 .25rem;
+}
+
+.pu-cat {
+  margin-left: .25rem;
+  font-size: .75rem;
+}
+
+.pu-cat-1 {
+  color: var(--bs-success);
+}
+
+.pu-cat-2 {
+  color: var(--bs-primary);
+}
+
+.pu-cat-3 {
+  color: var(--bs-secondary-color);
+}
+
+.pu-check {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  margin: 0;
+}
+
+.pu-check-label {
+  font-size: .75rem;
+  color: var(--bs-secondary-color);
+  cursor: pointer;
+}
+
+.pu-literal {
+  align-self: flex-end;
+  margin-bottom: 1.75rem;
+  white-space: pre;
+}
+
+.pu-gap {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  row-gap: .125rem;
+}
+
+.pu-gap-btn {
+  padding: 0 .3rem;
+  line-height: 1.1;
+  font-weight: bold;
+}
+
+.pu-literal-punct {
+  color: var(--bs-tertiary-color, var(--bs-secondary-color));
+}
+
+.pu-help {
+  margin-top: .5rem;
+}
 </style>
