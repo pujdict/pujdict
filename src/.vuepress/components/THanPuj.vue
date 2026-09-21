@@ -21,8 +21,18 @@
               <template v-for="(item, index) in line" :key="item.key">
                 <span v-if="!item.isHan" class="pu-literal"
                       :class="item.isPunct ? 'pu-literal-punct' : ''"
-                      :title="item.isPunct ? '标点：自动分隔连调组' : ''">{{ item.char }}</span>
-                <div v-else class="pu-item">
+                      :title="item.isQuote ? '引号：导出为 \&quot;，且不分隔连调组'
+                              : (item.isPunct ? '标点：自动分隔连调组' : '')">{{ item.char }}</span>
+                <template v-else>
+                <div v-if="isGroupStart(line, index)" class="pu-edge"
+                     title="勾选：本连调组之前有本调 Ｘ（虚拟），组内全是后变调 Ｚ">
+                  <div class="form-check pu-check">
+                    <input class="form-check-input" type="checkbox" :checked="item.xBefore"
+                           @change="setEdgeX(lineIndex, index, 'before', $event.target.checked)"/>
+                    <label class="form-check-label pu-check-label">X</label>
+                  </div>
+                </div>
+                <div class="pu-item">
                   <div class="pu-char">
                     <span class="pu-pos" :class="'pu-pos-' + (positionOf(line, index) || 'none')"
                     >{{ positionOf(line, index) }}</span>
@@ -55,6 +65,15 @@
                     <label class="form-check-label pu-check-label">X</label>
                   </div>
                 </div>
+                <div v-if="isGroupEnd(line, index)" class="pu-edge"
+                     title="勾选：本连调组之后有本调 Ｘ（虚拟），组内全是前变调 Ｙ；若同时勾选末字，则末字为重读前变调 Ｗ">
+                  <div class="form-check pu-check">
+                    <input class="form-check-input" type="checkbox" :checked="item.xAfter"
+                           @change="setEdgeX(lineIndex, index, 'after', $event.target.checked)"/>
+                    <label class="form-check-label pu-check-label">X</label>
+                  </div>
+                </div>
+                </template>
                 <div v-if="hasGapButtons(line, index)" class="pu-gap">
                   <button type="button"
                           class="btn btn-sm pu-gap-btn"
@@ -74,9 +93,15 @@
             点击两字之间的 <code>/</code> 按钮添加连调组边界（再点取消），添加时 <code>/</code> 之前的一个字自动勾选为本调 <b>Ｘ</b>。<br/>
             每个字下方的复选框用于标记本调 <b>Ｘ</b>；连续勾选两个字时，后一个为 <b>Ｘ</b>，前一个为重读前变调 <b>Ｗ</b>。
             标记后，同组内 Ｘ 之前的字自动为 <b>Ｙ</b>（前变调），之后的字自动为 <b>Ｚ</b>（后变调／轻声）。<br/>
+            每个连调组首尾各有一个额外的 <b>Ｘ</b> 复选框，用于标出组外（虚拟）的本调：
+            勾选<b>组首之前</b>的 Ｘ，表示本调在组之前，组内全是 <b>Ｚ</b>（全轻声调）；
+            勾选<b>组末之后</b>的 Ｘ，表示本调在组之后，组内全是 <b>Ｙ</b>（全前变调）；
+            若同时勾选组末之后的 Ｘ 与末字本身的 Ｘ，则末字为 <b>Ｗ</b>。<br/>
             点击两字之间的 <code>_</code> 按钮，可标记这两个字属于同一个词（再点取消）；已连写的两个拼音在导出时用 <code>_</code> 相连。<br/>
             标点（含西文标点）自动分隔连调组，且标点之前的最后一个汉字自动勾选为 <b>Ｘ</b>；
             若句中／句末没有收尾标点，则该行最后一个汉字也自动勾选为 <b>Ｘ</b>。<br/>
+            引号 <code>“”</code> <code>《》</code> <code>「」</code> <code>『』</code> <code>〈〉</code>
+            一律导出为 <code>"</code>，且视为透明——不分隔连调组，也不会在其前自动勾选 Ｘ。<br/>
             修改输入文字后再次点击「转换」，已标注的部分会尽量保留。
           </div>
         </div>
@@ -86,6 +111,7 @@
                     v-model="finalPUJ"></textarea>
           <div class="form-text">
             <code>/</code> 为连调组边界，<code>*</code> 表示该字读本调（Ｘ），<code>_</code> 连接同一个词内部的两个音节。
+            单独成词的 <code>*</code> 表示本调在该连调组之外（组之前或组之后）。
             中文标点导出时转为西文标点。
           </div>
           <div class="btn-toolbar mt-2">
@@ -137,10 +163,18 @@ const PunctMap = Object.assign(Object.create(null), {
   '，': ',', '、': ',', '；': ';', '：': ':', '。': '.', '？': '?', '！': '!',
   '（': '(', '）': ')',
   '【': '[', '】': ']', '〔': '[', '〕': ']',
-  '《': '<', '》': '>', '〈': '<', '〉': '>',
+  // 各种引号、书名号一律输出为英文双引号
+  '《': '"', '》': '"', '〈': '"', '〉': '"',
   '「': '"', '」': '"', '『': '"', '』': '"',
+  '“': '"', '”': '"', '‘': '"', '’': '"',
   '—': '-', '－': '-', '～': '~', '…': '...', '·': '.',
 });
+
+// 引号类标点：导出为 "，且视为透明，不分隔连调组。
+const QuoteChars = '《》〈〉「」『』“”‘’"';
+const QuoteOpenChars = '《〈「『“‘';
+const QuoteCloseChars = '》〉」』”’';
+const isQuoteChar = (ch) => ch.length === 1 && QuoteChars.indexOf(ch) !== -1;
 
 function toWesternPunct(token) {
   let result = '';
@@ -211,16 +245,27 @@ function getHanCharPUJCandidates(han) {
 
 function createItem(token) {
   const isHan = isChineseChar(token);
+  const isQuote = isQuoteChar(token);
   const item = {
     key: ++keyCounter,
     char: token,
     isHan,
     isPunct: !WordLikeRegex.test(token),
+    isQuote,
+    // 是否为右引号（紧贴前一个音节）。左右成对的引号可静态判定，
+    // 英文 " 需要结合上下文判定，见 resolveQuoteDirection()。
+    isQuoteClose: isQuote && QuoteCloseChars.indexOf(token) !== -1,
+    isQuoteAmbiguous: isQuote && QuoteOpenChars.indexOf(token) === -1
+        && QuoteCloseChars.indexOf(token) === -1,
     candidates: [],
     currentPUJ: '',
     currentPlain: '',
     isPolyphonic: false,
     isX: false,
+    // 连调组首字：组之前存在虚拟 Ｘ，组内全为后变调 Ｚ（全轻声调）
+    xBefore: false,
+    // 连调组末字：组之后存在虚拟 Ｘ，组内全为前变调 Ｙ；若末字也为 Ｘ 则末字为 Ｗ
+    xAfter: false,
     breakAfter: false,
     // 与后一个字属于同一个词
     wordJoin: false,
@@ -263,11 +308,13 @@ export default {
       return this.outputAsPlain ? item.currentPlain : item.currentPUJ;
     },
     // 连调组：汉字序列，遇 / 边界或非汉字 token 即断开。
+    // 引号是透明的，不分隔连调组。
     groupsOf(line) {
       const groups = [];
       let current = [];
       line.forEach((item, index) => {
         if (!item.isHan) {
+          if (item.isQuote) return;
           if (current.length) {
             groups.push(current);
             current = [];
@@ -286,6 +333,15 @@ export default {
     groupOf(line, index) {
       return this.groupsOf(line).find(group => group.includes(index)) ?? [];
     },
+    // 是否为所在连调组的首字／末字（决定两端的虚拟 Ｘ 复选框是否显示）
+    isGroupStart(line, index) {
+      const group = this.groupOf(line, index);
+      return group.length > 0 && group[0] === index;
+    },
+    isGroupEnd(line, index) {
+      const group = this.groupOf(line, index);
+      return group.length > 0 && group[group.length - 1] === index;
+    },
     // 声调地位（见 src/doc/hyphens.md）：
     // 勾选的字中最靠后的一个为本调 Ｘ；若 Ｘ 的前一个字也被勾选，则该字为重读前变调 Ｗ；
     // Ｗ 之前（含未被勾选的前邻）为前变调 Ｙ，Ｘ 之后为后变调 Ｚ。
@@ -294,6 +350,16 @@ export default {
       const item = line[index];
       if (!item || !item.isHan) return '';
       const group = this.groupOf(line, index);
+      if (!group.length) return '';
+      const first = group[0], last = group[group.length - 1];
+      // 虚拟 Ｘ 在组之前：组内没有本调，所有字都是后变调 Ｚ（全轻声调）
+      if (line[first].xBefore) return 'Z';
+      // 虚拟 Ｘ 在组之后：组内所有字都是前变调 Ｙ（全前变调）；
+      // 若末字同时被标记为 Ｘ，则末字为重读前变调 Ｗ。
+      if (line[last].xAfter) {
+        if (index === last && line[last].isX) return 'W';
+        return 'Y';
+      }
       const checked = group.filter(i => line[i].isX);
       if (!checked.length) return '';
       const xIndex = checked[checked.length - 1];
@@ -311,7 +377,9 @@ export default {
       item.breakAfter = !item.breakAfter;
       if (item.breakAfter) {
         // 新添加的 / 之前的一个字默认为该连调组的本调 Ｘ。
-        for (const i of this.groupOf(line, index)) {
+        const group = this.groupOf(line, index);
+        line[group[0]].xBefore = false;
+        for (const i of group) {
           line[i].isX = (i === index);
         }
       }
@@ -320,8 +388,33 @@ export default {
       const item = this.lines[lineIndex][index];
       item.wordJoin = !item.wordJoin;
     },
+    // 连调组两端的虚拟 Ｘ：'before' 表示 Ｘ 在组之前，'after' 表示 Ｘ 在组之后。
+    setEdgeX(lineIndex, index, edge, value) {
+      const line = this.lines[lineIndex];
+      const group = this.groupOf(line, index);
+      if (!group.length) return;
+      const last = group[group.length - 1];
+      if (edge === 'before') {
+        line[group[0]].xBefore = value;
+        // 组内全是 Ｚ，不能再有本调 Ｘ
+        if (value) for (const i of group) line[i].isX = false;
+      } else {
+        line[last].xAfter = value;
+        // 组内全是 Ｙ；之后再勾选末字，末字即为 Ｗ。
+        if (value) for (const i of group) line[i].isX = false;
+      }
+    },
     setX(lineIndex, index, isX) {
-      this.lines[lineIndex][index].isX = isX;
+      const line = this.lines[lineIndex];
+      line[index].isX = isX;
+      if (!isX) return;
+      const group = this.groupOf(line, index);
+      if (!group.length) return;
+      const last = group[group.length - 1];
+      // 与组两端的虚拟 Ｘ 互斥：组前已有虚拟 Ｘ 时组内不该再有本调；
+      // 组后有虚拟 Ｘ 时，只有末字可以保留本调（即 Ｗ）。
+      line[group[0]].xBefore = false;
+      if (index !== last) line[last].xAfter = false;
     },
     selectPinyin(lineIndex, index, candidateIndex) {
       const item = this.lines[lineIndex][index];
@@ -336,15 +429,34 @@ export default {
     },
     exportLine(line) {
       let str = '';
-      let prevOut = null; // 上一个已输出的 token 类型：'word' | 'punct'
+      // 上一个已输出的 token 类型：'word' | 'punct' | 'quote-open' | 'quote-close' | 'star'
+      // 'star' 表示刚输出了代表组外虚拟 Ｘ 的单独一个 *
+      let prevOut = null;
+      const emitStar = () => {
+        if (prevOut) str += ' ';
+        str += '*';
+        prevOut = 'star';
+      };
       line.forEach((item, index) => {
         if (item.isPunct) {
           if (!this.outputPunct) return;
           const mapped = toWesternPunct(item.char);
           if (!mapped) return;
+          if (item.isQuote) {
+            // 引号紧贴所引的内容：左引号前若有内容则空一格，右引号前不留空格。
+            if ((!item.isQuoteClose && prevOut) || prevOut === 'star') str += ' ';
+            str += mapped;
+            prevOut = item.isQuoteClose ? 'quote-close' : 'quote-open';
+            return;
+          }
+          if (prevOut === 'star') str += ' ';
           str += mapped;
           prevOut = 'punct';
           return;
+        }
+        // 本调在连调组之前（虚拟 Ｘ）：在该组第一个拼音之前单独写一个 *
+        if (item.isHan && item.xBefore && this.isGroupStart(line, index)) {
+          emitStar();
         }
         let text = item.isHan
             ? (this.outputAsPlain ? item.currentPlain : item.currentPUJ)
@@ -353,7 +465,10 @@ export default {
         if (item.isHan && item.isX) text += '*';
         if (prevOut) {
           const prev = line[index - 1];
-          if (prevOut === 'punct' || !prev.isHan) str += ' ';
+          if (prevOut === 'star') str += prev?.breakAfter ? ' / ' : ' ';
+          else if (prevOut === 'quote-open') str += ''; // 紧贴左引号
+          else if (prevOut === 'punct' || prevOut === 'quote-close') str += ' ';
+          else if (!prev.isHan) str += ' ';
           // 同一个词内部的两个音节用 _ 相连；连调组边界写在之后
           else if (prev.wordJoin) str += prev.breakAfter ? '_/ ' : '_';
           else if (prev.breakAfter) str += ' / ';
@@ -361,6 +476,10 @@ export default {
         }
         str += text;
         prevOut = 'word';
+        // 本调在连调组之后（虚拟 Ｘ）：在该组最后一个拼音之后单独写一个 *
+        if (item.isHan && item.xAfter && this.isGroupEnd(line, index)) {
+          emitStar();
+        }
       });
       return str;
     },
@@ -402,23 +521,42 @@ export default {
           return createItem(token);
         });
       });
-      for (const line of this.lines) this.applyPunctAutoX(line);
+      for (const line of this.lines) {
+        this.resolveQuoteDirection(line);
+        this.applyPunctAutoX(line);
+      }
+    },
+    // 判定英文 " 是左引号还是右引号：行内左右引号交替出现。
+    resolveQuoteDirection(line) {
+      let open = false;
+      for (const item of line) {
+        if (!item.isQuote) continue;
+        item.isQuoteClose = item.isQuoteAmbiguous
+            ? open
+            : QuoteCloseChars.indexOf(item.char) !== -1;
+        open = !item.isQuoteClose;
+      }
     },
     // 标点之前，以及没有标点收尾的行末，其最后一个汉字自动勾选为本调 Ｘ
     // （仅在该连调组尚未标注时进行）。
     applyPunctAutoX(line) {
       line.forEach((item, index) => {
-        if (!item.isPunct) return;
+        if (!item.isPunct || item.isQuote) return;
         this.markLastAsX(line, index);
       });
       const last = line[line.length - 1];
       if (last && last.isHan) this.markLastAsX(line, line.length);
     },
     // 从 end 位置向前找到最近的汉字，若其所属连调组尚未标注，则勾选为 Ｘ。
+    // 引号是透明的，向前查找时跳过。
     markLastAsX(line, end) {
       for (let i = end - 1; i >= 0; --i) {
+        if (line[i].isQuote) continue;
         if (!line[i].isHan) return;
-        if (this.groupOf(line, i).some(j => line[j].isX)) return;
+        const group = this.groupOf(line, i);
+        if (group.some(j => line[j].isX)) return;
+        // 组两端已标虚拟 Ｘ（全轻声／全前变调）时，不自动指定本调
+        if (line[group[0]].xBefore || line[group[group.length - 1]].xAfter) return;
         line[i].isX = true;
         return;
       }
@@ -545,6 +683,10 @@ export default {
   align-self: flex-end;
   margin-bottom: 1.75rem;
   white-space: pre;
+}
+
+.pu-edge {
+  align-self: flex-end;
 }
 
 .pu-gap {
