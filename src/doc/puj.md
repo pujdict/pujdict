@@ -219,16 +219,16 @@ flowchart
 
 潮州话的阳声韵、入声韵、鼻化韵，通过添加以下后缀表示：
 
-| 白话字       | 潮拼 | 国际音标 | 例字                                  |                                      |
-|-----------|----|------|-------------------------------------|--------------------------------------|
-| m^1^      | m  | m    | 甘 <TPopupPujNoAccent puj="kam1"/>  | 纤 <TPopupPujNoAccent puj="siam1"/>  |
-| n^1^      | nd | n    | 干 <TPopupPujNoAccent puj="kan1"/>  | 仙 <TPopupPujNoAccent puj="sian1"/>  |
-| ng        | ng | ŋ    | 刚 <TPopupPujNoAccent puj="kang1"/> | 相 <TPopupPujNoAccent puj="siang1"/> |
-| nn/ⁿ ^23^ | n  | ◌̃   | 柑 <TPopupPujNoAccent puj="kann1"/> | 声 <TPopupPujNoAccent puj="siann1"/> |
-| p         | b  | p̚   | 蛤 <TPopupPujNoAccent puj="kap4"/>  | 涩 <TPopupPujNoAccent puj="siap4"/>  |
-| t         | d  | t̚   | 结 <TPopupPujNoAccent puj="kat4"/>  | 设 <TPopupPujNoAccent puj="siat4"/>  |
-| k         | g  | k̚   | 角 <TPopupPujNoAccent puj="kak4"/>  | 削 <TPopupPujNoAccent puj="siak4"/>  |
-| h^4^      | h  | ʔ    | 甲 <TPopupPujNoAccent puj="kah4"/>  | 锡 <TPopupPujNoAccent puj="siah4"/>  |
+| 白话字      | 潮拼 | 国际音标 | 例字                                  |                                      |
+|----------|----|------|-------------------------------------|--------------------------------------|
+| m^1^     | m  | m    | 甘 <TPopupPujNoAccent puj="kam1"/>  | 纤 <TPopupPujNoAccent puj="siam1"/>  |
+| n^1^     | nd | n    | 干 <TPopupPujNoAccent puj="kan1"/>  | 仙 <TPopupPujNoAccent puj="sian1"/>  |
+| ng       | ng | ŋ    | 刚 <TPopupPujNoAccent puj="kang1"/> | 相 <TPopupPujNoAccent puj="siang1"/> |
+| nn/ⁿ ^2^ | n  | ◌̃   | 柑 <TPopupPujNoAccent puj="kann1"/> | 声 <TPopupPujNoAccent puj="siann1"/> |
+| p        | b  | p̚   | 蛤 <TPopupPujNoAccent puj="kap4"/>  | 涩 <TPopupPujNoAccent puj="siap4"/>  |
+| t        | d  | t̚   | 结 <TPopupPujNoAccent puj="kat4"/>  | 设 <TPopupPujNoAccent puj="siat4"/>  |
+| k        | g  | k̚   | 角 <TPopupPujNoAccent puj="kak4"/>  | 削 <TPopupPujNoAccent puj="siak4"/>  |
+| h^3^     | h  | ʔ    | 甲 <TPopupPujNoAccent puj="kah4"/>  | 锡 <TPopupPujNoAccent puj="siah4"/>  |
 
 ::: note
 
@@ -241,8 +241,15 @@ flowchart
    则需要考虑韵母来源，源于阳声韵的标记为鼻化，例如：年 <TPopupPujNoAccent puj="ninn5"/>——尼 <TPopupPujNoAccent puj="ni5"/>，鳗 <TPopupPujNoAccent puj="muann5"/>——
    麻 <TPopupPujNoAccent puj="mua5"/>，尽管二者在读音上已经完全无法区分。鼻声母后的元音一律鼻化也是“潮汕普通话”口音的一大特点。
    <!-- 本辞典中，为方便使用，各地口音的声韵检索时，鼻辅音声母后的元音可以用鼻化和非鼻化两种变体互查。-->
-3. 在传统的白话字方案中，鼻化韵也常以上标的 n 即 ◌ⁿ 来记录，为了排版工整和输入方便，辞典采用和台罗方案一致的 -nn 来记录鼻化韵。
-4. 鼻化韵和喉塞韵同时出现时，先写鼻化再写喉塞，例如：夗 <TPopupPujNoAccent puj="innh8"/>（睡觉）。
+
+   在传统的白话字方案中，鼻化韵也常以上标的 n 即 ◌ⁿ 来记录，为了排版工整和输入方便，辞典采用和台罗方案一致的 -nn 来记录鼻化韵。
+
+   另外，潮汕各地有一类特殊的鼻化现象——由阴声韵增生的鼻化韵。这些字在各地鼻化与否参差不齐。
+   例如澄海口音习惯上将 <TPopupPujNoAccent puj="i2"/> 音（“已”“以”“椅”等）全部鼻化为 <TPopupPujNoAccent puj="inn2"/>，潮阳口音习惯上将 <TPopupPujNoAccent puj="o3"/> 音（“奥”“澳”等）全部鼻化为 <TPopupPujNoAccent puj="onn3"/>。
+   虽有其中部分字音有明显地域差异，但随着人口流动和社交平台的传播，这一类鼻化也在“传染”。
+   例如“潮”字，以前多在潮阳读鼻化，但近年来在周边的汕头、揭阳等地也开始有人读鼻化，记录地域差异恐怕也赶不上变化。
+   因此，本辞典中将这些字音统一标记鼻化后缀，同时附加一个 ' 号，表示这个字可鼻化也可不鼻化。
+3. 鼻化韵和喉塞韵同时出现时，先写鼻化再写喉塞，例如：夗 <TPopupPujNoAccent puj="innh8"/>（睡觉）。
 
 :::
 
