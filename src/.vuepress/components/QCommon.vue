@@ -132,6 +132,7 @@ class PUJDictDatabase {
       'ShanTou_ShiQu',
       'JieYang_RongCheng',
       'ChaoYang_MianCheng',
+      'ChaoYang_HePing',
       'ChaoYang_DaHao',
       'PuNing_LiuSha',
       'HuiLai_HuiCheng',
