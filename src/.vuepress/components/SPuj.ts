@@ -928,6 +928,7 @@ const PUJInitialToXSAMPAMap = {
   'pf': 'p_df',
   'ph': 'p_h',
   'phf': 'p_d_hf',
+  'pfh': 'p_df_h',
   'm': 'm',
   'mv': 'F',
   'b': 'b',
