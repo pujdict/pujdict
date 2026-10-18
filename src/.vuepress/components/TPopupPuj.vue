@@ -30,7 +30,7 @@
             <template v-for="(pronunciation, key) in generatePerAccentsPronunciations()" :key="key">
               <div class="d-flex align-items-baseline my-2 pronunciation-row">
                 <span class="badge border border-primary text-primary pronunciation-badge">{{ pronunciation.name }}</span>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column pronunciation-prons">
                   <span>{{ pronunciation.display_puj }}</span>
                   <span>{{ pronunciation.display_dp }}</span>
                   <span v-if="pronunciation.display_ipa !== ''">[{{ pronunciation.display_ipa }}]</span>
@@ -84,12 +84,17 @@ export default {
 .pronunciation-row {
   min-width: 100%;
 }
-.pronunciation-badge {
-  min-width: 6em;
-  text-align: right;
+/* 注意：Bootstrap 在本组件的 scoped 块内被 import，其 .badge 规则会带 [data-v-xxx]
+   属性选择器（特异性 0,2,0），故此处必须提高选择器权重才能覆盖
+   .badge 的 display / text-align / white-space: nowrap。 */
+.pronunciation-row .badge.pronunciation-badge {
+  min-width: 7em;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  text-align: center;
   margin-right: 0.5em;
+  /* 使口音名中的换行符（name + '\n' + variant）真正生效 */
+  white-space: pre-line;
 }
 </style>

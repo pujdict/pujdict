@@ -120,6 +120,7 @@ class PUJDictDatabase {
     this.accents = [];
     const supportedAccentsSet = new Set([
       'ChaoZhou_FuCheng',
+      'ChaoZhou_WilliamDuffus',
       'XiQiang',
       'ChaoAn_FengHuang',
       'ChaoAn_WenCi',
@@ -132,11 +133,13 @@ class PUJDictDatabase {
       'ShanTou_ShiQu',
       'JieYang_RongCheng',
       'ChaoYang_MianCheng',
+      'ChaoYang_MianCheng_New',
       'ChaoYang_HePing',
       'ChaoYang_DaHao',
       'PuNing_LiuSha',
       'HuiLai_HuiCheng',
       'LuFeng_SanJia',
+      'LuFeng_SanJia_New',
     ]);
     for (const accent of accentsData.accents) {
       if (supportedAccentsSet.has(accent.id))
@@ -355,13 +358,14 @@ const getAccentsRules = function (): () => {string: FuzzyRulesGroup} {
       const id = accent.id;
       const area = accent.area;
       const subarea = accent.subarea;
+      const variant = accent.variant;
       const rulesIndices = accent.rules;
       const accentTones = accent.tones;
       let rules = [];
       for (const ruleIndex of rulesIndices) {
         rules.push(db.fuzzyRulesAction[ruleIndex]);
       }
-      fuzzyRules[id] = new FuzzyRulesGroup(`${area}${subarea}`, accentTones, rules);
+      fuzzyRules[id] = new FuzzyRulesGroup(`${area}${subarea}`, variant, accentTones, rules);
     }
     // TODO: 支持自定义声调调值
     const custom = {

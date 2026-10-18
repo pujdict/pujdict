@@ -4,18 +4,15 @@
     <TMirror/>
     <form id="query-conditions" class="row g-3">
       <div class="mb-auto">
-        <div class="form-label fw-bold d-flex align-items-center mb-2">
+        <label class="form-label fw-bold d-flex align-items-center mb-2" for="fuzzy-query">
           口音偏好
-        </div>
-        <div id="fuzzy-query" class="query-filter-list">
-          <div class="form-check form-check-inline offset-sm-0" v-for="fuzzyQuery in fuzzyQueryList">
-            <input class="form-check-input" type="radio"
-                   :id="fuzzyQuery.key" :value="fuzzyQuery.key"
-                   v-model="selectedFuzzyQueryKey"
-                   @change="initializeFuzzyRulesMap()"/>
-            <label class="form-check-label" style="width: 4em" :for="fuzzyQuery.key">{{ fuzzyQuery.name }}</label>
-          </div>
-        </div>
+        </label>
+        <select id="fuzzy-query" class="form-select" style="width: auto; cursor: pointer;"
+                v-model="selectedFuzzyQueryKey" @change="initializeFuzzyRulesMap()">
+          <option v-for="fuzzyQuery in fuzzyQueryList" :key="fuzzyQuery.key" :value="fuzzyQuery.key">
+            {{ fuzzyQuery.name }}
+          </option>
+        </select>
       </div>
       <div class="mb-auto">
         <div class="form-label fw-bold d-flex align-items-center mb-2">
@@ -242,7 +239,7 @@ export default {
     initializeAccents() {
       this.fuzzyQueryList = Object.entries(getAccentsRules()).map(([key, rule]) => ({
         key,
-        name: rule.name,
+        name: rule.variant ? rule.name + ' [' + rule.variant + ']' : rule.name,
         fuzzy: rule.fuzzy,
       }));
 

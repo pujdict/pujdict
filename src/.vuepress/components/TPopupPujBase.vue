@@ -195,7 +195,7 @@ export default {
       });
       return this.perAccentsResult[accentKey] = {
         key: accentKey,
-        name: accentRule.name,
+        name: accentRule.variant ? accentRule.name + '\n' + accentRule.variant : accentRule.name,
         display_puj: display_puj,
         display_dp: display_dp,
         display_ipa: display_ipa,
