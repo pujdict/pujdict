@@ -46,7 +46,9 @@
           <legend class="col-form-label"><b>拼音详情页展示口音</b></legend>
           <div class="form-check-inline" v-for="listedPinyinDisplayFuzzyRule in listedPinyinDisplayFuzzyRules">
             <div class="form-check">
+              <!--TODO: 重构：应改为“不展示”口音，否则一旦有添加新口音，此处都不会展示 -->
               <input class="form-check-input"
+                     disabled
                      name="listed-pinyin-display"
                      type="checkbox"
                      :id="`listed-pinyin-display-${listedPinyinDisplayFuzzyRule.value}`"

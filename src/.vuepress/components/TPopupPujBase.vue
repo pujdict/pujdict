@@ -117,7 +117,8 @@ export default {
       const customListedPinyinDisplayFuzzyRulesStr = getLocalOption('custom-listed-pinyin-display-fuzzy-rules');
       const customListedPinyinDisplayFuzzyRules = customListedPinyinDisplayFuzzyRulesStr.split(';');
       Object.entries(getAccentsRules()).forEach(([key, rule]) => {
-        if (customListedPinyinDisplayFuzzyRulesStr !== '' && !customListedPinyinDisplayFuzzyRules.includes(key)) return;
+        // TODO: 重构：可设置去掉哪些口音，而不是设置显示哪些。
+        // if (customListedPinyinDisplayFuzzyRulesStr !== '' && !customListedPinyinDisplayFuzzyRules.includes(key)) return;
         this.generateAccentPronunciation(key);
       });
       return this.perAccentsResult;
