@@ -145,6 +145,7 @@ export default defineUserConfig({
           "han_puj.md",
         ],
       },
+      "/options/",
     ],
     navbar: [
       {
