@@ -147,8 +147,12 @@ export default defineUserConfig({
       },
       {
         text: "设置",
-        collapsible: false,
+        collapsible: true,
         link: '/options/README.md',
+        prefix: '/options/',
+        children: [
+          "README.md",
+        ],
       },
     ],
     navbar: [
