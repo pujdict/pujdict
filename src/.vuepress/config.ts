@@ -145,7 +145,11 @@ export default defineUserConfig({
           "han_puj.md",
         ],
       },
-      "/options/",
+      {
+        text: "设置",
+        collapsible: false,
+        link: '/options/README.md',
+      },
     ],
     navbar: [
       {
